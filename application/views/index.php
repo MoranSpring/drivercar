@@ -9,10 +9,9 @@ and open the template in the editor.
         <title>驾途网-首页</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="../css/index.css">
-        <link href="../css/index.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" type="text/css" href="css/index.css">
         <link rel="shortcut icon" href="../images/iconfont-suo.png" type="image/x-icon">
-        <script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script>
+        <script src="js/jquery-1.7.1.min.js" type="text/javascript"></script>
     </head>
     <body>
         <div id="header">
