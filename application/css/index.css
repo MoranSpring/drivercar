@@ -1,0 +1,419 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 2015-2-6, 21:08:52
+    Author     : KYLE
+*/
+*{
+    margin:0;
+    padding: 0;
+}
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: ".";
+    clear: both;
+    height: 0;
+}
+div ,li ,ul, h1, h2, h3, h4 ,nav, span {
+    font-family: "Arial","Microsoft Yahei","Hiragino Sans GB","Simsun,sans-self";
+    font-size: 16px;
+
+}
+a{
+    color:#60aff6;
+    text-decoration: none; 
+}
+
+/*----------------------------[public]-------------------------------------*/
+body{
+    background-color: #eee;
+}
+#header{
+    width: 100%;
+    min-width: 1000px;
+    background-color: #141a3e;
+}
+#header nav{
+    width:1000px;
+    margin-left: auto;
+    margin-right: auto;
+    height:auto
+}
+#header span{
+    color:#fff;
+    text-align: right;
+}
+#hea-ul{
+    float: right;
+    display: block;
+
+}
+#hea-ul li{
+    float: left;
+    display: inline;
+    background-color:#141a3e;
+}
+#hea-ul li span{
+    line-height: 36px;
+    height: 36px;
+    display: block;
+    padding: 0 10px 0 10px;
+}
+#hea-ul li span:hover{
+    background-color: #60aff6;
+    cursor: pointer;
+}
+
+
+
+.navgation{
+    width:100%;
+    min-width: 1000px;
+    border-bottom:1px solid #ccc;
+    background-color: #fff;
+}
+#nav {
+    width:1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#nav div {
+    float:left;
+    margin: 0;
+    padding: 0;
+}
+.logo-div  img{
+    display: block;
+
+}
+#menu-ul{
+    float: left;
+    display: block;
+    font-size: 20px;
+    margin-left: 20px;
+}
+#menu-ul li{
+    display: inline;
+    float: left;
+    text-align: center;
+    width: 130px;
+    border-left: 1px solid #ccc;
+    position: relative;
+
+}
+#menu-ul li:hover{
+    background-color: #8C8FA2;
+    cursor: pointer;
+}
+#menu-ul li span{
+    display: block;
+    padding: 0 15px 0 15px;
+    line-height: 50px;
+    height: 50px;
+}
+.menu-chir{
+    position: absolute;
+    display: none;
+    background-color: #fff;
+
+}
+
+.menu-chir li{
+    margin-left: -1px;
+    border-bottom: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+}
+#chir li span{
+    display: block;
+    line-height: 30px;
+    height:30px;
+}
+#content{
+    width:1000px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#con-left{
+    background-color: #fff;
+    float:left;
+    width:200px;
+    border:1px solid #aaa;
+    border-bottom: 0;
+}
+#con-left ul li{
+    list-style: none;
+    text-align: center;
+    border-bottom:1px solid #aaa;
+}
+#con-left ul li:hover{
+    background-color: #8C8FA2;
+}
+#con-left ul li span{
+    display: block;
+    line-height: 40px;
+    height: 40px;
+}
+#con-right{
+    float:left;
+    width:780px;
+    height:auto;
+    display: block;
+    margin-left: 14px;
+    background-color: #fff;
+}
+#con-nav{
+    margin: 5px 0 5px 5px;
+    display: block;
+
+}
+#con-con{font-family: 'Lato', 'PT Sans';
+         width:778px;
+}
+.real_content{
+    float:left;
+    text-align:center;
+}
+.tab li {
+    list-style: none;
+    font-size: 18px;
+    float :left;
+    width:100px;
+    margin-bottom: -1px;
+    color:#000;font-family: 'Lato', 'PT Sans';
+    padding:5px 20px 5px 20px;
+    background-color: #fff;
+    cursor: pointer;
+}
+.selected-li{
+    font-weight:bold;
+    border:1px solid #999999;
+    border-top:2px solid crimson;
+    border-bottom: 0;
+
+
+
+}
+#main_content{
+    clear: both;
+    width:100%;
+    border:1px solid #999999;
+    background-color: #fff;
+    height:800px;
+}
+#footer {
+    background-color: #99bbbb;
+    clear: both;
+    font-size: 9px;
+    text-align: center;
+    bottom: 0;
+    width: 100%;
+}
+
+.am-panel {
+    
+    text-align: left;
+    border-color: #ddd;
+margin: 50px;
+background-color: #fff;
+border: 1px solid transparent;
+border-radius: 0;
+-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+.am-panel-default>.am-panel-hd {
+color: #444;
+background-color: #f5f5f5;
+border-color: #ddd;
+}
+[data-am-collapse] {
+cursor: pointer;
+}
+.am-panel-hd {
+padding: .6rem 1.25rem;
+border-bottom: 1px solid transparent;
+border-top-right-radius: 0;
+border-top-left-radius: 0;
+}
+.am-comments-list .am-comment {
+margin: 1.6rem 0 0 0;
+list-style: none;
+}
+
+.am-comment-avatar {
+float: left;
+width: 32px;
+height: 32px;
+border-radius: 50%;
+border: 1px solid transparent;
+}
+.am-comment-main {
+position: relative;
+margin-left: 42px;
+border: 1px solid #dedede;
+border-radius: 0;
+}
+.am-comment-main:before, .am-comment-main:after {
+position: absolute;
+top: 10px;
+left: -8px;
+right: 100%;
+width: 0;
+height: 0;
+display: block;
+content: " ";
+border-color: transparent;
+border-style: solid solid outset;
+border-width: 8px 8px 8px 0;
+pointer-events: none;
+}
+.am-comment-main:before {
+border-right-color: #dedede;
+z-index: 1;
+}
+.am-comment-hd {
+background: #f8f8f8;
+border-bottom: 1px solid #eee;
+display: -webkit-box;
+display: -webkit-flex;
+display: -ms-flexbox;
+display: flex;
+}
+.am-comment-meta {
+-webkit-box-flex: 1;
+-webkit-flex: 1;
+-ms-flex: 1;
+flex: 1;
+padding: 10px 15px;
+font-size: 13px;
+color: #999;
+line-height: 1.2;
+white-space: nowrap;
+text-overflow: ellipsis;
+overflow: hidden;
+text-align:left;
+}
+.am-comment-main:before {
+border-right-color: #dedede;
+z-index: 1;
+}
+.am-comment-main:before, .am-comment-main:after {
+position: absolute;
+top: 10px;
+left: -8px;
+right: 100%;
+width: 0;
+height: 0;
+display: block;
+content: " ";
+border-color: transparent;
+border-style: solid solid outset;
+border-width: 8px 8px 8px 0;
+pointer-events: none;
+}
+
+
+/*----------------------翻页条样式------------------------------------*/
+.am-pagination {
+position: relative;
+}
+.am-fr {
+float: right;
+}
+.am-pagination {
+padding-left: 0;
+margin: 1.5rem 0;
+list-style: none;
+color: #999;
+text-align: left;
+}
+.am-pagination>li {
+display: inline-block;
+}
+.admin-content-pagination li a {
+padding: 4px 8px;
+}
+.am-pagination>li>a, .am-pagination>li>span {
+position: relative;
+display: block;
+padding: .5em 1em;
+text-decoration: none;
+line-height: 1.2;
+background-color: #fff;
+border: 1px solid #ddd;
+border-radius: 0;
+margin-bottom: 5px;
+margin-right: 5px;
+}
+.am-pagination>.am-active>a, .am-pagination>.am-active>span, .am-pagination>.am-active>a:hover, .am-pagination>.am-active>span:hover, .am-pagination>.am-active>a:focus, .am-pagination>.am-active>span:focus {
+z-index: 2;
+color: #fff;
+background-color: #0e90d2;
+border-color: #0e90d2;
+cursor: default;
+}
+.am-pagination>.am-disabled>span, .am-pagination>.am-disabled>span:hover, .am-pagination>.am-disabled>span:focus, .am-pagination>.am-disabled>a, .am-pagination>.am-disabled>a:hover, .am-pagination>.am-disabled>a:focus {
+color: #999;
+background-color: #fff;
+border-color: #ddd;
+cursor: not-allowed;
+pointer-events: none;
+}
+.admin-content-pagination li a {
+padding: 4px 8px;
+}
+/*----------------------翻页条样式------------------------------------*/
+.con2-ul {
+   
+}
+.con2-ul li {
+    color:#0e90d2;
+    border-bottom: 1px solid #aaa;
+    list-style: none;
+    display: block;
+     
+    padding: 10px;
+}
+
+.con-div {
+    text-align: left;
+    float:left;
+    padding-left: 10px;
+}
+.con-div2 {
+  width:630px;
+}
+.con2-ul li div img{
+  height: 70px;
+  display: block;
+  border: 1px solid #000;
+  
+}
+.con2-ul li div{
+margin: 5px 0 5px 0;
+  
+}
+.con2-div {
+   float:none;
+}
+.con2-div span {
+   float:none;
+   display: block;
+   line-height: 25px;
+   height: 25px;
+}
+.con2-con{
+   display: block;
+}
+.con2-con li{
+    text-align: center;
+    display: inline-block;
+    width:200px;
+    border: 0;
+    padding: 0;
+}

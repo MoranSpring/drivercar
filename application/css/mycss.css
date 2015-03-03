@@ -1,0 +1,110 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+div#container {
+    width: auto;
+}
+#head_box {
+    margin: 0px 30px 0px 30px;
+}
+#body {
+    margin: 0;
+   background-color: yellow;
+}
+.header_content {
+    padding: 3px 1px 0 1px ;
+    font-family: "Times New Roman",Georgia,Serif;
+    float: left;
+}
+.mylogo {
+    float: left;
+    /* height: 50px; */
+    
+}
+
+.header_content a:link  {color: #000000}
+.header_content a:visited  {color: #000000}
+.header_content a:hover  {color: #CDCDCD}
+.header_content a:active  {color: #ffffff}
+.header_content2 {
+    padding: 3px 1px 0 1px ;
+    font-family: "Times New Roman",Georgia,Serif;
+    float: right;
+}
+#header {
+    margin-top: 0px;
+    margin: 0px;
+    font-size: 14px;
+    top: 0;
+    left: 0;
+    padding-left:10px;
+    font: 'Microsoft Yahei', Tahoma, 'Simsun';
+    border-bottom: 1px solid #CDCDCD;
+    background: #F2F2F2;
+    z-index: 9999;
+    width: 100%;
+    height: 25px;
+    background-color: F2F2F2;
+}
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: ".";
+    clear: both;
+    height: 0;
+}
+#Navigate {
+    position:relative;
+    overflow: visible;
+    display:block;
+    left: 0;
+    min-width: 1000px;
+    width: 100%;
+    background: #866E6E;
+}
+#search {
+    margin-top: 10px;
+    font-size: 16px;
+}
+div#menu {
+    background-color: #ffff99;
+    height: 50%;
+    width: 50%;
+    float: left;
+}
+div#content {
+    background-color: #EEEEEE;
+    height: 50%;
+    width: 50%;
+    float: left;
+}
+div#footer {
+    background-color: #99bbbb;
+    clear: both;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 999;
+    width: 100%;
+}
+#saomiao{
+    position: fixed;
+    left: 75%;
+    top: 25%;
+    z-index: 1000;
+}
+h1 {
+    margin-bottom: 0;
+}
+ul {
+    margin: 0;
+}
+li {
+    list-style: none;
+}
+div{
+    display: block;
+}
