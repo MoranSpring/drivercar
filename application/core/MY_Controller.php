@@ -6,10 +6,10 @@ class MY_Controller extends CI_Controller {
     }   
   
     public function assign($key,$val) {   
-        $this->CI_Smarty->assign($key,$val);   
+        $this->cismarty->assign($key,$val);   
     }   
   
     public function display($html) {   
-        $this->CI_Smarty->display($html);   
+        $this->cismarty->display($html);   
     }   
 }  

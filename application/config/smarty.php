@@ -6,4 +6,4 @@ $config['cache_dir']    = FCPATH . 'cache';
 $config['config_dir']   = FCPATH . 'configs';   
 $config['template_ext'] = '.html';   
 $config['caching']      = false;   
-$config['lefttime']     = 60;
+$config['lefttime']     = 60; 

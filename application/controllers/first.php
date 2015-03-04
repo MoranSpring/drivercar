@@ -22,19 +22,23 @@ class First extends MY_Controller {
     function __construct() {
         parent::__construct();
         $this->load->helper('url');
-        $this->load->library('CI_Smarty');
     }
 	public function index()
 	{
 //            $this->ci_smarty->assign('test', 'smarty');
-            $this->ci_smarty->display('test.tpl');
 //               $this->template->load('template', 'about');
 //		$this->load->view('a_views/head');
 //                $this->load->view('a_views/nav');
 //                $this->load->view('a_views/content_1');
 //                $this->load->view('a_views/content_2');
 //                $this->load->view('a_views/foot');
-                
+//              $data['title'] = '标题';   
+//              $data['num'] = '123456789';   
+//        $this->cismarty->assign('data',$data); // 亦可   
+//        $this->assign('data',$data);   
+        $this->assign('test','测试用的网页标题');   
+        //$this->cismarty->display('test.html'); // 亦可   
+        $this->display('test.html');   
                 
 	}
 }
