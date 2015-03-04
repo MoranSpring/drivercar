@@ -19,9 +19,18 @@ class First extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
+    function __construct() {
+        parent::__construct();
+        $this->load->helper('url');
+    }
 	public function index()
 	{
-            $this->load->helper('url');
-		$this->load->view('index');
+		$this->load->view('a_views/head');
+                $this->load->view('a_views/nav');
+                $this->load->view('a_views/content_1');
+                $this->load->view('a_views/content_2');
+                $this->load->view('a_views/foot');
+                
+                
 	}
 }
