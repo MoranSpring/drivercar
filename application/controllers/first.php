@@ -36,9 +36,12 @@ class First extends CI_Controller {
 //              $data['num'] = '123456789';   
 //        $this->cismarty->assign('data',$data); // 亦可   
 //        $this->assign('data',$data);   
-        $this->assign('test','测试用的网页标题');   
+        $this->smarty->assign("Name","Fred Irving Johnathan Bradley Peppergill");
+        
+        $this->assign('title','测试用的网页标题');
+        $this->smarty->view( 'test.tpl', "$data ");
         //$this->cismarty->display('test.html'); // 亦可   
-        $this->display('test.html');   
+          
                 
 	}
 }
