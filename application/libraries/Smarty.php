@@ -9,7 +9,7 @@
  * @author		Kepler Gelotte
  * @link		http://www.coolphptools.com/codeigniter-smarty
  */
-require_once( BASEPATH.'libs/smarty/libs/Smarty.class.php' );
+require_once( APPPATH.'libraries/smarty-3.1.21/Smarty.class.php' );
 
 class CI_Smarty extends Smarty {
 
@@ -73,7 +73,7 @@ class CI_Smarty extends Smarty {
 		if ($return == FALSE)
 		{
 			$CI =& get_instance();
-			$CI->output->final_output = $this->fetch($template);
+			$CI->output->set_output($this->fetch($template));
 			return;
 		}
 		else

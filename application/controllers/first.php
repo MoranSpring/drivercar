@@ -2,7 +2,7 @@
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class First extends MY_Controller {
+class First extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
