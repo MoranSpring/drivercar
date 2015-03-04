@@ -2,7 +2,7 @@
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class First extends CI_Controller {
+class First extends MY_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -22,14 +22,18 @@ class First extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->helper('url');
+        $this->load->library('CI_Smarty');
     }
 	public function index()
 	{
-		$this->load->view('a_views/head');
-                $this->load->view('a_views/nav');
-                $this->load->view('a_views/content_1');
-                $this->load->view('a_views/content_2');
-                $this->load->view('a_views/foot');
+//            $this->ci_smarty->assign('test', 'smarty');
+            $this->ci_smarty->display('test.tpl');
+//               $this->template->load('template', 'about');
+//		$this->load->view('a_views/head');
+//                $this->load->view('a_views/nav');
+//                $this->load->view('a_views/content_1');
+//                $this->load->view('a_views/content_2');
+//                $this->load->view('a_views/foot');
                 
                 
 	}

@@ -52,9 +52,7 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array();
-
-
+$autoload['libraries'] = array('CI_Smarty');
 /*
 | -------------------------------------------------------------------
 |  Auto-load Helper Files
