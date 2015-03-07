@@ -29,6 +29,10 @@ class First extends CI_Controller {
         $data['head']=$this->load->view('a_views/second');
         $data['body']=$this->load->view('a_views/third');
         $data['body']=$this->load->view('a_views/third');
+        $data['body']=$this->load->view('a_views/third');
+        $data['body']=$this->load->view('a_views/third');
+        $data['body']=$this->load->view('a_views/third');
+        $data['body']=$this->load->view('a_views/third');
         $this->load->view('a_views/first',$data);
 
 
