@@ -29,7 +29,7 @@ class First extends CI_Controller {
         
         $body['header']=$this->load->view('a_views/header','',true);
         $body['navigation']=$this->load->view('a_views/navigation','',true);
-        $body['content']=$this->load->view('a_views/content','',true);
+        $body['content']=$this->load->view('a_views/pos_info','',true);
         $body['footer']=$this->load->view('a_views/footer','',true);
         $this->load->view('a_views/template',$body);
 
