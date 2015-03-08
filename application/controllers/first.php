@@ -26,16 +26,12 @@ class First extends CI_Controller {
     }
 
     public function index() {
-        $data['head']=$this->load->view('a_views/second');
         
-        $data['head']=$this->load->view('a_views/second');$data['head']=$this->load->view('a_views/second');
-        $data['body']=$this->load->view('a_views/third');
-        $data['body']=$this->load->view('a_views/third');
-        $data['body']=$this->load->view('a_views/third');
-        $data['body']=$this->load->view('a_views/third');
-        $data['body']=$this->load->view('a_views/third');
-        $data['body']=$this->load->view('a_views/third');
-        $this->load->view('a_views/first',$data);
+        $body['header']=$this->load->view('a_views/header','',true);
+        $body['navigation']=$this->load->view('a_views/navigation','',true);
+        $body['content']=$this->load->view('a_views/content','',true);
+        $body['footer']=$this->load->view('a_views/footer','',true);
+        $this->load->view('a_views/template',$body);
 
 
 //            $this->ci_smarty->assign('test', 'smarty');

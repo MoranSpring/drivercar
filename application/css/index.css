@@ -27,6 +27,7 @@ div ,li ,ul, h1, h2, h3, h4 ,nav, span {
 a{
     color:#60aff6;
     text-decoration: none; 
+    cursor: pointer;
 }
 
 /*----------------------------[public]-------------------------------------*/
@@ -101,7 +102,7 @@ body{
     display: inline;
     float: left;
     text-align: center;
-    width: 130px;
+    width: 110px;
     border-left: 1px solid #ccc;
     position: relative;
 
@@ -183,7 +184,7 @@ body{
     list-style: none;
     font-size: 18px;
     float :left;
-    width:100px;
+    width:80px;
     margin-bottom: -1px;
     color:#000;font-family: 'Lato', 'PT Sans';
     padding:5px 20px 5px 20px;
@@ -416,4 +417,18 @@ margin: 5px 0 5px 0;
     width:200px;
     border: 0;
     padding: 0;
+}
+.news {
+    text-align: left;
+    border-bottom: 1px dotted #ccc;
+    line-height: 32px;
+    height: 32px;
+}
+.news_time{
+    float:right;
+    margin-right: 10px;
+}
+.news_title{
+    float:left;
+    margin-left: 10px;
 }

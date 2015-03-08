@@ -1,4 +1,4 @@
-        <div class='navgation'>
+<div class='navgation'>
             <div  id="nav" class="clearfix" >
                 <div class="logo-div">
                     <img src="<?php  echo base_url().'application/images/logo.png'?>" height="50"/>
@@ -9,40 +9,52 @@
                             <span>
                                 首  页 
                             </span>
+                        </li>
+                        <li>
+                            <span>
+                                驾培资讯
+                            </span>
                             <ul class='menu-chir'id="chir">
                                 <li>
-                                    <span>nihao </span>
+                                    <span>驾培资讯</span>
                                 </li>
                                 <li>
-                                    <span>nihao </span>
+                                    <span>培训点信息</span>
                                 </li>
                                 <li>
-                                    <span>nihao </span>
+                                    <span>服务指南</span>
                                 </li>
                                 <li>
-                                    <span>nihao </span>
+                                    <span>教练信息</span>
                                 </li>
-
+                                <li>
+                                    <span>教学大纲</span>
+                                </li>
                             </ul>
                         </li>
                         <li>
                             <span>
-                                驾培咨询
+                                会员中心
                             </span>
                         </li>
                         <li>
                             <span>
-                                考试报名
+                                驾考报名
                             </span>
                         </li>
                         <li>
                             <span>
-                                预约学车
+                                模拟考试
+                            </span>
+                        </li>
+                        <li>
+                            <span>
+                                爱车服务
                             </span>
                         </li>
                         <li>
                             <span style="border-right: 1px solid #ccc">
-                                服务市场
+                                更多
                             </span>
                         </li>
 
@@ -51,4 +63,3 @@
 
             </div>
         </div>
-
