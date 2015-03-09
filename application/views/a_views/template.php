@@ -33,6 +33,8 @@ and open the template in the editor.
 
 
         <script type="text/javascript">
+           
+            
             $('#menu-ul >li').hover(function () {
                 $(this).find('.menu-chir').animate({opacity: 'show', height: 'show'}, 200);
             }, function () {
@@ -44,8 +46,24 @@ and open the template in the editor.
                 selects: ['province', 'city', 'area'],
                 nodata: 'none'
             });
-            var map = new BMap.Map("allmap");  // 创建Map实例
-            map.centerAndZoom("上海", 15);      // 初始化地图,用城市名设置地图中心点
+
+            function saveLast() {
+                var select = document.getElementById("citys");
+
+                var lastIndex = select.selectedIndex;
+                var midValue = select.options[lastIndex].value;
+//var text = select.options[index].text;
+                if (midValue != "0") {
+                    lastIndex = select.selectedIndex;
+                    lastValue = select.options[lastIndex].value;
+                    alert(lastValue); 
+                      var map = new BMap.Map("allmap");  // 创建Map实例
+            map.centerAndZoom(lastValue, 11);      // 初始化地图,用城市名设置地图中心点
+            }
+        }
+
+
+            
         </script>
     </body>
 </html>

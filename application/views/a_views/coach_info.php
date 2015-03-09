@@ -1,12 +1,12 @@
 <div id="content" class="clearfix">
     <div id="con-left">
         <ul>
-            <li><span>驾培资讯</span></li>
-            <li><span>培训点信息</span></li>
-            <li><span>服务指南</span></li>
-            <li><span>教练信息</span></li>
-            <li><span>教学大纲</span></li>
-        </ul>
+                    <li><a href="<?=base_url() . 'index.php/first/sch_info'?>"><span>驾培资讯</span></a></li>
+                    <li><a href="<?=base_url() . 'index.php/first/pos_info'?>"><span>培训点信息</span></a></li>
+                    <li><a href="<?=base_url() . 'index.php/first/ser_info'?>"><span>服务指南</span></a></li>
+                    <li><a href="<?=base_url() . 'index.php/first/coach_info'?>"><span>教练信息</span></a></li>
+                    <li><a href="<?=base_url()?>index.php/first/sch_info"><span>教学大纲</span></a></li>
+                </ul>
     </div>
     <div id="con-right">
         <div id="con-nav">
@@ -22,7 +22,7 @@
                 <div id="content1">
                     <p id="city_china_val">所在地区：
                         <select class="province cxselect" data-value="浙江省" data-first-title="选择省" disabled="disabled"></select>
-                        <select class="city cxselect" data-value="杭州市" data-first-title="选择市" disabled="disabled"></select>
+                        <select id="citys" class="city cxselect" data-value="杭州市" data-first-title="选择市" disabled="disabled" onchange="saveLast()"></select>
                         <select class="area cxselect" data-value="西湖区" data-first-title="选择地区" disabled="disabled"></select>
                     </p>
                     <div id="map">

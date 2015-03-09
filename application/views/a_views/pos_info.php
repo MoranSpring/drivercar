@@ -1,12 +1,12 @@
 <div id="content" class="clearfix">
     <div id="con-left">
         <ul>
-            <li><span>驾培资讯</span></li>
-            <li><span>培训点信息</span></li>
-            <li><span>服务指南</span></li>
-            <li><span>教练信息</span></li>
-            <li><span>教学大纲</span></li>
-        </ul>
+                    <li><a href="<?=base_url() . 'index.php/first/sch_info'?>"><span>驾培资讯</span></a></li>
+                    <li><a href="<?=base_url() . 'index.php/first/pos_info'?>"><span>培训点信息</span></a></li>
+                    <li><a href="<?=base_url() . 'index.php/first/ser_info'?>"><span>服务指南</span></a></li>
+                    <li><a href="<?=base_url() . 'index.php/first/coach_info'?>"><span>教练信息</span></a></li>
+                    <li><a href="<?=base_url() . 'index.php/first/sch_info'?>"><span>教学大纲</span></a></li>
+                </ul>
     </div>
     <div id="con-right">
         <div id="con-nav">

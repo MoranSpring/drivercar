@@ -31,6 +31,9 @@ a{
     text-decoration: none; 
     cursor: pointer;
 }
+span{
+    color:#000;
+}
 
 /*----------------------------[public]-------------------------------------*/
 body{

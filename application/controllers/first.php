@@ -43,13 +43,34 @@ class First extends CI_Controller {
 //                $this->load->view('a_views/foot');
 //              $data['title'] = '标题';   
 //              $data['num'] = '123456789';   
-//        $this->cismarty->assign('data',$data); // 亦可   
-//        $this->assign('data',$data);   
-//        $this->smarty->assign("Name","Fred Irving Johnathan Bradley Peppergill");
-//        
-//        $this->assign('title','测试用的网页标题');
-//        $this->smarty->view( 'test.tpl', "$data ");
-        //$this->cismarty->display('test.html'); // 亦可   
+    }
+    public function sch_info() {
+        $body['header']=$this->load->view('a_views/header','',true);
+        $body['navigation']=$this->load->view('a_views/navigation','',true);
+        $body['content']=$this->load->view('a_views/sch_info','',true);
+        $body['footer']=$this->load->view('a_views/footer','',true);
+        $this->load->view('a_views/template',$body);
+    }
+    public function pos_info() {
+        $body['header']=$this->load->view('a_views/header','',true);
+        $body['navigation']=$this->load->view('a_views/navigation','',true);
+        $body['content']=$this->load->view('a_views/pos_info','',true);
+        $body['footer']=$this->load->view('a_views/footer','',true);
+        $this->load->view('a_views/template',$body);
+    }
+    public function ser_info() {
+        $body['header']=$this->load->view('a_views/header','',true);
+        $body['navigation']=$this->load->view('a_views/navigation','',true);
+        $body['content']=$this->load->view('a_views/ser_info','',true);
+        $body['footer']=$this->load->view('a_views/footer','',true);
+        $this->load->view('a_views/template',$body);
+    }
+    public function coach_info() {
+        $body['header']=$this->load->view('a_views/header','',true);
+        $body['navigation']=$this->load->view('a_views/navigation','',true);
+        $body['content']=$this->load->view('a_views/coach_info','',true);
+        $body['footer']=$this->load->view('a_views/footer','',true);
+        $this->load->view('a_views/template',$body);
     }
 
 }
