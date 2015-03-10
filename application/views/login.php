@@ -9,11 +9,11 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="../mycss.css">
-        <link rel="stylesheet" type="text/css" href="../header_menu.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url() . 'application/css/mycss.css' ?>">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url() . 'application/css/login.css' ?>">
         <link rel="stylesheet" type="text/css" href="../css/login.css">
-        <script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script>
-        <link href="../tpl/Home/weixin/common/css/wstyle.css" rel="stylesheet" type="text/css" />
+        <script src="<?php echo base_url() . 'application/js/jquery-1.7.1.min.js' ?>" type="text/javascript"></script>
+        <link href="<?php echo base_url() . 'application/css/wstyle.css' ?>" rel="stylesheet" type="text/css" />
     </head>
     <body>
         <div id="header" class="clearfix">
@@ -30,13 +30,13 @@ and open the template in the editor.
             <div id ="loginbox">
                 <form>
                     <h2>
-                       登陆驾培网
+                        登陆驾培网
                     </h2>
                     <div><lable id="userimg">dddd</lable>
                         <input class="input_cls" type = "text"/>
                     </div><br/><br/>
                     <div>
-                        <lable id="userimg">dddd</lable>
+                        <lable id="userimg" class="pswimg">dddd</lable>
                         <input class="input_cls" type = "password"  oncontextmenu="return false" onpaste="return false" oncopy="return false" oncut="return false" autocomplete="off"/>
                     </div>
                     <p class="forget clearfix">
@@ -45,17 +45,27 @@ and open the template in the editor.
                     <div>
                         <input id="submit"type="submit" value="确  定"/>
                     </div>
-                    
+
 
                 </form>
             </div>
 <!--            <div id = "background-img"><img src="https://i.alipayobjects.com/e/201311/1V52qKurDp_src.jpg" width="100%" height="100%" />-->
-            </div>
+        </div>
 
 
 
 
 
         <div id="footer">Copyright W3School.com.cn</div>
+        <script language="javascript" type="text/javascript">
+            function myFunction()
+            {
+                $("#userimg").css("background", "url( '<?= base_url() ?>application/images/icon.png')");
+                $("#userimg").css("background-position","-5px 0px");
+                $(".pswimg").css("background", "url( '<?= base_url() ?>application/images/icon.png')");
+                $(".pswimg").css("background-position","-44px 0px");
+            }
+            $(document).ready(myFunction);
+        </script>
     </body>
 </html>

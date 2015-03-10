@@ -56,9 +56,10 @@ and open the template in the editor.
                 if (midValue != "0") {
                     lastIndex = select.selectedIndex;
                     lastValue = select.options[lastIndex].value;
-                    alert(lastValue); 
                       var map = new BMap.Map("allmap");  // 创建Map实例
             map.centerAndZoom(lastValue, 11);      // 初始化地图,用城市名设置地图中心点
+            map.enableScrollWheelZoom();                 //启用滚轮放大缩小
+          
             }
         }
 

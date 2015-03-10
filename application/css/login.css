@@ -46,12 +46,8 @@ h2{
     text-indent: -9999em;
     background-color: #aaabab;
     border: 1px solid #aaabab;
-
-    background:url(../icon.png);
     background-repeat:no-repeat;
-    background-position:-44px 0px;
-    background-position:-4px 0px;
-vertical-align: middle;
+    vertical-align: middle;
     text-align:center;
 }
 .forget{

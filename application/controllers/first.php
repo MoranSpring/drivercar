@@ -27,13 +27,19 @@ class First extends CI_Controller {
 
     public function index() {
         
-        $body['header']=$this->load->view('a_views/header','',true);
-        $body['navigation']=$this->load->view('a_views/navigation','',true);
-        $body['content']=$this->load->view('a_views/coach_info','',true);
-        $body['footer']=$this->load->view('a_views/footer','',true);
-        $this->load->view('a_views/template',$body);
-
-
+//        $this->load->view('register_views/template');
+        $con =mysql_connect('120.24.159.96:3306','root','Ali2jiapei');
+if (!$con)
+  {
+  die('Could not connect: ' . mysql_error());
+  }
+ mysql_select_db('driver_un', $con);
+ 
+//        $body['header']=$this->load->view('a_views/header','',true);
+//        $body['navigation']=$this->load->view('a_views/navigation','',true);
+//        $body['content']=$this->load->view('a_views/coach_info','',true);
+//        $body['footer']=$this->load->view('a_views/footer','',true);
+//        $this->load->view('a_views/template',$body);
 //            $this->ci_smarty->assign('test', 'smarty');
 //               $this->template->load('template', 'about');
 //		$this->load->view('a_views/head');
