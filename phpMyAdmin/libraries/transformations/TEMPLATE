@@ -29,5 +29,4 @@ function PMA_transformation_[ENTER_FILENAME_HERE]($buffer, $options = array(), $
 
     return $buffer;
 }
-
 ?>

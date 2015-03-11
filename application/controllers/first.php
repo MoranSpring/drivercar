@@ -23,17 +23,24 @@ class First extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->helper('url');
+        $this->load->model('accesscontrol_model');
     }
 
     public function index() {
         
 //        $this->load->view('register_views/template');
-        $con =mysql_connect('120.24.159.96:3306','root','Ali2jiapei');
-if (!$con)
-  {
-  die('Could not connect: ' . mysql_error());
-  }
- mysql_select_db('driver_un', $con);
+//        $con =mysql_connect('120.24.159.96:3306','root','Ali2jiapei');
+//if (!$con)
+//  {
+//  die('Could not connect: ' . mysql_error());
+//  }
+// mysql_select_db('driver_un', $con);
+        $datas=array(
+            'name'=>'maliang',
+            'psw'=>'kyle0659'
+        );
+        $this->accesscontrol_model->insert($datas);
+        
  
 //        $body['header']=$this->load->view('a_views/header','',true);
 //        $body['navigation']=$this->load->view('a_views/navigation','',true);
