@@ -80,15 +80,6 @@ class First extends CI_Controller {
         $body['footer']=$this->load->view('a_views/footer','',true);
         $this->load->view('a_views/template',$body);
     }
-     public function login() {
-         $this->load->view('login_views/template');
-         
-     }
-     public function login_test() {
-         echo 'hello';
-     }
-    
-        
     public function login_check() {
         $name = $this->input->get('name');
         $Result = $this->accesscontrol_model->loginSelect($name);
