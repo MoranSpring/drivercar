@@ -35,18 +35,11 @@ class First extends CI_Controller {
 //  die('Could not connect: ' . mysql_error());
 //  }
 // mysql_select_db('driver_un', $con);
-        $datas=array(
-            'name'=>'maliang',
-            'psw'=>'kyle0659'
-        );
-        $this->accesscontrol_model->insert($datas);
-        
- 
-//        $body['header']=$this->load->view('a_views/header','',true);
-//        $body['navigation']=$this->load->view('a_views/navigation','',true);
-//        $body['content']=$this->load->view('a_views/coach_info','',true);
-//        $body['footer']=$this->load->view('a_views/footer','',true);
-//        $this->load->view('a_views/template',$body);
+        $body['header']=$this->load->view('a_views/header','',true);
+        $body['navigation']=$this->load->view('a_views/navigation','',true);
+        $body['content']=$this->load->view('a_views/coach_info','',true);
+        $body['footer']=$this->load->view('a_views/footer','',true);
+        $this->load->view('a_views/template',$body);
 //            $this->ci_smarty->assign('test', 'smarty');
 //               $this->template->load('template', 'about');
 //		$this->load->view('a_views/head');
@@ -84,6 +77,50 @@ class First extends CI_Controller {
         $body['content']=$this->load->view('a_views/coach_info','',true);
         $body['footer']=$this->load->view('a_views/footer','',true);
         $this->load->view('a_views/template',$body);
+    }
+     public function login() {
+         $this->load->view('login_views/template');
+         
+     }
+     public function login_test() {
+         echo 'hello';
+     }
+    public function login_check() {
+        $UserName = $this->input->post('name');
+        $Password = $this->input->post('password');
+
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('Name', 'name', 'trim|required|min_length[6]|max_length[20]|xss_clean');
+        $this->form_validation->set_rules('Password', 'password', 'trim|required|md5');
+        $datas = array(
+            'name' => $UserName,
+            'psw' => $Password,
+        );
+
+        if ($this->form_validation->run() == FALSE) {
+//            echo form_error('Name');
+//            echo form_error('Password');
+            echo '输入有误';
+        } else {
+            $Result = $this->accesscontrol_model->loginSelect($datas['Name']);
+            if ($this->CheckUserPassword($Result, $Password)) {
+                foreach ($Result as $row) {
+                    
+                    $this->session->set_userdata('uid', $row['UID']);
+//                    $_SESSION['UID'] = $row['UID'];
+                }
+                $AllInfo = $this->accesscontrol_model->select($UserName);
+                foreach ($AllInfo as $row) {
+                    foreach ($row as $key => $value) {
+                        $temparray[$key] = $value;
+                    }
+                }
+//                $sessionid['PHPSESSION'] = session_id();
+//                $alldata = array_merge($sessionid, $temparray);
+                $this->render('10000', '登录成功', $temparray);
+            }
+        }
+        
     }
 
 }
