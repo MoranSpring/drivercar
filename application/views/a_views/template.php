@@ -64,5 +64,13 @@ and open the template in the editor.
         }
 
         </script>
+        <script language="javascript" type="text/javascript">
+            function myFunction()
+            {
+                $(".user_header_img").css("background", "url( '<?= base_url() ?>application/images/arrow.png')");
+                $(".user_header_img").css("background-position","-32px 32px");
+            }
+            $(document).ready(myFunction);
+        </script>
     </body>
 </html>

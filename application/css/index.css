@@ -52,7 +52,6 @@ body{
 }
 #header span{
     color:#fff;
-    text-align: right;
 }
 #hea-ul{
     float: right;
@@ -130,6 +129,7 @@ body{
 }
 
 .menu-chir li{
+    clear:both;
     margin-left: -1px;
     border-bottom: 1px solid #ccc;
     border-right: 1px solid #ccc;
@@ -508,5 +508,21 @@ body{
 .coa_comment{
      line-height: 25px;
      height: 25px;
+    
+}
+.user_header{
+    min-width: 100px;
+    text-align: left;
+}
+.user_header li{
+    min-width: 100px;
+    text-align: left;
+}
+.user_header_img{
+    width: 30px;
+    height: 30px;
+    background-repeat:no-repeat;
+    vertical-align: middle;
+    text-align:center;
     
 }

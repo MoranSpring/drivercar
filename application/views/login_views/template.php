@@ -62,7 +62,7 @@
                             <tr>
                                 <th></th>
                                 <td width="245"><input class="confirm" type="submit" value="登  录"></td>
-                                <td>错误</td>
+                                <td><?php  echo$error;?></td>
                             </tr>
                         </tbody>
                     </table>
