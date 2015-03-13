@@ -24,6 +24,8 @@ class First extends CI_Controller {
         parent::__construct();
         $this->load->helper('url');
         $this->load->model('accesscontrol_model');
+        $this->load->library('session');
+       
     }
 
     public function index() {
@@ -35,11 +37,19 @@ class First extends CI_Controller {
 //  die('Could not connect: ' . mysql_error());
 //  }
 // mysql_select_db('driver_un', $con);
-        $body['header']=$this->load->view('a_views/header','',true);
-        $body['navigation']=$this->load->view('a_views/navigation','',true);
-        $body['content']=$this->load->view('a_views/sch_info','',true);
-        $body['footer']=$this->load->view('a_views/footer','',true);
-        $this->load->view('a_views/template',$body);
+
+        $name = $this->session->userdata('name');
+        if ($name == null) {
+            $body['header'] = $this->load->view('a_views/header', '', true);
+        } else {
+            $data = array('username' => $name);
+            $body['header'] = $this->load->view('a_views/header_logined', $data, true);
+        }
+
+        $body['navigation'] = $this->load->view('a_views/navigation', '', true);
+        $body['content'] = $this->load->view('a_views/sch_info', '', true);
+        $body['footer'] = $this->load->view('a_views/footer', '', true);
+        $this->load->view('a_views/template', $body);
 //            $this->ci_smarty->assign('test', 'smarty');
 //               $this->template->load('template', 'about');
 //		$this->load->view('a_views/head');
@@ -83,6 +93,10 @@ class First extends CI_Controller {
         $this->load->view('a_views/template', $body);
     }
 
+    public function register() {
+        $this->load->view('register_views/template');
+    }
+
     public function login_check() {
         $name = $this->input->get('name');
         $Result = $this->accesscontrol_model->loginSelect($name);
@@ -94,6 +108,7 @@ class First extends CI_Controller {
             echo TRUE;
         }
     }
+
     public function login() {
         $data = array('error' => '');
         $this->load->view('login_views/template', $data);
@@ -112,7 +127,8 @@ class First extends CI_Controller {
                 $this->load->view('first', $data);
                 return false;
             } else {
-                redirect('first/ser_info');
+                $this->session->set_userdata('name', $name);
+                redirect();
 
                 return true;
             }
@@ -124,4 +140,18 @@ class First extends CI_Controller {
         $this->load->view('login_views/template', $data);
     }
 
+    public function login_exit() {
+        $this->session->sess_destroy();
+        redirect();
+    }
+public function verify_image() {  
+    
+    $conf['name'] = 'verify_code'; //作为配置参数  
+    
+    $this->load->library('captcha',$conf); 
+    $this->captcha->show();  
+    $yzm_session = $this->session->userdata('verify_code');  
+    echo $yzm_session;  
+}  
 }
+    

@@ -1,15 +1,13 @@
 <!DOCTYPE HTML>
-<html lang="en-US">
+<html>
 <head>
-<title>大气带JS表单验证功能的注册页面模板 - JS代码网</title>
+<title>驾途网-注册</title>
 <meta charset="UTF-8">
-<meta name="keywords" content="注册页面模板,网站注册页面,注册模板页面,网站模板,注册页面表单验证">
-<meta name="description" content="JS代码网提供大量的注册页面模板的学习和下载">
 <link type="text/css" href="<?= base_url()?>application/css/register/reset.css" rel="stylesheet">
 <link type="text/css" href="<?= base_url()?>application/css/register/public.css" rel="stylesheet">
 <link type="text/css" href="<?= base_url()?>application/css/register/register.css" rel="stylesheet">
 <link rel="shortcut icon" href="favicon.ico" />
-<script src="themes/js/jquery.min.js" type="text/javascript"></script>
+<script src="<?php echo base_url() . 'application/js/jquery-1.7.1.min.js' ?>" type="text/javascript"></script>
 <script src="themes/js/jquery.form.js" type="text/javascript"></script>
 <script src="themes/js/json.parse.js" type="text/javascript"></script>
 <script type="text/javascript">
@@ -31,40 +29,46 @@ $(function(){
 				$(".btn").val('注册中...').attr('disabled','disabled');
 				
 				if(!isRegisterUserName(userName)){
-					$(".input_div1 span").html('<img src="themes/images/v3/text_error.png"><font color=red>账户名格式不正确!</font>');
+					$(".input_div1 span").html('<img src="<?= base_url() ?>application/images/text_error.png"><font color=red>账户名格式不正确!</font>');
 					$("#username").focus();
 					$(".btn").val('注册').removeAttr('disabled');
 					return false;
 				}else if(!isEmail(userEmail)){
-					$(".input_div2 span").html('<img src="themes/images/v3/text_error.png"><font color=red>邮箱格式不正确!</font>');
+					$(".input_div2 span").html('<img src="<?= base_url() ?>application/images/text_error.png"><font color=red>邮箱格式不正确!</font>');
 					$("#mail").focus();
 					$(".btn").val('注册').removeAttr('disabled');
 					return false;
 				}else if(userPass.length <8){
-					$(".input_div3 span").html('<img src="themes/images/v3/text_error.png"><font color=red>密码格式不正确!</font>');
+					$(".input_div3 span").html('<img src="<?= base_url() ?>application/images/text_error.png"><font color=red>密码格式不正确!</font>');
 					$("#password1").focus();
 					$(".btn").val('注册').removeAttr('disabled');
 					return false;
 				}else if(userPass != userPass2){
-					$(".input_div4 span").html('<img src="themes/images/v3/text_error.png"><font color=red>两次输入的密码不一致!</font>');
+					$(".input_div4 span").html('<img src="<?= base_url() ?>application/images/text_error.png"><font color=red>两次输入的密码不一致!</font>');
 					$("#password2").focus();
 					$(".btn").val('注册').removeAttr('disabled');
 					return false;
 				} else if(vercode ==''){
-					$(".input_div5 span").html('<img src="themes/images/v3/text_error.png"><font color=red>输入图片验证码</font>').fadeIn();
+					$(".input_div5 span").html('<img src="<?= base_url() ?>application/images/text_error.png"><font color=red>输入图片验证码</font>').fadeIn();
 					$("#varcode").focus();
 					$(".btn").val('注册').removeAttr('disabled');
 					return false;
-				} else if(agreenMent != '1'){
+				}else if(vercode ==){
+					$(".input_div5 span").html('<img src="<?= base_url() ?>application/images/text_error.png"><font color=red>输入图片验证码</font>').fadeIn();
+					$("#varcode").focus();
+					$(".btn").val('注册').removeAttr('disabled');
+					return false;
+				}
+                                else if(agreenMent != '1'){
 					//$(".agreenment-tips").html('请先同意用户条款!').fadeIn();
-					$(".input_div6 span").html('<img src="themes/images/v3/text_error.png"><font color=red>请先同意用户条款!</font>');
+					$(".input_div6 span").html('<img src="<?= base_url() ?>application/images/text_error.png"><font color=red>请先同意用户条款!</font>');
 					$(".btn").val('注册').removeAttr('disabled');
 					return false;
 				}else{
 					$("#registerForm").ajaxSubmit(function(e){
 						var obj=json_parse(e);
 						var code=obj.code;
-						var info = '<img src="themes/images/v3/text_error.png"><font color=red>'+obj.info+"</font>";
+						var info = '<img src="<?= base_url() ?>application/images/text_error.png"><font color=red>'+obj.info+"</font>";
 						if(code=='-1' || code=='-5'){
 							$(".input_div1 span").html(info);
 							$("#username").focus();
@@ -109,6 +113,7 @@ $(function(){
 	});
 	
 });
+function isCodeRight
 function isRegisterUserName(s){  
 	var patrn=/^[a-zA-Z0-9]{1}([a-zA-Z0-9]|[._]){5,19}$/;  
 	if (!patrn.exec(s)) return false
@@ -119,6 +124,9 @@ function isEmail(email){
 	   if(!myreg.test(email)) return false;
 		return true; 
  }
+ function changeCode(){    
+         $("#verify_code").attr("src","<?= base_url() ?>index.php/first/verify_image?r="+Math.random());
+    } 
 
 </script>
 <style>
@@ -175,11 +183,11 @@ function isEmail(email){
 				</div>
 			</div>
 			<div class="div_form clear ">
-				<label>输入计算结果：</label>
+				<label>输入验证码：</label>
 				<div class="input_div input_div5">
 					<input id="varcode" name="vercode" type="text" maxlength="2">
-					
-					<a class="change" href="javascript:;">点击换一张</a>
+					<img src="<?= base_url() ?>index.php/first/verify_image" alt="验证码" id="verify_code" class="yz_img" />
+					<a class="change_yz" href="javascript:changeCode();">点击换一张</a>
 					<span></span>
 				</div>
 			</div>
@@ -215,6 +223,17 @@ function isEmail(email){
     var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
     document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F5d12e2b4eed3b554ae941c0ac43c330a' type='text/javascript'%3E%3C/script%3E"));
 </script>
+<script language="javascript" type="text/javascript">
+            function myFunction()
+            {
+                $(".step_ul").css("background", "url(<?= base_url() ?>application/images/iphone.png)  0 -314px no-repeat");
+                $(".step1").css("background", "url(<?= base_url() ?>application/images/iphone.png)  center -381px no-repeat");
+                $(".step2").css("background", "url(<?= base_url() ?>application/images/iphone.png)  center -314px no-repeat");
+                $(".check2").css("background", "url(<?= base_url() ?>application/images/check2.png) no-repeat");
+                $(".check1").css("background", "url(<?= base_url() ?>application/images/check1.png) no-repeat");
+            }
+            $(document).ready(myFunction);
+        </script>
 <!-- footer end -->
 </body>
 </html>

@@ -11,9 +11,9 @@ input[type="text"]:focus,input[type="password"]:focus{
 
 .register_content{width:1200px; margin:0 auto; position:relative;}
 .bg{height:34px;background:url(../../images/v3/aaa.png) left 0 repeat-x;}
-.step_ul{padding:0 40px; margin-top:32px; height:64px; background:url(../../images/v3/iphone.png) 0 -314px no-repeat;}
-.step1{padding:0 40px; height:64px; background:url(../../images/v3/iphone.png) center -381px no-repeat;}
-.step2{padding:0 40px; height:64px; background:url(../../images/v3/iphone.png) center -314px no-repeat;}
+.step_ul{padding:0 40px; margin-top:32px; height:64px;}
+.step1{padding:0 40px; height:64px;}
+.step2{padding:0 40px; height:64px;}
 .step_ul li{float:left; width:540px; height:64px; text-align:center; font:bold 16px/64px '����'; color:#fff;}
 .step1 .li1{background:#009fe3;}
 .step1 .li2{background:#d1d1d1; margin-left:40px;}
@@ -31,7 +31,7 @@ input[type="text"]:focus,input[type="password"]:focus{
 #btn:hover, .btn2:hover, .success_login:hover,.login_btn:hover{background:#0697d5;}
 .code_img{width:70px; height:48px;}
 .change{color:#666; text-decoration:underline; margin-left:10px;}
-.input_div span{background:url(../../images/v3/text.png) no-repeat;padding-left:25px; padding-bottom:6px;}
+.input_div span{padding-left:25px; padding-bottom:6px;}
 .input_div5 span{background:0 none;}
 .check2{background:url(../../images/v3/check2.png) no-repeat; padding-left:22px; padding-bottom:4px;}
 .check1{background:url(../../images/v3/check1.png) no-repeat; padding-left:22px; padding-bottom:4px;}
