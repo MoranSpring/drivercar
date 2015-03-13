@@ -1,6 +1,6 @@
 <div id="header">
             <nav class="clearfix">
-                <ul id="hea-ul">
+                <ul class="hea-ul">
                     <li>
                         <a href="<?=base_url()?>index.php"><span >首页</span></a>
                     </li>

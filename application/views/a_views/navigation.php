@@ -4,7 +4,7 @@
             <img src="<?php echo base_url() . 'application/images/logo.png' ?>" height="50"/>
         </div>
         <div>
-            <ul id='menu-ul'>
+            <ul class='menu-ul'>
                 <li>
                     <a><span>
                             首  页 
@@ -14,7 +14,7 @@
                     <a href="<?= base_url() . 'index.php/first/sch_info' ?>"><span>
                             驾培资讯
                         </span></a>
-                    <ul class='menu-chir'id="chir">
+                    <ul class="menu-chir chir">
                         <li><a href="<?= base_url() . 'index.php/first/sch_info' ?>"><span>驾培资讯</span></a></li>
                         <li><a href="<?= base_url() . 'index.php/first/pos_info' ?>"><span>培训点信息</span></a></li>
                         <li><a href="<?= base_url() . 'index.php/first/ser_info' ?>"><span>服务指南</span></a></li>

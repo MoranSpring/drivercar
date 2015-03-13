@@ -35,7 +35,12 @@ and open the template in the editor.
         <script type="text/javascript">
            
             
-            $('#menu-ul >li').hover(function () {
+            $('.menu-ul >li').hover(function () {
+                $(this).find('.menu-chir').animate({opacity: 'show', height: 'show'}, 200);
+            }, function () {
+                $('.menu-chir').stop(true, true).hide();
+            });
+            $('.user_header').hover(function () {
                 $(this).find('.menu-chir').animate({opacity: 'show', height: 'show'}, 200);
             }, function () {
                 $('.menu-chir').stop(true, true).hide();

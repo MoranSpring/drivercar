@@ -35,7 +35,7 @@ class First extends CI_Controller {
 //  die('Could not connect: ' . mysql_error());
 //  }
 // mysql_select_db('driver_un', $con);
-        $body['header']=$this->load->view('a_views/header_logined','',true);
+        $body['header']=$this->load->view('a_views/header','',true);
         $body['navigation']=$this->load->view('a_views/navigation','',true);
         $body['content']=$this->load->view('a_views/sch_info','',true);
         $body['footer']=$this->load->view('a_views/footer','',true);
