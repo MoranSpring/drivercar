@@ -10,6 +10,7 @@ function check_onbulr(str){
                 success: function(data) {
                     if(data!=true)
                      $(".name_alert").text(data);
+                 
                 }
             });
 }

@@ -153,5 +153,10 @@ public function verify_image() {
     $yzm_session = $this->session->userdata('verify_code');  
     echo $yzm_session;  
 }  
+public function get_verify_code() {  
+    
+    $yzm_session = $this->session->userdata('verify_code');  
+    echo $yzm_session;  
+}  
 }
     
