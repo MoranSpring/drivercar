@@ -6,7 +6,6 @@ function check_onbulr(str){
                 type: "GET",
                 url: base_url+"/first/login_check",
                 async:true,
-                data:data,
                 success: function(data) {
                     if(data!=true)
                      $(".name_alert").text(data);

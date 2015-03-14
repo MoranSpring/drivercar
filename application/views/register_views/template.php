@@ -8,28 +8,17 @@
         <link type="text/css" href="<?= base_url() ?>application/css/register/register.css" rel="stylesheet">
         <link rel="shortcut icon" href="favicon.ico" />
         <script src="<?php echo base_url() . 'application/js/jquery-1.7.1.min.js' ?>" type="text/javascript"></script>
-        <script type="text/javascript">
-            function myFunctions()
-            {
-                alert("Hello World!");
-            }
-            function changeCode() {
-                $("#verify_code").attr("src", "<?= base_url() ?>index.php/first/verify_image?r=" + Math.random());
-            }
-        </script>
-        <script type="text/javascript">
 
+        <script type="text/javascript">
+            var real_code = '';
             $(function () {
                 $(".btn").click(function () {
                     var agreenMent = $("#agreement").attr("data");
-
-                    //alert(agreenMent);0
                     var userName = $("#username").val();
                     var userPass = $("#password1").val();
                     var userPass2 = $("#password2").val();
                     var userEmail = $("#mail").val();
-                    var vercode = $("#varcode").val();
-
+                    var varCode = $("#varcode").val();
                     userPass = $.trim(userPass);
                     userPass2 = $.trim(userPass2);
 
@@ -56,13 +45,9 @@
                         $("#password2").focus();
                         $(".btn").val('注册').removeAttr('disabled');
                         return false;
-                    } else if (vercode == '') {
-                        $(".input_div5 span").html('<img src="<?= base_url() ?>application/images/text_error.png"><font color=red>输入图片验证码</font>').fadeIn();
-                        $("#varcode").focus();
-                        $(".btn").val('注册').removeAttr('disabled');
-                        return false;
-                    } else if (vercode == ) {
-                        $(".input_div5 span").html('<img src="<?= base_url() ?>application/images/text_error.png"><font color=red>输入图片验证码</font>').fadeIn();
+                    } else if (varCode != real_code) {
+                        alert(varCode + '___' + real_code);
+                        $(".input_div5 span").html('<img src="<?= base_url() ?>application/images/text_error.png"><font color=red>验证码错误!</font>');
                         $("#varcode").focus();
                         $(".btn").val('注册').removeAttr('disabled');
                         return false;
@@ -105,9 +90,7 @@
 
                 })
 
-                $(".change").click(function () {
-                    $("#imgcode").attr('src', 'vercode');
-                })
+
 
                 $('.check2').click(function () {
                     var rel = $('#agreement').attr("data");
@@ -118,28 +101,14 @@
                         $('#agreement').attr("data", "1");
                     }
                     $('.check2').toggleClass("check1");
-                });
+                })
+            })
 
-            });
-            function isCodeRight() {
-                data = 'name=' + str;
-                $.ajax({
-                    type: "GET",
-                    url: base_url + "/first/login_check",
-                    async: true,
-                    data: data,
-                    success: function (data) {
-                        if (data != true)
-                            $(".name_alert").text(data);
-                    }
-                });
-
-            }
             function isRegisterUserName(s) {
                 var patrn = /^[a-zA-Z0-9]{1}([a-zA-Z0-9]|[._]){5,19}$/;
                 if (!patrn.exec(s))
-                    return false
-                return true
+                    return false;
+                return true;
             }
             function isEmail(email) {
                 var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\-|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
@@ -147,17 +116,43 @@
                     return false;
                 return true;
             }
+            function isCodeRight() {
+                var base_url = 'http://' + window.document.location.hostname + ':' + window.document.location.port + '/index.php';
+                $.ajax({
+                    type: "GET",
+                    url: base_url + "/first/get_verify_code",
+                    async: true,
+                    success: function (data) {
+                        real_code = data;
+
+                    }
+                });
+
+            }
+
+            function changeCode() {
+                $("#verify_code").attr("src", "<?= base_url() ?>index.php/first/verify_image?r=" + Math.random());
+            }
         </script>
         <style>
             .input_div span{ background:#FFF;}
+            .header a{position:absolute; top:60px; right:50px; font-size:12px; color:#666; height:20px; line-height:20px;background:url(<?= base_url() ?>application/images/iphone.png) -25px -290px no-repeat; text-indent:20px;}
+
+            .check2{background:url(<?= base_url() ?>application/images/check2.png) no-repeat;}
+            .check1{background:url(<?= base_url() ?>application/images/check1.png) no-repeat;}
+            .step_ul{background:url(<?= base_url() ?>application/images/iphone.png)  0 -314px no-repeat}
+            .step1{background:url(<?= base_url() ?>application/images/iphone.png)  center -381px no-repeat}
+            .step2{background:url(<?= base_url() ?>application/images/iphone.png)  center -314px no-repeat}           
+            .div_user span, .div_pw span{position:absolute; left:15px; top:12px; width:16px; height:18px; background:url(<?= base_url() ?>application/images/iphone.png) 0 -480px no-repeat; z-index:1;}
+#login_form h2{background:url(<?= base_url() ?>application/images/iphone.png) left -452px no-repeat; padding-left:46px; color:#009fe3; font-size:16px; font-weight:bold; height:20px; line-height:20px; margin-bottom:24px;}
+
         </style>
     </head>
     <body>
         <div id="header">
             <div class="header">
                 <h1 class="png_bg">JS代码网</h1>
-            <button style='float: right' onclick="changeCode()">点击这里</button>
-                <button class="png_bg"  onclick="myFunctions()">返回主页</button>
+                <a class="png_bg"  onclick="myFunctions()">返回主页</a>
             </div>
         </div>
 
@@ -167,8 +162,8 @@
                 <li class="li1">01、填写资料</li>
                 <li class="li2">02、完成注册</li>
             </ul>
-
-            <form name="registerForm" id='registerForm' method="post" style="padding:60px 40px 88px 40px;font-family:Microsoft Yahei">
+<div>
+            <form name="registerForm" id='registerForm' method="post"  style="padding:60px 40px 88px 40px;font-family:Microsoft Yahei">
                 <div class="div_form clear ">
                     <label>账户名：</label>
                     <div class="input_div input_div1">
@@ -200,7 +195,7 @@
                 <div class="div_form clear ">
                     <label>输入验证码：</label>
                     <div class="input_div input_div5">
-                        <input id="varcode" name="vercode" type="text" maxlength="2">
+                        <input id="varcode" name="vercode" type="text" onblur="isCodeRight()" >
                         <img src="<?= base_url() ?>index.php/first/verify_image" alt="验证码" id="verify_code" class="yz_img" />
                         <a class="changeone" href="javascript:void(0);" onclick="changeCode()">点击换一张</a>
                         <span></span>
@@ -227,28 +222,15 @@
                 <p>已有帐号？</p>
                 <a class="btn2" href="login">登录</a>
             </div>
+    </div>
             <div class="bg"></div>
         </div>
 
         <!-- footer start -->
         <div id="footer" class="clear">
-            <p>上海微一科技有限公司©版权所有 沪ICP备83823823号</p>
+            <p>驾途网©版权所有 沪ICP备83823823号</p>
         </div>
-        <script type="text/javascript">
-            var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-            document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F5d12e2b4eed3b554ae941c0ac43c330a' type='text/javascript'%3E%3C/script%3E"));
-        </script>
-        <script language="javascript" type="text/javascript">
-            function myFunction()
-            {
-                $(".step_ul").css("background", "url(<?= base_url() ?>application/images/iphone.png)  0 -314px no-repeat");
-                $(".step1").css("background", "url(<?= base_url() ?>application/images/iphone.png)  center -381px no-repeat");
-                $(".step2").css("background", "url(<?= base_url() ?>application/images/iphone.png)  center -314px no-repeat");
-                $(".check2").css("background", "url(<?= base_url() ?>application/images/check2.png) no-repeat");
-                $(".check1").css("background", "url(<?= base_url() ?>application/images/check1.png) no-repeat");
-            }
-            $(document).ready(myFunction);
-        </script>
+
         <!-- footer end -->
     </body>
 </html>
