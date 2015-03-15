@@ -10,7 +10,8 @@
         <script src="<?php echo base_url() . 'application/js/jquery-1.7.1.min.js' ?>" type="text/javascript"></script>
 
         <script type="text/javascript">
-            var real_code = '';
+            var real_code = 'o_o';
+            var is_user_exist = 0;
             $(function () {
                 $(".btn").click(function () {
                     var agreenMent = $("#agreement").attr("data");
@@ -25,7 +26,7 @@
                     $(".input_div1 span,.input_div2 span,.input_div3 span,.input_div4 span,.input_div6 span,.input_div5 span").html("");
                     $(".btn").val('注册中...').attr('disabled', 'disabled');
 
-                    if (!isRegisterUserName(userName)) {
+                    if (!isRegisterUserName(userName)||is_user_exist==='1') {
                         $(".input_div1 span").html('<img src="<?= base_url() ?>application/images/text_error.png"><font color=red>账户名格式不正确!</font>');
                         $("#username").focus();
                         $(".btn").val('注册').removeAttr('disabled');
@@ -45,7 +46,7 @@
                         $("#password2").focus();
                         $(".btn").val('注册').removeAttr('disabled');
                         return false;
-                    } else if (varCode != real_code) {
+                    } else if (varCode !== real_code) {
                         alert(varCode + '___' + real_code);
                         $(".input_div5 span").html('<img src="<?= base_url() ?>application/images/text_error.png"><font color=red>验证码错误!</font>');
                         $("#varcode").focus();
@@ -117,13 +118,28 @@
                 return true;
             }
             function isCodeRight() {
-                var base_url = 'http://' + window.document.location.hostname + ':' + window.document.location.port + '/index.php';
                 $.ajax({
-                    type: "GET",
-                    url: base_url + "/first/get_verify_code",
+                    url: "<?= base_url() ?>index.php/first/get_verify_code?r=" + Math.random(),
                     async: true,
                     success: function (data) {
                         real_code = data;
+
+                    }
+                });
+
+            }
+            function isUserExist() {
+            var userName = "name="+$("#username").val();
+                $.ajax({
+                    type: "GET",
+                    url: "<?= base_url() ?>index.php/first/login_check?r=" + Math.random(),
+                    async: true,
+                    data:userName,
+                    success: function (data) {
+                        is_user_exist=data;
+                        if(data==="1")
+                        $(".input_div1 span").html('<img src="<?= base_url() ?>application/images/text_error.png"><font color=red>已存在该用户名，请更换~</font>');
+                        
 
                     }
                 });
@@ -144,7 +160,7 @@
             .step1{background:url(<?= base_url() ?>application/images/iphone.png)  center -381px no-repeat}
             .step2{background:url(<?= base_url() ?>application/images/iphone.png)  center -314px no-repeat}           
             .div_user span, .div_pw span{position:absolute; left:15px; top:12px; width:16px; height:18px; background:url(<?= base_url() ?>application/images/iphone.png) 0 -480px no-repeat; z-index:1;}
-#login_form h2{background:url(<?= base_url() ?>application/images/iphone.png) left -452px no-repeat; padding-left:46px; color:#009fe3; font-size:16px; font-weight:bold; height:20px; line-height:20px; margin-bottom:24px;}
+            #login_form h2{background:url(<?= base_url() ?>application/images/iphone.png) left -452px no-repeat; padding-left:46px; color:#009fe3; font-size:16px; font-weight:bold; height:20px; line-height:20px; margin-bottom:24px;}
 
         </style>
     </head>
@@ -162,68 +178,72 @@
                 <li class="li1">01、填写资料</li>
                 <li class="li2">02、完成注册</li>
             </ul>
-<div>
-            <form name="registerForm" id='registerForm' method="post"  style="padding:60px 40px 88px 40px;font-family:Microsoft Yahei">
-                <div class="div_form clear ">
-                    <label>账户名：</label>
-                    <div class="input_div input_div1">
-                        <input id="username" name="username" type="text" placeholder="格式6-24位数字字母组合" maxlength="24">
-                        <span></span>
+            <div class="body1">
+                <form name="registerForm" id='registerForm' method="post"  style="padding:60px 40px 88px 40px;font-family:Microsoft Yahei">
+                    <div class="div_form clear ">
+                        <label>账户名：</label>
+                        <div class="input_div input_div1">
+                            <input id="username" name="username" type="text" placeholder="格式6-24位数字字母组合" onblur="isUserExist()" maxlength="24">
+                            <span></span>
+                        </div>
                     </div>
-                </div>
-                <div class="div_form clear ">
-                    <label>常用的邮箱帐号：</label>
-                    <div class="input_div input_div2" >
-                        <input id="mail" name="useremail"  type="text" placeholder="请填写正确的邮箱，以便接收账号激活邮件" maxlength="64">
-                        <span></span>
+                    <div class="div_form clear ">
+                        <label>常用的邮箱帐号：</label>
+                        <div class="input_div input_div2" >
+                            <input id="mail" name="useremail"  type="text" placeholder="请填写正确的邮箱，以便接收账号激活邮件" maxlength="64">
+                            <span></span>
+                        </div>
                     </div>
-                </div>
-                <div class="div_form clear ">
-                    <label>请创建一个密码：</label>
-                    <div class="input_div input_div3">
-                        <input id="password1" name="userpass" type="password" placeholder="最少 8 个字符，区分大小写" maxlength="32">
-                        <span></span>
+                    <div class="div_form clear ">
+                        <label>请创建一个密码：</label>
+                        <div class="input_div input_div3">
+                            <input id="password1" name="userpass" type="password" placeholder="最少 8 个字符，区分大小写" maxlength="32">
+                            <span></span>
+                        </div>
                     </div>
-                </div>
-                <div class="div_form clear ">
-                    <label>重新输入密码：</label>
-                    <div class="input_div input_div4">
-                        <input id="password2" name="userpass2" type="password" placeholder="再次输入密码" maxlength="32">
-                        <span></span>
+                    <div class="div_form clear ">
+                        <label>重新输入密码：</label>
+                        <div class="input_div input_div4">
+                            <input id="password2" name="userpass2" type="password" placeholder="再次输入密码" maxlength="32">
+                            <span></span>
+                        </div>
                     </div>
-                </div>
-                <div class="div_form clear ">
-                    <label>输入验证码：</label>
-                    <div class="input_div input_div5">
-                        <input id="varcode" name="vercode" type="text" onblur="isCodeRight()" >
-                        <img src="<?= base_url() ?>index.php/first/verify_image" alt="验证码" id="verify_code" class="yz_img" />
-                        <a class="changeone" href="javascript:void(0);" onclick="changeCode()">点击换一张</a>
-                        <span></span>
+                    <div class="div_form clear ">
+                        <label>输入验证码：</label>
+                        <div class="input_div input_div5">
+                            <input id="varcode" name="vercode" type="text" onblur="isCodeRight()" value="" placeholder="请输入验证码">
+                            <img src="<?= base_url() ?>index.php/first/verify_image" alt="验证码" id="verify_code" class="yz_img" />
+                            <a class="changeone" href="javascript:void(0);" onclick="changeCode()">点击换一张</a>
+                            <span></span>
+                        </div>
                     </div>
-                </div>
-                <div class="div_form clear ">
-                    <label></label>
-                    <div class="input_div check2 input_div6" data="0" id="agreement">
-                        我已阅读并接受《JS代码网用户服务协议》
-                        <span></span>
+                    <div class="div_form clear ">
+                        <label></label>
+                        <div class="input_div check2 input_div6" data="0" id="agreement">
+                            我已阅读并接受《JS代码网用户服务协议》
+                            <span></span>
+                        </div>
                     </div>
+
+                    <div class="div_form clear ">
+                        <label></label>
+                        <div class="input_div">
+                            <input id="btn" class="btn" type="button" value="注册" />
+                        </div>
+                    </div>
+
+                </form>
+
+                <div class="reg_login">
+                    <p>已有帐号？</p>
+                    <a class="btn2" href="login">登录</a>
                 </div>
 
-                <div class="div_form clear ">
-                    <label></label>
-                    <div class="input_div">
-                        <input id="btn" class="btn" type="button" value="注册" />
-                    </div>
-                </div>
 
-            </form>
 
-            <div class="reg_login">
-                <p>已有帐号？</p>
-                <a class="btn2" href="login">登录</a>
+
             </div>
-    </div>
-            <div class="bg"></div>
+            <div class="body2"></div>
         </div>
 
         <!-- footer start -->
