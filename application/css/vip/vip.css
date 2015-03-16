@@ -1,0 +1,22 @@
+.user_top{
+    background: #999999;
+    border-bottom: 1px dashed #b2b2b2;
+    padding: 10px 0 10px 10px;
+}
+.info_content{
+    padding:10px 0 10px 10px; 
+}
+.info_content li{
+    list-style: none;
+}
+#coach {
+    list-style:none;
+}
+#coach li{
+    padding: 3px 3px 3px 0;
+}
+#coach ul li{
+    
+    padding: 7px 10px 7px 10px;
+}
+

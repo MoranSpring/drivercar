@@ -173,7 +173,7 @@ public function vip_center(){
         }
 
         $body['navigation'] = $this->load->view('vip_views/navigation', '', true);
-        $body['content'] = $this->load->view('vip_views/content', '', true);
+        $body['content'] = $this->load->view('vip_views/study_progress', '', true);
         $body['footer'] = $this->load->view('vip_views/footer', '', true);
         $this->load->view('vip_views/template', $body);
     

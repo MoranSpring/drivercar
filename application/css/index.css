@@ -125,7 +125,10 @@ body{
     position: absolute;
     display: none;
     background-color: #fff;
+    z-index: 100;
 }
+
+ul.menu-chir.chir {}
 .user_menu li{
     background: #141a3e;
     color: #000;
@@ -177,7 +180,7 @@ body{
 #con-right{
     float:left;
     width:780px;
-    height:auto;
+    min-height: 800px;
     display: block;
     margin-left: 14px;
     background-color: #fff;
@@ -189,7 +192,7 @@ body{
 }
 #con-con{
     font-family: 'Lato', 'PT Sans';
-    width:778px;
+   
 }
 .real_content{
     float:left;
@@ -218,10 +221,10 @@ body{
 }
 #main_content{
     clear: both;
-    width:100%;
     border:1px solid #999999;
     background-color: #fff;
     height:800px;
+    /* margin:-2px; */
 }
 #footer {
     background-color: #99bbbb;
@@ -335,7 +338,7 @@ body{
 }
 
 
-/*----------------------翻页条样式------------------------------------*/
+/*----------------------????????------------------------------------*/
 .am-pagination {
     position: relative;
 }
@@ -384,7 +387,7 @@ body{
 .admin-content-pagination li a {
     padding: 4px 8px;
 }
-/*----------------------翻页条样式------------------------------------*/
+/*----------------------????????------------------------------------*/
 .con2-ul {
 
 }
@@ -474,7 +477,6 @@ body{
 }
 #content1{
     width: 100%;
-    height: 100%;
 }
 .sch_content{
     clear: both;
