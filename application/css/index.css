@@ -472,11 +472,18 @@ ul.menu-chir.chir {}
 }
 #allmap {
     width: 100%;
-    height: 90%;
+    height:100%;
     overflow: hidden;
+}
+.map_father{
+   width: 100%;
+   height:100%;
+    border: 3px solid #0c0;
 }
 #content1{
     width: 100%;
+    height: 100%;
+    margin: 3px;
 }
 .sch_content{
     clear: both;

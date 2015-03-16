@@ -19,15 +19,14 @@
                 <li id="one3" onclick="setTab('one', 3, 3)">搜索</li>
             </ul>
             <div class="pos_content">
-                <div id="content1">
+                <div id="content1" class="clearfix">
                     <p id="city_china_val">所在地区：
                         <select class="province cxselect" data-value="浙江省" data-first-title="选择省" disabled="disabled"></select>
                         <select id="citys" class="city cxselect" data-value="杭州市" data-first-title="选择市" disabled="disabled" onchange="saveLast()"></select>
                         <select class="area cxselect" data-value="西湖区" data-first-title="选择地区" disabled="disabled"></select>
-                    </p>
-                    <div id="map">
-                        <div id="allmap"></div>
-                    </div>
+                    </p><div class="map_father">
+                        <div id="allmap"></div></div>
+                    
                 </div>
                 <div id="content2" style="display:none">
                 </div>
