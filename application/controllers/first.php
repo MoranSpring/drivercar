@@ -173,6 +173,21 @@ public function vip_center(){
         }
 
         $body['navigation'] = $this->load->view('vip_views/navigation', '', true);
+        $body['content'] = $this->load->view('vip_views/self_info', '', true);
+        $body['footer'] = $this->load->view('vip_views/footer', '', true);
+        $this->load->view('vip_views/template', $body);
+    
+}
+public function study_progress(){
+     $name = $this->session->userdata('name');
+        if ($name == null) {
+            $body['header'] = $this->load->view('vip_views/header', '', true);
+        } else {
+            $data = array('username' => $name);
+            $body['header'] = $this->load->view('vip_views/header_logined', $data, true);
+        }
+
+        $body['navigation'] = $this->load->view('vip_views/navigation', '', true);
         $body['content'] = $this->load->view('vip_views/study_progress', '', true);
         $body['footer'] = $this->load->view('vip_views/footer', '', true);
         $this->load->view('vip_views/template', $body);

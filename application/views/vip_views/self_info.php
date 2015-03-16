@@ -1,8 +1,8 @@
 <div id="content" class="clearfix">
             <div id="con-left">
                 <ul>
-                    <li><a href="<?=base_url() . 'index.php/first/sch_info'?>"><span>个人信息</span></a></li>
-                    <li><a href="<?=base_url() . 'index.php/first/sch_info'?>"><span>学习进度</span></a></li>
+                    <li><a href="<?=base_url() . 'index.php/first/vip_center'?>"><span>个人信息</span></a></li>
+                    <li><a href="<?=base_url() . 'index.php/first/study_progress'?>"><span>学习进度</span></a></li>
                     <li><a href="<?=base_url() . 'index.php/first/pos_info'?>"><span>预约培训</span></a></li>
                     <li><a href="<?=base_url() . 'index.php/first/ser_info'?>"><span>预约管理</span></a></li>
                     <li><a href="<?=base_url() . 'index.php/first/coach_info'?>"><span>学习反馈</span></a></li>

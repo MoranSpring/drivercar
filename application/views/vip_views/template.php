@@ -48,7 +48,7 @@ and open the template in the editor.
                                                        no-repeat top center}.content .line-left{position:absolute;left:0;top:15px;width:70px}.content
             .line-right{position:absolute;right:0;top:15px;width:460px}
             .content .main{background:url(http://p0.qhimg.com/d/inn/05a63fc5/line-bg.png) repeat-y 149px 0}
-            .content .main .title{position:absolute;line-height:40px;padding-left:67px;left:130px;top:0;color:#58a6fb;font-size:24px;background:url("<?=base_url()?>application/images/c.png")
+            .content .main .title{position:absolute;line-height:40px;padding-left:67px;left:130px;top:0;color:#58a6fb;font-size:24px;background:url("<?=base_url()?>application/images/clock.png")
                                                        no-repeat left top}
             .content .main .year{position:relative;z-index:1}
             .content .main .year h2{height:40px;width:270px;padding-right:30px;font-size:24px;line-height:40px;text-align:left}
