@@ -124,7 +124,7 @@ class First extends CI_Controller {
                 $data = array(
                     'error' => '密码错误！'
                 );
-                $this->load->view('first', $data);
+                $this->load->view('login_views/template', $data);
                 return false;
             } else {
                 $this->session->set_userdata('name', $name);
@@ -158,5 +158,25 @@ public function get_verify_code() {
     $yzm_session = $this->session->userdata('verify_code');  
     echo $yzm_session;  
 }  
+
+
+
+
+
+public function vip_center(){
+     $name = $this->session->userdata('name');
+        if ($name == null) {
+            $body['header'] = $this->load->view('vip_views/header', '', true);
+        } else {
+            $data = array('username' => $name);
+            $body['header'] = $this->load->view('vip_views/header_logined', $data, true);
+        }
+
+        $body['navigation'] = $this->load->view('vip_views/navigation', '', true);
+        $body['content'] = $this->load->view('vip_views/content', '', true);
+        $body['footer'] = $this->load->view('vip_views/footer', '', true);
+        $this->load->view('vip_views/template', $body);
+    
+}
 }
     
