@@ -23,11 +23,27 @@ class First extends MY_Controller {
     function __construct() {
         parent::__construct();
         $this->load->model('accesscontrol_model');
+        $this->load->library('oss/alioss');
     }
 
     public function index() {
-        $this->view();
+//        $this->view();
+        $bucket = 'driver-un';
+	$object = 'sjy.jpg';	
+	$file_path ="C:\\Users\\KYLE\\Desktop\\sjy.jpg";
+	
+	$response = $this->alioss->upload_file_by_file($bucket,$object,$file_path);
+	$this->_format($response);
     }
+    function _format($response) {
+	echo '|-----------------------Start---------------------------------------------------------------------------------------------------'."\n";
+	echo '|-Status:' . $response->status . "\n";
+	echo '|-Body:' ."\n"; 
+	echo $response->body . "\n";
+	echo "|-Header:\n";
+	print_r ( $response->header );
+	echo '-----------------------End-----------------------------------------------------------------------------------------------------'."\n\n";
+}
 
     public function view($page = '') {
         $name = $this->session->userdata('name');
@@ -69,7 +85,6 @@ class First extends MY_Controller {
         $this->view($page);
     }
 
-    
 //--------------注册------------------------
     public function register() {
         $this->load->view('register_views/template');
@@ -146,6 +161,7 @@ class First extends MY_Controller {
         $this->session->sess_destroy();
         redirect();
     }
+
 //--------------验证码------------------------
     public function verify_image() {
 
@@ -162,6 +178,5 @@ class First extends MY_Controller {
         $yzm_session = $this->session->userdata('verify_code');
         echo $yzm_session;
     }
-
 
 }

@@ -195,7 +195,6 @@ ul.menu-chir.chir {}
 
 }
 .real_content{
-    float:left;
     text-align:left;
 }
 .tab li {
@@ -481,7 +480,7 @@ ul.menu-chir.chir {}
 #content1{
     width: 100%;
     height: 100%;
-    margin: 3px;
+    /* margin: 3px; */
 }
 .sch_content{
     clear: both;
