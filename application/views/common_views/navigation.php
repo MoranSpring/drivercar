@@ -23,7 +23,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="<?= base_url() . 'index.php/first/vip_center' ?>"><span>
+                    <a href="<?= base_url() . 'index.php/vipcenter' ?>"><span>
                         会员中心
                     </span></a>
                 </li>

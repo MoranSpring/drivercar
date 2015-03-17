@@ -26,25 +26,7 @@ class First extends MY_Controller {
     }
 
     public function index() {
-
-//        $this->load->view('register_views/template');
-//        $con =mysql_connect('120.24.159.96:3306','root','Ali2jiapei');
-//if (!$con)
-//  {
-//  die('Could not connect: ' . mysql_error());
-//  }
-// mysql_select_db('driver_un', $con);
-
         $this->view();
-//            $this->ci_smarty->assign('test', 'smarty');
-//               $this->template->load('template', 'about');
-//		$this->load->view('a_views/head');
-//                $this->load->view('a_views/nav');
-//                $this->load->view('a_views/content_1');
-//                $this->load->view('a_views/content_2');
-//                $this->load->view('a_views/foot');
-//              $data['title'] = '标题';   
-//              $data['num'] = '123456789';   
     }
 
     public function view($page = '') {
@@ -55,10 +37,9 @@ class First extends MY_Controller {
             $data = array('username' => $name);
             $body['header'] = $this->load->view('common_views/header_logined', $data, true);
         }
-
         $body['navigation'] = $this->load->view('common_views/navigation', '', true);
         if ($page == '') {
-            $body['content'] = $this->load->view('a_views/sch_info', '', true);
+            $body['content'] = $this->load->view('a_views/news', '', true);
         } else {
             $body['content'] = $page;
         }
@@ -88,6 +69,8 @@ class First extends MY_Controller {
         $this->view($page);
     }
 
+    
+//--------------注册------------------------
     public function register() {
         $this->load->view('register_views/template');
     }
@@ -139,7 +122,6 @@ class First extends MY_Controller {
         $Result = $this->accesscontrol_model->loginSelect($name);
         foreach ($Result as $row) {
             if ($row['stu_pwd'] != md5($psw)) {
-//                    echo $this->render('10004', '密码错误');
                 $data = array(
                     'error' => '密码错误！'
                 );
@@ -164,7 +146,7 @@ class First extends MY_Controller {
         $this->session->sess_destroy();
         redirect();
     }
-
+//--------------验证码------------------------
     public function verify_image() {
 
         $conf['name'] = 'verify_code'; //作为配置参数  
@@ -181,34 +163,5 @@ class First extends MY_Controller {
         echo $yzm_session;
     }
 
-    public function vip_center() {
-        $name = $this->session->userdata('name');
-        if ($name == null) {
-            $body['header'] = $this->load->view('vip_views/header', '', true);
-        } else {
-            $data = array('username' => $name);
-            $body['header'] = $this->load->view('vip_views/header_logined', $data, true);
-        }
-
-        $body['navigation'] = $this->load->view('vip_views/navigation', '', true);
-        $body['content'] = $this->load->view('vip_views/self_info', '', true);
-        $body['footer'] = $this->load->view('vip_views/footer', '', true);
-        $this->load->view('vip_views/template', $body);
-    }
-
-    public function study_progress() {
-        $name = $this->session->userdata('name');
-        if ($name == null) {
-            $body['header'] = $this->load->view('vip_views/header', '', true);
-        } else {
-            $data = array('username' => $name);
-            $body['header'] = $this->load->view('vip_views/header_logined', $data, true);
-        }
-
-        $body['navigation'] = $this->load->view('vip_views/navigation', '', true);
-        $body['content'] = $this->load->view('vip_views/study_progress', '', true);
-        $body['footer'] = $this->load->view('vip_views/footer', '', true);
-        $this->load->view('vip_views/template', $body);
-    }
 
 }
