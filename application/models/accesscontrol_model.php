@@ -13,7 +13,8 @@ class Accesscontrol_model extends CI_Model{
     }
     
     public function insert($data) {    //把数据增加到sites表中.
-        $this->db->insert('AccessControl', $data); 
+        $result=$this->db->insert('AccessControl', $data); 
+        return $result;
         
     }
     public function select($name) {//返回该用户名所有信息
@@ -37,7 +38,7 @@ class Accesscontrol_model extends CI_Model{
     
     public function loginSelect($name){//返回该用户名对应的密码
          $this->db->select();
-         $this->db->where('name',$name);
+         $this->db->where('stu_name',$name);
         $query = $this->db->get('AccessControl');
         return $query->result_array();
     }

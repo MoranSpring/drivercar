@@ -3,7 +3,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class First extends CI_Controller {
+class First extends MY_Controller {
 
     /**
      * Index Page for this controller.
@@ -22,10 +22,7 @@ class First extends CI_Controller {
      */
     function __construct() {
         parent::__construct();
-        $this->load->helper('url');
         $this->load->model('accesscontrol_model');
-        $this->load->library('session');
-       
     }
 
     public function index() {
@@ -38,18 +35,7 @@ class First extends CI_Controller {
 //  }
 // mysql_select_db('driver_un', $con);
 
-        $name = $this->session->userdata('name');
-        if ($name == null) {
-            $body['header'] = $this->load->view('a_views/header', '', true);
-        } else {
-            $data = array('username' => $name);
-            $body['header'] = $this->load->view('a_views/header_logined', $data, true);
-        }
-
-        $body['navigation'] = $this->load->view('a_views/navigation', '', true);
-        $body['content'] = $this->load->view('a_views/sch_info', '', true);
-        $body['footer'] = $this->load->view('a_views/footer', '', true);
-        $this->load->view('a_views/template', $body);
+        $this->view();
 //            $this->ci_smarty->assign('test', 'smarty');
 //               $this->template->load('template', 'about');
 //		$this->load->view('a_views/head');
@@ -61,40 +47,73 @@ class First extends CI_Controller {
 //              $data['num'] = '123456789';   
     }
 
-    public function sch_info() {
-        $body['header'] = $this->load->view('a_views/header', '', true);
-        $body['navigation'] = $this->load->view('a_views/navigation', '', true);
-        $body['content'] = $this->load->view('a_views/sch_info', '', true);
-        $body['footer'] = $this->load->view('a_views/footer', '', true);
+    public function view($page = '') {
+        $name = $this->session->userdata('name');
+        if ($name == null) {
+            $body['header'] = $this->load->view('common_views/header', '', true);
+        } else {
+            $data = array('username' => $name);
+            $body['header'] = $this->load->view('common_views/header_logined', $data, true);
+        }
+
+        $body['navigation'] = $this->load->view('common_views/navigation', '', true);
+        if ($page == '') {
+            $body['content'] = $this->load->view('a_views/sch_info', '', true);
+        } else {
+            $body['content'] = $page;
+        }
+
+        $body['footer'] = $this->load->view('common_views/footer', '', true);
         $this->load->view('a_views/template', $body);
+    }
+
+    public function sch_info() {
+
+        $page = $this->load->view('a_views/sch_info', '', true);
+        $this->view($page);
     }
 
     public function pos_info() {
-        $body['header'] = $this->load->view('a_views/header', '', true);
-        $body['navigation'] = $this->load->view('a_views/navigation', '', true);
-        $body['content'] = $this->load->view('a_views/pos_info', '', true);
-        $body['footer'] = $this->load->view('a_views/footer', '', true);
-        $this->load->view('a_views/template', $body);
+        $page = $this->load->view('a_views/pos_info', '', true);
+        $this->view($page);
     }
 
     public function ser_info() {
-        $body['header'] = $this->load->view('a_views/header', '', true);
-        $body['navigation'] = $this->load->view('a_views/navigation', '', true);
-        $body['content'] = $this->load->view('a_views/ser_info', '', true);
-        $body['footer'] = $this->load->view('a_views/footer', '', true);
-        $this->load->view('a_views/template', $body);
+        $page = $this->load->view('a_views/ser_info', '', true);
+        $this->view($page);
     }
 
     public function coach_info() {
-        $body['header'] = $this->load->view('a_views/header', '', true);
-        $body['navigation'] = $this->load->view('a_views/navigation', '', true);
-        $body['content'] = $this->load->view('a_views/coach_info', '', true);
-        $body['footer'] = $this->load->view('a_views/footer', '', true);
-        $this->load->view('a_views/template', $body);
+        $page = $this->load->view('a_views/coach_info', '', true);
+        $this->view($page);
     }
 
     public function register() {
         $this->load->view('register_views/template');
+    }
+
+    public function register_insert() {
+        $username = $this->input->post('username');
+        $password = $this->input->post('userpass');
+        $email = $this->input->post('useremail');
+        $reg_time = $this->getTime();
+        $stu_type = 3;
+        $Uid = time();
+        $datas = array(
+            'stu_id' => $Uid,
+            'stu_name' => $username,
+            'stu_email' => $email,
+            'stu_pwd' => md5($password),
+            'stu_type' => $stu_type,
+            'stu_reg_time' => $reg_time
+        );
+        $result = $this->accesscontrol_model->insert($datas);
+        if ($result == 1) {
+            $this->session->set_userdata('name', $username);
+            redirect();
+        } else {
+            echo 'insert error!';
+        }
     }
 
     public function login_check() {
@@ -119,7 +138,7 @@ class First extends CI_Controller {
         $psw = $this->input->post('password');
         $Result = $this->accesscontrol_model->loginSelect($name);
         foreach ($Result as $row) {
-            if ($row['psw'] != $psw) {
+            if ($row['stu_pwd'] != md5($psw)) {
 //                    echo $this->render('10004', '密码错误');
                 $data = array(
                     'error' => '密码错误！'
@@ -127,6 +146,7 @@ class First extends CI_Controller {
                 $this->load->view('login_views/template', $data);
                 return false;
             } else {
+                $this->session->set_userdata('UID', $row['stu_id']);
                 $this->session->set_userdata('name', $name);
                 redirect();
 
@@ -144,27 +164,25 @@ class First extends CI_Controller {
         $this->session->sess_destroy();
         redirect();
     }
-public function verify_image() {  
-    
-    $conf['name'] = 'verify_code'; //作为配置参数  
-    
-    $this->load->library('captcha',$conf); 
-    $this->captcha->show();  
-    $yzm_session = $this->session->userdata('verify_code');  
-    echo $yzm_session;  
-}  
-public function get_verify_code() {  
-    
-    $yzm_session = $this->session->userdata('verify_code');  
-    echo $yzm_session;  
-}  
 
+    public function verify_image() {
 
+        $conf['name'] = 'verify_code'; //作为配置参数  
 
+        $this->load->library('captcha', $conf);
+        $this->captcha->show();
+        $yzm_session = $this->session->userdata('verify_code');
+        echo $yzm_session;
+    }
 
+    public function get_verify_code() {
 
-public function vip_center(){
-     $name = $this->session->userdata('name');
+        $yzm_session = $this->session->userdata('verify_code');
+        echo $yzm_session;
+    }
+
+    public function vip_center() {
+        $name = $this->session->userdata('name');
         if ($name == null) {
             $body['header'] = $this->load->view('vip_views/header', '', true);
         } else {
@@ -176,10 +194,10 @@ public function vip_center(){
         $body['content'] = $this->load->view('vip_views/self_info', '', true);
         $body['footer'] = $this->load->view('vip_views/footer', '', true);
         $this->load->view('vip_views/template', $body);
-    
-}
-public function study_progress(){
-     $name = $this->session->userdata('name');
+    }
+
+    public function study_progress() {
+        $name = $this->session->userdata('name');
         if ($name == null) {
             $body['header'] = $this->load->view('vip_views/header', '', true);
         } else {
@@ -191,7 +209,6 @@ public function study_progress(){
         $body['content'] = $this->load->view('vip_views/study_progress', '', true);
         $body['footer'] = $this->load->view('vip_views/footer', '', true);
         $this->load->view('vip_views/template', $body);
-    
+    }
+
 }
-}
-    
