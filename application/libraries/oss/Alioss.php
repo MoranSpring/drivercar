@@ -2322,7 +2322,7 @@ class Alioss{
 			$log_path = dirname(__FILE__).DIRECTORY_SEPARATOR.'logs'.DIRECTORY_SEPARATOR;
 		}
 		
-		//检测日志目录是否存在
+		//检测日志目录是否存在？
 		if(!file_exists($log_path)){
 			throw new OSS_Exception(OSS_LOG_PATH_NOT_EXIST);
 		}
