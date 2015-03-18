@@ -12,6 +12,11 @@ class MY_Controller extends CI_Controller {
         $CurrentTime = $timeArray["year"] . "-" . $timeArray["mon"] . "-" . $timeArray["mday"] . " " . $timeArray["hours"] . ":" . $timeArray["minutes"] . ":" . $timeArray["seconds"];
         return $CurrentTime;
     }
+    public function getDate() {
+        $timeArray = getdate();
+        $CurrentTime = $timeArray["year"] . "-" . $timeArray["mon"] . "-" . $timeArray["mday"];
+        return $CurrentTime;
+    }
 
    
 
