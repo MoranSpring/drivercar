@@ -28,22 +28,56 @@ class First extends MY_Controller {
 
     public function index() {
 //        $this->view();
-        $bucket = 'driver-un';
-	$object = 'sjy.jpg';	
-	$file_path ="C:\\Users\\KYLE\\Desktop\\sjy.jpg";
-	
-	$response = $this->alioss->upload_file_by_file($bucket,$object,$file_path);
-	$this->_format($response);
+//        $bucket = 'driver-un';
+//	$object = 'logo.jpg';	
+//	$file_path ="C:\\Users\\KYLE\\Desktop\\logo.png";
+//	$response = $this->alioss->upload_file_by_file($bucket,$object,$file_path);
+//	$this->_format($response);
+        $this->load->view('admin_views/template');
     }
+
+    public function upload() {
+        if ((($_FILES["file"]["type"] == "image/gif") || ($_FILES["file"]["type"] == "image/jpeg") || ($_FILES["file"]["type"] == "image/pjpeg")) && ($_FILES["file"]["size"] < 20000)) {
+            if ($_FILES["file"]["error"] > 0) {
+                echo "Return Code: " . $_FILES["file"]["error"] . "<br />";
+            } else {
+                echo "Upload: " . $_FILES["file"]["name"] . "<br />";
+                echo "Type: " . $_FILES["file"]["type"] . "<br />";
+                echo "Size: " . ($_FILES["file"]["size"] / 1024) . " Kb<br />";
+                echo "Temp file: " . $_FILES["file"]["tmp_name"] . "<br />";
+
+               $this->upload_by_content();
+            }
+        } else {
+            echo "Invalid file";
+        }
+    }
+
+    function upload_by_content() {
+        $bucket = 'driver-un';
+        $object = 'finddfdda.jpg';
+        $filepath =  $_FILES["file"]["tmp_name"] ;  //英文
+		
+	$options = array(
+		ALIOSS::OSS_FILE_UPLOAD => $filepath,
+		'partSize' => 5242880,
+	);
+
+	$response = $this->alioss->create_mpu_object($bucket, $object,$options);
+
+
+        //_format($response);
+    }
+
     function _format($response) {
-	echo '|-----------------------Start---------------------------------------------------------------------------------------------------'."\n";
-	echo '|-Status:' . $response->status . "\n";
-	echo '|-Body:' ."\n"; 
-	echo $response->body . "\n";
-	echo "|-Header:\n";
-	print_r ( $response->header );
-	echo '-----------------------End-----------------------------------------------------------------------------------------------------'."\n\n";
-}
+        echo '|-----------------------Start---------------------------------------------------------------------------------------------------' . "\n";
+        echo '|-Status:' . $response->status . "\n";
+        echo '|-Body:' . "\n";
+        echo $response->body . "\n";
+        echo "|-Header:\n";
+        print_r($response->header);
+        echo '-----------------------End-----------------------------------------------------------------------------------------------------' . "\n\n";
+    }
 
     public function view($page = '') {
         $name = $this->session->userdata('name');

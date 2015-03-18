@@ -254,7 +254,7 @@ function create_directory($obj){
 }
 
 //通过内容上传文件
-function upload_by_content($obj){
+ function upload_by_content($obj){
 	$bucket = 'invalidxml3';
 	$folder = 'bbb/';
 	
