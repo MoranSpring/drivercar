@@ -56,7 +56,7 @@ class Admin extends MY_Controller {
             echo 'insert error!';
         }
 
-        if ((($_FILES["file"]["type"] == "image/gif") || ($_FILES["file"]["type"] == "image/jpeg") || ($_FILES["file"]["type"] == "image/pjpeg")) && ($_FILES["file"]["size"] < 2000000)) {
+        if ((($_FILES["file"]["type"] == "image/gif")  || ($_FILES["file"]["type"] == "image/png") || ($_FILES["file"]["type"] == "image/jpeg") || ($_FILES["file"]["type"] == "image/pjpeg")) && ($_FILES["file"]["size"] < 2000000)) {
             if ($_FILES["file"]["error"] > 0) {
 //                echo "Return Code: " . $_FILES["file"]["error"] . "<br />";
             } else {
