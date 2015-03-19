@@ -25,61 +25,161 @@ class Admin extends MY_Controller {
 //        $this->load->model('accesscontrol_model');
         $this->load->library('oss/alioss');
         $this->load->model('news_model');
+        $this->load->model('school_model');
     }
-    public function index(){
+
+    public function index() {
         $this->load->view('admin_views/template');
     }
-    
-    public function upload() {
-        $news_id=  time();
-        $news_title=$this->input->post('news_title');
-        $news_type=$this->input->post('news_type');
-        $news_author=$this->input->post('news_author');
-        $news_content=$this->input->post('news_content');
-        $news_date=$this->input->post('news_date');
-        $news_imge='http://driver-un.oss-cn-shenzhen.aliyuncs.com/'.$news_id.'.jpg';
-        
-        $data=array(
-            'news_id'=>$news_id,
-            'news_title'=>$news_title,
-            'news_type'=>$news_type,
-            'news_content'=>$news_content,
-            'news_author'=>$news_author,
-            'news_imge'=>$news_imge,
-            'news_date'=>$news_date,
+//文件上传 begin
+    public function news_upload() {
+        $news_id = time();
+        $news_title = $this->input->post('news_title');
+        $news_type = $this->input->post('news_type');
+        $news_author = $this->input->post('news_author');
+        $news_content = $this->input->post('news_content');
+        $news_date = $this->input->post('news_date');
+        $news_imge = 'http://driver-un.oss-cn-shenzhen.aliyuncs.com/' . $news_id . '.jpg';
+        $hasImg = false;
+        $data = array(
+            'news_id' => $news_id,
+            'news_title' => $news_title,
+            'news_type' => $news_type,
+            'news_content' => $news_content,
+            'news_author' => $news_author,
+            'news_date' => $news_date,
         );
-        $result = $this->news_model->insert($data);
+        $image = array(
+            'news_imge' => $news_imge
+        );
+
+        
+        if($this->_is_upload_imge($news_id)==true){
+            $result = $this->news_model->insert(array_merge($data,$image));
+        }else{
+            $result = $this->news_model->insert($data);
+        }
         if ($result == 1) {
 //            redirect();
-            echo 'insert success!!';
+            echo 'insert success!!'.$hasImg;
         } else {
-            echo 'insert error!';
+            echo 'insert error!'.$hasImg;
         }
+    }
+    public function school_upload() {
+        $jp_id = time();
+        $jp_name = $this->input->post('jp_name');
+        $jp_addr = $this->input->post('jp_addr');
+        $jp_car_num = $this->input->post('jp_car_num');
+        $jp_half_num = $this->input->post('jp_half_num');
+        $jp_zhi_num = $this->input->post('jp_zhi_num');
+        $jp_s_num = $this->input->post('jp_s_num');
+        $jp_ku_num = $this->input->post('jp_ku_num');
+        $jp_ce_num = $this->input->post('jp_ce_num');
+        $jp_coach_num = $this->input->post('jp_coach_num');
+        $jp_intro = $this->input->post('jp_intro');
+        $jp_reg_date = $this->getDate();
+        $jp_imge = 'http://driver-un.oss-cn-shenzhen.aliyuncs.com/' . $jp_id . '.jpg';
+        $hasImg = false;
+        $data = array(
+            'jp_id' => $jp_id,
+            'jp_name' => $jp_name,
+            'jp_addr' => $jp_addr,
+            'jp_car_num' => $jp_car_num,
+            'jp_half_num' => $jp_half_num,
+            'jp_zhi_num' => $jp_zhi_num,
+            'jp_s_num' => $jp_s_num,
+            'jp_ku_num' => $jp_ku_num,
+            'jp_ce_num' => $jp_ce_num,
+            'jp_coach_num' => $jp_coach_num,
+            'jp_intro' => $jp_intro,
+            'jp_reg_date' => $jp_reg_date
+        );
+        $image = array(
+            'jp_imge' => $jp_imge
+        );
 
-        if ((($_FILES["file"]["type"] == "image/gif")  || ($_FILES["file"]["type"] == "image/png") || ($_FILES["file"]["type"] == "image/jpeg") || ($_FILES["file"]["type"] == "image/pjpeg")) && ($_FILES["file"]["size"] < 2000000)) {
+        
+        if($this->_is_upload_imge($jp_id)==true){
+            $result = $this->school_model->insert(array_merge($data,$image));
+        }else{
+            $result = $this->school_model->insert($data);
+        }
+        if ($result == 1) {
+//            redirect();
+            echo 'insert success!!'.$hasImg;
+        } else {
+            echo 'insert error!'.$hasImg;
+        }
+    }public function coach_upload() {
+        $coach_id = time();
+        $coach_name = $this->input->post('coach_name');
+        $coach_workid = $this->input->post('coach_workid');
+        $coach_old = $this->input->post('coach_old');
+        $coach_sch_id = $this->input->post('coach_sch_id');
+        $coach_reg_time =$this->getDate();
+        $coach_face = 'http://driver-un.oss-cn-shenzhen.aliyuncs.com/' . $coach_id . '.jpg';
+        $coach_intro = $this->input->post('coach_intro');
+        $data = array(
+            'jp_id' => $coach_id,
+            'jp_name' => $coach_name,
+            'jp_addr' => $coach_workid,
+            'jp_car_num' => $coach_old,
+            'jp_half_num' => $coach_sch_id,
+            'jp_zhi_num' => $coach_reg_time,
+            'jp_s_num' => $coach_face,
+            'jp_ku_num' => $coach_intro,
+        );
+        $image = array(
+            'jp_imge' => $jp_imge
+        );
+
+        
+        if($this->_is_upload_imge($jp_id)==true){
+            $result = $this->school_model->insert(array_merge($data,$image));
+        }else{
+            $result = $this->school_model->insert($data);
+        }
+        if ($result == 1) {
+//            redirect();
+            echo 'insert success!!'.$hasImg;
+        } else {
+            echo 'insert error!'.$hasImg;
+        }
+    }
+    
+    function _is_upload_imge($news_id){
+        if ((($_FILES["file"]["type"] == "image/gif") || ($_FILES["file"]["type"] == "image/png") || 
+                ($_FILES["file"]["type"] == "image/jpeg") || ($_FILES["file"]["type"] == "image/pjpeg")) && 
+                ($_FILES["file"]["size"] < 2000000)) {
             if ($_FILES["file"]["error"] > 0) {
 //                echo "Return Code: " . $_FILES["file"]["error"] . "<br />";
             } else {
-               $this->upload_by_content($news_id);
+                $status = $this->_upload_by_content($news_id);
+                if ($status == 200) {
+                    return TRUE;
+                }
             }
         } else {
-            echo "Invalid file";
+//            echo "Invalid file";
         }
+        return FALSE;
+        
     }
 
-    function upload_by_content($name) {
+    function _upload_by_content($name) {
         $bucket = 'driver-un';
-        $object = $name.'.jpg';
-        $filepath =  $_FILES["file"]["tmp_name"] ;  //英文
-	$options = array(
-		ALIOSS::OSS_FILE_UPLOAD => $filepath,
-		'partSize' => 5242880,
-	);
-	$response = $this->alioss->create_mpu_object($bucket, $object,$options);
+        $object = $name . '.jpg';
+        $filepath = $_FILES["file"]["tmp_name"];  //英文
+        $options = array(
+            ALIOSS::OSS_FILE_UPLOAD => $filepath,
+            'partSize' => 5242880,
+        );
+        $response = $this->alioss->create_mpu_object($bucket, $object, $options);
 
-
-        $this->_format($response);
+        return $response->status;
     }
+//文件上传 end
 
     function _format($response) {
         echo '|-----------------------Start---------------------------------------' . "<br/>";
@@ -90,6 +190,5 @@ class Admin extends MY_Controller {
         print_r($response->header);
         echo '-----------------------End--------------------------------------' . "<br/><br/>";
     }
-    
 
 }

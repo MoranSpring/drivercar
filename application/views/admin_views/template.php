@@ -46,9 +46,9 @@
                 <ul class="am-list admin-sidebar-list">
                     <li><a href="admin-index.html"><span class="am-icon-home"></span> 首页</a></li>
                     <li class="admin-parent">
-                        <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}"><span class="am-icon-file"></span> 驾校信息 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+                        <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}"><span class="am-icon-file"></span> 信息编辑 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
                         <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
-                            <li><a href="admin-user.html" class="am-cf"><span class="am-icon-check"></span> 驾校信息录入 <span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
+                            <li><a href="admin-user.html" class="am-cf"><span class="am-icon-check"></span> 信息录入 <span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
                             <li><a href="admin-help.html"><span class="am-icon-puzzle-piece"></span> 教练信息录入</a></li>
                             <li><a href="admin-gallery.html"><span class="am-icon-th"></span>驾校信息查看<span class="am-badge am-badge-secondary am-margin-right am-fr">24</span></a></li>
                             <li><a href="admin-log.html"><span class="am-icon-calendar"></span> 教练信息查看</a></li>
@@ -73,15 +73,15 @@
                 </div>
                 <div class="am-tabs am-margin" data-am-tabs="{noSwipe: 1}">
                     <ul class="am-tabs-nav am-nav am-nav-tabs">
-                        <li class="am-active"><a href="#tab1">基本信息</a></li>
-                        <li><a href="#tab2">详细描述</a></li>
+                        <li class="am-active"><a href="#tab1">新闻上传</a></li>
+                        <li><a href="#tab2">驾校添加</a></li>
                         <li><a href="#tab3">图片上传</a></li>
                     </ul>
                     <div class="am-tabs-bd">
 
 
                         <div class="am-tab-panel am-fade am-in am-active" id="tab1" style="padding-bottom: 200px">
-                            <form class="am-form" action="<?= base_url() . 'index.php/admin/upload' ?>" method="post" enctype="multipart/form-data">
+                            <form class="am-form" action="<?= base_url() . 'index.php/admin/news_upload' ?>" method="post" enctype="multipart/form-data">
                                 <div class="am-g am-margin-top">
                                     <div class="am-u-sm-4 am-u-md-2 am-text-right">新闻分类</div>
                                     <div class="am-u-sm-8 am-u-md-10">
@@ -153,26 +153,193 @@
                                         <div id="localImag"><img id="preview" width=-1 height=-1 style="diplay:none" /></div>
                                     </div>
                                     <br />
-                                    
+
                                     <br />
                                 </div>
-                                 <div class="am-margin">
-                    <button type="submit" class="am-btn am-btn-primary am-btn-default">提交保存</button>
-                    <button type="button" class="am-btn am-btn-primary am-btn-default">放弃保存</button>
-                </div>
+                                <div class="am-margin">
+                                    <button type="submit" class="am-btn am-btn-primary am-btn-default">提交保存</button>
+                                    <button type="button" class="am-btn am-btn-primary am-btn-default">放弃保存</button>
+                                </div>
                             </form>
                         </div>
 
-                        <div class="am-tab-panel am-fade" id="tab2">
+                        <div class="am-tab-panel am-fade" id="tab2" >
+                            <form class="am-form" action="<?= base_url() . 'index.php/admin/school_upload' ?>" method="post" enctype="multipart/form-data">
+                                <div class="am-g am-margin-top">
+                                    <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                        驾校名字
+                                    </div>
+                                    <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                        <input type="text" class="am-input-sm" name="jp_name">
+                                    </div>
+                                </div>
+                                <div class="am-g am-margin-top">
+                                    <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                        驾校地址
+                                    </div>
+                                    <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                        <input type="text" class="am-input-sm" name="jp_addr">
+                                    </div>
+                                </div>
+                                <div class="am-g am-margin-top">
+                                    <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                        车辆数
+                                    </div>
+                                    <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                        <input type="text" class="am-input-sm" name="jp_car_num">
+                                    </div>
+                                </div>
+                                <div class="am-g am-margin-top">
+                                    <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                        倒库数
+                                    </div>
+                                    <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                        <input type="text" class="am-input-sm" name="jp_ku_num">
+                                    </div>
+                                </div>
+                                <div class="am-g am-margin-top">
+                                    <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                        侧方数
+                                    </div>
+                                    <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                        <input type="text" class="am-input-sm" name="jp_ce_num">
+                                    </div>
+                                </div>
+                                <div class="am-g am-margin-top">
+                                    <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                        S路数
+                                    </div>
+                                    <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                        <input type="text" class="am-input-sm" name="jp_s_num">
+                                    </div>
+                                </div>
+                                <div class="am-g am-margin-top">
+                                    <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                        直角路数
+                                    </div>
+                                    <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                        <input type="text" class="am-input-sm" name="jp_zhi_num">
+                                    </div>
+                                </div>
+                                <div class="am-g am-margin-top">
+                                    <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                        全坡数
+                                    </div>
+                                    <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                        <input type="text" class="am-input-sm" name="jp_half_num">
+                                    </div>
+                                </div>
+                                <div class="am-g am-margin-top">
+                                    <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                        教练数
+                                    </div>
+                                    <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                        <input type="text" class="am-input-sm" name="jp_coach_num">
+                                    </div>
+                                    <div class="am-hide-sm-only">*必填</div>
+                                </div>
+
+                                <div class="am-g am-margin-top-sm">
+                                    <div class="am-u-sm-22 am-u-md-2 am-text-right admin-form-text">
+                                        驾培点简介
+                                    </div>
+                                    <div class="am-u-sm-22 am-u-md-10">
+                                        <textarea rows="10" placeholder="驾培点简介" name="jp_intro"></textarea>
+                                    </div>
+                                </div>
+                                <div class="am-g am-margin-top-sm">
+                                    <div class="am-u-sm-22 am-u-md-2 am-text-right admin-form-text">Filename: </div>
+                                    <div class="am-u-sm-22 am-u-md-10">
+                                        <input type="file" name="file"   id="file" onchange="setImagePreview()"/> 
+                                        <div id="localImag"><img id="preview" width=-1 height=-1 style="diplay:none" /></div>
+                                    </div>
+                                    <br />
+
+                                    <br />
+                                </div>
+                                <div class="am-margin">
+                                <button type="submit" class="am-btn am-btn-primary am-btn-default">提交保存</button>
+                                <button type="button" class="am-btn am-btn-primary am-btn-default">放弃保存</button>
+                                </div>
+                            </form>
+
                         </div>
 
                         <div class="am-tab-panel am-fade" id="tab3">
+                            <form class="am-form" action="<?= base_url() . 'index.php/admin/upload' ?>" method="post" enctype="multipart/form-data">
+                                <div class="am-g am-margin-top">
+                                    <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                        教练姓名
+                                    </div>
+                                    <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                        <input type="text" class="am-input-sm" name="news_author">
+                                    </div>
+                                </div>
+                                <div class="am-g am-margin-top">
+                                    <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                        教练工号
+                                    </div>
+                                    <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                        <input type="text" class="am-input-sm" name="news_author">
+                                    </div>
+                                </div>
+                                <div class="am-g am-margin-top">
+                                    <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                        所属驾校
+                                    </div>
+                                    <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                        <input type="text" class="am-input-sm" name="news_author">
+                                    </div>
+                                </div>
+                                <div class="am-g am-margin-top">
+                                    <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                        年龄
+                                    </div>
+                                    <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                        <input type="text" class="am-input-sm" name="news_author">
+                                    </div>
+                                </div>
+                                <div class="am-g am-margin-top">
+                                    <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                        教龄
+                                    </div>
+                                    <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                        <input type="text" class="am-input-sm" name="news_author">
+                                    </div>
+                                </div>
+                                
+                               
+
+                                <div class="am-g am-margin-top-sm">
+                                    <div class="am-u-sm-22 am-u-md-2 am-text-right admin-form-text">
+                                        教练简介
+                                    </div>
+                                    <div class="am-u-sm-22 am-u-md-10">
+                                        <textarea rows="10" placeholder="教练简介" name="news_content"></textarea>
+                                    </div>
+                                </div>
+                                
+                                <div class="am-g am-margin-top-sm">
+                                    <div class="am-u-sm-22 am-u-md-2 am-text-right admin-form-text">头像</div>
+                                    <div class="am-u-sm-22 am-u-md-10">
+                                        <input type="file" name="file"   id="file" onchange="setImagePreview()"/> 
+                                        <div id="localImag"><img id="preview" width=-1 height=-1 style="diplay:none" /></div>
+                                    </div>
+                                    <br />
+
+                                    <br />
+                                </div>
+                                <div class="am-margin">
+                                <button type="submit" class="am-btn am-btn-primary am-btn-default">提交保存</button>
+                                <button type="button" class="am-btn am-btn-primary am-btn-default">放弃保存</button>
+                                </div>
+                            </form>
                         </div>
 
                     </div>
                 </div>
 
-               
+
             </div>
 
         </div>
@@ -199,38 +366,38 @@
     <!--<![endif]-->
     <script src="<?= base_url() ?>application/js/admin/app.js"></script>
     <script>
-                                        function setImagePreview() {
-                                            var docObj = document.getElementById("file");
-                                            var imgObjPreview = document.getElementById("preview");
-                                            if (docObj.files && docObj.files[0]) {
-                                                //火狐下，直接设img属性  
-                                                imgObjPreview.style.display = 'block';
-                                                imgObjPreview.style.width = '400px';
-                                                //imgObjPreview.src = docObj.files[0].getAsDataURL();  
+                                            function setImagePreview() {
+                                                var docObj =$('.file'); document.getElementById("file");
+                                                var imgObjPreview = document.getElementById("preview");
+                                                if (docObj.files && docObj.files[0]) {
+                                                    //火狐下，直接设img属性  
+                                                    imgObjPreview.style.display = 'block';
+                                                    imgObjPreview.style.width = '400px';
+                                                    //imgObjPreview.src = docObj.files[0].getAsDataURL();  
 
-                                                //火狐7以上版本不能用上面的getAsDataURL()方式获取，需要一下方式    
-                                                imgObjPreview.src = window.URL.createObjectURL(docObj.files[0]);
-                                            } else {
-                                                //IE下，使用滤镜  
-                                                docObj.select();
-                                                var imgSrc = document.selection.createRange().text;
-                                                var localImagId = document.getElementById("localImag");
-                                                //必须设置初始大小  
-                                                //                    localImagId.style.width = "300px";
-                                                //                    localImagId.style.height = "120px";
-                                                //图片异常的捕捉，防止用户修改后缀来伪造图片  
-                                                try {
-                                                    localImagId.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
-                                                    localImagId.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = imgSrc;
-                                                } catch (e) {
-                                                    alert("您上传的图片格式不正确，请重新选择!");
-                                                    return false;
+                                                    //火狐7以上版本不能用上面的getAsDataURL()方式获取，需要一下方式    
+                                                    imgObjPreview.src = window.URL.createObjectURL(docObj.files[0]);
+                                                } else {
+                                                    //IE下，使用滤镜  
+                                                    docObj.select();
+                                                    var imgSrc = document.selection.createRange().text;
+                                                    var localImagId = document.getElementById("localImag");
+                                                    //必须设置初始大小  
+                                                    //                    localImagId.style.width = "300px";
+                                                    //                    localImagId.style.height = "120px";
+                                                    //图片异常的捕捉，防止用户修改后缀来伪造图片  
+                                                    try {
+                                                        localImagId.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+                                                        localImagId.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = imgSrc;
+                                                    } catch (e) {
+                                                        alert("您上传的图片格式不正确，请重新选择!");
+                                                        return false;
+                                                    }
+                                                    imgObjPreview.style.display = 'none';
+                                                    document.selection.empty();
                                                 }
-                                                imgObjPreview.style.display = 'none';
-                                                document.selection.empty();
+                                                return true;
                                             }
-                                            return true;
-                                        }
     </script> 
 </body>
 </html>

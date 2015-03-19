@@ -23,6 +23,7 @@ class First extends MY_Controller {
     function __construct() {
         parent::__construct();
         $this->load->model('accesscontrol_model');
+        $this->load->model('news_model');
         $this->load->library('oss/alioss');
     }
 
@@ -34,10 +35,9 @@ class First extends MY_Controller {
 //	$response = $this->alioss->upload_file_by_file($bucket,$object,$file_path);
 //	$this->_format($response);
 //        $this->load->view('admin_views/template');
+//        redirect('first/sch_info');
         redirect('admin');
     }
-
-    
 
     public function view($page = '') {
         $name = $this->session->userdata('name');
@@ -49,7 +49,7 @@ class First extends MY_Controller {
         }
         $body['navigation'] = $this->load->view('common_views/navigation', '', true);
         if ($page == '') {
-            $body['content'] = $this->load->view('a_views/news', '', true);
+            $body['content'] = $this->load->view('a_views/sch_info', '', true);
         } else {
             $body['content'] = $page;
         }
@@ -60,7 +60,24 @@ class First extends MY_Controller {
 
     public function sch_info() {
 
-        $page = $this->load->view('a_views/sch_info', '', true);
+        $news = $this->news_model->select_simple();
+        $i = 0;
+        foreach ($news as $row) {
+            $oneNews['news'][$i]=$this->load->view('a_views/news_list',$row, true);
+            $i++;
+//             print_r($row);
+//            echo '<br/>';
+//            foreach ($row as $key => $value) {
+//                $temparray[$i][$key] = $value;
+//            }
+//            $i++;
+        }
+//        foreach ($temparray as $row) {
+//            print_r($row);
+//            echo '<br/>';
+//        }
+
+        $page = $this->load->view('a_views/sch_info', $oneNews, true);
         $this->view($page);
     }
 
@@ -172,5 +189,16 @@ class First extends MY_Controller {
         $yzm_session = $this->session->userdata('verify_code');
         echo $yzm_session;
     }
+//--------------验证码------------------------
+    public function news($id=''){
+        $news = $this->news_model->select_detail($id);
+        foreach ($news as $row){
+            $row['news_content']=preg_replace('/\n/','<p/><p>',$row['news_content']);
+            $page = $this->load->view('a_views/news', $row, true);
+        }
+        
+        $this->view($page);
+    }
+    
 
 }
