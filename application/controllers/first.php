@@ -36,7 +36,7 @@ class First extends MY_Controller {
 //	$this->_format($response);
 //        $this->load->view('admin_views/template');
 //        redirect('first/sch_info');
-        redirect('admin');
+        redirect('vipcenter');
     }
 
     public function view($page = '') {

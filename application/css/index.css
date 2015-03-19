@@ -19,8 +19,7 @@ and open the template in the editor.
     clear: both;
     height: 0;
 }
-div ,li ,ul,nav, span {
-    font-family: "Arial","Microsoft Yahei","Hiragino Sans GB","Simsun,sans-self";
+div ,li ,ul,nav {
     font-size: 16px;
 }
 h1, h2, h3, h4{
@@ -37,7 +36,7 @@ span{
 
 /*----------------------------[public]-------------------------------------*/
 body{
-    background-color: #eee;
+    background-color: #f5f5f5;
 }
 #header{
     width: 100%;
@@ -61,7 +60,7 @@ body{
 .hea-ul li{
     float: left;
     display: inline;
-    background-color:#141a3e;
+    /* background-color:#141a3e; */
 }
 .hea-ul li span{
     line-height: 36px;
@@ -117,7 +116,7 @@ body{
 }
 .menu-ul li span{
     display: block;
-    padding: 0 15px 0 15px;
+    /* padding: 0 15px 0 15px; */
     line-height: 50px;
     height: 50px;
 }
@@ -128,7 +127,7 @@ body{
     z-index: 100;
 }
 
-ul.menu-chir.chir {}
+
 .user_menu li{
     background: #141a3e;
     color: #000;
@@ -191,7 +190,7 @@ ul.menu-chir.chir {}
 
 }
 #con-con{
-    font-family: 'Lato', 'PT Sans';
+    /* font-family: 'Lato', 'PT Sans'; */
 
 }
 .real_content{
@@ -199,11 +198,12 @@ ul.menu-chir.chir {}
 }
 .tab li {
     list-style: none;
-    font-size: 18px;
+    /* font-size: 18px; */
     float :left;
-    width:80px;
+    min-width: 110px;
     margin-bottom: -1px;
-    color:#000;font-family: 'Lato', 'PT Sans';
+    color:#000;
+    text-align: center;
     padding:5px 20px 5px 20px;
     background-color: #fff;
     cursor: pointer;
@@ -541,7 +541,7 @@ ul.menu-chir.chir {}
 
 }
 .headline{
-    font: bold 24px 宋体;
+    font: bold 24px ����;
     padding: 20px 0 0 5px;
     letter-spacing: -1.5px;
 }

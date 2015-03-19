@@ -14,6 +14,8 @@ and open the template in the editor.
         <script src="<?php echo base_url() . 'application/js/jquery-1.7.1.min.js' ?>" type="text/javascript"></script>
         <script src="<?php echo base_url() . 'application/js/jquery.cxselect.min.js' ?>" type="text/javascript"></script>
         <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=RbYDrD0LPcQqzZTo21PFZ6kR"></script>
+                        <link rel="stylesheet" href="<?= base_url() ?>application/css/admin/amazeui.min.css"/>
+        <link rel="stylesheet" href="<?= base_url() ?>application/css/admin/admin.css">
     </head>
     <body>
         <?= $header ?>
@@ -40,12 +42,6 @@ and open the template in the editor.
             }, function () {
                 $('.menu-chir').stop(true, true).hide();
             });
-            $('.user_header').hover(function () {
-                $(this).find('.menu-chir').animate({opacity: 'show', height: 'show'}, 200);
-            }, function () {
-                $('.menu-chir').stop(true, true).hide();
-            });
-
             $.cxSelect.defaults.url = "<?php echo base_url() . 'application/js/cityData.min.json' ?>";
             $('#city_china_val').cxSelect({
                 selects: ['province', 'city', 'area'],
@@ -77,5 +73,18 @@ and open the template in the editor.
             }
             $(document).ready(myFunction);
         </script>
+                <!--[if lt IE 9]>
+    <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+    <script src="assets/js/polyfill/rem.min.js"></script>
+    <script src="assets/js/polyfill/respond.min.js"></script>
+    <script src="assets/js/amazeui.legacy.js"></script>
+    <![endif]-->
+
+    <!--[if (gte IE 9)|!(IE)]><!-->
+    <script src="<?php echo base_url() . 'application/js/admin/jquery.min.js' ?>" ></script>
+    <script src="<?= base_url() ?>application/js/admin/amazeui.min.js"></script>
+    <!--<![endif]-->
+    <script src="<?= base_url() ?>application/js/admin/app.js"></script>
     </body>
 </html>

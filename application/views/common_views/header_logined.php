@@ -4,15 +4,15 @@
             <li>
                 <a href="<?= base_url() ?>index.php"><span >首页</span></a>
             </li>
-            <li class="user_header">
-                <a href="<?= base_url() ?>index.php/first/login"><span><?=$username?> <img src='<?= base_url()?>application/images/cover.png'style="float:right;vertical-align:middle;" class="user_header_img"/></span></a>
-                    <ul class='menu-chir chir user_menu'>
-                        <li><a href="<?= base_url() . 'index.php/vipcenter/vip_center' ?>"><span>会员中心</span></a></li>
-                        <li><a href="<?= base_url() . 'index.php/vipcenter/study_progress' ?>"><span>个人信息</span></a></li>
-                        <li><a href="<?= base_url() . 'index.php/first/login_exit' ?>"><span>退出登录</span></a></li>
+            <li class="am-dropdown" data-am-dropdown>
+                <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;" href="<?= base_url() ?>index.php/first/login"><span class="am-icon-users"> <?=$username?> <span class="am-icon-caret-down" style="display: inline ;padding: 0; "></span></span></a>
+                    <ul class='am-dropdown-content'>
+                        <li><a class="am-icon-user" href="<?= base_url() . 'index.php/vipcenter/vip_center' ?>">  会员中心</a></li>
+                        <li><a class="am-icon-info-circle"  href="<?= base_url() . 'index.php/vipcenter/study_progress' ?>">  个人信息</a></li>
+                        <li><a class="am-icon-power-off" style="color:#A00;"href="<?= base_url() . 'index.php/first/login_exit' ?>">  退出登录</a></li>
                     </ul>
+   
             </li>
-
             <li>
                 <a href="<?= base_url() ?>index.php/first/register"><span>注册</span></a>
             </li>
