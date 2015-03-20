@@ -54,7 +54,7 @@
                                                 教练：
                                             </li>
                                             <li style="float:left;">
-                                                <img src="<?= base_url() ?>application/images/schimg.png" height="70"/>
+                                                <img src="<?= base_url() ?>application/images/schimg.png" width="100"/>
                                             </li>
                                             <li style="float:left;">
                                                 <ul>
@@ -68,7 +68,7 @@
                                             </li>
                                         </ul>
                                         <p>
-                                            地点：华科大驾校
+                                            华科大驾校
                                         </p>
                                         <p>
                                             积分消费：100RMB
@@ -82,59 +82,65 @@
 
                                     </div>
                                 </li>
-                                
-                               
+
+
                                 <li class="cls highlight">
                                     <p class="date">
                                         03.05
                                     </p>
                                     <p class="intro">
-                                        微活动微客服上线
+                                        <span class="am-badge am-badge-primary am-text-xl" >科目二</span>
                                     </p>
                                     <p class="version">
                                         v1.2 build 521
                                     </p>
-                                    <div class="more">
-                                        新增:
-                                        <br />
-                                        微活动上线,暂只支持优惠券
-                                        <br />
-                                        新增多关键词模糊匹配
-                                        <br />
-                                        增加IE兼容性提示
-                                        <br />
-                                        增加了客服接口, 认证服务号可与48小时之内发送过消息的用户进行对话
-                                        <br />
-                                        优化:
-                                        <br />
-                                        允许未激活帐号登陆
-                                        <br />
-                                        优化了缓存,解决了删除关键词但对应数据仍然缓存的问题
-                                        <br />
-                                        去掉页面标题后的 "-微一微信"
-                                        <br />
-                                        相册目前只有一种展示样式, 暂时隐藏了其它展示方式
-                                        <br />
-                                        图文增加URL地址,可直接跳转,同时保留了原文地址
-                                        <br />
-                                        修复:
-                                        <br />
-                                        微报告数据统计为空
-                                        <br />
-                                        有时候关键词不触发(由于腾讯提供SDK错误导致)
-                                        <br />
-                                        微相册手机上不显示
-                                        <br />
-                                        模板21和模板29的问题,以及其它一些细节
-                                        <br />
-                                        消息管理中更新资料提示openid无效
-                                        <br />
-                                        多图文编辑分类不能保存
-                                        <br />
-                                        消息列表中回复的图文显示错误
-                                        <br />
-                                        关键词为数字时模糊匹配无效
-                                        <br />
+                                    <div class="more"><br/>
+                                        <table class="am-table am-table-bordered ml-red">
+                                            <tbody>
+                                                <tr>
+                                                    <td>内容 </td>
+                                                    <td>倒库</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>状态</td>
+                                                    <td>已学习</td>
+                                                </tr>
+                                                <tr class="am-active">
+                                                    <td>教练</td>
+                                                    <td><ul id="coach" class="clearfix">
+                                            <li style="float:left;">
+                                                <img class="am-img-thumbnail am-circle" src="<?= base_url() ?>application/images/schimg.png" width="100" height="100"/>
+                                            </li>
+                                            <li style="float:left;">
+                                                <ul>
+                                                    <li>
+                                                        张名犬
+                                                    </li>
+                                                    <li>
+                                                        教练等级：<span class="am-icon-star ml-red"></span><span class="am-icon-star-half-o ml-red"></span><span class="am-icon-star-half-o ml-red"></span>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>地点</td>
+                                                    <td>华科大驾校</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>积分消费</td>
+                                                    <td>100RMB</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>已学学时</td>
+                                                    <td>1课时</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>教学建议</td>
+                                                    <td>继续学习倒库</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </li>
                                 <li class="cls highlight">
@@ -171,7 +177,7 @@
                                         </p>
                                     </div>
                                 </li>
-                              
+
                             </ul>
                         </div>
                     </div>

@@ -66,7 +66,7 @@ and open the template in the editor.
                                                                         1s cubic-bezier(0.025,0.025,0.000,1.115),opacity 1s;transition:height 1s
                                                                         cubic-bezier(0.025,0.025,0.000,1.115),opacity 1s}
             .content .main .year .list ul{bottom:0}
-            .content .main .year .list ul li{background:url("<?=base_url()?>application/images/circle.png")
+            .content .main .year .cls{background:url("<?=base_url()?>application/images/circle.png")
                                                              no-repeat 135px 31px;padding:30px 0;color:#a1a4b8}
             .content .main .year .list ul li .date,.content .main .year .list ul li .version{float:left;display:block;clear:left;width:100px;line-height:24px;text-align:right}.content
             .main .year .list ul li .date{font-size:18px;line-height:32px;color:#bec1d5}.content
