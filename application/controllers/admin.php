@@ -23,14 +23,45 @@ class Admin extends MY_Controller {
     function __construct() {
         parent::__construct();
 //        $this->load->model('accesscontrol_model');
-        $this->load->library('oss/alioss');
-        $this->load->model('news_model');
-        $this->load->model('school_model');
+       
+       
+//        $this->load->library('oss/alioss');
+//        $this->load->model('news_model');
+//        $this->load->model('school_model');
+//        $this->load->model('coach_model');
     }
 
     public function index() {
-        $this->load->view('admin_views/template');
+        $this->view();
     }
+    public function view($page = '') {
+       
+        if ($page == '') {
+            $body['content'] = $this->load->view('admin_views/insert_info', '', true);
+        } else {
+            $body['content'] = $page;
+        }
+        $this->load->view('admin_views/template', $body);
+    }
+    public function insert_info(){
+        $page = $this->load->view('admin_views/insert_info', '', true);
+        $this->view($page);
+    }
+    public function check_info(){
+        $page = $this->load->view('admin_views/check_info', '', true);
+        $this->view($page);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 //文件上传 begin
     public function news_upload() {
         $news_id = time();
@@ -117,34 +148,33 @@ class Admin extends MY_Controller {
         $coach_workid = $this->input->post('coach_workid');
         $coach_old = $this->input->post('coach_old');
         $coach_sch_id = $this->input->post('coach_sch_id');
+        $coach_car_old = $this->input->post('coach_car_old');
         $coach_reg_time =$this->getDate();
         $coach_face = 'http://driver-un.oss-cn-shenzhen.aliyuncs.com/' . $coach_id . '.jpg';
         $coach_intro = $this->input->post('coach_intro');
         $data = array(
-            'jp_id' => $coach_id,
-            'jp_name' => $coach_name,
-            'jp_addr' => $coach_workid,
-            'jp_car_num' => $coach_old,
-            'jp_half_num' => $coach_sch_id,
-            'jp_zhi_num' => $coach_reg_time,
-            'jp_s_num' => $coach_face,
-            'jp_ku_num' => $coach_intro,
+            'coach_id' => $coach_id,
+            'coach_name' => $coach_name,
+            'coach_workid' => $coach_workid,
+            'coach_old' => $coach_old,
+            'coach_sch_id' => $coach_sch_id,
+            'coach_car_old' => $coach_car_old,
+            'coach_reg_time' => $coach_reg_time,
+            'coach_intro' => $coach_intro
         );
         $image = array(
-            'jp_imge' => $jp_imge
+           'coach_face' => $coach_face
         );
-
-        
-        if($this->_is_upload_imge($jp_id)==true){
-            $result = $this->school_model->insert(array_merge($data,$image));
+        if($this->_is_upload_imge($coach_id)==true){
+            $result = $this->coach_model->insert(array_merge($data,$image));
         }else{
-            $result = $this->school_model->insert($data);
+            $result = $this->coach_model->insert($data);
         }
         if ($result == 1) {
 //            redirect();
-            echo 'insert success!!'.$hasImg;
+            echo 'insert success!!';
         } else {
-            echo 'insert error!'.$hasImg;
+            echo 'insert error!';
         }
     }
     
