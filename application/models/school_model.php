@@ -33,4 +33,10 @@ class School_model extends CI_Model{
         $query = $this->db->get('School');
         return $query->result_array();
     }
+    public function select_school() {//返回该用户名所有信息
+        $this->db->select('jp_id');
+        $this->db->select('jp_name');
+        $query = $this->db->get('School');
+        return $query->result_array();
+    }
 }

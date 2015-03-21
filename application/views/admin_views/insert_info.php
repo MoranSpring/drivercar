@@ -216,11 +216,10 @@
                                     </div>
                                 </div>
                                 <div class="am-g am-margin-top">
-                                    <div class="am-u-sm-4 am-u-md-2 am-text-right">
-                                        所属驾校
-                                    </div>
-                                    <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
-                                        <input type="text" class="am-input-sm" name="coach_sch_id">
+                                    <div class="am-u-sm-4 am-u-md-2 am-text-right">所属驾校</div>
+                                    <div class="am-u-sm-8 am-u-md-10">
+                                        <select id="select_sch" class="chosen-select" data-placeholder="请选择" style="width:307px;" name="coach_sch_id">
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="am-g am-margin-top">

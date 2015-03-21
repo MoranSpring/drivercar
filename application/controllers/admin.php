@@ -25,10 +25,10 @@ class Admin extends MY_Controller {
 //        $this->load->model('accesscontrol_model');
        
        
-//        $this->load->library('oss/alioss');
-//        $this->load->model('news_model');
-//        $this->load->model('school_model');
-//        $this->load->model('coach_model');
+        $this->load->library('oss/alioss');
+        $this->load->model('news_model');
+        $this->load->model('school_model');
+        $this->load->model('coach_model');
     }
 
     public function index() {
@@ -210,6 +210,11 @@ class Admin extends MY_Controller {
         return $response->status;
     }
 //文件上传 end
+    function get_schools(){
+        $result = $this->school_model->select_school();
+        echo json_encode($result);
+        
+    }
 
     function _format($response) {
         echo '|-----------------------Start---------------------------------------' . "<br/>";

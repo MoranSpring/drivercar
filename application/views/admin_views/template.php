@@ -6,6 +6,7 @@
         <meta name="keywords" content="index">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <link rel="stylesheet" href="<?= base_url() ?>application/css/admin/amazeui.min.css"/>
+        <link rel="stylesheet" href="<?= base_url() ?>application/css/admin/amazeui.chosen.min.css"/>
         <link rel="stylesheet" href="<?= base_url() ?>application/css/admin/admin.css">
     </head>
     <body>
@@ -89,6 +90,7 @@
     <!--[if (gte IE 9)|!(IE)]><!-->
     <script src="<?php echo base_url() . 'application/js/admin/jquery.min.js' ?>" ></script>
     <script src="<?= base_url() ?>application/js/admin/amazeui.min.js"></script>
+    <script src="<?= base_url() ?>application/js/admin/amazeui.chosen.js"></script>
     <!--<![endif]-->
     <script src="<?= base_url() ?>application/js/admin/app.js"></script>
     <script>
@@ -126,5 +128,28 @@
             return true;
         }
     </script> 
+    <script>
+         $(function () {
+                $.ajax({
+                    type: "GET",
+                    url: "<?= base_url() ?>index.php/admin/get_schools?r=" + Math.random(),
+                    async: true,
+                    success: function (data) {
+                        var json = eval ("(" + data + ")");
+                        for(var i=0 ;i<json.length;i++){
+                            
+                             $('#select_sch').append("<option value='" +json[i].jp_id+ "'>" + json[i].jp_name + "</option>");
+                             
+                        }
+                        $('#select_sch').trigger('chosen:updated');
+                        
+
+                    }
+                });
+
+         })
+         
+    
+    </script>
 </body>
 </html>
