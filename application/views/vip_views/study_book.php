@@ -28,8 +28,12 @@
                 </ul>
             </div>
             <div class="step_1">
-                <h1>温馨提示</h1>
-                <span>预约之前必须通过科目一</span>
+                <div class="am-alert am-alert-danger am-margin-xl" data-am-alert>
+                    <button type="button" class="am-close">&times;</button>
+                    <p><strong>温馨提示</strong></p>
+                    <p>预约之前必须通过科目一</p>
+                </div>
+
                 <div class="am-g am-margin-top">
                     <div class="am-u-sm-4 am-u-md-3 am-text-right">请选择培训项目</div>
                     <div class="am-u-sm-8 am-u-md-9 " id="project_list">
@@ -45,22 +49,22 @@
                 </div>
             </div>
             <div class="step_2" style="display:none">
-                
-                
-                
-                
-                
-                
-                
-                
+
+
+
+
+
+
+
+
                 <div class="am-center am-margin-top-xl" style="width:320px">
                     <button id="bt21" type="button" class=" am-btn am-btn-primary " style="width:150px" >上一步</button>
                     <button id="bt22" type="button" class=" am-btn am-btn-primary " style="width:150px">下一步</button>
                 </div>
             </div>
             <div class="step_3" style="display:none">
-                
-               <div class="am-center am-margin-top-xl" style="width:320px">
+
+                <div class="am-center am-margin-top-xl" style="width:320px">
                     <button id="bt31" type="button" class=" am-btn am-btn-primary " style="width:150px" >上一步</button>
                     <button id="bt32" type="button" class=" am-btn am-btn-primary am-btn-danger " style="width:150px">确   定</button>
                 </div>
@@ -86,8 +90,8 @@
                     $('.step_2').css('display', 'none');
                     $('.step_3').css('display', 'none');
                 });
-                 $('#bt22').click(function () {
-                     step3();
+                $('#bt22').click(function () {
+                    step3();
                     $('.step_1').css('display', 'none');
                     $('.step_2').css('display', 'none');
                     $('.step_3').css('display', 'block');
@@ -98,7 +102,7 @@
                     $('.step_2').css('display', 'block');
                     $('.step_3').css('display', 'none');
                 });
-                 $('#bt32').click(function () {
+                $('#bt32').click(function () {
 //                     sumit();
                 });
             </script>

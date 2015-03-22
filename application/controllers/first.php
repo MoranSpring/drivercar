@@ -34,7 +34,7 @@ class First extends MY_Controller {
 //	$file_path ="C:\\Users\\KYLE\\Desktop\\logo.png";
 //	$response = $this->alioss->upload_file_by_file($bucket,$object,$file_path);
 //	$this->_format($response);
-        $this->load->view('test');
+        $this->load->view('test2');
 //        redirect('first/sch_info');
 //        redirect('vipcenter');
     }
