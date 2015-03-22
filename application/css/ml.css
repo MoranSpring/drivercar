@@ -1,0 +1,46 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 2015-3-22, 15:14:46
+    Author     : KYLE
+*/
+.ml_step_ul{
+            width:100%;
+            list-style: none;
+            display: block;
+            color: white;
+
+        }
+        .clear:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+        .step_on{
+            background: #3B95D3;
+        }
+        .step_off{
+            background: #B1B3B2;
+        }
+        .step_img_onoff{
+            background: url(../images/step.png) center 0px no-repeat;
+        }
+        .step_img_offon{
+            background: url(../images/step.png) center -50px no-repeat;
+        }
+        .step_img_offoff{
+            background: url(../images/step.png) center -100px no-repeat;
+        }
+        .ml_li{
+            float:left;
+            height:40px;
+            line-height: 40px;
+            text-align: center;
+        }
+        .ml_li_width{
+            width:30%;
+        }
+

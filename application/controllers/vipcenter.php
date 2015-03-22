@@ -44,5 +44,9 @@ class VipCenter extends MY_Controller {
         $page = $this->load->view('vip_views/study_progress', '', true);
         $this->view($page);
     }
+    public function study_book() {
+        $page = $this->load->view('vip_views/study_book', '', true);
+        $this->view($page);
+    }
 
 }
