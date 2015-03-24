@@ -7,37 +7,37 @@
  */
 
 /**
- * Description of coach_model
+ * Description of coachbook_model
  *
  * @author Kyle
  */
-class Coach_model extends CI_Model{
+class Coachbook_model extends CI_Model{
     function __construct() {
         parent::__construct();
         $this->load->database();
     }
     public function insert($data) {    //把数据增加到sites表中.
-        $result=$this->db->insert_batch('Coach', $data); 
+        $result=$this->db->insert_batch('CoachBook', $data); 
         return $result;
     }
-    public function select_simple() {//返回该用户名所有信息
-        $this->db->select('news_id');
-        $this->db->select('news_title');
-        $this->db->select('news_date');
-        $query = $this->db->get('Coach');
+    public function select($data) {
+        $this->db->select('coabk_cls_num');
+        $this->db->where('coabk_coach_id',$data['coabk_coach_id']);
+        $this->db->where('coabk_time',$data['coabk_time']);
+        $query = $this->db->get('CoachBook');
         return $query->result_array();
     }
     public function select_detail($id) {//返回该用户名所有信息
         $this->db->select();
         $this->db->where('news_id',$id);
-        $query = $this->db->get('Coach');
+        $query = $this->db->get('CoachBook');
         return $query->result_array();
     }
     public function select_coach($id) {//返回该用户名所有信息
         $this->db->select('coach_id');
         $this->db->select('coach_name');
         $this->db->where('coach_sch_id',$id);
-        $query = $this->db->get('Coach');
+        $query = $this->db->get('CoachBook');
         return $query->result_array();
     }
 }

@@ -25,6 +25,7 @@ class First extends MY_Controller {
         $this->load->model('accesscontrol_model');
         $this->load->model('news_model');
         $this->load->library('oss/alioss');
+        $this->load->model('coach_model');
     }
 
     public function index() {
@@ -37,8 +38,6 @@ class First extends MY_Controller {
 //        $this->load->view('test2');
 //        redirect('first/sch_info');
         redirect('vipcenter');
-        
-        
     }
 
     public function view($page = '') {
@@ -65,7 +64,7 @@ class First extends MY_Controller {
         $news = $this->news_model->select_simple();
         $i = 0;
         foreach ($news as $row) {
-            $oneNews['news'][$i]=$this->load->view('a_views/news_list',$row, true);
+            $oneNews['news'][$i] = $this->load->view('a_views/news_list', $row, true);
             $i++;
 //             print_r($row);
 //            echo '<br/>';
@@ -191,16 +190,68 @@ class First extends MY_Controller {
         $yzm_session = $this->session->userdata('verify_code');
         echo $yzm_session;
     }
+
 //--------------验证码------------------------
-    public function news($id=''){
+    public function news($id = '') {
         $news = $this->news_model->select_detail($id);
-        foreach ($news as $row){
-            $row['news_content']=preg_replace('/\n/','<p/><p>',$row['news_content']);
+        foreach ($news as $row) {
+            $row['news_content'] = preg_replace('/\n/', '<p/><p>', $row['news_content']);
             $page = $this->load->view('a_views/news', $row, true);
         }
-        
+
         $this->view($page);
     }
-    
+
+    public function getcityData() {
+        $retval = $this->_request('http://driver-un.oss-cn-shenzhen.aliyuncs.com/js/cityData.min.js');
+
+        if ($retval !== false) {
+            echo $retval;
+        }
+    }
+    public function test() {
+        $data1=array(
+            'coach_id'=>'12345678',
+            'coach_name'=>'jald',
+            'coach_workid'=>'jald',
+            'coach_reg_time'=>$this->getTime()
+        );
+        $data2=array(
+            'coach_id'=>'165432',
+            'coach_name'=>'gfdddddd',
+            'coach_workid'=>'jasd',
+            'coach_reg_time'=>$this->getTime()
+        );
+        $arr = array();
+        $arr[] = $data1;
+        $arr[] = $data2;
+        $result = $this->coach_model->insert($arr);
+        echo $result;
+        
+    }
+
+    function _request($url, $posts = null) {
+        if (is_array($posts) && !empty($posts)) {
+            foreach ($posts as $key => $value) {
+                $post[] = $key . '=' . urlencode($value);
+            }
+            $posts = implode('&', $post);
+        }
+
+        $curl = curl_init();
+
+        $options = array(
+            CURLOPT_URL => $url,
+            CURLOPT_CONNECTTIMEOUT => 2,
+            CURLOPT_TIMEOUT => 10,
+            CURLOPT_RETURNTRANSFER => true
+        );
+
+        curl_setopt_array($curl, $options);
+
+        $retval = curl_exec($curl);
+
+        return $retval;
+    }
 
 }

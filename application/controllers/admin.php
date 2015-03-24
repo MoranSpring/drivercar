@@ -215,6 +215,11 @@ class Admin extends MY_Controller {
         echo json_encode($result);
         
     }
+    function get_coach_via_sch($id){
+        $result = $this->coach_model->select_coach($id);
+        echo json_encode($result);
+        
+    }
 
     function _format($response) {
         echo '|-----------------------Start---------------------------------------' . "<br/>";

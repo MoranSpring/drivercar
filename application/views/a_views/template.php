@@ -42,7 +42,7 @@ and open the template in the editor.
             }, function () {
                 $('.menu-chir').stop(true, true).hide();
             });
-            $.cxSelect.defaults.url = "<?php echo base_url() . 'application/js/cityData.min.json' ?>";
+            $.cxSelect.defaults.url = "<?php echo base_url() . 'index.php/first/getcityData' ?>";
             $('#city_china_val').cxSelect({
                 selects: ['province', 'city', 'area'],
                 nodata: 'none'
