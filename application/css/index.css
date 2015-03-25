@@ -22,9 +22,7 @@ and open the template in the editor.
 div ,li ,ul,nav {
     font-size: 16px;
 }
-h1, h2, h3, h4{
-    font-family: "Arial","Microsoft Yahei","Hiragino Sans GB","Simsun,sans-self";
-}
+
 a{
     color:#60aff6;
     text-decoration: none; 

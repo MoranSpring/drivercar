@@ -64,5 +64,8 @@ and open the template in the editor.
 .ml-cls-active:hover{
     background: #00A000;
 }
+.ml-has-selecked{
+    background: #900;
+}
 
 

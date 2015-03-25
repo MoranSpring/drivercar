@@ -40,9 +40,9 @@
                         <div class="am-u-sm-4 am-u-md-3 am-text-right">请选择培训项目</div>
                         <div class="am-u-sm-8 am-u-md-9 " id="project_list">
 
-                            <select  class="province" style="width:150px;text-align: center;display:inline;"  data-placeholder="请选择">
+                            <select  class="cls_kind" style="width:150px;text-align: center;display:inline;"  data-placeholder="请选择">
                             </select>
-                            <select  class="city" first data-placeholder="请选择" style="width:250px;text-align: center;">
+                            <select  class="cls_project" first data-placeholder="请选择" style="width:250px;text-align: center;">
                             </select>
 
 
@@ -157,7 +157,7 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                                <button  type="button" class=" am-btn am-btn-primary " onclick="hs()" style="width:150px">summit</button>
+
                             </div>
                         </div>
                         <div class="am-u-sm-6 am-u-md-6">
@@ -214,26 +214,72 @@
                     </div>
                 </div>
                 <div class="step_3" style="display:none">
+                    <div class="am-margin-xl">
+                        <div  class="am-g am-padding" style="background: #EEE">
+                            <h2>预约信息确认</h2>
+                            <p class="am-icon-user"> 预约人名 ：个人姓名</p><br/>
+                            <p class="am-icon-phone"> 预留电话：12334345678</p><br/>
+                            <p class="am-icon-file-text"> 预选节数：<span class="sum-cls-num">8</span>节课</p>
+                        </div><br />
+                        <table  class="am-table am-table-bordered">
+                            <thead>
+                                <tr>          
+                                    <th>日期+时间</th>
+                                    <th>培训点</th>
+                                    <th>教练</th>
+                                    <th>项目</th>
+                                </tr>
+                            </thead>
+                            <tr>
+                                <td>上坡起步</td>
+                                <td>6</td>
+                                <td>3</td>
+                                <td>3</td>
+                            </tr>
+                            <tr>
+                                <td>上坡起步</td>
+                                <td>6</td>
+                                <td>3</td>
+                                <td>3</td>
+                            </tr>
+                            <tr>
+                                <td>上坡起步</td>
+                                <td>6</td>
+                                <td>3</td>
+                                <td>3</td>
+                            </tr>
+                        </table>
+                        <h3 class="am-text-right">您选了 <span id="sum-cls-num">8</span> 节课  共计：<span id="sum" class="am-icon-rmb" style="color:#990000;font-size: 18px;">3000</span>  积分</h3>
+
+
+                    </div>
 
                     <div class="am-center am-margin-top-xl" style="width:320px">
+
+
                         <button id="bt31" type="button" class=" am-btn am-btn-primary " style="width:150px" >上一步</button>
                         <button id="bt32" type="button" class=" am-btn am-btn-primary am-btn-danger " style="width:150px">确   定</button>
                     </div>
 
                 </div>
             </form>
+            <button  class=" am-btn am-btn-primary " onclick="submit()" style="width:150px">summit</button>
 
             <script>
                 $.cxSelect.defaults.url = "<?php echo base_url() . 'application/js/project.json' ?>";
                 $('#project_list').cxSelect({
-                    selects: ['province', 'city'],
+                    selects: ['cls_kind', 'cls_project'],
                     nodata: 'none'
                 });
                 $('#bt1').click(function () {
-                    step2();
-                    $('.step_1').css('display', 'none');
-                    $('.step_2').css('display', 'block');
-                    $('.step_3').css('display', 'none');
+                    if (check() === 100) {
+                        step2();
+                        $('.step_1').css('display', 'none');
+                        $('.step_2').css('display', 'block');
+                        $('.step_3').css('display', 'none');
+                    }else{
+                        myAlert('ni da ye de');
+                    }
                 });
                 $('#bt21').click(function () {
                     step1();
@@ -242,10 +288,14 @@
                     $('.step_3').css('display', 'none');
                 });
                 $('#bt22').click(function () {
-                    step3();
-                    $('.step_1').css('display', 'none');
-                    $('.step_2').css('display', 'none');
-                    $('.step_3').css('display', 'block');
+                    if (check() === 200) {
+                        step3();
+                        $('.step_1').css('display', 'none');
+                        $('.step_2').css('display', 'none');
+                        $('.step_3').css('display', 'block');
+                    }else{
+                        myAlert('ni da ye de toooo');
+                    }
                 });
                 $('#bt31').click(function () {
                     step2();
@@ -349,6 +399,7 @@
         function refresh() {
             var n = 0;
             $('#cls_date_box').empty();
+            var selArray = new Array();
 
             $('.item').each(function () {
                 if ($(this).attr('value') === '8')
@@ -358,12 +409,12 @@
                     var dayNum = $(this).attr('date');
                     var day = $('#' + dayNum).html();
                     $('#cls_date_box').append("<p>时间为" + day + ",    第" + cls + "节课</p>");
-
-                    var selArray = new Array();
-                    var select = new choice('afd', 'asfd');
+                    var selected = new choice(day, cls);
+                    selArray.push(selected);
                 }
                 $('#cls_num_box').html(n);
             });
+            return selArray;
 
         }
 //        var select = new choice('afd', 'asfd');
@@ -425,6 +476,7 @@
         function init() {
             $('#cls_table').css('display', 'none');
             $('.item').removeClass('ml-cls-active');
+            $('.item').removeClass('ml-has-selecked');
             $('.item').attr('value', '');
             $('.item').css('background', '');
             refresh();
@@ -442,14 +494,50 @@
                 data: {coabk_time: day, coabk_coach_id: coach},
                 success: function (data) {
                     var json = eval("(" + data + ")");
-                    for (var i = 0; i < json.length; i++) {
-                        var cls = json[i].coabk_cls_num;
+                    for (var i = 0; i < json.coachbook.length; i++) {
+                        var cls = json.coachbook[i].coabk_cls_num;
                         cls = cls > 4 ? cls - (-1) : cls;
-                        cls = cls > 8 ? cls - (-1) : cls;
+                        cls = cls > 9 ? cls - (-1) : cls;
                         $('#cls_table tr:eq(' + cls + ') td:eq(' + n + ')').addClass('ml-cls-active');
+                    }
+                    for (var i = 0; i < json.teachbook.length; i++) {
+                        var cls = json.teachbook[i].book_cls_num;
+                        cls = cls > 4 ? cls - (-1) : cls;
+                        cls = cls > 9 ? cls - (-1) : cls;
+                        $('#cls_table tr:eq(' + cls + ') td:eq(' + n + ')').removeClass('ml-cls-active');
+                        $('#cls_table tr:eq(' + cls + ') td:eq(' + n + ')').addClass('ml-has-selecked');
                     }
                 }});
 
+        }
+        function submit() {
+            var kind = $('.cls_kind').val();
+            var project = $('.cls_project').val();
+            var school_id = $('.select_sch').val();
+            var coach_id = $('.select_coach').val();
+            var school_name = $('.select_sch option:selected').text();
+            var coach_name = $('.select_coach  option:selected').text();
+            alert(kind + '    ' + project + '    ' + school_name + '    ' + coach_name);
+            var selArray = refresh();
+            for (var i = 0; i < selArray.length; i++) {
+                alert(selArray[i].date);
+            }
+        }
+        function check() {
+            var project = $('.cls_project').val();
+            var selArray = refresh();
+
+            if (project == null || project == 0) {
+                return false;
+            } else if (selArray.length === 0) {
+                
+                return 100;
+            } else {
+                return 200;
+            }
+        }
+        function myAlert(content){
+            alert(content);
         }
     </script>
 

@@ -9,6 +9,7 @@ class VipCenter extends MY_Controller {
         parent::__construct();
         $this->load->model('accesscontrol_model');
         $this->load->model('coachbook_model');
+        $this->load->model('teachbook_model');
     }
 
     public function index() {
@@ -55,12 +56,24 @@ class VipCenter extends MY_Controller {
         $coabk_time = $this->input->post('coabk_time');
         $coabk_coach_id = $this->input->post('coabk_coach_id');
 
-        $data = array(
+        $data1 = array(
             'coabk_coach_id' => $coabk_coach_id,
             'coabk_time' => $coabk_time
         );
-        $result = $this->coachbook_model->select($data);
-        echo json_encode($result);
+        $book_date = $coabk_time;
+        $book_coa_id = $coabk_coach_id;
+
+        $data2 = array(
+            'book_coa_id' => $book_coa_id,
+            'book_date' => $book_date
+        );
+        $result1 = $this->coachbook_model->select($data1);
+        $result2 = $this->teachbook_model->select_info_coa($data2);
+        $both = array(
+            'coachbook' => $result1,
+            'teachbook' => $result2,
+        );
+        echo json_encode($both);
     }
 
 }
