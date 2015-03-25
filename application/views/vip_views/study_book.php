@@ -287,6 +287,7 @@
         });
         $(".select_coach").attr("disabled", "true");
         function selectCoach(sch_id) {
+            init();
             $('.select_coach').empty();
             $(".select_coach").attr("disabled", "true");
             $.ajax({
@@ -317,13 +318,24 @@
         }
 
         //---------SelectMore---------------
-        $(".ml-cls-active").toggle(function () {
-            $(this).attr('value', '8');
-            $(this).css('background', '#aac');
-            refresh();
-        }, function () {
-            $(this).attr('value', '-1');
-            $(this).css('background', '');
+//        $(".ml-cls-active").toggle(function () {
+//            $(this).attr('value', '8');
+//            $(this).css('background', '#aac');
+//            refresh();
+//        }, function () {
+//            $(this).attr('value', '-1');
+//            $(this).css('background', '');
+//            refresh();
+//        });
+        $(".ml-cls-active").live('click', function () {
+            if ($(this).attr('value') !== '8') {
+                $(this).attr('value', '8');
+                $(this).css('background', '#aac');
+
+            } else {
+                $(this).attr('value', '-1');
+                $(this).css('background', '');
+            }
             refresh();
         });
 //---------SelectOne---------------
@@ -368,7 +380,7 @@
                 {
                     var select = new choice('afd', 'asfd');
                     alert($(this).attr('date'));
-                    $('#date1').html()
+                    $('#date1').html();
                 }
             });
 
@@ -380,8 +392,9 @@
                     return date.valueOf() <= today ? 'am-disabled' : '';
                 }
             }).on('changeDate.datepicker.amui', function (event) {
-                //----------------------------
-                $('#cls_table').css('display', 'table');
+
+                //------------Init----------------
+                init();
 
                 var date1 = event.date;
                 var date2 = new Date();
@@ -401,11 +414,22 @@
                 select_date(day1, 1);
                 select_date(day2, 2);
                 select_date(day3, 3);
+                //--------------afterInit--------------
+                $('#cls_table').css('display', 'table');
+
 
                 checkout.close();
             }).data('amui.datepicker');
 
         });
+        function init() {
+            $('#cls_table').css('display', 'none');
+            $('.item').removeClass('ml-cls-active');
+            $('.item').attr('value', '');
+            $('.item').css('background', '');
+            refresh();
+
+        }
         function select_date(day, n) {
             var thisDay = "coabk_time=" + day;
             var coach = $('.select_coach').val();
@@ -415,21 +439,16 @@
                 dataType: "text",
                 url: "<?= base_url() ?>index.php/vipcenter/get_cls",
                 async: true,
-                data: {coabk_time:day,coabk_coach_id:coach},
+                data: {coabk_time: day, coabk_coach_id: coach},
                 success: function (data) {
                     var json = eval("(" + data + ")");
                     for (var i = 0; i < json.length; i++) {
                         var cls = json[i].coabk_cls_num;
                         cls = cls > 4 ? cls - (-1) : cls;
                         cls = cls > 8 ? cls - (-1) : cls;
-                        $('#cls_table tr:eq(' + cls + ') td:eq(' + n + ')').css('background', '#44f');
-
-
-
+                        $('#cls_table tr:eq(' + cls + ') td:eq(' + n + ')').addClass('ml-cls-active');
                     }
                 }});
-
-            $('.item').addClass('ml-cls-active');
 
         }
     </script>

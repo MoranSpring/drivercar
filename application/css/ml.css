@@ -50,14 +50,19 @@ and open the template in the editor.
     vertical-align:middle;
     text-overflow:ellipsis;
     overflow: hidden;
-    font-family: "Arial","宋体","Hiragino Sans GB","Simsun,sans-self"，"FontAwesome";
+    font-family: "Arial","宋体","Hiragino Sans GB","Simsun,sans-self","FontAwesome";
     text-align: center;
 }
+.item{
+    background:url("../images/forbid.png" );
+    cursor: no-drop;
+}
 .ml-cls-active{
-    background: #FFF;
+    background: #63d029;
+    cursor: pointer;
 }
 .ml-cls-active:hover{
-    background: #fff6bf;
+    background: #00A000;
 }
 
 
