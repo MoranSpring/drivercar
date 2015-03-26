@@ -1,8 +1,11 @@
 <div id="content" class="clearfix">
     <script src="<?php echo base_url() . 'application/js/ml.js' ?>" type="text/javascript"></script>
     <script src="<?php echo base_url() . 'application/js/admin/amazeui.chosen.min.js' ?>" type="text/javascript"></script>
+    <script src="<?php echo base_url() . 'application/js/jquery.cxselect.min.js' ?>" type="text/javascript"></script>
+    <script src="<?php echo base_url() . 'application/js/vip/study_book.js' ?>" type="text/javascript"></script>
     <link type="text/css" href="<?= base_url() ?>application/css/ml.css" rel="stylesheet">
     <link type="text/css" href="<?= base_url() ?>application/css/admin/amazeui.chosen.css" rel="stylesheet">
+
     <div id="con-left">
         <ul>
             <li><a href="<?= base_url() . 'index.php/vipcenter/vip_center' ?>"><span>个人信息</span></a></li>
@@ -217,11 +220,11 @@
                     <div class="am-margin-xl">
                         <div  class="am-g am-padding" style="background: #EEE">
                             <h2>预约信息确认</h2>
-                            <p class="am-icon-user"> 预约人名 ：个人姓名</p><br/>
-                            <p class="am-icon-phone"> 预留电话：12334345678</p><br/>
-                            <p class="am-icon-file-text"> 预选节数：<span class="sum-cls-num">8</span>节课</p>
+                            <p class="am-icon-user"> 预约人名 ：<span class="user-name"></span></p><br/>
+                            <p class="am-icon-phone"> 预留电话：<span class="user-tel"></span></p><br/>
+                            <p class="am-icon-file-text"> 预选节数：<span class="sum-cls-num"></span>节课</p>
                         </div><br />
-                        <table  class="am-table am-table-bordered">
+                        <table  class="am-table am-table-bordered" >
                             <thead>
                                 <tr>          
                                     <th>日期+时间</th>
@@ -230,26 +233,11 @@
                                     <th>项目</th>
                                 </tr>
                             </thead>
-                            <tr>
-                                <td>上坡起步</td>
-                                <td>6</td>
-                                <td>3</td>
-                                <td>3</td>
-                            </tr>
-                            <tr>
-                                <td>上坡起步</td>
-                                <td>6</td>
-                                <td>3</td>
-                                <td>3</td>
-                            </tr>
-                            <tr>
-                                <td>上坡起步</td>
-                                <td>6</td>
-                                <td>3</td>
-                                <td>3</td>
-                            </tr>
+                            <tbody id="book-table-info">
+                                
+                            </tbody>
                         </table>
-                        <h3 class="am-text-right">您选了 <span id="sum-cls-num">8</span> 节课  共计：<span id="sum" class="am-icon-rmb" style="color:#990000;font-size: 18px;">3000</span>  积分</h3>
+                        <h3 class="am-text-right">您选了 <span class="sum-cls-num">8</span> 节课  共计：<span id="sum" class="am-icon-rmb" style="color:#990000;font-size: 18px;">3000</span>  积分</h3>
 
 
                     </div>
@@ -265,281 +253,29 @@
             </form>
             <button  class=" am-btn am-btn-primary " onclick="submit()" style="width:150px">summit</button>
 
-            <script>
-                $.cxSelect.defaults.url = "<?php echo base_url() . 'application/js/project.json' ?>";
-                $('#project_list').cxSelect({
-                    selects: ['cls_kind', 'cls_project'],
-                    nodata: 'none'
-                });
-                $('#bt1').click(function () {
-                    if (check() === 100) {
-                        step2();
-                        $('.step_1').css('display', 'none');
-                        $('.step_2').css('display', 'block');
-                        $('.step_3').css('display', 'none');
-                    }else{
-                        myAlert('ni da ye de');
-                    }
-                });
-                $('#bt21').click(function () {
-                    step1();
-                    $('.step_1').css('display', 'block');
-                    $('.step_2').css('display', 'none');
-                    $('.step_3').css('display', 'none');
-                });
-                $('#bt22').click(function () {
-                    if (check() === 200) {
-                        step3();
-                        $('.step_1').css('display', 'none');
-                        $('.step_2').css('display', 'none');
-                        $('.step_3').css('display', 'block');
-                    }else{
-                        myAlert('ni da ye de toooo');
-                    }
-                });
-                $('#bt31').click(function () {
-                    step2();
-                    $('.step_1').css('display', 'none');
-                    $('.step_2').css('display', 'block');
-                    $('.step_3').css('display', 'none');
-                });
-                $('#bt32').click(function () {
-//                     sumit();
-                });
-            </script>
-
-
-
-
         </div>
 
     </div>
     <script>
-        $(function () {
-
-            $.ajax({
-                type: "GET",
-                url: "<?= base_url() ?>index.php/admin/get_schools?r=" + Math.random(),
-                async: true,
-                success: function (data) {
-                    var json = eval("(" + data + ")");
-                    for (var i = 0; i < json.length; i++) {
-
-                        $('.select_sch').append("<option value='" + json[i].jp_id + "'>" + json[i].jp_name + "</option>");
-
-                    }
-                    $('.select_sch').trigger('chosen:updated');
-
-
-                }
-            });
-
-        });
-        $(".select_coach").attr("disabled", "true");
-        function selectCoach(sch_id) {
-            init();
-            $('.select_coach').empty();
-            $(".select_coach").attr("disabled", "true");
-            $.ajax({
-                type: "GET",
-                url: "<?= base_url() ?>index.php/admin/get_coach_via_sch/" + sch_id + "?r=" + Math.random(),
-                async: true,
-                success: function (data) {
-                    var json = eval("(" + data + ")");
-                    for (var i = 0; i < json.length; i++) {
-                        $(".select_coach").removeAttr("disabled");
-
-
-                        $('.select_coach').append("<option value='" + json[i].coach_id + "'>" + json[i].coach_name + "</option>");
-
-                    }
-                    $('.select_coach').trigger('chosen:updated');
-
-
-                }
-            });
-
-        }
-        //--------------选择类-----------------
-        function choice(date, cls)
-        {
-            this.date = date;
-            this.cls = cls;
-        }
-
-        //---------SelectMore---------------
-//        $(".ml-cls-active").toggle(function () {
-//            $(this).attr('value', '8');
-//            $(this).css('background', '#aac');
-//            refresh();
-//        }, function () {
-//            $(this).attr('value', '-1');
-//            $(this).css('background', '');
-//            refresh();
-//        });
-        $(".ml-cls-active").live('click', function () {
-            if ($(this).attr('value') !== '8') {
-                $(this).attr('value', '8');
-                $(this).css('background', '#aac');
-
-            } else {
-                $(this).attr('value', '-1');
-                $(this).css('background', '');
-            }
-            refresh();
-        });
-//---------SelectOne---------------
-//        $(".item").click(function () {
-//            $(".item").attr('value', '-1');
-//            $(".item").css('background', '');
-//            $(this).attr('value', '8');
-//            $(this).css('background', '#aac');
-//            
-//        });
-        function refresh() {
-            var n = 0;
-            $('#cls_date_box').empty();
-            var selArray = new Array();
-
-            $('.item').each(function () {
-                if ($(this).attr('value') === '8')
-                {
-                    n++;
-                    var cls = $(this).attr('num');
-                    var dayNum = $(this).attr('date');
-                    var day = $('#' + dayNum).html();
-                    $('#cls_date_box').append("<p>时间为" + day + ",    第" + cls + "节课</p>");
-                    var selected = new choice(day, cls);
-                    selArray.push(selected);
-                }
-                $('#cls_num_box').html(n);
-            });
-            return selArray;
-
-        }
-//        var select = new choice('afd', 'asfd');
-//        var select2 = new choice('afd2', 'asfd2');
-//
-//        selArray.push(select);
-//        selArray.push(select2);
-//        for (var i = 0; i < selArray.length; i++) {
-//            alert(selArray[i].date);
-//        }
-        function hs() {
-            $('.item').each(function () {
-                if ($(this).attr('value') == '8')
-                {
-                    var select = new choice('afd', 'asfd');
-                    alert($(this).attr('date'));
-                    $('#date1').html();
-                }
-            });
-
-        }
-        $(function () {
-            var today = new Date().getTime() - 86400000;
-            var checkout = $('#select_date').datepicker({
-                onRender: function (date) {
-                    return date.valueOf() <= today ? 'am-disabled' : '';
-                }
-            }).on('changeDate.datepicker.amui', function (event) {
-
-                //------------Init----------------
-                init();
-
-                var date1 = event.date;
-                var date2 = new Date();
-                var date3 = new Date();
-                var Month1 = date1.getMonth() + 1;
-                var day1 = date1.getFullYear() + "-" + Month1 + "-" + date1.getDate();
-
-                date2 = new Date(date1.setDate(date1.getDate() + 1));
-                var Month2 = date2.getMonth() + 1;
-                var day2 = date2.getFullYear() + "-" + Month2 + "-" + date2.getDate();
-                date3 = new Date(date1.setDate(date1.getDate() + 1));
-                var Month3 = date3.getMonth() + 1;
-                var day3 = date3.getFullYear() + "-" + Month3 + "-" + date3.getDate();
-                $('#date1').html(day1);
-                $('#date2').html(day2);
-                $('#date3').html(day3);
-                select_date(day1, 1);
-                select_date(day2, 2);
-                select_date(day3, 3);
-                //--------------afterInit--------------
-                $('#cls_table').css('display', 'table');
-
-
-                checkout.close();
-            }).data('amui.datepicker');
-
-        });
-        function init() {
-            $('#cls_table').css('display', 'none');
-            $('.item').removeClass('ml-cls-active');
-            $('.item').removeClass('ml-has-selecked');
-            $('.item').attr('value', '');
-            $('.item').css('background', '');
-            refresh();
-
-        }
-        function select_date(day, n) {
-            var thisDay = "coabk_time=" + day;
-            var coach = $('.select_coach').val();
-            var thisCoach = "coabk_coach_id=" + coach;
-            $.ajax({
-                type: "POST",
-                dataType: "text",
-                url: "<?= base_url() ?>index.php/vipcenter/get_cls",
-                async: true,
-                data: {coabk_time: day, coabk_coach_id: coach},
-                success: function (data) {
-                    var json = eval("(" + data + ")");
-                    for (var i = 0; i < json.coachbook.length; i++) {
-                        var cls = json.coachbook[i].coabk_cls_num;
-                        cls = cls > 4 ? cls - (-1) : cls;
-                        cls = cls > 9 ? cls - (-1) : cls;
-                        $('#cls_table tr:eq(' + cls + ') td:eq(' + n + ')').addClass('ml-cls-active');
-                    }
-                    for (var i = 0; i < json.teachbook.length; i++) {
-                        var cls = json.teachbook[i].book_cls_num;
-                        cls = cls > 4 ? cls - (-1) : cls;
-                        cls = cls > 9 ? cls - (-1) : cls;
-                        $('#cls_table tr:eq(' + cls + ') td:eq(' + n + ')').removeClass('ml-cls-active');
-                        $('#cls_table tr:eq(' + cls + ') td:eq(' + n + ')').addClass('ml-has-selecked');
-                    }
-                }});
-
-        }
-        function submit() {
-            var kind = $('.cls_kind').val();
-            var project = $('.cls_project').val();
-            var school_id = $('.select_sch').val();
-            var coach_id = $('.select_coach').val();
-            var school_name = $('.select_sch option:selected').text();
-            var coach_name = $('.select_coach  option:selected').text();
-            alert(kind + '    ' + project + '    ' + school_name + '    ' + coach_name);
-            var selArray = refresh();
-            for (var i = 0; i < selArray.length; i++) {
-                alert(selArray[i].date);
-            }
-        }
-        function check() {
-            var project = $('.cls_project').val();
-            var selArray = refresh();
-
-            if (project == null || project == 0) {
-                return false;
-            } else if (selArray.length === 0) {
-                
-                return 100;
-            } else {
-                return 200;
-            }
-        }
-        function myAlert(content){
-            alert(content);
-        }
+        $.cxSelect.defaults.url = "<?php echo base_url() . 'application/js/project.json' ?>";
+                $('#project_list').cxSelect({
+                    selects: ['cls_kind', 'cls_project'],
+                    nodata: 'none'
+                });
     </script>
+   
 
+
+    <div class="am-modal am-modal-alert" tabindex="-1" id="your-modal">
+        <div class="am-modal-dialog">
+            <div class="am-modal-hd am-icon-exclamation-triangle" style="color: #990000; font-size:32px">提示</div>
+            <div class="am-modal-bd">
+                <span id="alert-content"></span>
+            </div>
+            <div class="am-modal-footer">
+                <span class="am-modal-btn">确定</span>
+            </div>
+        </div>
+    </div>
 </div>
 

@@ -37,7 +37,7 @@ class First extends MY_Controller {
 //	$this->_format($response);
 //        $this->load->view('test2');
 //        redirect('first/sch_info');
-        redirect('vipcenter');
+        redirect('coach');
     }
 
     public function view($page = '') {
@@ -156,6 +156,7 @@ class First extends MY_Controller {
                 return false;
             } else {
                 $this->session->set_userdata('UID', $row['stu_id']);
+                $this->session->set_userdata('TYPE', $row['stu_type']);
                 $this->session->set_userdata('name', $name);
                 redirect();
 

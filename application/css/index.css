@@ -572,3 +572,11 @@ body{
     color: #999;
 
 }
+#con-coach-right{
+    float:left;
+    width:1000px;
+    min-height: 800px;
+    display: block;
+    margin-left: 14px;
+    background-color: #fff;
+}

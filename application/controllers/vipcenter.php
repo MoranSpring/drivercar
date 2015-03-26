@@ -76,4 +76,28 @@ class VipCenter extends MY_Controller {
         echo json_encode($both);
     }
 
+    public function teach_book() {
+        $book_id=  time();
+        $book_stu_id =$this->session->userdata('UID');
+        $book_coa_id = $this->input->post('book_coa_id');
+        $book_sch_id = $this->input->post('book_sch_id');
+        $json = $this->input->post('json');
+        $bookArray = json_decode($json, true);
+        $DateArray = array();
+        foreach ($bookArray as $row) {
+            $book_id=time().rand(1,100);
+            $newDate = array(
+                'book_id'=>$book_id,
+                'book_stu_id' => $book_stu_id,
+                'book_coa_id' => $book_coa_id,
+                'book_sch_id' => $book_sch_id,
+                'book_date' => $row['date'],
+                'book_cls_num' => $row['cls'],
+            );
+            array_push($DateArray,$newDate);
+        }
+        $result = $this->teachbook_model->insert($DateArray);
+        echo $result;
+    }
+
 }

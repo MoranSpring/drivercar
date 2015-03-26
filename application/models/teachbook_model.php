@@ -17,7 +17,7 @@ class Teachbook_model extends CI_Model{
         $this->load->database();
     }
     public function insert($data) {    //把数据增加到sites表中.
-        $result=$this->db->insert('TeachBook', $data); 
+        $result=$this->db->insert_batch('TeachBook', $data); 
         return $result;
     }
     public function select_simple() {//返回该用户名所有信息
