@@ -64,43 +64,43 @@
                             <tbody>
                                 <tr>
                                     <td value="1" name="">08:00--09:00</td>
-                                    <td class="item" value="" date="date1" num="1"></td>
-                                    <td class="item" value="" date="date2" num="1"></td>
-                                    <td class="item" value="" date="date3" num="1"></td>
-                                    <td class="item" value="" date="date4" num="1"></td>
-                                    <td class="item" value="" date="date5" num="1"></td>
-                                    <td class="item" value="" date="date6" num="1"></td>
-                                    <td class="item" value="" date="date7" num="1"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date1" num="1"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date2" num="1"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date3" num="1"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date4" num="1"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date5" num="1"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date6" num="1"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date7" num="1"></td>
                                 </tr>
                                 <tr>
                                     <td value="1" name="">09:00--2:00</td>
-                                    <td class="item" value="" date="date1" num="2"></td>
-                                    <td class="item" value="" date="date2" num="2"></td>
-                                    <td class="item" value="" date="date3" num="2"></td>
-                                    <td class="item" value="" date="date4" num="2"></td>
-                                    <td class="item" value="" date="date5" num="2"></td>
-                                    <td class="item" value="" date="date6" num="2"></td>
-                                    <td class="item" value="" date="date7" num="2"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date1" num="2"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date2" num="2"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date3" num="2"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date4" num="2"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date5" num="2"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date6" num="2"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date7" num="2"></td>
                                 </tr>
                                 <tr>
                                     <td value="1" name="">10:00--11:00</td>
-                                    <td class="item" value="" date="date1" num="3"></td>
-                                    <td class="item" value="" date="date2" num="3"></td>
-                                    <td class="item" value="" date="date3" num="3"></td>
-                                    <td class="item" value="" date="date4" num="3"></td>
-                                    <td class="item" value="" date="date5" num="3"></td>
-                                    <td class="item" value="" date="date6" num="3"></td>
-                                    <td class="item" value="" date="date7" num="3"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date1" num="3"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date2" num="3"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date3" num="3"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date4" num="3"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date5" num="3"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date6" num="3"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date7" num="3"></td>
                                 </tr>
                                 <tr>
                                     <td value="1" name="">11:00--12:00</td>
-                                    <td class="item" value="" date="date1" num="4"></td>
-                                    <td class="item" value="" date="date2" num="4"></td>
-                                    <td class="item" value="" date="date3" num="4"></td>
-                                    <td class="item" value="" date="date4" num="4"></td>
-                                    <td class="item" value="" date="date5" num="4"></td>
-                                    <td class="item" value="" date="date6" num="4"></td>
-                                    <td class="item" value="" date="date7" num="4"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date1" num="4"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date2" num="4"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date3" num="4"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date4" num="4"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date5" num="4"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date6" num="4"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date7" num="4"></td>
                                 </tr>
                                 <tr style="background:#DDDDDD;">
                                     <td>休息</td><td></td><td></td><td></td><td></td><td></td><td></td>
@@ -108,43 +108,43 @@
                                 </tr>
                                 <tr>
                                     <td value="1" name="">13:00--14:00</td>
-                                    <td class="item" value="" date="date1" num="5"></td>
-                                    <td class="item" value="" date="date2" num="5"></td>
-                                    <td class="item" value="" date="date3" num="5"></td>
-                                    <td class="item" value="" date="date4" num="5"></td>
-                                    <td class="item" value="" date="date5" num="5"></td>
-                                    <td class="item" value="" date="date6" num="5"></td>
-                                    <td class="item" value="" date="date7" num="5"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date1" num="5"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date2" num="5"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date3" num="5"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date4" num="5"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date5" num="5"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date6" num="5"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date7" num="5"></td>
                                 </tr>
                                 <tr>
                                     <td value="1" name="">14:00--15:00</td>
-                                    <td class="item" value="" date="date1" num="6"></td>
-                                    <td class="item" value="" date="date2" num="6"></td>
-                                    <td class="item" value="" date="date3" num="6"></td>
-                                    <td class="item" value="" date="date4" num="6"></td>
-                                    <td class="item" value="" date="date5" num="6"></td>
-                                    <td class="item" value="" date="date6" num="6"></td>
-                                    <td class="item" value="" date="date7" num="6"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date1" num="6"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date2" num="6"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date3" num="6"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date4" num="6"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date5" num="6"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date6" num="6"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date7" num="6"></td>
                                 </tr>
                                 <tr>
                                     <td value="1" name="">15:00--16:00</td>
-                                    <td class="item" value="" date="date1" num="7"></td>
-                                    <td class="item" value="" date="date2" num="7"></td>
-                                    <td class="item" value="" date="date3" num="7"></td>
-                                    <td class="item" value="" date="date4" num="7"></td>
-                                    <td class="item" value="" date="date5" num="7"></td>
-                                    <td class="item" value="" date="date6" num="7"></td>
-                                    <td class="item" value="" date="date7" num="7"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date1" num="7"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date2" num="7"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date3" num="7"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date4" num="7"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date5" num="7"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date6" num="7"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date7" num="7"></td>
                                 </tr>
                                 <tr>
                                     <td value="1" name="">16:00--17:00</td>
-                                    <td class="item" value="" date="date1" num="8"></td>
-                                    <td class="item" value="" date="date2" num="8"></td>
-                                    <td class="item" value="" date="date3" num="8"></td>
-                                    <td class="item" value="" date="date4" num="8"></td>
-                                    <td class="item" value="" date="date5" num="8"></td>
-                                    <td class="item" value="" date="date6" num="8"></td>
-                                    <td class="item" value="" date="date7" num="8"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date1" num="8"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date2" num="8"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date3" num="8"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date4" num="8"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date5" num="8"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date6" num="8"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date7" num="8"></td>
                                 </tr>
                                 <tr style="background:#DDDDDD;">
                                     <td>休息</td><td></td><td></td><td></td><td></td><td></td><td></td>
@@ -152,23 +152,23 @@
                                 </tr>
                                 <tr>
                                     <td value="1" name="">17:00--18:00</td>
-                                    <td class="item" value="" date="date1" num="9"></td>
-                                    <td class="item" value="" date="date2" num="9"></td>
-                                    <td class="item" value="" date="date3" num="9"></td>
-                                    <td class="item" value="" date="date4" num="9"></td>
-                                    <td class="item" value="" date="date5" num="9"></td>
-                                    <td class="item" value="" date="date6" num="9"></td>
-                                    <td class="item" value="" date="date7" num="9"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date1" num="9"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date2" num="9"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date3" num="9"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date4" num="9"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date5" num="9"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date6" num="9"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date7" num="9"></td>
                                 </tr>
                                 <tr>
                                     <td value="1" name="">18:00--19:00</td>
-                                    <td class="item" value="" date="date1" num="10"></td>
-                                    <td class="item" value="" date="date2" num="10"></td>
-                                    <td class="item" value="" date="date3" num="10"></td>
-                                    <td class="item" value="" date="date4" num="10"></td>
-                                    <td class="item" value="" date="date5" num="10"></td>
-                                    <td class="item" value="" date="date6" num="10"></td>
-                                    <td class="item" value="" date="date7" num="10"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date1" num="10"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date2" num="10"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date3" num="10"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date4" num="10"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date5" num="10"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date6" num="10"></td>
+                                    <td class="ml-item ml-coach-active" value="" date="date7" num="10"></td>
                                 </tr>
                             </tbody>
                         </table>

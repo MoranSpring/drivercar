@@ -40,7 +40,7 @@ class Coach extends MY_Controller {
         }
 
         $body['footer'] = $this->load->view('common_views/footer', '', true);
-        $this->load->view('a_views/template', $body);
+        $this->load->view('coach_views/template', $body);
     }
 
 }

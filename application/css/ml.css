@@ -62,10 +62,40 @@ and open the template in the editor.
     cursor: pointer;
 }
 .ml-cls-active:hover{
-    background: #00A000;
+    background: #E6C941;
 }
 .ml-has-selecked{
-    background: #900;
+    background: #C72741 !important;
+    cursor: no-drop !important;
+}
+.ml-has-selecked:after{
+    content:"学员已预约";
+    color:#fff;
+}
+.ml-item{
+    cursor: pointer;
+}
+.ml-choiced{
+    background: #CF6C33 !important;
+}
+.ml-choiced:after{
+    content:"上次已选" !important;
+    color:#fff !important;
+}
+
+.ml-coach-active{
+    background: #5B504A;
+}
+.ml-coach-active:after{
+    content:"可选";
+    color:#3B95D3;
+}
+.ml-coa-cls-choice{
+    background: #3B95D3;
+}
+.ml-coa-cls-choice:after{
+    content:"已选";
+    color:#fff;
 }
 
 
