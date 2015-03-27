@@ -22,9 +22,7 @@ class Admin extends MY_Controller {
      */
     function __construct() {
         parent::__construct();
-//        $this->load->model('accesscontrol_model');
-       
-       
+        $this->load->model('accesscontrol_model');
         $this->load->library('oss/alioss');
         $this->load->model('news_model');
         $this->load->model('school_model');

@@ -14,7 +14,7 @@
                     <form>
                         <div  class="am-u-sm-4 am-u-md-4">
                             <div class="am-g am-margin-top">
-                                <label class="am-u-sm-5 am-u-md-5 am-text-right am-form-label">日历组件</label>
+                                <label class="am-u-sm-5 am-u-md-5 am-text-right am-form-label">上课日期</label>
                                 <div class="am-u-sm-7 am-u-md-7  ">
                                     <input type="text" class="am-form-field" id="select_date" name="news_date" style="width: 200px" placeholder="点击选择日期" data-am-datepicker="{format: 'yyyy-mm-dd'}" readonly/>
                                 </div>
@@ -32,22 +32,22 @@
                                     </label>
                                 </div>
                             </div>
-                        </div>
+                        </div>  
                         <div  class="am-u-sm-4 am-u-md-4 am-text-right">
                             <div class="am-vertical-align" style="height: 100px;">
                                 <div class="am-vertical-align-bottom">
-                                    <button class="am-btn  am-btn-danger ">确定完成</button>
+                                    <label onclick="Statistics()" class="am-btn  am-btn-danger ">确定完成</label>
                                 </div>
                             </div>
                             
                         </div>
-                    </form>
+                  </form>
 
                 </div>
                 <div class="am-g am-margin-top am-padding">
                     <div class="">选择时间</div>
                     <div onselectstart="return false">
-                        <table id="cls_table"class="am-table am-table-bordered ml-table-hover"   style=" font-size:16px;cursor:pointer;user-select:none;">
+                        <table id="cls_table"class="am-table am-table-bordered ml-table-hover"   style="display:none; font-size:16px;cursor:pointer;user-select:none;">
                             <thead>
                                 <tr>          
                                     <th width="16%">时间 \ 日期</th>
@@ -179,3 +179,11 @@
 
         </div>
     </div>
+    <div class="am-modal am-modal-loading am-modal-no-btn" tabindex="-1" id="my-modal-loading">
+  <div class="am-modal-dialog">
+    <div class="am-modal-hd">正在载入...</div>
+    <div class="am-modal-bd">
+      <span class="am-icon-spinner am-icon-spin"></span>
+    </div>
+  </div>
+</div>

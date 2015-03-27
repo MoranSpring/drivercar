@@ -84,18 +84,28 @@ and open the template in the editor.
 }
 
 .ml-coach-active{
-    background: #5B504A;
+    background: #CCC9C0;
 }
-.ml-coach-active:after{
-    content:"可选";
-    color:#3B95D3;
+.ml-coach-active:hover{
+    background: #CCC9C0;
 }
+.ml-coach-active:hover{
+    background: #DEDDD8;
+}
+
 .ml-coa-cls-choice{
-    background: #3B95D3;
+    background: #3B95D3 !important;
 }
 .ml-coa-cls-choice:after{
     content:"已选";
     color:#fff;
+}
+.ml-coa-cls-cancel{
+    background:#B8C785;
+}
+.ml-coa-cls-cancel:after{
+    content:"已取消";
+    color:#900;
 }
 
 

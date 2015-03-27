@@ -36,6 +36,10 @@ function select_date(day, n) {
                 $('#cls_table tr:eq(' + cls + ') td:eq(' + n + ')').removeClass('ml-coach-active');
                 $('#cls_table tr:eq(' + cls + ') td:eq(' + n + ')').addClass('ml-has-selecked');
             }
+            if(n===7){
+                $('#cls_table').css('display', 'table');
+                $('#my-modal-loading').modal('close');
+            }
         }});
 }
 function get3Date() {
@@ -99,13 +103,15 @@ function get3Date() {
 $(".ml-coach-active").live('click', function () {
     if ($(this).attr('value') === '13') {
         $(this).attr('value', '-3');
-        $(this).removeClass('ml-choiced ');
+        $(this).removeClass('ml-choiced');
+        $(this).addClass('ml-coa-cls-cancel');
     } else if ($(this).attr('value') === '8') {
         $(this).attr('value', '-1');
         $(this).removeClass('ml-coa-cls-choice');
     } else if ($(this).attr('value') === '-3') {
         $(this).attr('value', '13');
         $(this).addClass('ml-choiced ');
+        $(this).removeClass('ml-coa-cls-cancel');
     } else {
         $(this).attr('value', '8');
         $(this).addClass('ml-coa-cls-choice');
@@ -113,11 +119,77 @@ $(".ml-coach-active").live('click', function () {
 });
 
 function init() {
-//    $('#cls_table').css('display', 'none');
+    $('#cls_table').css('display', 'none');
     $('.ml-item').removeClass('ml-choiced');
     $('.ml-item').removeClass('ml-has-selecked');
-    $(this).removeClass('ml-coa-cls-choice');
+    $('.ml-item').removeClass('ml-coa-cls-choice');
+    $('.ml-item').removeClass('ml-coa-cls-cancel');
     $('.ml-item').addClass('ml-coach-active');
     $('.ml-item').attr('value', '');
+    
+    $('#my-modal-loading').modal('open');
 //    refresh();
+}
+function summit() {
+
+}
+function toOnload(data) {
+    var json = data;
+    $.ajax({
+        type: "POST",
+        dataType: "text",
+        url: localhostPath + "/index.php/coach/coach_book",
+        async: true,
+        data: {json: json},
+        success: function (data) {
+                alert(data);
+            }
+        });
+}
+function Statistics() {
+    var n = 0;
+    var addArray = new Array();
+    var removeArray = new Array();
+    $('.ml-item').each(function () {
+        if ($(this).attr('value') === '8')
+        {
+            n++;
+            var cls = $(this).attr('num');
+            var dayNum = $(this).attr('date');
+            var day = $('#' + dayNum).html();
+            var selected = new choice(day, cls);
+            addArray.push(selected);
+        }
+        if ($(this).attr('value') === '-3')
+        {
+            n++;
+            var cls = $(this).attr('num');
+            var dayNum = $(this).attr('date');
+            var day = $('#' + dayNum).html();
+            var selected = new choice(day, cls);
+            removeArray.push(selected);
+        }
+       
+        
+    });
+    
+    var allData=new bothData(addArray,removeArray);
+    var json = JSON.stringify(allData);
+    if(addArray.length+removeArray.length===0){
+        alert('您没有选择');
+    }else{
+        alert(json);
+        toOnload(json);
+    }
+}
+//--------------选择类-----------------
+function choice(date, cls)
+{
+    this.date = date;
+    this.cls = cls;
+}
+function bothData(add, remove)
+{
+    this.add = add;
+    this.remove = remove;
 }
