@@ -12,7 +12,7 @@ and open the template in the editor.
         <link rel="stylesheet" type="text/css" href='<?=base_url()?>application/css/index.css'>
         <link rel="shortcut icon" href="<?php echo base_url() . 'application/images/iconfont-suo.png' ?>" type="image/x-icon">
         <script src="<?php echo base_url() . 'application/js/jquery-1.7.1.min.js' ?>" type="text/javascript"></script>
-        <script src="<?php echo base_url() . 'application/js/jquery.cxselect.min.js' ?>" type="text/javascript"></script>
+        <script src="<?php echo base_url() . 'application/js/jquery.cxselect.js' ?>" type="text/javascript"></script>
         <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=RbYDrD0LPcQqzZTo21PFZ6kR"></script>
                         <link rel="stylesheet" href="<?= base_url() ?>application/css/admin/amazeui.min.css"/>
         <link rel="stylesheet" href="<?= base_url() ?>application/css/admin/admin.css">
@@ -76,9 +76,9 @@ and open the template in the editor.
                 <!--[if lt IE 9]>
     <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-    <script src="assets/js/polyfill/rem.min.js"></script>
-    <script src="assets/js/polyfill/respond.min.js"></script>
-    <script src="assets/js/amazeui.legacy.js"></script>
+    <script src="<?= base_url() ?>application/js/admin/polyfill/rem.min.js"></script>
+    <script src="<?= base_url() ?>application/js/admin/polyfill/respond.min.js"></script>
+    <script src="<?= base_url() ?>application/js/admin/amazeui.legacy.js"></script>
     <![endif]-->
 
     <!--[if (gte IE 9)|!(IE)]><!-->

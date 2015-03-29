@@ -1,7 +1,7 @@
 <div id="content" class="clearfix">
     <script src="<?php echo base_url() . 'application/js/ml.js' ?>" type="text/javascript"></script>
     <script src="<?php echo base_url() . 'application/js/admin/amazeui.chosen.min.js' ?>" type="text/javascript"></script>
-    <script src="<?php echo base_url() . 'application/js/jquery.cxselect.min.js' ?>" type="text/javascript"></script>
+    <script src="<?php echo base_url() . 'application/js/jquery.cxselect.js' ?>" type="text/javascript"></script>
     <script src="<?php echo base_url() . 'application/js/vip/study_book.js' ?>" type="text/javascript"></script>
     <link type="text/css" href="<?= base_url() ?>application/css/ml.css" rel="stylesheet">
     <link type="text/css" href="<?= base_url() ?>application/css/admin/amazeui.chosen.css" rel="stylesheet">
@@ -43,9 +43,9 @@
                         <div class="am-u-sm-4 am-u-md-3 am-text-right">请选择培训项目</div>
                         <div class="am-u-sm-8 am-u-md-9 " id="project_list">
 
-                            <select  class="cls_kind" style="width:150px;text-align: center;display:inline;"  data-placeholder="请选择">
+                            <select  class="cls_kind" style="font-size: 1em;width:150px;text-align: center;display:inline;"  data-placeholder="请选择">
                             </select>
-                            <select  class="cls_project" first data-placeholder="请选择" style="width:250px;text-align: center;">
+                            <select  class="cls_project" first data-placeholder="请选择" style="font-size: 1em;width:250px;text-align: center;">
                             </select>
 
 
@@ -59,14 +59,14 @@
                     <div class="am-g am-margin-top">
                         <div class="am-u-sm-4 am-u-md-2 am-text-right">所属驾校</div>
                         <div class="am-u-sm-8 am-u-md-10">
-                            <select class="select_sch" onchange="selectCoach(this.value)" data-placeholder="请选择" style="width:250px;text-align: center;">
+                            <select class="select_sch" onchange="selectCoach(this.value)" data-placeholder="请选择" style="font-size: 1em;width:250px;text-align: center;">
                             </select>
                         </div>
                     </div>
                     <div class="am-g am-margin-top">
                         <div class="am-u-sm-4 am-u-md-2 am-text-right">选择教练</div>
                         <div class="am-u-sm-8 am-u-md-10">
-                            <select class="select_coach" data-placeholder="请选择" style="width:250px;text-align: center;">
+                            <select class="select_coach" data-placeholder="请选择" style="font-size: 1em;width:250px;text-align: center;">
                             </select>
                         </div>
                     </div>
@@ -173,12 +173,12 @@
                             <div class="choose-info">
                                 <p class="title">所选时段概况</p>
                                 <table id='data-table' class="am-table am-table-bordered ml-table">
-                                    <tr>
+                                    <thead>
                                         <td></td>
                                         <td>此时刻最大承载量</td>
                                         <td>当前时段已被预约</td>
                                         <td>剩余可约</td>
-                                    </tr>
+                                    </thead>
                                     <tr>
                                         <td>倒库</td>
                                         <td>15</td>

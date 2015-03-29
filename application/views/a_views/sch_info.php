@@ -22,19 +22,14 @@
                 <li id="one6" onclick="setTab('one', 6, 6)">学车流程</li>
 
             </ul>
-            <div id="main_content">
-                <div id="content1">
-                    <!------------------------------------------------------>
+            <div id="main_content" class="clearfix">
+                <div id="content1" class="clearfix">
+                </div>
+                <div id="content2" style="display:none;" class="clearfix">
                     <!------------------------------------------------------>
                 </div>
-                <div id="content2" style="display:none">
-                    <!------------------------------------------------------>
-                </div>
-                <div id="content3" style="display:none">
+                <div id="content3" style="display:none" class="clearfix">
                     <?php foreach($news as $row) echo $row ?>
-
-
-
                 </div>
                 <div id="content4" style="display:none">content 4</div>
                 <div id="content5" style="display:none">content 5</div>

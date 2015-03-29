@@ -1,4 +1,4 @@
-<footer data-am-widget="footer" class="am-footer am-footer-default" data-am-footer="{  }">
+<div data-am-widget="footer" class="am-footer am-footer-default" data-am-footer="{  }">
     <div class="am-footer-switch">
         <span class="am-footer-ysp" data-rel="mobile" data-am-modal="{target: '#am-switch-mode'}">云适配版</span>
         <span class="am-footer-divider">|</span>
@@ -6,12 +6,12 @@
            href="javascript:">电脑版</a>
     </div>
     <div class="am-footer-miscs ">
-        <p>由
-            <a href="http://www.baidu.com/" title="kyle" target="_blank" class="">Kyle</a>提供技术支持</p>
-        <p>CopyRight©2015 52drivercar.com Inc.</p>
-        <p>京ICP备13033158</p>
+        <span>由
+            <a href="http://www.baidu.com/" title="kyle" target="_blank" class="">Kyle</a>提供技术支持</span>
+        <span>CopyRight©2015 52drivercar.com Inc.</span>
+        <span>京ICP备13033158</span>
     </div>
-</footer>
+</div>
 <div id="am-footer-modal" class="am-modal am-modal-no-btn am-switch-mode-m am-switch-mode-m-default">
     <div class="am-modal-dialog">
         <div class="am-modal-hd am-modal-footer-hd">

@@ -4,7 +4,7 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>驾途网-首页</title>
         <meta charset="UTF-8">
@@ -13,6 +13,7 @@ and open the template in the editor.
         <link rel="stylesheet" type="text/css" href='<?= base_url() ?>application/css/vip/vip.css'>
         <link rel="shortcut icon" href="<?php echo base_url() . 'application/images/iconfont-suo.png' ?>" type="image/x-icon">
         <script src="<?php echo base_url() . 'application/js/jquery-1.7.1.min.js' ?>" type="text/javascript"></script>
+
                 <link rel="stylesheet" href="<?= base_url() ?>application/css/admin/amazeui.min.css"/>
         <link rel="stylesheet" href="<?= base_url() ?>application/css/admin/admin.css">
         <style type="text/css">
@@ -150,13 +151,7 @@ and open the template in the editor.
             $(this).parents(".year").toggleClass("close")
           })
         </script>
-        <!--[if lt IE 9]>
-    <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
-    <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-    <script src="assets/js/polyfill/rem.min.js"></script>
-    <script src="assets/js/polyfill/respond.min.js"></script>
-    <script src="assets/js/amazeui.legacy.js"></script>
-    <![endif]-->
+
 
     <!--[if (gte IE 9)|!(IE)]><!-->
     <script src="<?php echo base_url() . 'application/js/admin/jquery.min.js' ?>" ></script>
