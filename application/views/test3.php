@@ -4,27 +4,24 @@
 
         <link rel="stylesheet" href="<?= base_url() ?>application/css/admin/amazeui.min.css"/>
         <link type="text/css" href="<?= base_url() ?>application/css/ml.css" rel="stylesheet">
+        <link type="text/css" href="<?= base_url() ?>application/css/jqueryui/jquery-ui.min.css" rel="stylesheet">
         <script src="<?php echo base_url() . 'application/js/jquery-1.7.1.min.js' ?>" type="text/javascript"></script>
         <script src="<?= base_url() ?>application/js/admin/amazeui.js"></script>
-        ﻿<!--[if (gte IE 9)|!(IE)]><!-->
-    <script src="<?php echo base_url() . 'application/js/admin/jquery.min.js' ?>" ></script>
-    <script src="<?= base_url() ?>application/js/admin/amazeui.min.js"></script>
-        <!--<![endif]-->
-
-        <!--[if lt IE 9]>
-        <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
-        <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-        <script src="<?= base_url() ?>application/js/admin/polyfill/rem.min.js"></script>
-        <script src="<?= base_url() ?>application/js/admin/polyfill/respond.min.js"></script>
-        <script src="<?= base_url() ?>application/js/admin/amazeui.legacy.min.js"></script>
-        <![endif]-->
+        <script src="<?= base_url() ?>application/js/jqueryui/jquery-ui.min.js"></script>
+        <script src="<?= base_url() ?>application/js/jqueryui/datepicker-zh-cn.js"></script>
         <script src="<?= base_url() ?>application/js/admin/app.js"></script>
     </head>  
     <body>   
-        <p><input type="text" class="am-form-field" placeholder="日历组件" data-am-datepicker readonly/></p>
+        <p>Date: <input type="text" id="datepicker"></p>
 
         <div>hello</div>
-
+        <script>
+            $(function () {
+                $("#datepicker").datepicker({ minDate: 0 ,maxDate: "+1M" });
+                $("#datepicker").datepicker("option", "dateFormat", "yy-mm-dd");
+                $("#datepicker").datepicker("option", $.datepicker.regional[ "zh-TW" ]);
+            });
+        </script>
 
     </body>   
 </html> 

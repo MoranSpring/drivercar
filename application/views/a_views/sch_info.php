@@ -24,16 +24,41 @@
             </ul>
             <div id="main_content" class="clearfix">
                 <div id="content1" class="clearfix">
+                    <?php
+                    foreach ($news1 as $row)
+                        echo $row
+                        ?>
                 </div>
                 <div id="content2" style="display:none;" class="clearfix">
+                    <?php
+                    foreach ($news2 as $row)
+                        echo $row
+                        ?>
                     <!------------------------------------------------------>
                 </div>
                 <div id="content3" style="display:none" class="clearfix">
-                    <?php foreach($news as $row) echo $row ?>
+                    <?php
+                    foreach ($news3 as $row)
+                        echo $row
+                        ?>
                 </div>
-                <div id="content4" style="display:none">content 4</div>
-                <div id="content5" style="display:none">content 5</div>
-                <div id="content6" style="display:none">content 6</div>
+                <div id="content4" style="display:none">
+                    <?php
+                    foreach ($news4 as $row)
+                        echo $row
+                        ?></div>
+                <div id="content5" style="display:none">
+                    <?php
+                    if (isset($news5)){
+                    foreach ($news5 as $row)
+                        echo $row;
+                            }
+                        ?></div>
+                <div id="content6" style="display:none">
+<?php
+foreach ($news6 as $row)
+    echo $row
+    ?></div>
 
             </div>
         </div>

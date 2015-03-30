@@ -49,6 +49,8 @@ body{
 #header{
     width: 100%;
     min-width: 1000px;
+    position: relative;
+    z-index: 1000;
     background-color: #141a3e;
 }
 #header nav{
@@ -87,7 +89,7 @@ body{
     width:100%;
     min-width: 1000px;
     position: relative;
-    z-index: 1000;
+    z-index: 100;
     border-bottom:1px solid #ccc;
     background-color: #fff;
 }
@@ -128,15 +130,16 @@ body{
 }
 .menu-chir{
     position: absolute;
+    width:110px;
     display: none;
     left: 0px;
     background-color: #fff;
-    z-index: 100;
+    z-index: 1000;
 }
 
 
 .user_menu li{
-    background: #141a3e;
+    padding: 2px 0px 2px 0px;
     color: #000;
     border-bottom: 1px solid #ddd;
 }
@@ -145,10 +148,11 @@ body{
 }
 
 .menu-chir li{
-    clear:both;
-    margin-left: -1px;
+    width:110px;
+    text-align: center;
     border-bottom: 1px solid #ccc;
     border-right: 1px solid #ccc;
+    border-left: 1px solid #ccc;
 }
 .chir li a span{
     display: block;
@@ -388,21 +392,11 @@ body{
 
 }
 .user_header{
-    min-width: 100px;
+    min-width: 110px;
+    position: relative;
     text-align: left;
 }
-.user_header li{
-    min-width: 100px;
-    text-align: left;
-}
-.user_header_img{
-    width: 30px;
-    height: 30px;
-    background-repeat:no-repeat;
-    vertical-align: middle;
-    text-align:center;
 
-}
 .headline{
     padding: 20px 0 0 5px;
     letter-spacing: -1.5px;

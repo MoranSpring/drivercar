@@ -60,11 +60,30 @@ class First extends MY_Controller {
     }
 
     public function sch_info() {
-
+        $oneNews = array();
         $news = $this->news_model->select_simple();
         $i = 0;
         foreach ($news as $row) {
-            $oneNews['news'][$i] = $this->load->view('a_views/news_list', $row, true);
+            switch ($row['news_type']) {
+                case 1:
+                    $oneNews['news1'][$i] = $this->load->view('a_views/news_list', $row, true);
+                    break;
+                case 2:
+                    $oneNews['news2'][$i] = $this->load->view('a_views/news_list', $row, true);
+                    break;
+                case 3:
+                    $oneNews['news3'][$i] = $this->load->view('a_views/news_list', $row, true);
+                    break;
+                case 4:
+                    $oneNews['news4'][$i] = $this->load->view('a_views/news_list', $row, true);
+                    break;
+                case 5:
+                    $oneNews['news5'][$i] = $this->load->view('a_views/news_list', $row, true);
+                    break;
+                case 6:
+                    $oneNews['news6'][$i] = $this->load->view('a_views/news_list', $row, true);
+                    break;
+            }
             $i++;
 //             print_r($row);
 //            echo '<br/>';
@@ -210,25 +229,25 @@ class First extends MY_Controller {
             echo $retval;
         }
     }
+
     public function test() {
-        $data1=array(
-            'coach_id'=>'12345678',
-            'coach_name'=>'jald',
-            'coach_workid'=>'jald',
-            'coach_reg_time'=>$this->getTime()
+        $data1 = array(
+            'coach_id' => '12345678',
+            'coach_name' => 'jald',
+            'coach_workid' => 'jald',
+            'coach_reg_time' => $this->getTime()
         );
-        $data2=array(
-            'coach_id'=>'165432',
-            'coach_name'=>'gfdddddd',
-            'coach_workid'=>'jasd',
-            'coach_reg_time'=>$this->getTime()
+        $data2 = array(
+            'coach_id' => '165432',
+            'coach_name' => 'gfdddddd',
+            'coach_workid' => 'jasd',
+            'coach_reg_time' => $this->getTime()
         );
         $arr = array();
         $arr[] = $data1;
         $arr[] = $data2;
         $result = $this->coach_model->insert($arr);
         echo $result;
-        
     }
 
     function _request($url, $posts = null) {

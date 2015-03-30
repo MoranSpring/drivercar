@@ -19,6 +19,7 @@ class News_model extends CI_Model{
         $this->db->select('news_id');
         $this->db->select('news_title');
         $this->db->select('news_date');
+        $this->db->select('news_type');
         $query = $this->db->get('News');
         return $query->result_array();
     }
