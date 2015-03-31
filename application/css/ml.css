@@ -14,6 +14,7 @@ and open the template in the editor.
     color: white;
 
 }
+
 .clear:after {
     content: '';
     display: block;
@@ -53,12 +54,22 @@ and open the template in the editor.
     font-family: "Arial","宋体","Hiragino Sans GB","Simsun,sans-self","FontAwesome";
     text-align: center;
 }
+.ml-table-defult{
+    font-size: 1.6em;
+}
 .item{
     background:url("../images/forbid.png" );
     cursor: no-drop;
 }
 .ml-cls-active{
-    background: #63d029;
+    
+}
+.ml-cls-active-defult{
+    background: #63d029 !important;
+    cursor: pointer;
+}
+.ml-cls-active-selected{
+    background: #B1B3B2 !important;
     cursor: pointer;
 }
 .ml-cls-active:hover{
@@ -84,7 +95,7 @@ and open the template in the editor.
 }
 
 .ml-coach-active{
-    background: #CCC9C0;
+    background: #CCC9C0 !important;
 }
 .ml-coach-active:hover{
     background: #CCC9C0;

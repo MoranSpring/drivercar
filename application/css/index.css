@@ -125,8 +125,7 @@ body{
 .menu-ul li span{
     display: block;
     /* padding: 0 15px 0 15px; */
-    line-height: 50px;
-    height: 50px;
+    line-height: 60px;
 }
 .menu-chir{
     position: absolute;

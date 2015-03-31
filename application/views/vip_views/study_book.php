@@ -22,6 +22,7 @@
         <div id="con-nav">
             <p><a href="void">首页</a> > <a href="void">会员中心</a> > 预约培训</p>
         </div>
+        
         <div id="con-con" class ="real_content "><form class="am-form">
                 <div class="ml_step_ul">
                     <ul class="clear">
@@ -73,14 +74,15 @@
                     <div class="am-g am-margin-top">
                         <div class="am-u-sm-4 am-u-md-2 am-text-right">选择日期</div>
                         <div class="am-u-sm-8 am-u-md-10 ">
-                            <input type="text" class="am-form-field" id="select_date" name="news_date" style="width: 200px" placeholder="点击选择日期" data-am-datepicker="{format: 'yyyy-mm-dd'}" readonly/>
+                            <!--<input type="text" class="am-form-field" id="select_date" name="news_date" style="width: 200px" placeholder="点击选择日期" data-am-datepicker="{format: 'yyyy-mm-dd'}" readonly/>-->
+                        <input type="text" id="datepicker"style="width: 200px"/>
                         </div>
                     </div>
                     <div class="am-g am-margin-top">
                         <div class="am-u-sm-6 am-u-md-6 am-text-center">
                             <div class="">选择时间</div>
                             <div onselectstart="return false">
-                                <table id="cls_table"class="am-table am-table-bordered ml-table-hover"   style="display: none;font-size:12px;cursor:pointer;user-select:none;">
+                                <table id="cls_table"class="am-table am-table-bordered ml-table-hover"   style="font-size: 0.8em;display: none;cursor:pointer;user-select:none;">
                                     <thead>
                                         <tr>          
                                             <th width="25%">时间 \ 日期</th>

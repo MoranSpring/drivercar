@@ -4,6 +4,7 @@ var pos = curWwwPath.indexOf(pathName);
 var localhostPath = curWwwPath.substring(0, pos);
 //初始化
 $(function () {
+   
     $('#bt1').click(function () {
         if (check() === 100 || check() === 200) {
             step2();
@@ -45,6 +46,7 @@ $(function () {
     get3Date();
     $(".select_coach").attr("disabled", "true");
 });
+
 function getSchoolsInfo() {
     $.ajax({
         type: "GET",
@@ -60,38 +62,10 @@ function getSchoolsInfo() {
         }
     });
 }
-function get3Date() {
-    var today = new Date().getTime() - 86400000;
-    var checkout = $('#select_date').datepicker({
-        onRender: function (date) {
-            return date.valueOf() <= today ? 'am-disabled' : '';
-        }
-    }).on('changeDate.datepicker.amui', function (event) {
 
-//------------Init----------------
-        init();
-        var date1 = event.date;
-        var date2 = new Date();
-        var date3 = new Date();
-        var Month1 = date1.getMonth() + 1;
-        var day1 = date1.getFullYear() + "-" + Month1 + "-" + date1.getDate();
-        date2 = new Date(date1.setDate(date1.getDate() + 1));
-        var Month2 = date2.getMonth() + 1;
-        var day2 = date2.getFullYear() + "-" + Month2 + "-" + date2.getDate();
-        date3 = new Date(date1.setDate(date1.getDate() + 1));
-        var Month3 = date3.getMonth() + 1;
-        var day3 = date3.getFullYear() + "-" + Month3 + "-" + date3.getDate();
-        $('#date1').html(day1);
-        $('#date2').html(day2);
-        $('#date3').html(day3);
-        select_date(day1, 1);
-        select_date(day2, 2);
-        select_date(day3, 3);
-        //--------------afterInit--------------
-        $('#cls_table').css('display', 'table');
-        checkout.close();
-    }).data('amui.datepicker');
-}
+    
+
+
 function selectCoach(sch_id) {
     init();
     $('.select_coach').empty();
@@ -130,10 +104,12 @@ function choice(date, cls)
 $(".ml-cls-active").live('click', function () {
     if ($(this).attr('value') !== '8') {
         $(this).attr('value', '8');
-        $(this).css('background', '#aac');
+        $(this).removeClass("ml-cls-active-defult");
+        $(this).addClass("ml-cls-active-selected");
     } else {
         $(this).attr('value', '-1');
-        $(this).css('background', '');
+        $(this).removeClass("ml-cls-active-selected");
+        $(this).addClass("ml-cls-active-defult");
     }
     refresh();
 });
@@ -216,11 +192,43 @@ function get3Date() {
 }
 function init() {
     $('#cls_table').css('display', 'none');
-    $('.item').removeClass('ml-cls-active');
+    $('.item').removeClass('ml-cls-active-defult');
+    $('.item').removeClass('ml-cls-active-selected');
     $('.item').removeClass('ml-has-selecked');
     $('.item').attr('value', '');
     $('.item').css('background', '');
     refresh();
+}
+function get3Date(){
+     $("#datepicker").datepicker({
+        minDate: 0, maxDate: "+1M",
+        onSelect: function (dateText) {
+            init();
+            var date1 = parseISO8601(dateText);
+            var date2 = new Date();
+            var date3 = new Date();
+            var Month1 = date1.getMonth() + 1;
+            var day1 = date1.getFullYear() + "-" + Month1 + "-" + date1.getDate();
+            date2 = new Date(date1.setDate(date1.getDate() + 1));
+            var Month2 = date2.getMonth() + 1;
+            var day2 = date2.getFullYear() + "-" + Month2 + "-" + date2.getDate();
+            date3 = new Date(date1.setDate(date1.getDate() + 1));
+            var Month3 = date3.getMonth() + 1;
+            var day3 = date3.getFullYear() + "-" + Month3 + "-" + date3.getDate();
+            $('#date1').html(day1);
+            $('#date2').html(day2);
+            $('#date3').html(day3);
+            select_date(day1, 1);
+            select_date(day2, 2);
+            select_date(day3, 3);
+            alert(day1);
+            //--------------afterInit--------------
+            $('#cls_table').css('display', 'table');
+        }
+    }
+    );
+    $("#datepicker").datepicker("option", "dateFormat", "yy-mm-dd");
+    $("#datepicker").datepicker("option", $.datepicker.regional[ "zh-TW" ]);
 }
 function select_date(day, n) {
     var thisDay = "coabk_time=" + day;
@@ -239,12 +247,15 @@ function select_date(day, n) {
                 cls = cls > 4 ? cls - (-1) : cls;
                 cls = cls > 9 ? cls - (-1) : cls;
                 $('#cls_table tr:eq(' + cls + ') td:eq(' + n + ')').addClass('ml-cls-active');
+                $('#cls_table tr:eq(' + cls + ') td:eq(' + n + ')').addClass('ml-cls-active-defult');
             }
             for (var i = 0; i < json.teachbook.length; i++) {
                 var cls = json.teachbook[i].book_cls_num;
                 cls = cls > 4 ? cls - (-1) : cls;
                 cls = cls > 9 ? cls - (-1) : cls;
                 $('#cls_table tr:eq(' + cls + ') td:eq(' + n + ')').removeClass('ml-cls-active');
+                $('#cls_table tr:eq(' + cls + ') td:eq(' + n + ')').removeClass('ml-cls-active-selected');
+                $('#cls_table tr:eq(' + cls + ') td:eq(' + n + ')').removeClass('ml-cls-active-defult');
                 $('#cls_table tr:eq(' + cls + ') td:eq(' + n + ')').addClass('ml-has-selecked');
             }
         }});
@@ -271,18 +282,18 @@ function toOnload() {
     var coach_id = $('.select_coach').val();
     var selArray = refresh();
     var json = JSON.stringify(selArray);
-     $.ajax({
+    $.ajax({
         type: "POST",
         dataType: "text",
         url: localhostPath + "/index.php/vipcenter/teach_book",
         async: true,
-        data: {book_coa_id: coach_id, book_sch_id: school_id,json:json},
+        data: {book_coa_id: coach_id, book_sch_id: school_id, json: json},
         success: function (data) {
-            if(data==1)
-            alert("插入成功！");
-        else{
-            alert("插入失败！");
-        }
+            if (data == 1)
+                alert("插入成功！");
+            else {
+                alert("插入失败！");
+            }
         }});
 
 }
@@ -300,7 +311,22 @@ function check() {
 }
 function myAlert(content) {
     $('#alert-content').html(content);
-    var $modal = $('#your-modal');
-    $modal.modal('open');
+//    var $modal = $('#your-modal');
+    alert(content);
+//    $modal.modal('open');
 }
+function parseISO8601(dateStringInRange) {
+   var isoExp = /^\s*(\d{4})-(\d\d)-(\d\d)\s*$/,
+       date = new Date(NaN), month,
+       parts = isoExp.exec(dateStringInRange);
+
+   if(parts) {
+     month = +parts[2];
+     date.setFullYear(parts[1], month - 1, parts[3]);
+     if(month != date.getMonth() + 1) {
+       date.setTime(NaN);
+     }
+   }
+   return date;
+ }
 

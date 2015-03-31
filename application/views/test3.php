@@ -17,7 +17,10 @@
         <div>hello</div>
         <script>
             $(function () {
-                $("#datepicker").datepicker({ minDate: 0 ,maxDate: "+1M" });
+                $( "#datepicker" ).datepicker( {
+                    minDate: 0, maxDate: "+1M",
+                    onSelect:function(dateText){alert(dateText);}} 
+                        );
                 $("#datepicker").datepicker("option", "dateFormat", "yy-mm-dd");
                 $("#datepicker").datepicker("option", $.datepicker.regional[ "zh-TW" ]);
             });
