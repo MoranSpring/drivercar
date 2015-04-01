@@ -49,6 +49,7 @@ class Teachbook_model extends CI_Model{
     public function get_book_info($UID){
         $this->db->select();
         $this->db->where('book_stu_id',$UID);
+        $this->db->order_by("book_date", "desc"); 
         $query = $this->db->get('TeachBook');
         return $query->result_array();
     }
