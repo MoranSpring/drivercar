@@ -1,7 +1,7 @@
 <div class='navgation'>
     <div  id="nav" class="clearfix" >
         <div class="logo-div">
-            <img src="<?php echo base_url() . 'application/images/logo.png' ?>" height="50"/>
+            <img src="<?php echo base_url() . 'application/images/logo4.png' ?>" height="60"/>
         </div>
         <div>
             <ul class='menu-ul'>

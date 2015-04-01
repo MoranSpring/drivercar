@@ -23,8 +23,8 @@ class Coach extends MY_Controller {
 //	$this->_format($response);
 //        $this->load->view('test2');
 //        redirect('first/sch_info');
-         $this->load->view('test3');
-//        $this->view();
+//         $this->load->view('test3');
+        $this->view();
     }
 
     public function view($page = '') {

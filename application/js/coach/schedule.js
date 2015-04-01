@@ -38,21 +38,18 @@ function select_date(day, n) {
             }
             if(n===7){
                 $('#cls_table').css('display', 'table');
-                $('#my-modal-loading').modal('close');
+//                $('#my-modal-loading').modal('close');
             }
         }});
 }
-function get3Date() {
-    var today = new Date().getTime() - 86400000;
-    var checkout = $('#select_date').datepicker({
-        onRender: function (date) {
-            return date.valueOf() <= today ? 'am-disabled' : '';
-        }
-    }).on('changeDate.datepicker.amui', function (event) {
-        init();
-//------------Init----------------
-        var date1 = event.date;
-        var date2 = new Date();
+function get3Date(){
+    alert('tinghao');
+     $("#select_date").datepicker({
+        minDate: 0, maxDate: "+1M",
+        onSelect: function (dateText) {
+            init();
+            var date1 = parseISO8601(dateText);
+             var date2 = new Date();
         var date3 = new Date();
         var date4 = new Date();
         var date5 = new Date();
@@ -95,10 +92,13 @@ function get3Date() {
         select_date(day5, 5);
         select_date(day6, 6);
         select_date(day7, 7);
-//        //--------------afterInit--------------
-//        $('#cls_table').css('display', 'table');
-        checkout.close();
-    }).data('amui.datepicker');
+            //--------------afterInit--------------
+            $('#cls_table').css('display', 'table');
+        }
+    }
+    );
+    $("#datepicker").datepicker("option", "dateFormat", "yy-mm-dd");
+    $("#datepicker").datepicker("option", $.datepicker.regional[ "zh-TW" ]);
 }
 $(".ml-coach-active").live('click', function () {
     if ($(this).attr('value') === '13') {
@@ -127,7 +127,6 @@ function init() {
     $('.ml-item').addClass('ml-coach-active');
     $('.ml-item').attr('value', '');
     
-    $('#my-modal-loading').modal('open');
 //    refresh();
 }
 function summit() {
@@ -193,3 +192,17 @@ function bothData(add, remove)
     this.add = add;
     this.remove = remove;
 }
+function parseISO8601(dateStringInRange) {
+   var isoExp = /^\s*(\d{4})-(\d\d)-(\d\d)\s*$/,
+       date = new Date(NaN), month,
+       parts = isoExp.exec(dateStringInRange);
+
+   if(parts) {
+     month = +parts[2];
+     date.setFullYear(parts[1], month - 1, parts[3]);
+     if(month != date.getMonth() + 1) {
+       date.setTime(NaN);
+     }
+   }
+   return date;
+ }

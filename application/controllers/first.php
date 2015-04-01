@@ -35,10 +35,10 @@ class First extends MY_Controller {
 //	$file_path ="C:\\Users\\KYLE\\Desktop\\logo.png";
 //	$response = $this->alioss->upload_file_by_file($bucket,$object,$file_path);
 //	$this->_format($response);
-        $this->load->view('ad_views/ad');
+//        $this->load->view('ad_views/ad');
 //                $this->load->view('test3');
 
-//        redirect('first/sch_info');
+        redirect('first/sch_info');
 //        redirect('coach');
     }
 

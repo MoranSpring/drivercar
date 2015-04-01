@@ -95,7 +95,7 @@ and open the template in the editor.
 }
 
 .ml-coach-active{
-    background: #CCC9C0 !important;
+    background: #CCC9C0;
 }
 .ml-coach-active:hover{
     background: #CCC9C0;
