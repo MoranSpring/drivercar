@@ -10,6 +10,8 @@ class VipCenter extends MY_Controller {
         $this->load->model('accesscontrol_model');
         $this->load->model('coachbook_model');
         $this->load->model('teachbook_model');
+        $this->load->model('coach_model');
+        $this->load->model('school_model');
     }
 
     public function index() {
@@ -43,7 +45,24 @@ class VipCenter extends MY_Controller {
     }
 
     public function study_progress() {
-        $page = $this->load->view('vip_views/study_progress', '', true);
+        $UID = $this->session->userdata('UID');
+        $result = $this->teachbook_model->get_book_info($UID);
+        $i = 0;
+        foreach ($result as $row) {
+
+            $data['date'] = $row['book_date'];
+            $data['course'] = '科目二';
+            $name = $this->coach_model->select_name($row['book_coa_id']);
+            $data['Name'] = $name[0]['coach_name'];
+            $data['course_num'] = $row['book_cls_num'];
+            $data['imageURL'] = $name[0]['coach_face'];
+            $sch_name = $this->school_model->select_name($row['book_sch_id']);
+            $data['school'] = $sch_name[0]['jp_name'];
+            $content['content'][$i] = $this->load->view('vip_views/content', $data, true);
+            $i++;
+        }
+        $year['year'] = $this->load->view('vip_views/year_list', $content, true);
+        $page = $this->load->view('vip_views/study_progress', $year, true);
         $this->view($page);
     }
 
@@ -77,24 +96,24 @@ class VipCenter extends MY_Controller {
     }
 
     public function teach_book() {
-        $book_id=  time();
-        $book_stu_id =$this->session->userdata('UID');
+        $book_id = time();
+        $book_stu_id = $this->session->userdata('UID');
         $book_coa_id = $this->input->post('book_coa_id');
         $book_sch_id = $this->input->post('book_sch_id');
         $json = $this->input->post('json');
         $bookArray = json_decode($json, true);
         $DateArray = array();
         foreach ($bookArray as $row) {
-            $book_id=time().rand(1,100);
+            $book_id = time() . rand(1, 100);
             $newDate = array(
-                'book_id'=>$book_id,
+                'book_id' => $book_id,
                 'book_stu_id' => $book_stu_id,
                 'book_coa_id' => $book_coa_id,
                 'book_sch_id' => $book_sch_id,
                 'book_date' => $row['date'],
                 'book_cls_num' => $row['cls'],
             );
-            array_push($DateArray,$newDate);
+            array_push($DateArray, $newDate);
         }
         $result = $this->teachbook_model->insert($DateArray);
         echo $result;

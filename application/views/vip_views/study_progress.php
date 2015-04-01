@@ -1,3 +1,34 @@
+<script>
+    $(function () {
+        set_date();
+
+    });
+    function set_date() {
+        $(".date").each(function () {
+            var date = $(this).html();
+            var newdate = parseISO8601(date);
+            var day = newdate.getDate();
+            var month = newdate.getMonth() + 1;
+            $(this).empty();
+            $(this).html(month + "月" + day + "日");
+        });
+
+    }
+    function parseISO8601(dateStringInRange) {
+        var isoExp = /^\s*(\d{4})-(\d\d)-(\d\d)\s*$/,
+                date = new Date(NaN), month,
+                parts = isoExp.exec(dateStringInRange);
+
+        if (parts) {
+            month = +parts[2];
+            date.setFullYear(parts[1], month - 1, parts[3]);
+            if (month != date.getMonth() + 1) {
+                date.setTime(NaN);
+            }
+        }
+        return date;
+    }
+</script>
 <div id="content" class="clearfix">
     <div id="con-left">
         <ul>
@@ -22,165 +53,7 @@
                     <h1 class="title">
                         我的学习进度
                     </h1>
-                    <div class="year">
-                        <h2>
-                            <a href="#">
-                                2014年
-                                <i>
-                                </i>
-                            </a>
-                        </h2>
-                        <div class="list">
-                            <ul>
-                                <li class="cls">
-                                    <p class="date">
-                                        07.07
-                                    </p>
-                                    <p class="intro">
-                                        科目二
-                                    </p>
-                                    <p class="version">
-                                        V1.6
-                                    </p>
-                                    <div class="more">
-                                        <p style="color:#E53333;">
-                                            内容：    倒库
-                                        </p>
-                                        <p style="color:#E53333;">
-                                            状态：    通过！
-                                        </p>
-                                        <ul id="coach" class="clearfix">
-                                            <li style="float:left;color:#E53333">
-                                                教练：
-                                            </li>
-                                            <li style="float:left;">
-                                                <img src="<?= base_url() ?>application/images/schimg.png" width="100"/>
-                                            </li>
-                                            <li style="float:left;">
-                                                <ul>
-                                                    <li>
-                                                        张名犬老师
-                                                    </li>
-                                                    <li>
-                                                        教练等级：5级
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                        <p>
-                                            华科大驾校
-                                        </p>
-                                        <p>
-                                            积分消费：100RMB
-                                        </p>
-                                        <p>
-                                            已学学时: 1课时
-                                        </p>
-                                        <p>
-                                            教学建议: 继续学习倒库
-                                        </p>
-
-                                    </div>
-                                </li>
-
-
-                                <li class="cls highlight">
-                                    <p class="date">
-                                        03.05
-                                    </p>
-                                    <p class="intro">
-                                        <span class="am-badge am-badge-primary am-text-xl" >科目二</span>
-                                    </p>
-                                    <p class="version">
-                                        v1.2 build 521
-                                    </p>
-                                    <div class="more"><br/>
-                                        <table class="am-table am-table-bordered ml-red">
-                                            <tbody>
-                                                <tr>
-                                                    <td>内容 </td>
-                                                    <td>倒库</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>状态</td>
-                                                    <td>已学习</td>
-                                                </tr>
-                                                <tr class="am-active">
-                                                    <td>教练</td>
-                                                    <td><ul id="coach" class="clearfix">
-                                            <li style="float:left;">
-                                                <img class="am-img-thumbnail am-circle" src="<?= base_url() ?>application/images/schimg.png" width="100" height="100"/>
-                                            </li>
-                                            <li style="float:left;">
-                                                <ul>
-                                                    <li>
-                                                        张名犬
-                                                    </li>
-                                                    <li>
-                                                        教练等级：<span class="am-icon-star ml-red"></span><span class="am-icon-star-half-o ml-red"></span><span class="am-icon-star-half-o ml-red"></span>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>地点</td>
-                                                    <td>华科大驾校</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>积分消费</td>
-                                                    <td>100RMB</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>已学学时</td>
-                                                    <td>1课时</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>教学建议</td>
-                                                    <td>继续学习倒库</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </li>
-                                <li class="cls highlight">
-                                    <p class="date">
-                                        02.16
-                                    </p>
-                                    <p class="intro">
-                                        360度全景上线
-                                    </p>
-                                    <p class="version">
-                                        v1.1 build 352
-                                    </p>
-                                    <div class="more">
-                                        <p>
-                                            增加微相册和360度全景事件触发,
-                                        </p>
-                                        <p>
-                                            增加帐号状态自动检测功能
-                                        </p>
-                                        <p>
-                                            增加多关键词触发
-                                        </p>
-                                        <p>
-                                            增加创建营销二维码
-                                        </p>
-                                        <p>
-                                            手机预览界面上增加了二维码预览功能
-                                        </p>
-                                        <p>
-                                            修复摘要为空时不能使用微信预览的问题
-                                        </p>
-                                        <p>
-                                            <br />
-                                        </p>
-                                    </div>
-                                </li>
-
-                            </ul>
-                        </div>
-                    </div>
+                    <?= $year ?>
                     <div class="year">
                         <h2>
                             <a href="#">
