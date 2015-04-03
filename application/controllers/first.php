@@ -38,8 +38,8 @@ class First extends MY_Controller {
 //        $this->load->view('ad_views/ad');
 //                $this->load->view('test3');
 
-        redirect('first/sch_info');
-//        redirect('coach');
+//        redirect('first/sch_info');
+        redirect('vipcenter');
     }
 
     public function view($page = '') {

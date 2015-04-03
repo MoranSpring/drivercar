@@ -16,8 +16,9 @@
     padding: 3px 3px 3px 0;
 }
 #coach ul li{
+    line-height: 30px;
 
-    padding: 7px 10px 7px 10px;
+    padding: auto 10px auto 10px;
 }
 body{min-width:960px}
 ul,li{list-style:none}

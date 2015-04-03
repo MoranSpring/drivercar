@@ -45,13 +45,13 @@ and open the template in the editor.
     width:30%;
 }
 .ml-table>thead>tr>th, .ml-table>tbody>tr>th, .ml-table>tfoot>tr>th, .ml-table>thead>tr>td, .ml-table>tbody>tr>td, .ml-table>tfoot>tr>td{
-    padding:1px;
+    line-height: 1em;
     color:black;
     font-size: 0.8em;
     vertical-align:middle;
     text-overflow:ellipsis;
     overflow: hidden;
-    font-family: "Arial","宋体","Hiragino Sans GB","Simsun,sans-self","FontAwesome";
+    font-family: "Arial","����","Hiragino Sans GB","Simsun,sans-self","FontAwesome";
     text-align: center;
 }
 .ml-table-defult{
@@ -80,7 +80,7 @@ and open the template in the editor.
     cursor: no-drop !important;
 }
 .ml-has-selecked:after{
-    content:"学员已预约";
+    content:"ѧԱ��ԤԼ";
     color:#fff;
 }
 .ml-item{
@@ -90,7 +90,7 @@ and open the template in the editor.
     background: #CF6C33 !important;
 }
 .ml-choiced:after{
-    content:"上次已选" !important;
+    content:"�ϴ���ѡ" !important;
     color:#fff !important;
 }
 
@@ -108,15 +108,35 @@ and open the template in the editor.
     background: #3B95D3 !important;
 }
 .ml-coa-cls-choice:after{
-    content:"已选";
+    content:"��ѡ";
     color:#fff;
 }
 .ml-coa-cls-cancel{
     background:#B8C785;
 }
 .ml-coa-cls-cancel:after{
-    content:"已取消";
+    content:"��ȡ��";
     color:#900;
 }
+
+.unbook{
+    background: #A00;
+    cursor: pointer;
+    color: #FFF !important;
+}
+.unbook:hover{
+    background: #600;
+}
+.teach-comment{
+    background: #CF6C33;
+    cursor: pointer;
+    color: #FFF !important;
+}
+.teach-comment:hover{
+    
+    background: #C46C33;
+ 
+}
+
 
 

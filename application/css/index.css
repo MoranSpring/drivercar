@@ -222,6 +222,22 @@ body{
     background-color: #fff;
     cursor: pointer;
 }
+.tab2{
+    position: relative;
+    z-index:10;
+}
+.tab2 li {
+    list-style: none;
+    /* font-size: 18px; */
+    float :left;
+    width: 210px; 
+    margin-bottom: -1px;
+    color:#000;
+    text-align: center;
+    padding:5px 0px 5px 0px;
+    background-color: #fff;
+    cursor: pointer;
+}
 .selected-li{
     font-weight:bold;
     border:1px solid #999999;

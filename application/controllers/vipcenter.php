@@ -15,7 +15,9 @@ class VipCenter extends MY_Controller {
     }
 
     public function index() {
-        $this->view();
+//        $this->view('management');
+        $this->management();
+//
     }
 
     public function view($page = '') {
@@ -71,6 +73,16 @@ class VipCenter extends MY_Controller {
         $this->view($page);
     }
 
+    public function management() {
+        $page = $this->load->view('vip_views/management', '', true);
+        $this->view($page);
+    }
+
+    public function feedback() {
+        $page = $this->load->view('vip_views/feedback', '', true);
+        $this->view($page);
+    }
+
     public function get_cls() {
         $coabk_time = $this->input->post('coabk_time');
         $coabk_coach_id = $this->input->post('coabk_coach_id');
@@ -117,6 +129,13 @@ class VipCenter extends MY_Controller {
         }
         $result = $this->teachbook_model->insert($DateArray);
         echo $result;
+    }
+
+    public function get_comment() {
+        $page = $this->load->view('vip_views/comment_list', '', true);
+        $page .= $this->load->view('vip_views/comment_list', '', true);
+        $page .= $this->load->view('vip_views/comment_list', '', true);
+        echo $page;
     }
 
 }
