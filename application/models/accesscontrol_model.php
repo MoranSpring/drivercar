@@ -59,4 +59,34 @@ class Accesscontrol_model extends CI_Model{
         return $result;
         
     }
+    public function update_nick_name($id,$data){
+        $this->db->where('stu_id',$id);
+        $result=$this->db->update('AccessControl', $data);
+        return $result;
+    }
+    public function update_self_intro($id,$data){
+        $this->db->where('stu_id',$id);
+        $result=$this->db->update('AccessControl', $data);
+        return $result;
+    }
+    public function update_real_name($id,$data){
+        $this->db->where('stu_id',$id);
+        $result=$this->db->update('AccessControl', $data);
+        return $result;
+    }
+    public function update_card_id($id,$data){
+        $this->db->where('stu_id',$id);
+        $result=$this->db->update('AccessControl', $data);
+        return $result;
+    }
+    public function update_gender_value($id,$data){
+        $this->db->where('stu_id',$id);
+        $result=$this->db->update('AccessControl', $data);
+        return $result;
+    }
+    public function update_age_change($id,$data){
+        $this->db->where('stu_id',$id);
+        $result=$this->db->update('AccessControl', $data);
+        return $result;
+    }
 }

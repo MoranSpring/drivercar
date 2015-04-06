@@ -82,3 +82,59 @@ i{transform:rotate(-90deg);-webkit-transform:rotate(-90deg);-moz-transform:rotat
 .content .main .year h2{padding-right:0;width:200px}.ie6 .content .main
 .year h2 a{cursor:default}.ie6 .content .main .year h2 i{display:none}
 
+<!-- 会员中心--个人信息--content--right    self_info.php      -->
+ 
+            .info_change{width: 700px ;margin: 10px auto;overflow: hidden; }
+            .info_change hr{width: 100%; margin: 5px auto;border: 1px ;background-color: lawngreen;height: 3px !important;}
+            .info_change  .base_info_change, .real_change, .mail_change, .pwd_change, .telnum_change{ width: 85%;margin: 10px auto;overflow: hidden;}
+            .change_info_title p{font-size: 20px;font-weight: bold;display: inline;margin: 10px auto;overflow: hidden;}
+            .info-details, .sex-info,.change_save { width: 90%; margin: 5px auto;}
+            .info-details p input{float: right;display: inline;margin-right: 200px;}
+            .sex-info .sex-radio{display: inline;margin-left: 180px;}
+            .sex-radio span{ margin-right: 20px;}
+            .important-info p{ width: 90%; margin: 5px auto;overflow: hidden;}
+            .click-change{float: right; margin-right: 138px; }
+            .important-info p .yanzhengma{float: right; margin-right: 195px;}
+            .important-info .changetips{text-indent: 2em; color: blueviolet;}
+            .save_cancel span{display: block; float: right;margin-right: 200px;}
+            .save_cancel span input{ margin-right: 20px;}
+
+
+        <!-- 会员中心--预约流程--content--right    self_info.php      -->
+  
+            .real_content{overflow: hidden;}
+            .clear{width: 754px;margin-left: 26px;}
+            .real_con_step{width: 90%;margin: 0px auto;}
+            .step_tips{background-color: white;color: blueviolet;}
+            .step_tips .tips_title{margin: 5px auto;font-size: 20px;font-weight: bold;}
+            .tips_con{color: blueviolet;text-indent: 2em;word-spacing: 1px;}
+            /*-----------------------------------*/
+            .step_2{overflow: hidden;width: 100%;}
+            .choose-train-place{ width: 100%;overflow: hidden;}
+            .current-place{width: 100%;overflow: hidden; padding-left: 20px; }
+            .current-place p{display: inline; line-height: 30px; margin-top: 5px;  margin-bottom: 5px; }
+            .current-place p span label{margin: 5px 30px; color: blueviolet; }
+            .current-place .choose-place{color:black;margin:5px auto;}
+            .choose-place p{ margin-left: 20px; }
+            .choose-trainer p{display: inline; line-height: 30px; margin-top: 5px;  margin-bottom: 5px;}
+            .choose-trainer p span label{ margin: 5px 30px;color: blueviolet;}
+            .choose-time {width: 100%;overflow: hidden;}
+            .choose_date { width: 600px; margin: 5px auto;}
+            .choose_date  select{font-size: 14px; margin: 2px 20px;display: inline;line-height: 30px;}
+            .choose_period{margin: 5px auto;}
+            .choose_period table{ margin: 5px auto; text-align: center;}
+            td {border: 1px solid #C1DAD7;    background: #fff; font-size:11px;padding: 6px 6px 6px 12px; color: #4f6b72;}
+            .choose-info table{ margin: 5px auto; text-align: center; }
+            .choose-info-tips .title{ float: left;}
+            .choose-info-tips p{margin: 0px auto;text-align: center;}
+            .choose-info-tips label{color: blueviolet;margin: 5px auto;}
+
+            /*------------------------------------*/
+/*            .liucheng_det3{
+                width: 80%;
+                margin: 5px auto;
+            }*/
+            .liucheng_det3 .title{text-align: center; color: black; font-size: 18px; margin: 5px auto; }
+            .yuyue_info table{margin: 5px auto;text-align: center;}
+            .yuyue_info table td{width: 200px; }
+            .yuyue_info table td p{ margin: 5px auto; }
