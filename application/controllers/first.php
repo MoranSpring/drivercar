@@ -37,7 +37,6 @@ class First extends MY_Controller {
 //	$this->_format($response);
 //        $this->load->view('ad_views/ad');
 //                $this->load->view('test3');
-
 //        redirect('first/sch_info');
         redirect('vipcenter');
     }
@@ -274,6 +273,32 @@ class First extends MY_Controller {
         $retval = curl_exec($curl);
 
         return $retval;
+    }
+
+    public function sendEmail() {
+        $this->load->library('email');
+        $this->email->from('kyleml@126.com', 'Your Name');
+        $this->email->to('554858916@qq.com');
+
+        $this->email->subject('Email Test');
+        
+        $random=md5(time());
+        $this->session->set_userdata('EMAILID', $random);
+        $url="http://localhost:8888/index.php/first/vadication?id=$random";
+        $this->email->message('Testing the:    '.$url );
+
+        $this->email->send();
+
+        echo $this->email->print_debugger();
+    }
+    function vadication(){
+        $id=$this->input->get("id");
+        $emailid = $this->session->userdata('EMAILID');
+        if($id==$emailid){
+            echo 'success!!!!!!!!!!!';
+        }else{
+            echo 'fail!!!!!!!!!!!';
+        }
     }
 
 }
