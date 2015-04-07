@@ -38,33 +38,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>2015-11-10</td>
-                                    <td>节4节</td>
-                                    <td>华科大驾校 </td>
-                                    <td>张教练</td>
-                                    <td>倒库</td>
-                                    <td>100积分</td>
-                                    <td class="unbook">申请退订</td>
-                                </tr>
-                                <tr>
-                                    <td>2015-11-10</td>
-                                    <td>节4节</td>
-                                    <td>华科大驾校 </td>
-                                    <td>张教练</td>
-                                    <td>科目二</td>
-                                    <td>100积分</td>
-                                    <td class="unbook">申请退订</td>
-                                </tr>
-                                <tr>
-                                    <td>2015-11-10</td>
-                                    <td>节4节</td>
-                                    <td>华科大驾校 </td>
-                                    <td>张教练</td>
-                                    <td>科目二</td>
-                                    <td>100积分</td>
-                                    <td class="unbook">申请退订</td>
-                                </tr>
+                                <?php foreach ($unuse_list as $row)
+                                    echo $row;
+                                ?>
                             </tbody>
                         </table>
                     </div>
@@ -80,37 +56,13 @@
                                     <td>教练</td>
                                     <td>项目 </td>
                                     <td>消费积分</td>
-                                    <td>申请退订</td>
+                                    <td>评价</td>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>2015-11-10</td>
-                                    <td>节4节</td>
-                                    <td>华科大驾校 </td>
-                                    <td>张教练</td>
-                                    <td>倒库</td>
-                                    <td>100积分</td>
-                                    <td class="teach-comment">评价</td>
-                                </tr>
-                                <tr>
-                                    <td>2015-11-10</td>
-                                    <td>节4节</td>
-                                    <td>华科大驾校 </td>
-                                    <td>张教练</td>
-                                    <td>科目二</td>
-                                    <td>100积分</td>
-                                    <td class="teach-comment">评价</td>
-                                </tr>
-                                <tr>
-                                    <td>2015-11-10</td>
-                                    <td>节4节</td>
-                                    <td>华科大驾校 </td>
-                                    <td>张教练</td>
-                                    <td>科目二</td>
-                                    <td>100积分</td>
-                                    <td class="teach-comment">评价</td>
-                                </tr>
+                                <?php foreach ($list as $row)
+                                    echo $row;
+                                ?>
                             </tbody>
                         </table>
                     </div>
@@ -122,3 +74,8 @@
 
             </div>
         </div>
+        <script>
+            function to_comment(title) {
+                window.location.href="<?= base_url() . 'index.php/vipcenter/tocomment?id=' ?>"+title;
+            }
+        </script>

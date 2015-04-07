@@ -11,15 +11,18 @@
  *
  * @author Kyle
  */
-class Teachbook_model extends CI_Model{
+class Teachbook_model extends CI_Model {
+
     function __construct() {
         parent::__construct();
         $this->load->database();
     }
+
     public function insert($data) {    //把数据增加到sites表中.
-        $result=$this->db->insert_batch('TeachBook', $data); 
+        $result = $this->db->insert_batch('TeachBook', $data);
         return $result;
     }
+
     public function select_simple() {//返回该用户名所有信息
         $this->db->select('news_id');
         $this->db->select('news_title');
@@ -27,30 +30,86 @@ class Teachbook_model extends CI_Model{
         $query = $this->db->get('TeachBook');
         return $query->result_array();
     }
+
     public function select_detail($id) {//返回该用户名所有信息
         $this->db->select();
-        $this->db->where('news_id',$id);
+        $this->db->where('book_stu_id', $id);
         $query = $this->db->get('TeachBook');
         return $query->result_array();
     }
+
+    public function select_history_detail($id, $time, $cls) {//返回该用户名所有信息
+        $this->db->select();
+        $this->db->where('book_stu_id', $id);
+        $this->db->where('book_date <', $time);
+        $this->db->order_by("book_date", "desc");
+        $this->db->order_by("book_cls_num", "desc");
+        $query1 = $this->db->get('TeachBook');
+
+        $this->db->select();
+        $this->db->where('book_stu_id', $id);
+        $this->db->where('book_date', $time);
+        $this->db->where('book_cls_num <', $cls);
+        $this->db->order_by("book_date", "desc");
+        $this->db->order_by("book_cls_num", "desc");
+        $query2 = $this->db->get('TeachBook');
+        $query = array_merge($query2->result_array(), $query1->result_array());
+        return $query;
+    }
+
+    public function select_further_detail($id, $time, $cls) {//返回该用户名所有信息
+        $this->db->select();
+        $this->db->where('book_stu_id', $id);
+        $this->db->where('book_date >', $time);
+        $this->db->order_by("book_date", "asc");
+        $this->db->order_by("book_cls_num", "asc");
+        $query1 = $this->db->get('TeachBook');
+
+        $this->db->select();
+        $this->db->where('book_stu_id', $id);
+        $this->db->where('book_date', $time);
+        $this->db->where('book_cls_num >', $cls);
+        $this->db->order_by("book_date", "asc");
+        $this->db->order_by("book_cls_num", "asc");
+        $query2 = $this->db->get('TeachBook');
+        $query = array_merge($query2->result_array(), $query1->result_array());
+        return $query;
+    }
+
     public function select_school() {//返回该用户名所有信息
         $this->db->select('jp_id');
         $this->db->select('jp_name');
         $query = $this->db->get('TeachBook');
         return $query->result_array();
     }
-     public function select_info_coa($data) {//返回该用户名所有信息
+
+    public function select_coa_id($id) {//返回该用户名所有信息
+        $this->db->select('book_coa_id');
+        $this->db->where('book_id', $id);
+        $query = $this->db->get('TeachBook');
+        return $query->result_array();
+    }
+
+    public function select_info_coa($data) {//返回该用户名所有信息
         $this->db->select('book_cls_num');
-        $this->db->where('book_date',$data['book_date']);
-        $this->db->where('book_coa_id',$data['book_coa_id']);
+        $this->db->where('book_date', $data['book_date']);
+        $this->db->where('book_coa_id', $data['book_coa_id']);
         $query = $this->db->get('TeachBook');
         return $query->result_array();
     }
-    public function get_book_info($UID){
+
+    public function get_book_info($UID) {
         $this->db->select();
-        $this->db->where('book_stu_id',$UID);
-        $this->db->order_by("book_date", "desc"); 
+        $this->db->where('book_stu_id', $UID);
+        $this->db->order_by("book_date", "desc");
         $query = $this->db->get('TeachBook');
         return $query->result_array();
     }
+    public function select_from_id($id){
+         $this->db->select();
+        $this->db->where('book_id', $id);
+        $query = $this->db->get('TeachBook');
+        return $query->result_array();
+    }
+
 }
