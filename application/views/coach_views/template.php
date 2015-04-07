@@ -28,6 +28,16 @@ and open the template in the editor.
         <?= $navigation ?>
         <?= $content ?>
         <?= $footer ?>
+        <script>
+            function setTab(name, cursel, n) {
+                for (i = 1; i <= n; i++) {
+                    var thismenu = document.getElementById(name + i);
+                    var con = document.getElementById("content" + i);
+                    thismenu.className = i == cursel ? "selected-li" : "";
+                    con.style.display = i == cursel ? "block" : "none";
+                }
+            }
+        </script>
 
         <script type="text/javascript">
 

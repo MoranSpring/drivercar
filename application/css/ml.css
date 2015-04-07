@@ -135,7 +135,14 @@ and open the template in the editor.
 .teach-comment:hover{
     
     background: #C46C33;
- 
+}
+.unbook_confirm{
+    background: #63d029;
+    cursor: pointer;
+    color: #FFF !important;
+}
+.unbook_confirm:hover{
+    background: #00A000;
 }
 
 

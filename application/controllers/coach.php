@@ -45,6 +45,10 @@ class Coach extends MY_Controller {
         $body['footer'] = $this->load->view('common_views/footer', '', true);
         $this->load->view('coach_views/template', $body);
     }
+    public function book(){
+        $page = $this->load->view('coach_views/book_info', '', true);
+        $this->view($page);
+    }
 
     public function coach_book() {
         $coabk_id = time();

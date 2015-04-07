@@ -38,9 +38,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($unuse_list as $row)
-                                    echo $row;
-                                ?>
+                                <tr>
+                                    <td>$book_date</td>
+                                    <td>第=$book_cls_num?节</td>
+                                    <td>?=$sch_name? </td>
+                                    <td>?=$coa_name?</td>
+                                    <td>倒库</td>
+                                    <td>100积分</td>
+                                    <td class="unbook" book_id="?=$book_id?">申请退订</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -60,7 +66,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($list as $row)
+                                <?php
+                                foreach ($list as $row)
                                     echo $row;
                                 ?>
                             </tbody>
@@ -76,6 +83,6 @@
         </div>
         <script>
             function to_comment(title) {
-                window.location.href="<?= base_url() . 'index.php/vipcenter/tocomment?id=' ?>"+title;
+                window.location.href = "<?= base_url() . 'index.php/vipcenter/tocomment?id=' ?>" + title;
             }
         </script>

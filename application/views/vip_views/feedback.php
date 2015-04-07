@@ -43,7 +43,7 @@
                         content = data;
                         thisTag.empty();
                         thisTag.html(content);
-                        thisTag.animate({height: "show"}, 500, 'easeOutQuart');
+                        thisTag.animate({height: "show"}, 200, 'easeOutQuart');
 
 
                     }
@@ -51,6 +51,6 @@
 
             }
             , function () {
-                $(this).closest("div").next().animate({height: "hide"}, 500, 'easeOutQuart');
+                $(this).closest("div").next().animate({height: "hide"}, 200, 'easeOutQuart');
             });
         </script>

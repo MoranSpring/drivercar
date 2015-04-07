@@ -55,5 +55,4 @@
     </ul>
 </div>
 <div class="comment" style="width:70%; display: none">
-    asf
 </div>
