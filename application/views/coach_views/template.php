@@ -6,7 +6,7 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>驾途网-首页</title>
+        <title>我爱开车网-教练员首页</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href='<?= base_url() ?>application/css/index.css'>

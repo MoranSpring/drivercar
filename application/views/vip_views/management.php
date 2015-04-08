@@ -38,15 +38,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>$book_date</td>
-                                    <td>第=$book_cls_num?节</td>
-                                    <td>?=$sch_name? </td>
-                                    <td>?=$coa_name?</td>
-                                    <td>倒库</td>
-                                    <td>100积分</td>
-                                    <td class="unbook" book_id="?=$book_id?">申请退订</td>
-                                </tr>
+                                <?php
+                                if(isset($unuse_list)){
+                                foreach ($unuse_list as $row)
+                                    echo $row;}else{
+                                        echo("<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
+                                    }
+                                ?>
                             </tbody>
                         </table>
                     </div>
@@ -67,8 +65,11 @@
                             </thead>
                             <tbody>
                                 <?php
+                                if(isset($list)){
                                 foreach ($list as $row)
-                                    echo $row;
+                                    echo $row;}else{
+                                        echo("<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
+                                    }
                                 ?>
                             </tbody>
                         </table>
@@ -85,4 +86,26 @@
             function to_comment(title) {
                 window.location.href = "<?= base_url() . 'index.php/vipcenter/tocomment?id=' ?>" + title;
             }
+            
+            $('.unbook').click(function () {
+                var book_id = $(this).attr('book_id');
+                var thisData = $(this);
+                $.ajax({
+                    type: "POST",
+                    dataType: "text",
+                    url: "<?= base_url() ?>index.php/vipcenter/unbook",
+                    async: true,
+                    data: {book_id: book_id},
+                    success: function (data) {
+                        if (data == 1) {
+                            thisData.addClass('unbook_end');
+                            thisData.html('已申请');
+                            thisData.removeClass('unbook');
+                        }
+                        else {
+                            alert("申请失败！");
+                        }
+                    }
+                });
+            });
         </script>

@@ -12,6 +12,8 @@ class Coach extends MY_Controller {
         $this->load->library('oss/alioss');
         $this->load->model('coach_model');
         $this->load->model('coachbook_model');
+        $this->load->model('teachbook_model');
+        $this->load->model('school_model');
     }
 
     public function index() {
@@ -46,10 +48,47 @@ class Coach extends MY_Controller {
         $this->load->view('coach_views/template', $body);
     }
     public function book(){
-        $page = $this->load->view('coach_views/book_info', '', true);
+        $coachID="1427162541";
+        $time = $this->getDate();
+        $cls = $this->getCurrentCls();
+        $result_fur = $this->teachbook_model->select_further_detail_coa($coachID, $time, $cls);
+        $comment_list = array();
+        $j = 0;
+        foreach ($result_fur as $row) {
+            $list['book_id'] = $row['book_id'];
+            $list['book_date'] = $row['book_date'];
+            $list['book_cls_num'] = $row['book_cls_num'];
+            
+            $coachName = $this->accesscontrol_model->selectUserName($row['book_stu_id']);
+            $list['stu_name'] = $coachName[0]['stu_true_name'];
+            
+            $schName = $this->school_model->select_name($row['book_sch_id']);
+            $list['sch_name'] = $schName[0]['jp_name'];
+            $comment_list['book_list'][$j] = $this->load->view('coach_views/book_list', $list, true);
+            $j++;
+        }
+        
+        $result_un = $this->teachbook_model->select_further_unbook_coa($coachID, $time, $cls);
+         $i = 0;
+        foreach ($result_un as $row) {
+            $list['book_id'] = $row['book_id'];
+            $list['book_date'] = $row['book_date'];
+            $list['book_cls_num'] = $row['book_cls_num'];
+            
+            $coachName = $this->accesscontrol_model->selectUserName($row['book_stu_id']);
+            $list['stu_name'] = $coachName[0]['stu_true_name'];
+            
+            $schName = $this->school_model->select_name($row['book_sch_id']);
+            $list['sch_name'] = $schName[0]['jp_name'];
+            $comment_list['unbook_list'][$i] = $this->load->view('coach_views/unbook_list', $list, true);
+            $i++;
+        }
+        
+        $page = $this->load->view('coach_views/book_info', $comment_list, true);
         $this->view($page);
     }
 
+    
     public function coach_book() {
         $coabk_id = time();
         ////        $book_stu_id =$this->session->userdata('UID');
@@ -93,6 +132,11 @@ class Coach extends MY_Controller {
         } else {
 //            echo "Insert Fail!";
         }
+    }
+    public function unbook(){
+        $book_id=$this->input->post("book_id");
+        $result=$this->teachbook_model->delete($book_id);
+        echo $result;
     }
 
 }

@@ -238,5 +238,13 @@ class VipCenter extends MY_Controller {
             echo 'fail';
         }
     }
+    public function unbook(){
+        $id = $this->input->post("book_id");
+        $data=array(
+            'book_state'=>'7'
+        );
+        $return = $this->teachbook_model->update_state($id,$data);
+        echo $return;
+    }
 
 }

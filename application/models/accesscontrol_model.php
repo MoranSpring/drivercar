@@ -35,6 +35,12 @@ class Accesscontrol_model extends CI_Model{
         $query = $this->db->get('AccessControl');
         return $query->result_array();
     }
+    public function selectUserName($data) {//返回该用户名所有头像
+        $this->db->select('stu_true_name');
+        $this->db->where('stu_id',$data);
+        $query = $this->db->get('AccessControl');
+        return $query->result_array();
+    }
     
     public function loginSelect($name){//返回该用户名对应的密码
          $this->db->select();

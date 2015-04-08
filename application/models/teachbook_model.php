@@ -76,6 +76,46 @@ class Teachbook_model extends CI_Model {
         return $query;
     }
 
+    public function select_further_detail_coa($id, $time, $cls) {//返回该用户名所有信息
+        $this->db->select();
+        $this->db->where('book_coa_id', $id);
+        $this->db->where('book_date >', $time);
+        $this->db->order_by("book_date", "asc");
+        $this->db->order_by("book_cls_num", "asc");
+        $query1 = $this->db->get('TeachBook');
+
+        $this->db->select();
+        $this->db->where('book_coa_id', $id);
+        $this->db->where('book_date', $time);
+        $this->db->where('book_cls_num >', $cls);
+        $this->db->order_by("book_date", "asc");
+        $this->db->order_by("book_cls_num", "asc");
+        $query2 = $this->db->get('TeachBook');
+        $query = array_merge($query2->result_array(), $query1->result_array());
+        return $query;
+    }
+
+    public function select_further_unbook_coa($id, $time, $cls) {//返回该用户名所有信息
+        $this->db->select();
+        $this->db->where('book_coa_id', $id);
+        $this->db->where('book_date >', $time);
+        $this->db->where('book_state', '7');
+        $this->db->order_by("book_date", "asc");
+        $this->db->order_by("book_cls_num", "asc");
+        $query1 = $this->db->get('TeachBook');
+
+        $this->db->select();
+        $this->db->where('book_coa_id', $id);
+        $this->db->where('book_date', $time);
+        $this->db->where('book_cls_num >', $cls);
+        $this->db->where('book_state', '7');
+        $this->db->order_by("book_date", "asc");
+        $this->db->order_by("book_cls_num", "asc");
+        $query2 = $this->db->get('TeachBook');
+        $query = array_merge($query2->result_array(), $query1->result_array());
+        return $query;
+    }
+
     public function select_school() {//返回该用户名所有信息
         $this->db->select('jp_id');
         $this->db->select('jp_name');
@@ -105,11 +145,22 @@ class Teachbook_model extends CI_Model {
         $query = $this->db->get('TeachBook');
         return $query->result_array();
     }
-    public function select_from_id($id){
-         $this->db->select();
+
+    public function select_from_id($id) {
+        $this->db->select();
         $this->db->where('book_id', $id);
         $query = $this->db->get('TeachBook');
         return $query->result_array();
+    }
+    public function delete($data) {
+        $this->db->where('book_id',$data);
+        $query = $this->db->delete('TeachBook');
+        return $query;
+    }
+        public function update_state($id,$data){
+        $this->db->where('book_id',$id);
+        $result=$this->db->update('TeachBook', $data);
+        return $result;
     }
 
 }

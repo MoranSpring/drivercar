@@ -9,7 +9,7 @@
         <span>由
             <a href="http://www.baidu.com/" title="kyle" target="_blank" class="">Kyle</a>提供技术支持</span>
         <span>CopyRight©2015 52drivercar.com Inc.</span>
-        <span>京ICP备13033158</span>
+        <span>鄂ICP备15005490号</span>
     </div>
 </div>
 <div id="am-footer-modal" class="am-modal am-modal-no-btn am-switch-mode-m am-switch-mode-m-default">
