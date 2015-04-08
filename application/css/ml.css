@@ -51,7 +51,7 @@ and open the template in the editor.
     vertical-align:middle;
     text-overflow:ellipsis;
     overflow: hidden;
-    font-family: "Arial","����","Hiragino Sans GB","Simsun,sans-self","FontAwesome";
+    font-family: "Arial","宋体","Hiragino Sans GB","Simsun,sans-self","FontAwesome";
     text-align: center;
 }
 .ml-table-defult{
@@ -80,7 +80,7 @@ and open the template in the editor.
     cursor: no-drop !important;
 }
 .ml-has-selecked:after{
-    content:"ѧԱ��ԤԼ";
+    content:"学员已预约";
     color:#fff;
 }
 .ml-item{
@@ -90,7 +90,7 @@ and open the template in the editor.
     background: #CF6C33 !important;
 }
 .ml-choiced:after{
-    content:"�ϴ���ѡ" !important;
+    content:"上次已选" !important;
     color:#fff !important;
 }
 
@@ -108,14 +108,14 @@ and open the template in the editor.
     background: #3B95D3 !important;
 }
 .ml-coa-cls-choice:after{
-    content:"��ѡ";
+    content:"已选";
     color:#fff;
 }
 .ml-coa-cls-cancel{
     background:#B8C785;
 }
 .ml-coa-cls-cancel:after{
-    content:"��ȡ��";
+    content:"已取消";
     color:#900;
 }
 
