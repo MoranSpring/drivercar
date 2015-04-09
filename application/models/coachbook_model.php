@@ -23,12 +23,21 @@ class Coachbook_model extends CI_Model {
         return $result;
     }
 
-    public function select($data) {
+    public function select($data,$time,$cls) {
         $this->db->select('coabk_cls_num');
+        $this->db->where('coabk_time >', $time);
         $this->db->where('coabk_coach_id', $data['coabk_coach_id']);
         $this->db->where('coabk_time', $data['coabk_time']);
-        $query = $this->db->get('CoachBook');
-        return $query->result_array();
+        $query1 = $this->db->get('CoachBook');
+        
+        $this->db->select('coabk_cls_num');
+        $this->db->where('coabk_time', $time);
+        $this->db->where('coabk_cls_num >', $cls+2);
+        $this->db->where('coabk_coach_id', $data['coabk_coach_id']);
+        $this->db->where('coabk_time', $data['coabk_time']);
+        $query2 = $this->db->get('CoachBook');
+         $query = array_merge($query2->result_array(), $query1->result_array());
+        return $query;
     }
 
     public function select_detail($id) {//返回该用户名所有信息

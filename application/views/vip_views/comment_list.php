@@ -1,6 +1,6 @@
 <article class="am-comment">
     <a href="#link-to-user-home">
-        <img src="http://wwc.taobaocdn.com/avatar/getAvatar.do?userId=1639905989&width=160&height=160&type=sns" alt="" class="am-comment-avatar" width="48" height="48"/>
+        <img src="http://image.52drivercar.com/1426679132.jpg@!nail" alt="" class="am-comment-avatar" width="48" height="48"/>
     </a>
 
     <div class="am-comment-main">

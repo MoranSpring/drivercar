@@ -46,7 +46,7 @@
 
                             <select  class="cls_kind" style="font-size: 1em;width:150px;text-align: center;display:inline;"  data-placeholder="请选择">
                             </select>
-                            <select  class="cls_project" first data-placeholder="请选择" style="font-size: 1em;width:250px;text-align: center;">
+                            <select  class="cls_project" first data-placeholder="请选择" projectName="" style="font-size: 1em;width:250px;text-align: center;">
                             </select>
 
 
@@ -253,7 +253,6 @@
 
                 </div>
             </form>
-            <button  class=" am-btn am-btn-primary " onclick="submit()" style="width:150px">summit</button>
 
         </div>
 

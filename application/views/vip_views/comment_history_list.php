@@ -16,7 +16,7 @@
         <li  class="clearfix">
             <ul id="coach" class="clearfix" style="float: left; width:40%">
                 <li style="float:left;">
-                    <img class="am-img-thumbnail am-circle" src="http://wwc.taobaocdn.com/avatar/getAvatar.do?userId=1639905989&width=160&height=160&type=sns" width="70" height="70"/>
+                    <img class="am-img-thumbnail am-circle" src="http://image.52drivercar.com/1426679132.jpg@!nail" width="70" height="70"/>
                 </li>
                 <li style="float:left;">
                     <ul>

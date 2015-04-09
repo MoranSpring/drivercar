@@ -39,11 +39,12 @@
                             </thead>
                             <tbody>
                                 <?php
-                                if(isset($unuse_list)){
-                                foreach ($unuse_list as $row)
-                                    echo $row;}else{
-                                        echo("<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
-                                    }
+                                if (isset($unuse_list)) {
+                                    foreach ($unuse_list as $row)
+                                        echo $row;
+                                } else {
+                                    echo("<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
+                                }
                                 ?>
                             </tbody>
                         </table>
@@ -65,47 +66,49 @@
                             </thead>
                             <tbody>
                                 <?php
-                                if(isset($list)){
-                                foreach ($list as $row)
-                                    echo $row;}else{
-                                        echo("<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
-                                    }
+                                if (isset($list)) {
+                                    foreach ($list as $row)
+                                        echo $row;
+                                } else {
+                                    echo("<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
+                                }
                                 ?>
                             </tbody>
                         </table>
                     </div>
                 </div>
                 <div id="content3" class="clearfix">
-
                 </div>
 
 
             </div>
         </div>
         <script>
-            function to_comment(title) {
-                window.location.href = "<?= base_url() . 'index.php/vipcenter/tocomment?id=' ?>" + title;
-            }
-            
-            $('.unbook').click(function () {
-                var book_id = $(this).attr('book_id');
-                var thisData = $(this);
-                $.ajax({
-                    type: "POST",
-                    dataType: "text",
-                    url: "<?= base_url() ?>index.php/vipcenter/unbook",
-                    async: true,
-                    data: {book_id: book_id},
-                    success: function (data) {
-                        if (data == 1) {
-                            thisData.addClass('unbook_end');
-                            thisData.html('已申请');
-                            thisData.removeClass('unbook');
+            $('.teach-comment').live("click",function () {
+                window.location.href = "<?= base_url() . 'index.php/vipcenter/tocomment?id=' ?>" + $(this).attr('value');
+            });
+            $('.unbook').live("click",function () {
+                if (confirm("你确定要申请退订吗?"))
+                {
+                    var book_id = $(this).attr('book_id');
+                    var thisData = $(this);
+                    $.ajax({
+                        type: "POST",
+                        dataType: "text",
+                        url: "<?= base_url() ?>index.php/vipcenter/unbook",
+                        async: true,
+                        data: {book_id: book_id},
+                        success: function (data) {
+                            if (data == 1) {
+                                thisData.addClass('unbook_end');
+                                thisData.html('已申请');
+                                thisData.removeClass('unbook');
+                            }
+                            else {
+                                alert("申请失败！");
+                            }
                         }
-                        else {
-                            alert("申请失败！");
-                        }
-                    }
-                });
+                    });
+                }
             });
         </script>

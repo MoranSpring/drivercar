@@ -14,6 +14,7 @@ class Coach extends MY_Controller {
         $this->load->model('coachbook_model');
         $this->load->model('teachbook_model');
         $this->load->model('school_model');
+        $this->load->model('course_model');
     }
 
     public function index() {
@@ -39,13 +40,21 @@ class Coach extends MY_Controller {
         }
         $body['navigation'] = $this->load->view('coach_views/navigation', '', true);
         if ($page == '') {
-            $body['content'] = $this->load->view('coach_views/schedule', '', true);
+            $body['content'] = $this->load->view('coach_views/self_info', '', true);
         } else {
             $body['content'] = $page;
         }
 
         $body['footer'] = $this->load->view('common_views/footer', '', true);
         $this->load->view('coach_views/template', $body);
+    }
+    public function self_info(){
+        $page = $this->load->view('coach_views/self_info', "", true);
+        $this->view($page);
+    }
+      public function schedule(){
+        $page = $this->load->view('coach_views/schedule', "", true);
+        $this->view($page);
     }
     public function book(){
         $coachID="1427162541";
@@ -58,6 +67,11 @@ class Coach extends MY_Controller {
             $list['book_id'] = $row['book_id'];
             $list['book_date'] = $row['book_date'];
             $list['book_cls_num'] = $row['book_cls_num'];
+            $list['book_cls_name'] ="";
+            $courseName1 = $this->course_model->select($row['book_cls_id']);
+            foreach ($courseName1 as $row1) {
+                $list['book_cls_name'] = $row1['cls_name'];
+            }
             
             $coachName = $this->accesscontrol_model->selectUserName($row['book_stu_id']);
             $list['stu_name'] = $coachName[0]['stu_true_name'];
@@ -74,6 +88,11 @@ class Coach extends MY_Controller {
             $list['book_id'] = $row['book_id'];
             $list['book_date'] = $row['book_date'];
             $list['book_cls_num'] = $row['book_cls_num'];
+            $list['book_cls_name'] ="";
+            $courseName1 = $this->course_model->select($row['book_cls_id']);
+            foreach ($courseName1 as $row2) {
+                $list['book_cls_name'] = $row2['cls_name'];
+            }
             
             $coachName = $this->accesscontrol_model->selectUserName($row['book_stu_id']);
             $list['stu_name'] = $coachName[0]['stu_true_name'];
@@ -100,7 +119,7 @@ class Coach extends MY_Controller {
         $bookArray = json_decode($json, true);
 
         $addArray = array();
-        $result = 0;
+        $result1= 0;$result2= 0;
         foreach ($bookArray['add'] as $row) {
             $coabk_id += rand(1, 100);
             $newDate = array(
@@ -113,7 +132,9 @@ class Coach extends MY_Controller {
             array_push($addArray, $newDate);
         }
         if (count($addArray) != 0) {
-            $result+=$this->coachbook_model->insert($addArray);
+            $result1+=$this->coachbook_model->insert($addArray);
+        }else{
+            $result1=1;
         }
         $i = 0;
         foreach ($bookArray['remove'] as $row2) {
@@ -124,13 +145,12 @@ class Coach extends MY_Controller {
             );
             $i++;
 //            echo $row['date'];
-            $result+=$this->coachbook_model->delete($newDate);
+            $result2+=$this->coachbook_model->delete($newDate);
         }
-        echo $result;
-        if ($result == $i + 1) {
-//            echo "Insert Seccuss!";
+        if ($result1 == 1&&$result2==$i) {
+            echo 1;
         } else {
-//            echo "Insert Fail!";
+            echo 0;
         }
     }
     public function unbook(){

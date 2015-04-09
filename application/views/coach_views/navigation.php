@@ -6,24 +6,26 @@
         <div>
             <ul class='menu-ul'>
                 <li>
-                    <a><span>
-                            个人信息 
-                        </span></a>
+                    <a href="<?= base_url() . 'index.php/coach/self_info' ?>">
+                    <span>
+                        个人信息
+                    </span></a>
                 </li>
                 <li>
-                    <a href="<?= base_url() . 'index.php/first/sch_info' ?>"><span>
+                    <a href="<?= base_url() . 'index.php/coach/sch_info' ?>"><span>
                             教学情况
                         </span></a>
                 </li>
                 <li>
-                    <a href="<?= base_url() . 'index.php/vipcenter' ?>"><span>
+                    <a href="<?= base_url() . 'index.php/coach/schedule' ?>"><span>
                         个人日程表
                     </span></a>
                 </li>
                 <li>
+                    <a href="<?= base_url() . 'index.php/coach/book' ?>">
                     <span>
-                        预约查看
-                    </span>
+                        预约管理
+                    </span></a>
                 </li>
                 <li>
                     <span>

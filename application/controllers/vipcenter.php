@@ -11,6 +11,7 @@ class VipCenter extends MY_Controller {
         $this->load->model('coachbook_model');
         $this->load->model('teachbook_model');
         $this->load->model('coach_model');
+        $this->load->model('course_model');
         $this->load->model('school_model');
         $this->load->model('clscomment_model');
     }
@@ -85,10 +86,17 @@ class VipCenter extends MY_Controller {
             $list['book_id'] = $row['book_id'];
             $list['book_date'] = $row['book_date'];
             $list['book_cls_num'] = $row['book_cls_num'];
+            $list['book_state'] = $row['book_state'];
             $coachName = $this->coach_model->select_name($row['book_coa_id']);
             $list['coa_name'] = $coachName[0]['coach_name'];
             $schName = $this->school_model->select_name($row['book_sch_id']);
             $list['sch_name'] = $schName[0]['jp_name'];
+            $list['book_cls_name'] ="";
+            $courseName = $this->course_model->select($row['book_cls_id']);
+            foreach ($courseName as $row) {
+                $list['book_cls_name'] = $row['cls_name'];
+            }
+            
             $comment_list['unuse_list'][$j] = $this->load->view('vip_views/management_fur_list', $list, true);
             $j++;
         }
@@ -103,6 +111,16 @@ class VipCenter extends MY_Controller {
             $list['coa_name'] = $coachName[0]['coach_name'];
             $schName = $this->school_model->select_name($row['book_sch_id']);
             $list['sch_name'] = $schName[0]['jp_name'];
+            $list['exist']=0;
+            $is_com_exist = $this->clscomment_model->select_exist($row['book_id']);
+            foreach ($is_com_exist as $result) {
+                $list['exist']=1;
+            }
+            $list['book_cls_name'] ="";
+            $courseName1 = $this->course_model->select($row['book_cls_id']);
+            foreach ($courseName1 as $row) {
+                $list['book_cls_name'] = $row['cls_name'];
+            }
             $comment_list['list'][$i] = $this->load->view('vip_views/management_list', $list, true);
             $i++;
         }
@@ -121,6 +139,11 @@ class VipCenter extends MY_Controller {
             $list['coa_name'] = $coachName[0]['coach_name'];
             $schName = $this->school_model->select_name($row['book_sch_id']);
             $list['sch_name'] = $schName[0]['jp_name'];
+            $list['book_cls_name'] ="";
+            $courseName1 = $this->course_model->select($row['book_cls_id']);
+            foreach ($courseName1 as $row2) {
+                $list['book_cls_name'] = $row2['cls_name'];
+            }
             $comment_list['feedback_content'][0] = $this->load->view('vip_views/feedback_content', $list, true);
         }
         $page = $this->load->view('vip_views/tocomment', $comment_list, true);
@@ -153,6 +176,8 @@ class VipCenter extends MY_Controller {
     public function get_cls() {
         $coabk_time = $this->input->post('coabk_time');
         $coabk_coach_id = $this->input->post('coabk_coach_id');
+        $time = $this->getDate();
+        $cls = $this->getCurrentCls();
 
         $data1 = array(
             'coabk_coach_id' => $coabk_coach_id,
@@ -165,7 +190,7 @@ class VipCenter extends MY_Controller {
             'book_coa_id' => $book_coa_id,
             'book_date' => $book_date
         );
-        $result1 = $this->coachbook_model->select($data1);
+        $result1 = $this->coachbook_model->select($data1,$time,$cls);
         $result2 = $this->teachbook_model->select_info_coa($data2);
         $both = array(
             'coachbook' => $result1,
@@ -179,6 +204,7 @@ class VipCenter extends MY_Controller {
         $book_stu_id = $this->session->userdata('UID');
         $book_coa_id = $this->input->post('book_coa_id');
         $book_sch_id = $this->input->post('book_sch_id');
+        $book_cls_id = $this->input->post('book_cls_id');
         $json = $this->input->post('json');
         $bookArray = json_decode($json, true);
         $DateArray = array();
@@ -189,6 +215,7 @@ class VipCenter extends MY_Controller {
                 'book_stu_id' => $book_stu_id,
                 'book_coa_id' => $book_coa_id,
                 'book_sch_id' => $book_sch_id,
+                'book_cls_id' => $book_cls_id,
                 'book_date' => $row['date'],
                 'book_cls_num' => $row['cls'],
             );
@@ -232,11 +259,7 @@ class VipCenter extends MY_Controller {
             'com_level' => $level
         );
         $return = $this->clscomment_model->insert($data);
-        if ($return == 1) {
-            echo 'success!';
-        } else {
-            echo 'fail';
-        }
+            echo $return;
     }
     public function unbook(){
         $id = $this->input->post("book_id");
@@ -245,6 +268,11 @@ class VipCenter extends MY_Controller {
         );
         $return = $this->teachbook_model->update_state($id,$data);
         echo $return;
+    }
+    public function get_course_name(){
+        $id = $this->input->post("id");
+        $return = $this->course_model->select($id);
+        echo $return[0]["cls_name"];
     }
 
 }

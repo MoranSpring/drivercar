@@ -43,7 +43,6 @@ function select_date(day, n) {
         }});
 }
 function get3Date(){
-    alert('tinghao');
      $("#select_date").datepicker({
         minDate: 0, maxDate: "+1M",
         onSelect: function (dateText) {
@@ -141,7 +140,12 @@ function toOnload(data) {
         async: true,
         data: {json: json},
         success: function (data) {
-                alert(data);
+                if(data==1){
+                    alert("教学计划制定完成！");
+                     location.reload();
+                }else{
+                    alert("出现异常错误！");
+                }
             }
         });
 }
@@ -177,7 +181,7 @@ function Statistics() {
     if(addArray.length+removeArray.length===0){
         alert('您没有选择');
     }else{
-        alert(json);
+//        alert(json);
         toOnload(json);
     }
 }

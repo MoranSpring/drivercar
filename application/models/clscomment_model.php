@@ -42,11 +42,11 @@ class Clscomment_model extends CI_Model{
         $query = $this->db->get('ClsComment');
         return $query->result_array();
     }
-    public function select_name($id) {//返回该用户名所有信息
-        $this->db->select('coach_name');
-        $this->db->select('coach_face');
-        $this->db->where('coach_id',$id);
+    public function select_exist($id) {//返回该用户名所有信息
+        $this->db->select('com_id');
+        $this->db->where('com_cls_id',$id);
         $query = $this->db->get('ClsComment');
         return $query->result_array();
     }
+    
 }

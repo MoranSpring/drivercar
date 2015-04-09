@@ -27,8 +27,8 @@
 
                                 <div class="am-u-sm-7 am-u-md-7  " data-am-button>
                                     <div id="radio">
-                                        <input type="radio" id="radio1" name="radio" style="display: inline"/><label for="radio1">Choice 1</label>
-                                        <input type="radio" id="radio2" name="radio" checked="checked" style="display: inline"/><label for="radio2">Choice 2</label>
+                                        <input type="radio" id="radio1" name="radio" style="display: inline"/><label for="radio1">科目二</label>
+                                        <input type="radio" id="radio2" name="radio" checked="checked" style="display: inline"/><label for="radio2">科目三</label>
                                     </div>
                                 </div>
                             </div>

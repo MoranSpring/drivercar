@@ -8,11 +8,12 @@ $(function () {
     $('#bt1').click(function () {
         if (check() === 100 || check() === 200) {
             step2();
+            get_project_name();
             $('.step_1').css('display', 'none');
             $('.step_2').css('display', 'block');
             $('.step_3').css('display', 'none');
         } else {
-            myAlert('ni da ye de');
+            myAlert('请选择科目！');
         }
     });
     $('#bt21').click(function () {
@@ -29,7 +30,7 @@ $(function () {
             $('.step_2').css('display', 'none');
             $('.step_3').css('display', 'block');
         } else {
-            myAlert('ni da ye de toooo');
+            myAlert('您还没有选课！');
         }
     });
     $('#bt31').click(function () {
@@ -153,7 +154,7 @@ function hs() {
         if ($(this).attr('value') == '8')
         {
             var select = new choice('afd', 'asfd');
-            alert($(this).attr('date'));
+//            alert($(this).attr('date'));
             $('#date1').html();
         }
     });
@@ -190,7 +191,7 @@ function get3Date(){
             select_date(day1, 1);
             select_date(day2, 2);
             select_date(day3, 3);
-            alert(day1);
+//            alert(day1);
             //--------------afterInit--------------
             $('#cls_table').css('display', 'table');
         }
@@ -232,15 +233,16 @@ function select_date(day, n) {
 function submit() {
     var kind = $('.cls_kind').val();
     var project = $('.cls_project').val();
+    var projectName = $('.cls_project').attr("projectName");
     var school_id = $('.select_sch').val();
     var coach_id = $('.select_coach').val();
     var school_name = $('.select_sch option:selected').text();
     var coach_name = $('.select_coach  option:selected').text();
-    alert(kind + '    ' + project + '    ' + school_name + '    ' + coach_name);
+//    alert(kind + '    ' + projectName + '    ' + school_name + '    ' + coach_name);
     var selArray = refresh();
     $('#book-table-info').empty();
     for (var i = 0; i < selArray.length; i++) {
-        $('#book-table-info').append("<tr><td>" + selArray[i].date + ", 第" + selArray[i].cls + "节课" + "</td><td>" + school_name + "</td> <td>" + coach_name + "</td><td>" + project + "</td>< /tr>");
+        $('#book-table-info').append("<tr><td>" + selArray[i].date + ", 第" + selArray[i].cls + "节课" + "</td><td>" + school_name + "</td> <td>" + coach_name + "</td><td>" + projectName + "</td>< /tr>");
     }
     $('.user-name').html('Kyle');
     $('.user-tel').html('1509890399');
@@ -249,6 +251,7 @@ function submit() {
 function toOnload() {
     var school_id = $('.select_sch').val();
     var coach_id = $('.select_coach').val();
+    var project = $('.cls_project').val();
     var selArray = refresh();
     var json = JSON.stringify(selArray);
     $.ajax({
@@ -256,12 +259,14 @@ function toOnload() {
         dataType: "text",
         url: localhostPath + "/index.php/vipcenter/teach_book",
         async: true,
-        data: {book_coa_id: coach_id, book_sch_id: school_id, json: json},
+        data: {book_coa_id: coach_id, book_sch_id: school_id, book_cls_id:project,json: json},
         success: function (data) {
-            if (data == 1)
-                alert("插入成功！");
+            if (data == 1){
+                alert("预约成功！");
+                location.replace(document.referrer);
+            }
             else {
-                alert("插入失败！");
+                alert("预约失败！");
             }
         }});
 
@@ -297,5 +302,18 @@ function parseISO8601(dateStringInRange) {
      }
    }
    return date;
+ }
+ function get_project_name(){
+     var project=$('.cls_project').val();
+     $.ajax({
+        type: "POST",
+        dataType: "text",
+        url: localhostPath + "/index.php/vipcenter/get_course_name",
+        async: true,
+        data: {id: project},
+        success: function (data) {
+            var projectName=data;
+            $('.cls_project').attr("projectName",projectName);
+        }});
  }
 

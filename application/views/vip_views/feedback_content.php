@@ -12,7 +12,7 @@
             </tr>
             <tr>
                 <td>项目</td>
-                <td>倒库</td>
+                <td><?= $book_cls_name ?></td>
             </tr>
 
             <tr>
@@ -97,7 +97,8 @@
         async: true,
         data: {com_cls_id: com_cls_id, com_content: com_content,level: level},
         success: function (data) {
-            alert(data);
+            if(data==1)
+            location.replace(document.referrer);
         }});
        }
    }

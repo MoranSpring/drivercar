@@ -26,9 +26,9 @@
                         </thead>
                         <tbody>
                             <?php
-                                foreach ($book_list as $row)
-                                    echo $row;
-                                ?>
+                            foreach ($book_list as $row)
+                                echo $row;
+                            ?>
                         </tbody>
                     </table>
                 </div>
@@ -50,17 +50,19 @@
                         </thead>
                         <tbody>
                             <?php
-                            if(isset($unbook_list)){
+                            if (isset($unbook_list)) {
                                 foreach ($unbook_list as $row)
-                                    echo $row;}else{
-                                        echo("<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
-                                    }
-                                ?>
+                                    echo $row;
+                            } else {
+                                echo("<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
+                            }
+                            ?>
                         </tbody>
                     </table>
                 </div>
             </div>
             <div id="content3" style="display:none">
+                <input type="submit" name="Submit2" value="提交" onclick="firm()" />
             </div>
         </div>
 
@@ -68,26 +70,30 @@
     </div>
 </div>
 <script>
-    $('.unbook_confirm').click(function(){
-        var book_id=$(this).attr('book_id');
-        var thisData=$(this);
-        $.ajax({
-        type: "POST",
-        dataType: "text",
-        url: "<?=  base_url()?>index.php/coach/unbook",
-        async: true,
-        data: {book_id: book_id},
-        success: function (data) {
-            if (data == 1){
-            thisData.addClass('unbook_end');
-            thisData.html('已同意');
-            thisData.removeClass('unbook_confirm');
-            }
-            else {
-                alert("删除失败！");
-            }
+    $('.unbook_confirm').live("click",function () {
+        if (confirm("你确信?"))
+        {
+            var book_id = $(this).attr('book_id');
+            var thisData = $(this);
+            $.ajax({
+                type: "POST",
+                dataType: "text",
+                url: "<?= base_url() ?>index.php/coach/unbook",
+                async: true,
+                data: {book_id: book_id},
+                success: function (data) {
+                    if (data == 1) {
+                        thisData.addClass('unbook_end');
+                        thisData.html('已同意');
+                        thisData.removeClass('unbook_confirm');
+                    }
+                    else {
+                        alert("删除失败！");
+                    }
+                }
+            });
         }
-        });
     });
 </script>
+
 
