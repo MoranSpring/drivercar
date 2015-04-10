@@ -263,7 +263,7 @@ function toOnload() {
         success: function (data) {
             if (data == 1){
                 alert("预约成功！");
-                location.replace(document.referrer);
+                window.location.href=localhostPath + "/index.php/vipcenter/vip_center";
             }
             else {
                 alert("预约失败！");

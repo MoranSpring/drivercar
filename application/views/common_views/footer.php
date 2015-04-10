@@ -1,4 +1,9 @@
-<div data-am-widget="footer" class="am-footer am-footer-default" data-am-footer="{  }">
+<style>
+    .info_footer_clear{
+        clear: both;
+    }
+</style>
+<div data-am-widget="footer" class="am-footer am-footer-default  info_footer_clear" data-am-footer="{  }">
     <div class="am-footer-switch">
         <span class="am-footer-ysp" data-rel="mobile" data-am-modal="{target: '#am-switch-mode'}">云适配版</span>
         <span class="am-footer-divider">|</span>

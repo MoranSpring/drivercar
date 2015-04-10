@@ -84,7 +84,7 @@ i{transform:rotate(-90deg);-webkit-transform:rotate(-90deg);-moz-transform:rotat
 
 
             .info_change{width: 700px ;margin: 10px auto;overflow: hidden; }
-            .info_change hr{width: 100%; margin: 5px auto;border: 1px ;background-color: lawngreen;height: 3px !important;}
+            .info_change hr{width: 100%; margin: 5px auto;background-color: #ccc;height: 1px !important;}
             .info_change  .base_info_change, .real_change, .mail_change, .pwd_change, .telnum_change{ width: 85%;margin: 10px auto;overflow: hidden;}
             .change_info_title p{font-size: 20px;font-weight: bold;display: inline;margin: 10px auto;overflow: hidden;}
             .info-details, .sex-info,.change_save { width: 90%; margin: 5px auto;}
@@ -133,3 +133,46 @@ i{transform:rotate(-90deg);-webkit-transform:rotate(-90deg);-moz-transform:rotat
             .yuyue_info table{margin: 5px auto;text-align: center;}
             .yuyue_info table td{width: 200px; }
             .yuyue_info table td p{ margin: 5px auto; }
+            
+               .info_change ul{
+        width: 100%;
+        overflow: hidden;
+        margin: 20px 0px;
+    }
+    .am-margin-top {
+        margin-top: 0px;
+    }
+    .testli{
+        width: 100%;
+        float: left;
+        line-height: 30px;
+        overflow: hidden;
+    }
+    .info_change_div{
+        float: left;
+        overflow: hidden;
+        display: inline;
+    }
+    .info_change_div span{
+        float: left;
+        overflow: hidden;
+    }
+    .info_change_div a{
+        margin: 0px 20px;
+    }
+    .testli select {
+        width: 100px;
+    }
+    .testli .city-txt{
+        line-height: 30px !important;
+    }
+    .pwd_change .change_pwd_tips{
+        color:red;
+        margin:0px 10px;
+        display:inline;
+        line-height: 28px;
+        text-align: center;
+    }
+    .pwd_change .new_pwd_two{
+        margin-left: 58px;
+    }

@@ -343,7 +343,7 @@ body{
 }
 #city_china_val{
     margin: 5px 0px 5px 10px;
-    text-align: left;
+    /* text-align: left; */
 }
 #map{
     margin: 15px 15px 15px 15px;

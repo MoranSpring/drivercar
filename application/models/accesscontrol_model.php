@@ -59,40 +59,23 @@ class Accesscontrol_model extends CI_Model{
     public function delete($id) {
         
     }
+    
     public function update($data) {
         $this->db->where('UID',$data['UID']);
         $result=$this->db->update('AccessControl', $data);
         return $result;
         
     }
-    public function update_nick_name($id,$data){
+    public function  update_attr($id,$data){
         $this->db->where('stu_id',$id);
         $result=$this->db->update('AccessControl', $data);
         return $result;
     }
-    public function update_self_intro($id,$data){
+    public function selectById($id) {//根据session_id返回当前登录用户的所有信息
+        $this->db->select();
         $this->db->where('stu_id',$id);
-        $result=$this->db->update('AccessControl', $data);
-        return $result;
+        $query = $this->db->get('AccessControl');
+        return $query->result_array();
     }
-    public function update_real_name($id,$data){
-        $this->db->where('stu_id',$id);
-        $result=$this->db->update('AccessControl', $data);
-        return $result;
-    }
-    public function update_card_id($id,$data){
-        $this->db->where('stu_id',$id);
-        $result=$this->db->update('AccessControl', $data);
-        return $result;
-    }
-    public function update_gender_value($id,$data){
-        $this->db->where('stu_id',$id);
-        $result=$this->db->update('AccessControl', $data);
-        return $result;
-    }
-    public function update_age_change($id,$data){
-        $this->db->where('stu_id',$id);
-        $result=$this->db->update('AccessControl', $data);
-        return $result;
-    }
+    
 }
