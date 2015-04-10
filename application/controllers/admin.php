@@ -50,16 +50,6 @@ class Admin extends MY_Controller {
         $this->view($page);
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 //文件上传 begin
     public function news_upload() {
         $news_id = time();
