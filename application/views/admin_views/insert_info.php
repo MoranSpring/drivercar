@@ -80,9 +80,9 @@
 
                                 <div class="am-g am-margin-top-sm">
                                     <div class="am-u-sm-22 am-u-md-2 am-text-right admin-form-text">Filename: </div>
-                                    <div class="am-u-sm-22 am-u-md-10">
-                                        <input type="file" name="file"   id="file" onchange="setImagePreview()"/> 
-                                        <div id="localImag"><img id="preview" width=-1 height=-1 style="diplay:none" /></div>
+                                    <div class="am-u-sm-22 am-u-md-10"  news="news_view" >
+                                        <input type="file" name="file"   id="file"onchange="setImagePreview(this)"/> 
+                                        <div id="localImag"><img id="news_preview"  news="news_pre"  width=-1 height=-1 style="diplay:none" /></div>
                                     </div>
                                     <br />
 
@@ -182,7 +182,7 @@
                                 <div class="am-g am-margin-top-sm">
                                     <div class="am-u-sm-22 am-u-md-2 am-text-right admin-form-text">Filename: </div>
                                     <div class="am-u-sm-22 am-u-md-10">
-                                        <input type="file" name="file"   id="file" onchange="setImagePreview()"/> 
+                                        <input type="file" name="file"   id="file" onchange="setImagePreview(this)"/> 
                                         <div id="localImag"><img id="preview" width=-1 height=-1 style="diplay:none" /></div>
                                     </div>
                                     <br />
@@ -253,7 +253,7 @@
                                 <div class="am-g am-margin-top-sm">
                                     <div class="am-u-sm-22 am-u-md-2 am-text-right admin-form-text">头像</div>
                                     <div class="am-u-sm-22 am-u-md-10">
-                                        <input type="file" name="file"   id="file" onchange="setImagePreview()"/> 
+                                        <input type="file" name="file"   id="file" onchange="setImagePreview(this)"/> 
                                         <div id="localImag"><img id="preview" width=-1 height=-1 style="diplay:none" /></div>
                                     </div>
                                     <br />

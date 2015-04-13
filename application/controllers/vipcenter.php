@@ -59,7 +59,7 @@ class VipCenter extends MY_Controller {
             $name = $this->coach_model->select_name($row['book_coa_id']);
             $data['Name'] = $name[0]['coach_name'];
             $data['course_num'] = $row['book_cls_num'];
-            $data['imageURL'] = $name[0]['coach_face'];
+            $data['imageURL'] = $name[0]['coach_face']."@!nail";
             $sch_name = $this->school_model->select_name($row['book_sch_id']);
             $data['school'] = $sch_name[0]['jp_name'];
             $content['content'][$i] = $this->load->view('vip_views/content', $data, true);
@@ -109,6 +109,7 @@ class VipCenter extends MY_Controller {
             $list['book_cls_num'] = $row['book_cls_num'];
             $coachName = $this->coach_model->select_name($row['book_coa_id']);
             $list['coa_name'] = $coachName[0]['coach_name'];
+            $list['coa_face'] = $coachName[0]['coach_face'];
             $schName = $this->school_model->select_name($row['book_sch_id']);
             $list['sch_name'] = $schName[0]['jp_name'];
             $list['exist']=0;
@@ -164,6 +165,7 @@ class VipCenter extends MY_Controller {
             $list['book_cls_num'] = $row['book_cls_num'];
             $coachName = $this->coach_model->select_name($row['book_coa_id']);
             $list['coa_name'] = $coachName[0]['coach_name'];
+            $list['coa_face'] = $coachName[0]['coach_face']."@!nail";
             $schName = $this->school_model->select_name($row['book_sch_id']);
             $list['sch_name'] = $schName[0]['jp_name'];
             $comment_list['comment_history_list'][$i] = $this->load->view('vip_views/comment_history_list', $list, true);

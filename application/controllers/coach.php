@@ -52,6 +52,10 @@ class Coach extends MY_Controller {
         $page = $this->load->view('coach_views/self_info', "", true);
         $this->view($page);
     }
+    public function teach_info(){
+        $page = $this->load->view('coach_views/teach_info', "", true);
+        $this->view($page);
+    }
       public function schedule(){
         $page = $this->load->view('coach_views/schedule', "", true);
         $this->view($page);

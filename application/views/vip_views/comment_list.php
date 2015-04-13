@@ -1,6 +1,6 @@
 <article class="am-comment">
     <a href="#link-to-user-home">
-        <img src="http://image.52drivercar.com/1426679132.jpg@!nail" alt="" class="am-comment-avatar" width="48" height="48"/>
+        <img src="http://image.52drivercar.com/coach_imges/1428902329.jpg@!nail" alt="" class="am-comment-avatar" width="48" height="48"/>
     </a>
 
     <div class="am-comment-main">

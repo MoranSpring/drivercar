@@ -52,13 +52,14 @@ class Admin extends MY_Controller {
     
 //文件上传 begin
     public function news_upload() {
-        $news_id = time();
+        $news_id =time();
+        $news_name="news_imges/".$news_id;
         $news_title = $this->input->post('news_title');
         $news_type = $this->input->post('news_type');
         $news_author = $this->input->post('news_author');
         $news_content = $this->input->post('news_content');
         $news_date = $this->input->post('news_date');
-        $news_imge = 'http://driver-un.oss-cn-shenzhen.aliyuncs.com/' . $news_id . '.jpg';
+        $news_imge = 'http://image.52drivercar.com/' . $news_name . '.jpg';
         $hasImg = false;
         $data = array(
             'news_id' => $news_id,
@@ -73,7 +74,7 @@ class Admin extends MY_Controller {
         );
 
         
-        if($this->_is_upload_imge($news_id)==true){
+        if($this->_is_upload_imge($news_name)==true){
             $result = $this->news_model->insert(array_merge($data,$image));
         }else{
             $result = $this->news_model->insert($data);
@@ -87,6 +88,7 @@ class Admin extends MY_Controller {
     }
     public function school_upload() {
         $jp_id = time();
+        $image_name="jp_imges/".$jp_id;
         $jp_name = $this->input->post('jp_name');
         $jp_addr = $this->input->post('jp_addr');
         $jp_car_num = $this->input->post('jp_car_num');
@@ -98,7 +100,7 @@ class Admin extends MY_Controller {
         $jp_coach_num = $this->input->post('jp_coach_num');
         $jp_intro = $this->input->post('jp_intro');
         $jp_reg_date = $this->getDate();
-        $jp_imge = 'http://driver-un.oss-cn-shenzhen.aliyuncs.com/' . $jp_id . '.jpg';
+        $jp_imge = 'http://image.52drivercar.com/' . $image_name . '.jpg';
         $hasImg = false;
         $data = array(
             'jp_id' => $jp_id,
@@ -119,7 +121,7 @@ class Admin extends MY_Controller {
         );
 
         
-        if($this->_is_upload_imge($jp_id)==true){
+        if($this->_is_upload_imge($image_name)==true){
             $result = $this->school_model->insert(array_merge($data,$image));
         }else{
             $result = $this->school_model->insert($data);
@@ -130,15 +132,17 @@ class Admin extends MY_Controller {
         } else {
             echo 'insert error!'.$hasImg;
         }
-    }public function coach_upload() {
+    }
+    public function coach_upload() {
         $coach_id = time();
+        $image_name="coach_imges/".$coach_id;
         $coach_name = $this->input->post('coach_name');
         $coach_workid = $this->input->post('coach_workid');
         $coach_old = $this->input->post('coach_old');
         $coach_sch_id = $this->input->post('coach_sch_id');
         $coach_car_old = $this->input->post('coach_car_old');
         $coach_reg_time =$this->getDate();
-        $coach_face = 'http://driver-un.oss-cn-shenzhen.aliyuncs.com/' . $coach_id . '.jpg';
+        $coach_face = 'http://image.52drivercar.com/' . $image_name . '.jpg';
         $coach_intro = $this->input->post('coach_intro');
         $data = array(
             'coach_id' => $coach_id,
@@ -153,7 +157,7 @@ class Admin extends MY_Controller {
         $image = array(
            'coach_face' => $coach_face
         );
-        if($this->_is_upload_imge($coach_id)==true){
+        if($this->_is_upload_imge($image_name)==true){
             $result = $this->coach_model->insert(array_merge($data,$image));
         }else{
             $result = $this->coach_model->insert($data);

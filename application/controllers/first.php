@@ -218,6 +218,7 @@ class First extends MY_Controller {
         $news = $this->news_model->select_detail($id);
         foreach ($news as $row) {
             $row['news_content'] = preg_replace('/\n/', '<p/><p>', $row['news_content']);
+            $row['news_imge'].="@!newsimg";
             $page = $this->load->view('a_views/news', $row, true);
         }
 

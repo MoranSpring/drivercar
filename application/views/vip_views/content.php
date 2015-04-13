@@ -24,7 +24,7 @@
                     <td>教练</td>
                     <td><ul id="coach" class="clearfix">
                             <li style="float:left;">
-                                <img class="am-img-thumbnail am-circle" src="<?= $imageURL ?>" width="100" height="100"/>
+                                <img class="am-img-thumbnail am-circle" src="<?= $imageURL ?>" width="70" height="70"/>
                             </li>
                             <li style="float:left;">
                                 <ul>

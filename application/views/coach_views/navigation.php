@@ -12,7 +12,7 @@
                     </span></a>
                 </li>
                 <li>
-                    <a href="<?= base_url() . 'index.php/coach/sch_info' ?>"><span>
+                    <a href="<?= base_url() . 'index.php/coach/teach_info' ?>"><span>
                             教学情况
                         </span></a>
                 </li>
