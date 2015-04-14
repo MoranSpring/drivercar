@@ -60,6 +60,10 @@ class Coach extends MY_Controller {
         $page = $this->load->view('coach_views/schedule', "", true);
         $this->view($page);
     }
+    public function suggest(){
+        $page = $this->load->view('coach_views/suggest', "", true);
+        $this->view($page);
+    }
     public function book(){
         $coachID="1427162541";
         $time = $this->getDate();
@@ -161,6 +165,45 @@ class Coach extends MY_Controller {
         $book_id=$this->input->post("book_id");
         $result=$this->teachbook_model->delete($book_id);
         echo $result;
+    }
+    public function get_teach_info(){
+        $coachID="1427162541";
+        $time1=$this->input->post("time1");
+        $time2=$this->input->post("time2");
+        $result=$this->teachbook_model->select_detail_from_time($coachID,$time1,$time2);
+        $stu_count=$this->teachbook_model->select_stu_count($coachID,$time1,$time2);
+         $comment_list = "";
+        $j = 0;
+        foreach ($result as $row) {
+            $list['book_id'] = $row['book_id'];
+            $list['book_date'] = $row['book_date'];
+            $list['book_cls_num'] = $row['book_cls_num'];
+            $list['book_suggest'] = $row['book_suggest'];
+            
+            $list['book_cls_name'] ="";
+            $courseName1 = $this->course_model->select($row['book_cls_id']);
+            foreach ($courseName1 as $row1) {
+                $list['book_cls_name'] = $row1['cls_name'];
+            }
+            
+            $coachName = $this->accesscontrol_model->selectUserName($row['book_stu_id']);
+            foreach ($coachName as $row3) {
+                $list['stu_name'] = $row3['stu_true_name'];
+            }
+            $schName = $this->school_model->select_name($row['book_sch_id']);
+            foreach ($schName as $row2) {
+                $list['sch_name'] = $row2['jp_name'];
+            }
+            $comment_list.= $this->load->view('coach_views/teach_info_list', $list, true);
+            $j++;
+           
+        }
+        $data=array(
+            'course_num'=>$j,
+            'stu_num'=>$stu_count,
+            'list'=>$comment_list
+        );
+         echo json_encode($data);
     }
 
 }

@@ -162,5 +162,24 @@ class Teachbook_model extends CI_Model {
         $result=$this->db->update('TeachBook', $data);
         return $result;
     }
+     public function select_detail_from_time($coachID,$time1,$time2) {//返回该用户名所有信息
+        $this->db->select();
+        $this->db->where('book_coa_id',$coachID);  
+         $this->db->where('book_date >=',$time1);
+         $this->db->where('book_date <=',$time2);
+         $this->db->order_by("book_date", "asc");
+        $this->db->order_by("book_cls_num", "asc");
+        $query = $this->db->get('TeachBook');
+        return $query->result_array();
+    }
+    public function select_stu_count($coachID,$time1,$time2){
+        $this->db->select("book_stu_id");
+        $this->db->distinct();
+        $this->db->where('book_coa_id',$coachID);         
+        $this->db->where('book_date >=',$time1);
+        $this->db->where('book_date <=',$time2);
+        $query = $this->db->get('TeachBook');
+        return count($query->result_array());
+    }
 
 }
