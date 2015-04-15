@@ -42,7 +42,7 @@ class First extends MY_Controller {
     }
 
     public function view($page = '') {
-        $this->output->enable_profiler(TRUE);
+        
         $name = $this->session->userdata('name');
         if ($name == null) {
             $body['header'] = $this->load->view('common_views/header', '', true);

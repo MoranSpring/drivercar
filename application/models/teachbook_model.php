@@ -180,6 +180,10 @@ class Teachbook_model extends CI_Model {
         $this->db->where('book_date <=',$time2);
         $query = $this->db->get('TeachBook');
         return count($query->result_array());
+}
+ public function update_suggest($id,$data){
+        $this->db->where('book_id',$id);
+        $result=$this->db->update('TeachBook', $data);
+        return $result;
     }
-
 }

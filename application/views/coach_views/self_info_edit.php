@@ -65,7 +65,7 @@
                     <ul class="co-self-info clearfix">
                         <li class="co-name">
                             <p>刘德华</p>
-                            <div>个人介绍：我是棒棒哒教练，教的好，学生学的块，成绩优异。<a class="co-self-edit-on"  href="<?= base_url() ?>index.php/coach/self_info_edit">资料编辑</a></div>
+                            <div>个人介绍：我是棒棒哒教练，教的好，学生学的块，成绩优异。<a class="co-self-edit-on">资料编辑</a></div>
                         </li>
                         <li>
                             <ul class="co-self-third clearfix">

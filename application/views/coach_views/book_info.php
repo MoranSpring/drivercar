@@ -16,12 +16,12 @@
                     <table class="ml-table am-table am-table-bordered" >
                         <thead>
                             <tr style="background: #CCC9C0">
-                                <td>日期 </td>
-                                <td>节数</td>
-                                <td>培训点 </td>
-                                <td>学员</td>
-                                <td>项目 </td>
-                                <td>积分</td>
+                                <th>日期 </th>
+                                <th>节数</th>
+                                <th>培训点 </th>
+                                <th>学员</th>
+                                <th>项目 </th>
+                                <th>积分</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -39,13 +39,13 @@
                     <table class="ml-table am-table am-table-bordered" >
                         <thead>
                             <tr style="background: #CCC9C0">
-                                <td>日期 </td>
-                                <td>节数</td>
-                                <td>培训点 </td>
-                                <td>学员</td>
-                                <td>项目 </td>
-                                <td>消费积分</td>
-                                <td>同意退订</td>
+                                <th>日期 </th>
+                                <th>节数</th>
+                                <th>培训点 </th>
+                                <th>学员</th>
+                                <th>项目 </th>
+                                <th>消费积分</th>
+                                <th>同意退订</th>
                             </tr>
                         </thead>
                         <tbody>

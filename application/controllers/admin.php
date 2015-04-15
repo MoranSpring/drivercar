@@ -100,7 +100,7 @@ class Admin extends MY_Controller {
         $jp_coach_num = $this->input->post('jp_coach_num');
         $jp_intro = $this->input->post('jp_intro');
         $jp_reg_date = $this->getDate();
-        $jp_imge = 'http://image.52drivercar.com/' . $image_name . '.jpg';
+        $jp_imge = 'http://image.52drivecar.com/' . $image_name . '.jpg';
         $hasImg = false;
         $data = array(
             'jp_id' => $jp_id,
@@ -142,7 +142,7 @@ class Admin extends MY_Controller {
         $coach_sch_id = $this->input->post('coach_sch_id');
         $coach_car_old = $this->input->post('coach_car_old');
         $coach_reg_time =$this->getDate();
-        $coach_face = 'http://image.52drivercar.com/' . $image_name . '.jpg';
+        $coach_face = 'http://image.52drivecar.com/' . $image_name . '.jpg';
         $coach_intro = $this->input->post('coach_intro');
         $data = array(
             'coach_id' => $coach_id,

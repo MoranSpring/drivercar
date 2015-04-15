@@ -136,6 +136,7 @@ class VipCenter extends MY_Controller {
             $list['book_id'] = $row['book_id'];
             $list['book_date'] = $row['book_date'];
             $list['book_cls_num'] = $row['book_cls_num'];
+            $list['book_suggest'] = $row['book_suggest'];
             $coachName = $this->coach_model->select_name($row['book_coa_id']);
             $list['coa_name'] = $coachName[0]['coach_name'];
             $schName = $this->school_model->select_name($row['book_sch_id']);
@@ -161,6 +162,10 @@ class VipCenter extends MY_Controller {
         $i = 0;
         foreach ($result1 as $row) {
             $list['book_id'] = $row['book_id'];
+            $iscomment = $this->clscomment_model->select_detail($list['book_id'] );
+            if($iscomment==null){
+                continue;
+            }
             $list['book_date'] = $row['book_date'];
             $list['book_cls_num'] = $row['book_cls_num'];
             $coachName = $this->coach_model->select_name($row['book_coa_id']);

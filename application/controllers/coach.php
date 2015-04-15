@@ -60,9 +60,44 @@ class Coach extends MY_Controller {
         $page = $this->load->view('coach_views/schedule', "", true);
         $this->view($page);
     }
-    public function suggest(){
-        $page = $this->load->view('coach_views/suggest', "", true);
+     public function self_info_edit(){
+        $page = $this->load->view('coach_views/self_info_edit', "", true);
         $this->view($page);
+    }
+    public function suggest(){
+        $id = $this->input->get('id');
+        $result = $this->teachbook_model->select_from_id($id);
+        $page="";
+        foreach ($result as $row) {
+            $list['book_id'] = $row['book_id'];
+            $list['book_date'] = $row['book_date'];
+            $list['book_cls_num'] = $row['book_cls_num'];
+             $stuName = $this->accesscontrol_model->selectUserName($row['book_stu_id']);
+            foreach ($stuName as $row3) {
+                $list['stu_name'] = $row3['stu_true_name'];
+            }
+            $schName = $this->school_model->select_name($row['book_sch_id']);
+            foreach ($schName as $row2) {
+                $list['sch_name'] = $row2['jp_name'];
+            }
+            $list['book_cls_name'] ="";
+            $courseName1 = $this->course_model->select($row['book_cls_id']);
+                    foreach ($courseName1 as $row1) {
+                $list['book_cls_name'] = $row1['cls_name'];
+            }
+            $page = $this->load->view('coach_views/suggest', $list, true);
+        }
+        
+        $this->view($page);
+    }
+    public function to_suggest(){
+        $book_id = $this->input->post("book_id");
+        $book_suggest = $this->input->post("book_suggest");
+        $data = array(
+            'book_suggest'=>$book_suggest
+        );
+        $return = $this->teachbook_model->update_suggest($book_id,$data);
+            echo $return;
     }
     public function book(){
         $coachID="1427162541";

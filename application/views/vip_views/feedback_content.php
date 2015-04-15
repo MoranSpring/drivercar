@@ -29,7 +29,7 @@
             </tr>
             <tr>
                 <td>教学建议</td>
-                <td>继续学习倒库</td>
+                <td><?= $book_suggest ?></td>
             </tr>
         </tbody>
     </table>

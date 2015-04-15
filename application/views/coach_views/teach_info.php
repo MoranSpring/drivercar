@@ -146,6 +146,9 @@
             }
         });
     }
+   $('.teach-comment').live("click",function(){
+                window.location.href = "<?= base_url() . 'index.php/coach/suggest?id=' ?>" + $(this).attr('value');
+    });
 </script>
 
 
