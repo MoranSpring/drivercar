@@ -348,6 +348,30 @@ class Info_change extends MY_Controller {
             }
 
     }
+        //学员序列号验证
+    public function ValiVipSerNum() {
+       
+        $vip_page_num= $this->input->post('vip_page_num');
+        echo  $vip_page_num;
+//        $data=array(
+//            'serial_num'=>$vip_page_num
+//        );
+        $result = $this->serialnumber_model->selectBySerNum($vip_page_num);
+        if ($result == 1) {
+            echo 'success!!';
+        } else {
+            echo 'insert error!';
+        }
+        
+    }
+
+    //加载修改密码页面
+    public function forgetPwd() {
+       $this->load->view('login_views/forget_pwd.php');
+       //$this->load->view('login_views/email_vali.php');
+//       $this->load->view('login_views/index.html');
+
+    }
     
     
 

@@ -26,6 +26,7 @@ class First extends MY_Controller {
         $this->load->model('news_model');
         $this->load->library('oss/alioss');
         $this->load->model('coach_model');
+        $this->load->model('serialnumber_model');
     }
 
     public function index() {
@@ -107,6 +108,10 @@ class First extends MY_Controller {
         $page = $this->load->view('a_views/pos_info', '', true);
         $this->view($page);
     }
+        public function school_info() {
+        $page = $this->load->view('a_views/school_info', '', true);
+        $this->view($page);
+    }
 
     public function ser_info() {
         $page = $this->load->view('a_views/ser_info', '', true);
@@ -127,8 +132,10 @@ class First extends MY_Controller {
         $username = $this->input->post('username');
         $password = $this->input->post('userpass');
         $email = $this->input->post('useremail');
+        $stu_type = $this->input->post('user_type');
+        
         $reg_time = $this->getTime();
-        $stu_type = 3;
+
         $Uid = time();
         $datas = array(
             'stu_id' => $Uid,
@@ -138,12 +145,50 @@ class First extends MY_Controller {
             'stu_type' => $stu_type,
             'stu_reg_time' => $reg_time
         );
-        $result = $this->accesscontrol_model->insert($datas);
-        if ($result == 1) {
-            $this->session->set_userdata('name', $username);
-            redirect();
+        if($stu_type==3){
+             $result = $this->accesscontrol_model->insert($datas);
+            if ($result == 1) {
+                $this->session->set_userdata('UID',$Uid);
+                $this->session->set_userdata('TYPE',$stu_type);
+                $this->session->set_userdata('name', $username);
+                $sess=$this->session->all_userdata();
+                redirect();
+                echo '"insert success !"';
+                return ;
+            }else{
+                echo 'insert  error !';
+                return ;
+            }
+        }
+        
+        $vip_serial_num = $this->input->post('vip_serial_num');
+        $train_serial_num = $this->input->post('train_serial_num');
+        if ($stu_type == 2) {
+            $serial_num = $vip_serial_num;
+        } elseif ($stu_type == 1) {
+            $serial_num = $train_serial_num;
         } else {
-            echo 'insert error!';
+            exit(0);
+        }
+        //$sernum_row=$this->serialnumber_model->selectBySerNum($serial_num);
+        //$sernum_row[0]['serial_valid']=0;
+        $attr_arr = array('serial_valid' => 0);
+        $ser_num_vali = $this->serialnumber_model->SerValidChange($serial_num, $attr_arr);
+        if ($ser_num_vali) {
+            $result = $this->accesscontrol_model->insert($datas);
+            if ($result == 1) {
+                $this->session->set_userdata('UID',$Uid);
+                $this->session->set_userdata('TYPE',$stu_type);
+                $this->session->set_userdata('name', $username);
+                $sess=$this->session->all_userdata();
+                //print_r($sess);
+                redirect();
+            } else {
+                echo 'insert error!';
+            }
+            echo '序列号状态修改成功！';
+        } else {
+            echo '序列号状态修改失败！';
         }
     }
 
@@ -158,7 +203,17 @@ class First extends MY_Controller {
             echo TRUE;
         }
     }
-
+    public function login_mailexist() {
+        $email = $this->input->post('email');
+        $Result = $this->accesscontrol_model->loginMailExist($email);
+        if ($Result == null) {
+            echo "no exist";
+//            echo 'This user is not exist.';
+            return false;
+        } else {
+            echo true;
+        }
+    }
     public function login() {
         $data = array('error' => '');
         $this->load->view('login_views/template', $data);
@@ -277,30 +332,31 @@ class First extends MY_Controller {
         return $retval;
     }
 
-    public function sendEmail() {
+        public function sendEmail($mail_address,$mail_con,$mail_time) {
         $this->load->library('email');
-        $this->email->from('kyleml@126.com', 'Your Name');
-        $this->email->to('554858916@qq.com');
-
-        $this->email->subject('Email Test');
+        $this->email->from('kyleml@126.com', '我爱开车网');
         
-        $random=md5(time());
-        $this->session->set_userdata('EMAILID', $random);
-        $url="http://localhost:8888/index.php/first/vadication?id=$random";
-        $this->email->message('Testing the:    '.$url );
+        $this->email->to($mail_address);
 
-        $this->email->send();
+        $this->email->subject('验证码邮件');
+        
+        $this->session->set_userdata('EMAILID', $mail_con);
+        $gmt = date('r',$mail_time);
+        $this->email->message("<html><div>这封邮件发送的是我爱开车网注册邮箱验证码："."<span style=".'"color:red;"'.">".$mail_con."</span>"."</div><div>邮件发送时间    ：".$gmt."  如果您没有进行此类操作，请忽略！</div></html>");
+        $result=$this->email->send();
+        //echo $this->email->print_debugger();
+        return $result;
 
-        echo $this->email->print_debugger();
     }
-    function vadication(){
-        $id=$this->input->get("id");
-        $emailid = $this->session->userdata('EMAILID');
-        if($id==$emailid){
-            echo 'success!!!!!!!!!!!';
-        }else{
-            echo 'fail!!!!!!!!!!!';
-        }
+    function RegmailVali() {
+        $this->load->helper('date');
+        $reg_email=  $this->input->post("reg_email");
+        $reg_email_str=$this->input->post("reg_email_str");
+        $send_time=  time();
+        $result=  $this->sendEmail($reg_email,$reg_email_str,$send_time);
+        $data=array('reg_email_str'=>$reg_email_str,'send_time'=>$send_time,'result'=>$result);
+        echo json_encode($data);
     }
+
 
 }

@@ -17,7 +17,7 @@
     .co-name p{
         color:#fff;
         font-size: 1.6em;
-        line-height: 1.6em;
+        line-height: 2em;
     }
     .co-name div{
         color:#DAD9D4;
@@ -53,51 +53,51 @@
 <div id="content" class="clearfix">
     <div id="con-coach-right">
         <div id="con-nav">
-            <p><a href="void">首页</a>  >个人信息</p>
+            <p><a href="void">首页</a>  >驾校信息</p>
         </div>
         <link type="text/css" href="<?= base_url() ?>application/css/ml.css" rel="stylesheet">
         <div>
+            <div class="co-name" style="position:relative;padding-left: 350px; line-height: 5em;">
+                            <p>华科大驾校</p>
+                          </div>
             <ul class="co-self clearfix">
-                <li style="width:25%">
-                    <img src="http://image.52drivecar.com/coach_imges/1428902329.jpg@!nail250" class="am-img-thumbnail" height="250" width="250"/>
+                <li style="width:30%;position:relative;z-index: 1;margin-top: -30px;">
+                    <img src="http://image.52drivecar.com/coach_imges/1428902329.jpg@!newsimg" class="am-img-thumbnail" height="220" width="300"/>
                 </li>
-                <li style="width:75%">
+                <li style="width:70%">
                     <ul class="co-self-info clearfix">
-                        <li class="co-name">
-                            <p>刘德华</p>
-                            <div>个人介绍：我是棒棒哒教练，教的好，学生学的块，成绩优异。<a class="co-self-edit-on"  href="<?= base_url() ?>index.php/coach/self_info_edit">资料编辑</a></div>
-                        </li>
+                        
                         <li>
                             <ul class="co-self-third clearfix">
                                 <li style="text-align: right;color:#969EC3">
-                                    等级：
+                                    学车价格：
                                 </li>
-                                <li>
-                                    专家级
-                                </li>
-                            </ul>
-                            <ul class="co-self-third clearfix">
-                                <li style="text-align: right;color:#969EC3">
-                                    所属驾培点：
-                                </li>
-                                <li>
-                                    华科大驾校点 <span class="am-icon-map-marker ml-red"></span>
+                                <li  style="width:300px">
+                                    3800 元
                                 </li>
                             </ul>
                             <ul class="co-self-third clearfix">
                                 <li style="text-align: right;color:#969EC3">
-                                    培训人数：
+                                    招生范围：
                                 </li>
-                                <li>
-                                    200人
+                                <li   style="width:300px">
+                                    江岸区 江汉区 乔口区
                                 </li>
                             </ul>
                             <ul class="co-self-third clearfix">
                                 <li style="text-align: right;color:#969EC3">
-                                    手机号码：
+                                    驾校地址：
                                 </li>
-                                <li>
-                                    2001111111
+                                <li  style="width:300px">
+                                    江岸区兴业路(解放大道佳园小区对面)
+                                </li>
+                            </ul>
+                            <ul class="co-self-third clearfix">
+                                <li style="text-align: right;color:#969EC3">
+                                    咨询电话：
+                                </li>
+                                <li  style="width:300px">
+                                    13886090700  
                                 </li>
                             </ul>
                             <ul class="co-self-third clearfix">
@@ -489,5 +489,6 @@
         </div>
     </div>
 </div>
+
 
 
