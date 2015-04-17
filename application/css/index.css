@@ -44,7 +44,7 @@ span{
 
 /*-----------------------------[Color]------------------------------------*/
 body{
-    background-color: #f5f5f5;
+    background-color: #f0f0f0;
 }
 #header{
     width: 100%;
@@ -192,7 +192,6 @@ body{
     min-height: 800px;
     display: block;
     margin-left: 14px;
-    background-color: #fff;
 }
 #con-nav{
     margin: 5px 0 5px 5px;
@@ -217,9 +216,11 @@ body{
     width: 110px; 
     margin-bottom: -1px;
     color:#000;
+    border-top: 1px solid #aaa;
+    border-left: 1px solid #aaa;
     text-align: center;
     padding:5px 0px 5px 0px;
-    background-color: #fff;
+    background-color: #fcfcfc;
     cursor: pointer;
 }
 .tab2{
@@ -240,12 +241,14 @@ body{
 }
 .selected-li{
     font-weight:bold;
-    border:1px solid #999999;
-    border-top:2px solid crimson;
+    border:1px solid #aaa;
+    border-right:0;
+    background-color: #fff !important ;
+    border-top:2px solid crimson !important;
     border-bottom: 0;
-
-
-
+}
+.tab-li-last{
+    
 }
 #main_content{
     clear: both;
