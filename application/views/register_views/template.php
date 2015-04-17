@@ -17,49 +17,16 @@
             var pos = curWwwPath.indexOf(pathName);
             var localhostPath = curWwwPath.substring(0, pos);
             $(function () {
-
                 //验证邮箱是否有效
                 var result = '';
                 var reg_email_str2 = '';
                 var send_time = '';
                 
-                
-                
-                $(".btn").click(function () {
-                    var agreenMent = $("#agreement").attr("data");
-                    var varCode = $("#varcode").val();
-
-
-                    if (varCode !== real_code) {
-                        alert(varCode + '___' + real_code);
-                        $(".input_div5 span").html('<img src="<?= base_url() ?>application/images/text_error.png"><font color=red>验证码错误!</font>');
-                        $("#varcode").focus();
-                        //$(".btn").val('注册').removeAttr('disabled');
-                        $(".btn").val('注册').attr("disabled", true);;
-                        return false;
-                    }
-                    else if (agreenMent != '1') {
-                        //$(".agreenment-tips").html('请先同意用户条款!').fadeIn();
-                        $(".input_div6 span").html('<img src="<?= base_url() ?>application/images/text_error.png"><font color=red>请先同意用户条款!</font>');
-                        //$(".btn").val('注册').removeAttr('disabled');
-                        $(".btn").val('注册').attr("disabled", true);;
-                        return false;
-                    } else {
-                        document.getElementById('registerForm').submit();
-                        
-                    }
-                });
-
-                $('.check2').click(function () {
-                    var rel = $('#agreement').attr("data");
-                    //alert(rel);
-                    if (rel == '1') {
-                        $('#agreement').attr("data", "0");
-                    } else {
-                        $('#agreement').attr("data", "1");
-                    }
-                    $('.check2').toggleClass("check1");
-                });
+                var name_flag=false;
+                var email_flag=false;
+                var emailkey_flag=false;
+                var pwd_flag=false;
+                var code_flag=false;
                 
                 //验证用户名格式是否正确
                 function isUserNameForm(str) {
@@ -69,37 +36,34 @@
                     return true;
                 }
                 //验证用户名是否已存在，若存在，则不可用
-                function isUserNameExist(username) {
-                    var userName = "name=" + username;
-                    $.ajax({
-                        type: "GET",
-                        url: "<?= base_url() ?>index.php/first/login_check?r=" + Math.random(),
-                        async: true,
-                        data:userName,
-                        success: function (data) {
-                            is_user_exist = data;
-                            if (data == "1"||data==true){
-                                $("#user_name_span").html('<img src="<?= base_url() ?>application/images/text_error.png"><font color=red>已存在该用户名，请更换~</font>');
-                                return false;
-                            }else{
-                                $("#user_name_span").html("");
-                                return true;
-                            }
-                        }
-                    });
-                }
+//                function isUserNameExist(username) {                 
+//                }
                 $('#username').focus();
                 $('#username').blur(function () {
                     var username = $('#username').val();
                     username=$.trim(username);
                     if(isUserNameForm(username)&&(username!=null||username!="")){
-                        if(isUserNameExist(username)){
-                            $("#btn").attr("disabled", false);
-                        }else{
-                            $("#btn").attr("disabled", true);
-                        }
+                        var userName = "name=" + username;
+                        $.ajax({
+                            type: "GET",
+                            url: "<?= base_url() ?>index.php/first/login_check?r=" + Math.random(),
+                            async: true,
+                            data:userName,
+                            success: function (data) {
+                                if (data == "1"||data==true){
+                                    $("#user_name_span").html('<img src="<?= base_url() ?>application/images/text_error.png"><font color=red>已存在该用户名，请更换~</font>');
+                                    name_flag=false;
+                                    $("#btn_sub").attr("disabled", true);
+                                }else{
+                                    $("#user_name_span").html("");
+                                    name_flag=true;
+                                    $("#btn_sub").attr("disabled", false);
+                                }
+                            }
+                        });
                     }else{
-                        $("#btn").attr("disabled", true);
+                        name_flag=false;
+                        $("#btn_sub").attr("disabled", true);
                         $("#user_name_span").html("<font color=red>用户名格式错误 !</font>");
                     }
                 });
@@ -111,19 +75,6 @@
                         return false;
                     return true;
                 }
-                //验证邮箱是否已经被注册
-//                function isEmailRegistered(email){
-//                    alert("========");
-//                    
-//                }
-                
-                //验证邮箱是可以注册
-                function isEmailValid(){
-                    
-                }
-//                $('#mail').blur(function (){
-//                    isEmailValid();
-//                });
                 //检验两个字符串是否相同
                 function isStrSame(str1, str2) {
                     if (str1 === str2) {
@@ -145,16 +96,8 @@
                     }
                     return  randomChars;
                 }
-                //检测是否超时，传入参数为Unix时间戳，且first大于second
-                function  isValiKeyTimeout(first_time, second_time) {
-                    var count = first_time - second_time;
-                    if (count > 0 && count < 600) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                }
-                
+
+                //{"reg_email_str":"cdvcqhew","send_time":1429246459,"result":true}
                 function setTime(countdown) {
                     var btn_reg_emailkey=$('#send_reg_emailkey');
                     if (countdown == 0) {
@@ -171,32 +114,31 @@
                         setTime(countdown)
                     },1000);
                 }
-                
+                //{"reg_email_str":"pwqzayn5","send_time":1429244818,"result":true}
                 $('#send_reg_emailkey').click(function () {
                     $("#send_reg_emailkey").attr("disabled", true);
                     var countdown=10;
                     var email=$('#mail').val();
                     email=$.trim(email);
                     if(isEmailForm(email)&&(email!=null||email!="")){
-                        setTime(countdown);
                         $.ajax({
                             type: "POST",
                             url: "<?= base_url() ?>index.php/first/login_mailexist?r=" + Math.random(),
                             async: true,
                             data:{email:email},
                             success: function (data) {
-                                is_user_exist = data;
+//                                is_user_exist = data;
                                 if (data == "1"||data==true){
                                     $("#mail_span").html('<img src="<?= base_url() ?>application/images/text_error.png"><font color=red>该邮箱已被注册，请更换~</font>');
                                     //$("#send_reg_emailkey").attr("disabled", true);
-                                    $("#btn").attr("disabled", true);
-                                    
+                                    $("#btn_sub").attr("disabled", true);
+                                    $("#send_reg_emailkey").attr("disabled", false);
                                 }else{
+                                    setTime(countdown);
                                     $("#mail_span").html("<font color=green>恭喜,邮箱可以注册 !</font>");
                                     //$("#send_reg_emailkey").attr("disabled", false).css("color","green");
                                     var reg_email = $('#mail').val();
                                     var reg_email_str = randomAlphanumeric('text', 8, '0123456789abcdefghijkmnpqrstuvwxyz');
-
                                          $.ajax({
                                         type: "POST",
                                         dataType: "text",
@@ -210,10 +152,10 @@
                                             reg_email_str2 = email_statua.reg_email_str;
                                             send_time = email_statua.send_time;
                                             if (result) {
-                                                
-                                                //-------------
+                                                email_flag=true;
                                                 $("#mail_span").html("<font color=green>邮件已正确发送,请注意查收！</font>");
                                             } else {
+                                                email_flag=false;
                                                 $("#mail_span").html("<font color=red>邮件发送错误,请检查邮箱地址！</font>");
                                             }
                                         }
@@ -223,35 +165,50 @@
                         });
                     }else{
                         $("#send_reg_emailkey").attr("disabled", false);
-                        $("#btn").attr("disabled", true);
+                        $("#btn_sub").attr("disabled", true);
                         $("#mail_span").html("<font color=red>邮箱格式错误 !</font>");
                         
                     }
                 });
-                //发送验证邮件返回的结果
+                //检测是否超时，传入参数为Unix时间戳，且first大于second
+                function  isValiKeyTimeout(first_time, second_time) {
+                    alert(first_time+":"+second_time);
+                    var count = first_time - second_time;
+                    //为方便测试  设置为60，实际应为600
+                    if (count > 0 && count<200) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+                //发送验证邮件返回的结果{"reg_email_str":"jpekj7a1","send_time":1429245588,"result":true}
                 $('#reg_mail_key').blur(function () {
                     var regpage_mail_key = $('#reg_mail_key').val();
-                    $.trim(regpage_mail_key);
+                    regpage_mail_key=$.trim(regpage_mail_key);
                     var mailkey_right_icon = document.getElementById("mailkey_right_icon");
                     var mailkey_wrong_icon = document.getElementById("mailkey_wrong_icon");
                     var cur_time = Math.round(new Date().getTime() / 1000);
                     if (regpage_mail_key != null||regpage_mail_key != "") {
                         if (isValiKeyTimeout(cur_time, send_time)) {
+                           //{"reg_email_str":"vxxzr5hw","send_time":1429243467,"result":true}         
+                           alert(regpage_mail_key+"::"+reg_email_str2);
                             if (isStrSame(regpage_mail_key, reg_email_str2)) {
-                                mailkey_right_icon.style.display = "";
-                                mailkey_wrong_icon.style.display = "none";
-                                $('#btn').attr("disabled", false);
-                            } else {
-                                mailkey_right_icon.style.display = "none";
-                                mailkey_wrong_icon.style.display = "";
-                                $("#btn").attr("disabled", true);
+                                emailkey_flag=true; 
+                                $('#mailkey_span').html("<font color=green>验证码正确</font>");
+                                $('#btn_sub').attr("disabled", false);
+                            } else {//y64ik2x4
+                                emailkey_flag=false;
+                                $("#btn_sub").attr("disabled", true);
+                                $('#mailkey_span').html('<img src="<?= base_url() ?>application/images/text_error.png"><font color=red>验证码错误</font>');
                             }
                         } else {
+                            emailkey_flag=false;
                             $('#mailkey_span').html("<font color=red>验证码超时</font>");
                             mailkey_right_icon.style.display = "none";
                             mailkey_wrong_icon.style.display = "none";
                         }
                     } else {
+                        emailkey_flag=false;
                         mailkey_right_icon.style.display = "none";
                         mailkey_wrong_icon.style.display = "none";
                         $('#mailkey_span').html("<font color=red>请输入邮件中的验证码！</font>");
@@ -264,10 +221,10 @@
                     var ispwd=myreg.test(pwd1);
                     if(ispwd){
                         $('#password1_span').html("<font color=green>密码格式正确！</font>");
-                        $("#btn").attr("disabled", false);
+                        $("#btn_sub").attr("disabled", false);
                     }else{
                         $('#password1_span').html("<font color=red>密码格式不正确！</font>");
-                        $("#btn").attr("disabled", true);
+                        $("#btn_sub").attr("disabled", true);
                     }
                 });
                 
@@ -275,11 +232,13 @@
                     var pwd1=$('#password1').val();
                     var pwd2=$('#password2').val();
                     if(isStrSame(pwd1,pwd2)){
+                        pwd_flag=true;
                         $('#password2_span').html("");
-                        $("#btn").attr("disabled", false);
+                        $("#btn_sub").attr("disabled", false);
                     }else{
+                        pwd_flag=false;
                         $('#password2_span').html("<font color=red>两次密码不一致！</font>");
-                        $("#btn").attr("disabled", true);
+                        $("#btn_sub").attr("disabled", true);
                     }
                 });
 
@@ -300,7 +259,7 @@
                         }
                     }
                     return radio_val;
-                }
+                }//{"reg_email_str":"f3iu6mp6","send_time":1429249007,"result":true}
                 function setSerialShowHide(check_val) {
                     var vip_serial_div = document.getElementById("vip_serial_div");
                     var train_serial_div = document.getElementById("train_serial_div");
@@ -315,9 +274,8 @@
                     } else {
                         vip_serial_div.style.display = "none";
                         train_serial_div.style.display = "none";
-                        $("#btn").attr("disabled", false);
+                        $("#btn_sub").attr("disabled", false);
                     }
-
                 }
 
                 $('#vip_serial_num').blur(function () {
@@ -337,11 +295,11 @@
                                 if (data == 1 || data == "1") {
                                     vip_wrong_icon.style.display = "none";
                                     vip_right_icon.style.display = "";
-                                    $("#btn").attr("disabled", false);
+                                    $("#btn_sub").attr("disabled", false);
                                 } else {
                                     vip_wrong_icon.style.display = "";
                                     vip_right_icon.style.display = "none";
-                                    $("#btn").attr("disabled", true);
+                                    $("#btn_sub").attr("disabled", true);
                                 }
 
                             }});
@@ -365,11 +323,11 @@
                                 if (data == 1 || data == "1") {
                                     train_wrong_icon.style.display = "none";
                                     train_right_icon.style.display = "";
-                                    $("#btn").attr("disabled", false);
+                                    $("#btn_sub").attr("disabled", false);
                                 } else {
                                     train_wrong_icon.style.display = "";
                                     train_right_icon.style.display = "none";
-                                    $("#btn").attr("disabled", true);
+                                    $("#btn_sub").attr("disabled", true);
                                 }
                             }});
                     } else {
@@ -378,21 +336,65 @@
                 });
                 //**********************************************************************
 
+                $('#varcode').blur(function (){
+                    var varcode=$('#varcode').val();
+                    $.ajax({
+                        url: "<?= base_url() ?>index.php/first/get_verify_code?r=" + Math.random(),
+                        async: true,
+                        success: function (data) {
+                            alert(data);
+                            real_code = data;
+                            if(isStrSame(varcode, data)){
+                                code_flag=true;
+                                $("#changeCode_span").html("");
+                                $("#btn_sub").val('注册').attr("disabled", false);
+                            }else{
+                                code_flag=false;
+                                $("#changeCode_span").html('<img src="<?= base_url() ?>application/images/text_error.png"><font color=red>验证码错误!</font>');
+                                $("#varcode").focus();
+                                $("#btn_sub").val('注册').attr("disabled", true);
+                            }
+                        }
+                    });
+                });
                 
-            });
-            function isCodeRight() {
-                $.ajax({
-                    url: "<?= base_url() ?>index.php/first/get_verify_code?r=" + Math.random(),
-                    async: true,
-                    success: function (data) {
-                        real_code = data;
-
+                $('.check2').click(function () {
+                    var rel = $('#agreement').attr("data");
+                    //alert(rel);
+                    if (rel == '1') {
+                        $('#agreement').attr("data", "0");
+                    } else {
+                        $('#agreement').attr("data", "1");
+                    }
+                    $('.check2').toggleClass("check1");
+                });
+                
+                $("#btn_sub").click(function () {
+                    var agreenMent = $("#agreement").attr("data");
+                    if(!name_flag){
+                        alert("用户名错误");
+                    }else if(!email_flag){
+                        alert("邮件地址错误");
+                    }else if(!emailkey_flag){
+                        alert("邮件验证码错误");
+                    }else if(!pwd_flag){
+                        alert("密码异常");
+                    }else if(!code_flag){
+                        alert("页面验证码错误");
+                    }else if (agreenMent != '1') {
+                        $("#aggreement_span").html('<img src="<?= base_url() ?>application/images/text_error.png"><font color=red>请先同意用户条款!</font>');
+                        return false;
+                    } else {
+                        $("#btn_sub").val('注册').attr("disabled", false);
+                        document.getElementById('registerForm').submit();
+                        
                     }
                 });
-            }
+                //{"reg_email_str":"265s9nct","send_time":1429244408,"result":true}
 
+            });
             function changeCode() {
-                $("#verify_code").attr("src", "<?= base_url() ?>index.php/first/verify_image?r=" + Math.random());
+                    $("#verify_code").attr("src", "<?= base_url() ?>index.php/first/verify_image?r=" + Math.random());
             }
 
 //            function isRegEmailKeyVali(reg_email_key){
@@ -415,6 +417,20 @@
             .serial_input{font-size:12px;width:308px!important; height:26px;line-height:26px;padding:10px 5px; border:1px solid #aeaeae; border-radius:4px; color:#666;}
             .input_div5 .user_type{ margin: 16px 10px;}
             .send_reg_emailkey{padding:8px;margin: 0px 10px;}
+            .btn_sub{  background: #0697d5;  width: 320px; 
+            font-size:20px;
+            height: 60px;
+            text-align: center;
+            border: 0 none;
+            border-radius: 4px;
+            color: #fff;
+            cursor: pointer;
+            letter-spacing: 6px;
+            word-spacing: normal;
+            text-transform: none;
+            text-indent: 0px;
+            text-shadow: none;
+            display: inline-block;}
 
         </style>
     </head>
@@ -493,24 +509,24 @@
                     <div class="div_form clear " >
                         <label>输入验证码：</label>
                         <div class="input_div input_div8">
-                            <input id="varcode" name="vercode" type="text" onblur="isCodeRight()" value="" placeholder="请输入验证码">
+                            <input id="varcode" name="vercode" type="text"  value="" placeholder="请输入验证码">
                             <img src="<?= base_url() ?>index.php/first/verify_image" alt="验证码" id="verify_code" class="yz_img" />
-                            <a class="changeone" href="javascript:void(0);" onclick="changeCode()">点击换一张</a>
-                            <span></span>
+                            <a class="changeone" href="javascript:void(0);" onclick="changeCode()" >点击换一张</a>
+                            <span id="changeCode_span"></span>
                         </div>
                     </div>
                     <div class="div_form clear ">
                         <label></label>
                         <div class="input_div check2 input_div9" data="0" id="agreement">
-                            我已阅读并接受《JS代码网用户服务协议》
-                            <span></span>
+                            我已阅读并接受《我爱开车网用户服务协议》
+                            <span  id="aggreement_span"></span>
                         </div>
                     </div>
-
+                    
                     <div class="div_form clear ">
                         <label></label>
                         <div class="input_div">
-                            <input id="btn" class="btn" type="test"  value="注册" />
+                            <input id="btn_sub" class="btn_sub" type="button" value="注册">
                         </div>
                     </div>
 
@@ -520,10 +536,6 @@
                     <p>已有帐号？</p>
                     <a class="btn2" href="login">登录</a>
                 </div>
-
-
-
-
             </div>
             <div class="body2"></div>
         </div>
