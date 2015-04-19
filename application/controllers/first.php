@@ -65,8 +65,34 @@ class First extends MY_Controller {
     public function sch_info() {
         $oneNews = array();
         $news = $this->news_model->select_simple();
+        $topNews = $this->news_model->select_TopNews();
+        $topNewsId="";
+        $sub1NewsId="";
+        $sub2NewsId="";
+        foreach ($topNews as $value) {
+            if($value['news_postion']==1){
+            $topNewsId=$value['news_id'];
+            }else if($value['news_postion']==2){
+                $sub1NewsId=$value['news_id'];
+            }else if($value['news_postion']==3){
+                $sub2NewsId=$value['news_id'];
+            }
+        }
         $i = 0;
         foreach ($news as $row) {
+            if($row['news_id']==$topNewsId){
+                $oneNews['topNewsTitle'][0]=$row['news_title'];
+                $oneNews['topNewsUrl'][0]=$row['news_imge'];
+                $oneNews['topNewsMainidea'][0]=$row['news_mainidea'];
+                $oneNews['topNewsAuthor'][0]=$row['news_author'];
+                $oneNews['topNewsTime'][0]=$row['news_date'];
+            }else if($row['news_id']==$sub1NewsId){
+                $oneNews['sub1NewsTitle'][0]=$row['news_title'];
+                $oneNews['sub1NewsUrl'][0]=$row['news_imge'];
+            }else if($row['news_id']==$sub2NewsId){
+                $oneNews['sub2NewsTitle'][0]=$row['news_title'];
+                $oneNews['sub2NewsUrl'][0]=$row['news_imge'];
+            }
             switch ($row['news_type']) {
                 case 1:
                     $oneNews['news1'][$i] = $this->load->view('a_views/news_list', $row, true);

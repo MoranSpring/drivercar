@@ -49,8 +49,8 @@
                     <li class="admin-parent">
                         <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}"><span class="am-icon-file"></span> 信息编辑 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
                         <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
-                            <li><a href="<?=  base_url()?>index.php/admin/insert_info" class="am-cf"><span class="am-icon-check"></span> 信息录入 <span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
-                            <li><a href="<?=  base_url()?>index.php/admin/check_info"><span class="am-icon-puzzle-piece"></span> 检查信息</a></li>
+                            <li><a href="<?= base_url() ?>index.php/admin/insert_info" class="am-cf"><span class="am-icon-check"></span> 信息录入 <span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
+                            <li><a href="<?= base_url() ?>index.php/admin/check_info"><span class="am-icon-puzzle-piece"></span> 检查信息</a></li>
                             <li><a href="admin-gallery.html"><span class="am-icon-th"></span>驾校信息查看<span class="am-badge am-badge-secondary am-margin-right am-fr">24</span></a></li>
                             <li><a href="admin-log.html"><span class="am-icon-calendar"></span> 教练信息查看</a></li>
                         </ul>
@@ -94,64 +94,106 @@
     <!--<![endif]-->
     <script src="<?= base_url() ?>application/js/admin/app.js"></script>
     <script>
-        function setImagePreview(docObj) {  
+        function setImagePreview(docObj) {
 
 //    var imgObjPreview=document.getElementById(preview);  
 ////     docObj.setAttribute("class","tempPreview");
-      var imgObjPreview=$(docObj).parent().find("img")[0];
+            var imgObjPreview = $(docObj).parent().find("img")[0];
 
-    if(docObj.files && docObj.files[0]){  
-        //火狐下，直接设img属性  
-        imgObjPreview.style.display = 'block';  
-        imgObjPreview.style.width = '300px';                   
-        //imgObjPreview.src = docObj.files[0].getAsDataURL();  
-          
-        //火狐7以上版本不能用上面的getAsDataURL()方式获取，需要一下方式    
-        imgObjPreview.src = window.URL.createObjectURL(docObj.files[0]);  
-    }else{  
-        //IE下，使用滤镜  
-        docObj.select();  
-        var imgSrc = document.selection.createRange().text;  
-        var localImagId = document.getElementById("localImag");  
-        //必须设置初始大小  
-        localImagId.style.width = "300px";  
-        localImagId.style.height = "120px";  
-        //图片异常的捕捉，防止用户修改后缀来伪造图片  
-        try{  
-            localImagId.style.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";  
-            localImagId.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = imgSrc;  
-        }catch(e){  
-            alert("您上传的图片格式不正确，请重新选择!");  
-            return false;  
-        }  
-        imgObjPreview.style.display = 'none';  
-        document.selection.empty();  
-    }  
-    return true;  
-}  
+            if (docObj.files && docObj.files[0]) {
+                //火狐下，直接设img属性  
+                imgObjPreview.style.display = 'block';
+                imgObjPreview.style.width = '300px';
+                //imgObjPreview.src = docObj.files[0].getAsDataURL();  
+
+                //火狐7以上版本不能用上面的getAsDataURL()方式获取，需要一下方式    
+                imgObjPreview.src = window.URL.createObjectURL(docObj.files[0]);
+            } else {
+                //IE下，使用滤镜  
+                docObj.select();
+                var imgSrc = document.selection.createRange().text;
+                var localImagId = document.getElementById("localImag");
+                //必须设置初始大小  
+                localImagId.style.width = "300px";
+                localImagId.style.height = "120px";
+                //图片异常的捕捉，防止用户修改后缀来伪造图片  
+                try {
+                    localImagId.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+                    localImagId.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = imgSrc;
+                } catch (e) {
+                    alert("您上传的图片格式不正确，请重新选择!");
+                    return false;
+                }
+                imgObjPreview.style.display = 'none';
+                document.selection.empty();
+            }
+            return true;
+        }
     </script> 
     <script>
-         $(function () {
-                $.ajax({
-                    type: "GET",
-                    url: "<?= base_url() ?>index.php/admin/get_schools?r=" + Math.random(),
-                    async: true,
-                    success: function (data) {
-                        var json = eval ("(" + data + ")");
-                        for(var i=0 ;i<json.length;i++){
-                            
-                             $('#select_sch').append("<option value='" +json[i].jp_id+ "'>" + json[i].jp_name + "</option>");
-                             
-                        }
-                        $('#select_sch').trigger('chosen:updated');
-                        
+        $(function () {
+            $.ajax({
+                type: "GET",
+                url: "<?= base_url() ?>index.php/admin/get_schools?r=" + Math.random(),
+                async: true,
+                success: function (data) {
+                    var json = eval("(" + data + ")");
+                    for (var i = 0; i < json.length; i++) {
+
+                        $('#select_sch').append("<option value='" + json[i].jp_id + "'>" + json[i].jp_name + "</option>");
 
                     }
-                });
+                    $('#select_sch').trigger('chosen:updated');
 
-         });
-         
-    
+
+                }
+            });
+
+        });
+        function checkNews(thisform) {
+            with (thisform)
+            {
+                if (options.value==="")
+                {
+                    alert("options is null");
+                    return false;
+                }else if(news_date.value===""){
+                    news_date.focus();
+                    alert("news_date is null");
+                    return false;
+                }else if(news_title.value===""){
+                    news_title.focus();
+                    alert("news_title is null");
+                    return false;
+                }else if(news_title.value.length<=18){
+                    news_title.focus();
+                    alert("news_title is full");
+                    return false;
+                }
+                else if(news_author.value===""){
+                    news_author.focus();
+                    alert("news_author is null");
+                    return false;
+                }
+                else if(news_mainidea.value===""){
+                    news_mainidea.focus();
+                    alert("news_mainidea is null");
+                    return false;
+                }
+                else if(news_mainidea.value.length>=50){
+                    news_mainidea.focus();
+                    alert("news_mainidea is full");
+                    return false;
+                }
+                else if(news_content.value===""){
+                    news_content.focus();
+                    alert("news_content is null");
+                    return false;
+                }
+            }
+        }
+
+
     </script>
 </body>
 </html>

@@ -43,7 +43,7 @@
                     </span>
                 </li>
                 <li>
-                    <span style="border-right: 1px solid #ccc">
+                    <span style="border-right: 1px solid #eee">
                         更多
                     </span>
                 </li>

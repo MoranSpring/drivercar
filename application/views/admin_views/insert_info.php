@@ -13,7 +13,7 @@
 
 
                         <div class="am-tab-panel am-fade am-in am-active" id="tab1" style="padding-bottom: 200px">
-                            <form class="am-form" action="<?= base_url() . 'index.php/admin/news_upload' ?>" method="post" enctype="multipart/form-data">
+                            <form class="am-form" action="<?= base_url() . 'index.php/admin/news_upload' ?>" onsubmit="return checkNews(this)"method="post" enctype="multipart/form-data">
                                 <div class="am-g am-margin-top">
                                     <div class="am-u-sm-4 am-u-md-2 am-text-right">新闻分类</div>
                                     <div class="am-u-sm-8 am-u-md-10">
@@ -29,17 +29,20 @@
                                 </div>
 
                                 <div class="am-g am-margin-top">
-                                    <div class="am-u-sm-4 am-u-md-2 am-text-right">显示状态</div>
+                                    <div class="am-u-sm-4 am-u-md-2 am-text-right">新闻等级</div>
                                     <div class="am-u-sm-8 am-u-md-10">
                                         <div class="am-btn-group" data-am-button>
                                             <label class="am-btn am-btn-primary am-btn-xs">
-                                                <input type="radio" name="options" id="option1"> 正   常
+                                                <input type="radio" name="options" id="option1" value="4"> 普通
                                             </label>
                                             <label class="am-btn am-btn-primary am-btn-xs">
-                                                <input type="radio" name="options" id="option2"> 待审核
+                                                <input type="radio" name="options" id="option2" value="1"> 头条
                                             </label>
                                             <label class="am-btn am-btn-primary am-btn-xs">
-                                                <input type="radio" name="options" id="option3"> 不显示
+                                                <input type="radio" name="options" id="option3" value="2"> 副一头条
+                                            </label>
+                                            <label class="am-btn am-btn-primary am-btn-xs">
+                                                <input type="radio" name="options" id="option3" value="3"> 副二头条
                                             </label>
                                         </div>
                                     </div>
@@ -60,17 +63,25 @@
 
                                 <div class="am-g am-margin-top">
                                     <div class="am-u-sm-4 am-u-md-2 am-text-right">
-                                        文章作者
+                                        文章出处
                                     </div>
                                     <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
                                         <input type="text" class="am-input-sm" name="news_author">
+                                    </div>
+                                </div>
+                                <div class="am-g am-margin-top">
+                                    <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                        文章摘要
+                                    </div>
+                                    <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                        <input type="text" placeholder="不超过50个字" class="am-input-sm" name="news_mainidea">
                                     </div>
                                 </div>
 
 
                                 <div class="am-g am-margin-top-sm">
                                     <div class="am-u-sm-22 am-u-md-2 am-text-right admin-form-text">
-                                        内容描述
+                                        正文
                                     </div>
                                     <div class="am-u-sm-22 am-u-md-10">
                                         <textarea rows="10" placeholder="请使用富文本编辑插件" name="news_content"></textarea>

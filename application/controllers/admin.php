@@ -54,17 +54,20 @@ class Admin extends MY_Controller {
     public function news_upload() {
         $news_id =time();
         $news_name="news_imges/".$news_id;
+        $news_options=$this->input->post('options');
         $news_title = $this->input->post('news_title');
+        $news_mainidea = $this->input->post('news_mainidea');
         $news_type = $this->input->post('news_type');
         $news_author = $this->input->post('news_author');
         $news_content = $this->input->post('news_content');
         $news_date = $this->input->post('news_date');
-        $news_imge = 'http://image.52drivercar.com/' . $news_name . '.jpg';
+        $news_imge = 'http://image.52drivecar.com/' . $news_name . '.jpg';
         $hasImg = false;
         $data = array(
             'news_id' => $news_id,
             'news_title' => $news_title,
             'news_type' => $news_type,
+            'news_mainidea' => $news_mainidea,
             'news_content' => $news_content,
             'news_author' => $news_author,
             'news_date' => $news_date,
@@ -79,7 +82,12 @@ class Admin extends MY_Controller {
         }else{
             $result = $this->news_model->insert($data);
         }
-        if ($result == 1) {
+        $result2=1;
+        if($news_options!=4){
+            $data1=array("news_id"=>$news_id);
+            $result2 = $this->news_model->update_TopNews($news_options,$data1);
+        }
+        if ($result == 1&&$result2==1) {
 //            redirect();
             echo 'insert success!!'.$hasImg;
         } else {

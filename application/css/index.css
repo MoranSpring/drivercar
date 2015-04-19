@@ -51,7 +51,7 @@ body{
     min-width: 1000px;
     position: relative;
     z-index: 1000;
-    background-color: #141a3e;
+    background-color: #414551;
 }
 #header nav{
     width:1000px;
@@ -114,7 +114,7 @@ body{
     float: left;
     text-align: center;
     width: 110px;
-    border-left: 1px solid #ccc;
+    border-left: 1px solid #eee;
     position: relative;
 
 }
@@ -169,14 +169,14 @@ body{
     background-color: #fff;
     float:left;
     width:200px;
-    border:1px solid #aaa;
+    border:1px solid #ddd;
     border-bottom: 0;
     cursor: pointer;
 }
 #con-left ul li{
     list-style: none;
     text-align: center;
-    border-bottom:1px solid #aaa;
+    border-bottom:1px solid #ddd;
 }
 #con-left ul li:hover{
     background-color: #8C8FA2;
@@ -192,6 +192,7 @@ body{
     min-height: 800px;
     display: block;
     margin-left: 14px;
+    background: #fff;
 }
 #con-nav{
     margin: 5px 0 5px 5px;
@@ -254,7 +255,8 @@ body{
     clear: both;
     border:1px solid #999999;
     background-color: #fff;
-    height:800px;position:relative;
+    min-height:400px;
+    position:relative;
     top:0;overflow: hidden;
     zoom:1;
     /* margin:-2px; */
@@ -326,6 +328,9 @@ body{
     border-bottom: 1px dotted #ccc;
     line-height: 32px;
     height: 32px;
+}
+.news:hover {
+    background:#ECEFF4;
 }
 .news_time{
     float:right;
