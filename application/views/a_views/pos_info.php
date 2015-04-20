@@ -16,7 +16,7 @@
             <ul class="tab">
                 <li id="one1" class="selected-li" onclick="setTab('one', 1, 3)">自动定位</li>
                 <li id="one2" onclick="setTab('one', 2, 3)">地址选择</li>
-                <li id="one3" onclick="setTab('one', 3, 3)">搜索</li>
+                <li id="one3" onclick="setTab('one', 3, 3)"  style="border-right:1px solid #aaa;">搜索</li>
             </ul>
             <div class="pos_content">
                 <div id="content1">
@@ -37,7 +37,7 @@
         
         <div class ="real_content">
             <ul class="tab">
-                <li id="one1" class="selected-li">驾培机构</li>
+                <li id="one1" class="selected-li"  style="border-right:1px solid #aaa;">驾培机构</li>
             </ul>
             <div class="sch_content">
                 <div>

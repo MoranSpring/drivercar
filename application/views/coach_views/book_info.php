@@ -8,7 +8,7 @@
         <ul class="tab">
             <li id="one1" class="selected-li" onclick="setTab('one', 1, 3)">已预约课程</li>
             <li id="one2" onclick="setTab('one', 2, 3)">申诉退订</li>
-            <li id="one3" onclick="setTab('one', 3, 3)">搜索</li>
+            <li id="one3" onclick="setTab('one', 3, 3)" style="border-right:1px solid #aaa;">搜索</li>
         </ul>
         <div class="pos_content">
             <div id="content1" class="clearfix">

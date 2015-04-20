@@ -16,10 +16,10 @@
             <p><a href="void">首页</a> > <a href="void">会员中心</a> >学习管理</p>
         </div>
         <div id="con-con" class ="real_content">
-            <ul class="tab2">
+            <ul class="tab">
                 <li id="one1" class="selected-li" onclick="setTab('one', 1, 3)">未消费订单</li>
                 <li id="one2" onclick="setTab('one', 2, 3)">历史订单</li>
-                <li id="one3" onclick="setTab('one', 3, 3)">法律法规</li>
+                <li id="one3" onclick="setTab('one', 3, 3)" style="border-right:1px solid #aaa;">法律法规</li>
 
             </ul>
             <div id="main_content" class="clearfix">
@@ -50,7 +50,7 @@
                         </table>
                     </div>
                 </div>
-                <div id="content2" class="clearfix">
+                <div id="content2" class="clearfix"   style="display:none;">
                     <div style="margin: 5px;">
                         <table class="ml-table am-table am-table-bordered" >
                             <thead>
@@ -77,38 +77,40 @@
                         </table>
                     </div>
                 </div>
-                <div id="content3" class="clearfix">
+                <div id="content3" class="clearfix"   style="display:none;">
                 </div>
 
 
             </div>
         </div>
-        <script>
-            $('.teach-comment').live("click",function () {
-                window.location.href = "<?= base_url() . 'index.php/vipcenter/tocomment?id=' ?>" + $(this).attr('value');
-            });
-            $('.unbook').live("click",function () {
-                if (confirm("你确定要申请退订吗?"))
-                {
-                    var book_id = $(this).attr('book_id');
-                    var thisData = $(this);
-                    $.ajax({
-                        type: "POST",
-                        dataType: "text",
-                        url: "<?= base_url() ?>index.php/vipcenter/unbook",
-                        async: true,
-                        data: {book_id: book_id},
-                        success: function (data) {
-                            if (data == 1) {
-                                thisData.addClass('unbook_end');
-                                thisData.html('已申请');
-                                thisData.removeClass('unbook');
-                            }
-                            else {
-                                alert("申请失败！");
-                            }
-                        }
-                    });
+    </div>
+</div>
+<script>
+    $('.teach-comment').live("click", function () {
+        window.location.href = "<?= base_url() . 'index.php/vipcenter/tocomment?id=' ?>" + $(this).attr('value');
+    });
+    $('.unbook').live("click", function () {
+        if (confirm("你确定要申请退订吗?"))
+        {
+            var book_id = $(this).attr('book_id');
+            var thisData = $(this);
+            $.ajax({
+                type: "POST",
+                dataType: "text",
+                url: "<?= base_url() ?>index.php/vipcenter/unbook",
+                async: true,
+                data: {book_id: book_id},
+                success: function (data) {
+                    if (data == 1) {
+                        thisData.addClass('unbook_end');
+                        thisData.html('已申请');
+                        thisData.removeClass('unbook');
+                    }
+                    else {
+                        alert("申请失败！");
+                    }
                 }
             });
-        </script>
+        }
+    });
+</script>

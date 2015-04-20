@@ -97,7 +97,7 @@
                                     手机号码：
                                 </li>
                                 <li>
-                                    2001111111
+                                    2001111333
                                 </li>
                             </ul>
                             <ul class="co-self-third clearfix">
@@ -139,7 +139,7 @@
             <ul class="tab">
                 <li id="one1" style="width:150px" class="selected-li" onclick="setTab('one', 1, 3)">详细信息</li>
                 <li id="one2" style="width:150px" onclick="setTab('one', 2, 3)">累计评论  <span style="font-size: 1em;color:#900;font-weight: bold">12300</span></li>
-                <li id="one3" style="width:150px" onclick="setTab('one', 3, 3)">学习记录  <span style="font-size: 1em;color:#900;font-weight: bold">12300</span></li>
+                <li id="one3" style="width:150px;border-right:1px solid #aaa;" onclick="setTab('one', 3, 3)">学习记录  <span style="font-size: 1em;color:#900;font-weight: bold">12300</span></li>
             </ul>
             <div class="pos_content" style="height: auto;max-height: 500px; min-height: 300px; overflow: auto">
                 <div id="content1" class="clearfix">

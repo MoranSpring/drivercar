@@ -107,7 +107,7 @@
                     </div>
                     <?php
                     foreach ($news1 as $row)
-                        echo $row
+                        echo $row;
                         ?>
                 </div>
                 <div id="content2" style="display:none;" class="clearfix">
