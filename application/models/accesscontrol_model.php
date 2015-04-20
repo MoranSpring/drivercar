@@ -83,5 +83,17 @@ class Accesscontrol_model extends CI_Model{
         $query = $this->db->get('AccessControl');
         return $query->result_array();
     }
+    public function ChangePwdByEmail($email,$pwd_md5) {//根据session_id返回当前登录用户的所有信息
+
+        $data=array('stu_pwd'=>$pwd_md5);
+        $result=$this->db->update('AccessControl', $data, array('stu_email' => $email));
+        return $result;
+    }
+    public function emailUnique($email){//查找邮箱是否存在与数据库中
+         $this->db->select();
+         $this->db->where('stu_email',$email);
+        $query = $this->db->get('AccessControl');
+        return $query->num_rows();
+    }
     
 }

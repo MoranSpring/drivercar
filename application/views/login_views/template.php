@@ -54,7 +54,7 @@
                                 <td>
                                     <div>
                                         <label class="checkbox" for="chk11"><input style="height: auto;" id="chk11" type="checkbox" name="remember_me" >记住我</label>
-                                        <a href="passport/forget-pwd">忘记密码？</a>
+                                        <a href="forgetPwd">忘记密码？</a>
                                     </div>
                                 </td>
                                 <td></td>

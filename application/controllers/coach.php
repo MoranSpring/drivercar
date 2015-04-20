@@ -40,7 +40,8 @@ class Coach extends MY_Controller {
         }
         $body['navigation'] = $this->load->view('coach_views/navigation', '', true);
         if ($page == '') {
-            $body['content'] = $this->load->view('coach_views/self_info', '', true);
+           $this->self_info();
+           return false;
         } else {
             $body['content'] = $page;
         }
@@ -49,7 +50,9 @@ class Coach extends MY_Controller {
         $this->load->view('coach_views/template', $body);
     }
     public function self_info(){
-        $page = $this->load->view('coach_views/self_info', "", true);
+        $body['book_date1']="afafdas";
+        $body['book_date2']="afafdas";
+        $page = $this->load->view('coach_views/self_info',$body, true);
         $this->view($page);
     }
     public function teach_info(){

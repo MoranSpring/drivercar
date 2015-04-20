@@ -165,7 +165,7 @@
                     news_title.focus();
                     alert("news_title is null");
                     return false;
-                }else if(news_title.value.length<=18){
+                }else if(news_title.value.length>=18){
                     news_title.focus();
                     alert("news_title is full");
                     return false;

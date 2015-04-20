@@ -148,6 +148,11 @@ class First extends MY_Controller {
         $page = $this->load->view('a_views/coach_info', '', true);
         $this->view($page);
     }
+    public function forgetPwd() {
+       $this->load->view('login_views/forget_pwd.php');
+
+    }
+
 
 //--------------注册------------------------
     public function register() {

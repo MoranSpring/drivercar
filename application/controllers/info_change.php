@@ -372,6 +372,46 @@ class Info_change extends MY_Controller {
 //       $this->load->view('login_views/index.html');
 
     }
+    //************forget_pwd**************
+    //验证邮箱是否已经被注册
+    public function emialChange() {
+        $email = $this->input->post('bind_email');
+        $Result = $this->accesscontrol_model->emailUnique($email);
+        if ($Result ==1) {
+            echo true;
+//            echo 'This user is not exist.';
+            return true;
+        } else {
+            echo false;
+        }
+    }
+    //
+    function ForgetPwdVali() {
+        $this->load->helper('date');
+        $email = $this->input->post('bind_email');
+        $con_str = $this->input->post('chage_pwd_str');
+        $send_time=  time();
+        $email_text="<html><div>这封邮件发送的是我爱开车网根据绑定邮箱修改密码的验证码：";
+        $result=  $this->sendEmail($email_text,$email,$con_str,$send_time);
+        $data=array('chage_pwd_str'=>$con_str,'send_time'=>$send_time,'result'=>$result);
+        echo json_encode($data);
+    }
+    
+    //{"chage_pwd_str":"s4ngz3vj","send_time":1429259814,"result":true}
+    function pdwChangeByEmail() {
+        $bindemail= $this->input->post('bindemail');
+        $newpwd= $this->input->post('newpwd');
+        trim($bindemail);
+        trim($newpwd);
+        $newpwd_md5=md5($newpwd);
+        $result = $this->accesscontrol_model->ChangePwdByEmail($bindemail,$newpwd_md5);
+        if($result){
+            echo 'true'.true;
+        }else{
+            echo 'false'.false;
+        }
+    }
+
     
     
 

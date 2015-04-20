@@ -64,7 +64,7 @@
                 <li style="width:75%">
                     <ul class="co-self-info clearfix">
                         <li class="co-name">
-                            <p>刘德华</p>
+                            <p><?= $book_date2 ?></p>
                             <div>个人介绍：我是棒棒哒教练，教的好，学生学的块，成绩优异。<a class="co-self-edit-on"  href="<?= base_url() ?>index.php/coach/self_info_edit">资料编辑</a></div>
                         </li>
                         <li>
@@ -163,7 +163,7 @@
                         <ul class="am-comments-list am-comments-list-flip">
                             <li class="am-comment">
                                 <a href="#link-to-user-home">
-                                    <img src="http://image.52drivercar.com/coach_imges/1428902329.jpg@!nail" alt="" class="am-comment-avatar" width="48" height="48"/>
+                                    <img src="" alt="" class="am-comment-avatar" width="48" height="48"/>
                                 </a>
 
                                 <div class="am-comment-main">
