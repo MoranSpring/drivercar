@@ -54,8 +54,19 @@ class Coach extends MY_Controller {
         $this->load->view('coach_views/template', $body);
     }
     public function self_info(){
-        $body['book_date1']="afafdas";
-        $body['book_date2']="afafdas";
+//        $UID = $this->session->userdata('UID');
+        $UID='1427162541';
+        $result = $this->coach_model->select_detail($UID);
+        $body=array();
+        foreach ($result as $row) {
+            $body['coach_name']=$row['coach_name'];
+            $body['coach_old']=$row['coach_old'];
+            $schName = $this->school_model->select_name($row['coach_sch_id']);
+            $body['coach_sch_name'] = $schName[0]['jp_name'];
+            $body['coach_face']=$row['coach_face'];
+            $body['coach_intro']=$row['coach_intro'];
+            $body['coach_telnum']=$row['coach_telnum'];
+        }
         $body['isCoach'] = true;
         $page = $this->load->view('coach_views/self_info',$body, true);
         $this->view($page);

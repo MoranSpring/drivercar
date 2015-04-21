@@ -59,13 +59,13 @@
         <div>
             <ul class="co-self clearfix">
                 <li style="width:25%">
-                    <img src="http://image.52drivecar.com/coach_imges/1428902329.jpg@!nail250" class="am-img-thumbnail" height="250" width="250"/>
+                    <img src="<?= $coach_face ?>@!nail250" class="am-img-thumbnail" height="250" width="250"/>
                 </li>
                 <li style="width:75%">
                     <ul class="co-self-info clearfix">
                         <li class="co-name">
-                            <p><?= $book_date2 ?></p>
-                            <div>个人介绍：我是棒棒哒教练，教的好，学生学的块，成绩优异。<a class="<?php if($isCoach==true) echo 'co-self-edit-on';else echo 'co-self-edit-off';?>"  href="<?= base_url() ?>index.php/coach/self_info_edit">资料编辑</a></div>
+                            <p><?= $coach_name ?></p>
+                            <div>个人介绍：<?= $coach_intro ?><a class="<?php if($isCoach==true) echo 'co-self-edit-on';else echo 'co-self-edit-off';?>"  href="<?= base_url() ?>index.php/coach/self_info_edit">资料编辑</a></div>
                         </li>
                         <li>
                             <ul class="co-self-third clearfix">
@@ -81,7 +81,7 @@
                                     所属驾培点：
                                 </li>
                                 <li>
-                                    华科大驾校点 <span class="am-icon-map-marker ml-red"></span>
+                                    <?= $coach_sch_name ?> <span class="am-icon-map-marker ml-red"></span>
                                 </li>
                             </ul>
                             <ul class="co-self-third clearfix">
@@ -97,7 +97,7 @@
                                     手机号码：
                                 </li>
                                 <li>
-                                    2001111333
+                                    <?= $coach_telnum ?>
                                 </li>
                             </ul>
                             <ul class="co-self-third clearfix">
