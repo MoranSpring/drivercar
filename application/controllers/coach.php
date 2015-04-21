@@ -32,6 +32,10 @@ class Coach extends MY_Controller {
 
     public function view($page = '') {
         $name = $this->session->userdata('name');
+         if($this->session->userdata('TYPE')==1){
+        }else{
+            exit('No direct script access allowed');
+        }
         if ($name == null) {
             $body['header'] = $this->load->view('common_views/header', '', true);
         } else {
@@ -52,6 +56,7 @@ class Coach extends MY_Controller {
     public function self_info(){
         $body['book_date1']="afafdas";
         $body['book_date2']="afafdas";
+        $body['isCoach'] = true;
         $page = $this->load->view('coach_views/self_info',$body, true);
         $this->view($page);
     }

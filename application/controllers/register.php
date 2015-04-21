@@ -28,14 +28,6 @@ class Register extends MY_Controller {
 
     public function index() {
         $this->view();
-//        $bucket = 'driver-un';
-//	$object = 'logo.jpg';	
-//	$file_path ="C:\\Users\\KYLE\\Desktop\\logo.png";
-//	$response = $this->alioss->upload_file_by_file($bucket,$object,$file_path);
-//	$this->_format($response);
-//        $this->load->view('test2');
-//        redirect('first/sch_info');
-//         redirect('vipcenter');
     }
  
     //学员序列号验证

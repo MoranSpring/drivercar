@@ -29,11 +29,15 @@ class Admin extends MY_Controller {
         $this->load->model('coach_model');
     }
 
-    public function index() {
+    public function index($a="") {
         $this->view();
+        
     }
-    public function view($page = '') {
-       
+    private function view($page = '') {
+       if($this->session->userdata('TYPE')==0){
+        }else{
+            exit('No direct script access allowed');
+        }
         if ($page == '') {
             $body['content'] = $this->load->view('admin_views/insert_info', '', true);
         } else {
@@ -41,11 +45,11 @@ class Admin extends MY_Controller {
         }
         $this->load->view('admin_views/template', $body);
     }
-    public function insert_info(){
+    public  function insert_info(){
         $page = $this->load->view('admin_views/insert_info', '', true);
         $this->view($page);
     }
-    public function check_info(){
+    public  function check_info(){
         $page = $this->load->view('admin_views/check_info', '', true);
         $this->view($page);
     }

@@ -13,6 +13,9 @@
             <p><a href="void">首页</a> >> <a href="void"> 驾培首页</a> >>驾培资讯</p>
         </div>
         <style>
+            .news-wrap a:hover{
+                text-decoration:underline;  
+            }
             .news-wrap{
                 width:100%;
             }
@@ -55,11 +58,11 @@
                 background: url("<?=base_url()?>application/images/alpha70.png");
             }
         </style>
-        <div stye="margin:10px;">
+        <div margin:10px;">
             <ul class="news-wrap clearfix">
                 <li style="width:65%;overflow: hidden;border: 1px solid #aaa;background: #fff;">
                     <div class="news-title-main">
-                    <div style="color:#FFF;font-size: 1.3em;line-height:2em"><?=$topNewsTitle[0]?></div>
+                        <div style="color:#FFF;font-size: 1.3em;line-height:2em"><a style="color:#fff;" href="<?= base_url()?>index.php/first/news/<?=$topNewsId[0]?>"><?=$topNewsTitle[0]?></a></div>
                     <div style="color:#ddd;font-size: 0.9em;line-height: 1em"><?=$topNewsMainidea[0]?></div>
                     </div>
                     <img class="am-img-responsive" style="width:100%;height:300px;position:relative; z-index: 9;margin-top:-83px;"  src="<?=$topNewsUrl[0]?>@!topnews"/>
@@ -68,11 +71,11 @@
                 <li  style="float: right;width:34%; border:0;">
                     <div style="overflow: hidden">
                         <img style="position:relative; z-index: 9;margin-bottom:-37px;" src="<?=$sub1NewsUrl[0]?>@!subtopnews" width="100%" height="165"/>
-                    <p class="news-title-second" style="font-size: 0.9em;padding-left: 3px; color:#FFF;line-height: 2.5em;width:100%;text-overflow:ellipsis; height:2.5em"><?=$sub1NewsTitle[0]?></p>
+                        <p class="news-title-second" style="font-size: 0.9em;padding-left: 3px; color:#FFF;line-height: 2.5em;width:100%;text-overflow:ellipsis; height:2.5em"><a style="color:#fff;" href="<?= base_url()?>index.php/first/news/<?=$sub1NewsId[0]?>"><?=$sub1NewsTitle[0]?></a></p>
                     </div>
                      <div style="overflow: hidden;margin-top: 10px">
                     <img style="position:relative; z-index: 9;margin-bottom:-37px;" src="<?=$sub2NewsUrl[0]?>@!subtopnews" width="100%" height="165"/>
-                    <p class="news-title-second" style="font-size: 0.9em;padding-left: 3px; color:#FFF;line-height: 2.5em;width:100%;text-overflow:ellipsis; height:2.5em"><?=$sub2NewsTitle[0]?></p>
+                    <p class="news-title-second" style="font-size: 0.9em;padding-left: 3px; color:#FFF;line-height: 2.5em;width:100%;text-overflow:ellipsis; height:2.5em"><a style="color:#fff;" href="<?= base_url()?>index.php/first/news/<?=$sub2NewsId[0]?>"><?=$sub2NewsTitle[0]?></a></p>
                     </div>
                 </li>
             </ul>
@@ -93,18 +96,6 @@
             </ul>
             <div id="main_content" class="clearfix">
                 <div id="content1" class="clearfix">
-                    <div>
-                        <ul class="news-list-wrap clearfix">
-                            <li style="width:25%">
-                                <img src="<?=$topNewsUrl[0]?>@!subtopnews" width="100%"/>
-                            </li>
-                            <li  style="padding-left:10px;width:75%;height:100%">
-                                <a><div style="font-size: 1.3em;"><?=$topNewsTitle[0]?></div></a>
-                                <div style="color:#777;line-height: 1em;font-size: 0.9em;margin-top: 10px;"><?=$topNewsMainidea[0]?></div>
-                                <div style="font-size: 0.8em;line-height: 1.5em;position:absolute;top:110px;"><a><?=$topNewsAuthor[0]?></a>   <?=$topNewsTime[0]?>   阅读（89）</div>
-                            </li>
-                        </ul>
-                    </div>
                     <?php
                     foreach ($news1 as $row)
                         echo $row;

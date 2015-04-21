@@ -18,12 +18,14 @@ class VipCenter extends MY_Controller {
 
     public function index() {
 //        $this->view('management');
-        $this->management();
+//        $this->management();
+        $this->view();
 //
     }
 
     public function view($page = '') {
         $name = $this->session->userdata('name');
+       
         if ($name == null) {
             $body['header'] = $this->load->view('common_views/header', '', true);
             $body['content'] = $this->load->view('common_views/unlogin', '', true);
@@ -49,6 +51,11 @@ class VipCenter extends MY_Controller {
     }
 
     public function study_progress() {
+         if($this->session->userdata('TYPE')==2){
+        }else{
+            $this->view("you aren't vip!");
+            return false;
+        }
         $UID = $this->session->userdata('UID');
         $result = $this->teachbook_model->get_book_info($UID);
         $i = 0;
@@ -71,11 +78,21 @@ class VipCenter extends MY_Controller {
     }
 
     public function study_book() {
+        if($this->session->userdata('TYPE')==2){
+        }else{
+            $this->view("you aren't vip!");
+            return false;
+        }
         $page = $this->load->view('vip_views/study_book', '', true);
         $this->view($page);
     }
 
     public function management() {
+        if($this->session->userdata('TYPE')==2){
+        }else{
+            $this->view("you aren't vip!");
+            return false;
+        }
         $UID = $this->session->userdata('UID');
         $time = $this->getDate();
         $cls = $this->getCurrentCls();
@@ -153,6 +170,11 @@ class VipCenter extends MY_Controller {
     }
 
     public function feedback() {
+        if($this->session->userdata('TYPE')==2){
+        }else{
+            $this->view("you aren't vip!");
+            return false;
+        }
         $comment_list = array();
         $UID = $this->session->userdata('UID');
         $time = $this->getDate();

@@ -12,9 +12,8 @@
     </head>
     <body background="<?= base_url() ?>application/images/login-al.png">
         <div class="logina-logo" style="height: 55px">
-            <a href="">
-                <img src="<?= base_url() ?>application/images/logo.png" height="50" alt="">
-            </a>
+<!--                <img src="<?= base_url() ?>application/images/logo4.png" height="60" alt="">-->
+                <div style="font-size:40px;color:#666;font-family:SimSUn;">我爱开车网</div>
         </div>
         <div class="logina-main main clearfix">
             <div class="tab-con">
@@ -75,7 +74,10 @@
             </div>
         </div>
         <div id="footer">
-            <div class="copyright">Copyright © 2015 drvierunion.com. All Rights Reserved. 驾途网 版权所有</div>
+            <div class="copyright"><span>由
+            <a href="http://www.baidu.com/" title="kyle" target="_blank" class="">Kyle</a>提供技术支持</span>
+        <span>CopyRight©2015 52drivercar.com Inc.</span>
+        <span>鄂ICP备15005490号</span></div>
         </div>
 
     </body>

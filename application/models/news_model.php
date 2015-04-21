@@ -26,6 +26,7 @@ class News_model extends CI_Model {
         $this->db->select('news_type');
         $this->db->select('news_mainidea');
         $this->db->select('news_author');
+        $this->db->order_by("news_date", "desc");
         $query = $this->db->get('News');
         return $query->result_array();
     }

@@ -30,7 +30,7 @@ class First extends MY_Controller {
     }
 
     public function index() {
-//        $this->view();
+        $this->view();
 //        $bucket = 'driver-un';
 //	$object = 'logo.jpg';	
 //	$file_path ="C:\\Users\\KYLE\\Desktop\\logo.png";
@@ -39,7 +39,7 @@ class First extends MY_Controller {
 //        $this->load->view('ad_views/ad');
 //                $this->load->view('test3');
 //        redirect('first/sch_info');
-        redirect('vipcenter');
+//        redirect('vipcenter');
     }
 
     public function view($page = '') {
@@ -53,7 +53,8 @@ class First extends MY_Controller {
         }
         $body['navigation'] = $this->load->view('common_views/navigation', '', true);
         if ($page == '') {
-            $body['content'] = $this->load->view('a_views/sch_info', '', true);
+            $this->sch_info();
+            return false;
         } else {
             $body['content'] = $page;
         }
@@ -78,42 +79,75 @@ class First extends MY_Controller {
                 $sub2NewsId=$value['news_id'];
             }
         }
-        $i = 0;
+        $a=$b=$c=$d=$e=$f=$g=1;
         foreach ($news as $row) {
             if($row['news_id']==$topNewsId){
                 $oneNews['topNewsTitle'][0]=$row['news_title'];
                 $oneNews['topNewsUrl'][0]=$row['news_imge'];
                 $oneNews['topNewsMainidea'][0]=$row['news_mainidea'];
+                $oneNews['topNewsId'][0]=$row['news_id'];
                 $oneNews['topNewsAuthor'][0]=$row['news_author'];
                 $oneNews['topNewsTime'][0]=$row['news_date'];
             }else if($row['news_id']==$sub1NewsId){
                 $oneNews['sub1NewsTitle'][0]=$row['news_title'];
+                $oneNews['sub1NewsId'][0]=$row['news_id'];
                 $oneNews['sub1NewsUrl'][0]=$row['news_imge'];
             }else if($row['news_id']==$sub2NewsId){
                 $oneNews['sub2NewsTitle'][0]=$row['news_title'];
+                $oneNews['sub2NewsId'][0]=$row['news_id'];
                 $oneNews['sub2NewsUrl'][0]=$row['news_imge'];
             }
+            
             switch ($row['news_type']) {
                 case 1:
-                    $oneNews['news1'][$i] = $this->load->view('a_views/news_list', $row, true);
+                    if($a==1){
+                    $oneNews['news1'][$a] = $this->load->view('a_views/news_list_first', $row, true);
+                    }else{
+                    $oneNews['news1'][$a] = $this->load->view('a_views/news_list', $row, true);
+                    }
+                    $a++;
                     break;
                 case 2:
-                    $oneNews['news2'][$i] = $this->load->view('a_views/news_list', $row, true);
+                    if($b==1){
+                    $oneNews['news2'][$b] = $this->load->view('a_views/news_list_first', $row, true);
+                    }else{
+                    $oneNews['news2'][$b] = $this->load->view('a_views/news_list', $row, true);
+                    }
+                    $b++;
                     break;
                 case 3:
-                    $oneNews['news3'][$i] = $this->load->view('a_views/news_list', $row, true);
+                    if($c==1){
+                    $oneNews['news3'][$c] = $this->load->view('a_views/news_list_first', $row, true);
+                    }else{
+                    $oneNews['news3'][$c] = $this->load->view('a_views/news_list', $row, true);
+                    }
+                    $c++;
                     break;
                 case 4:
-                    $oneNews['news4'][$i] = $this->load->view('a_views/news_list', $row, true);
+                    if($d==1){
+                    $oneNews['news4'][$d] = $this->load->view('a_views/news_list_first', $row, true);
+                    }else{
+                    $oneNews['news4'][$d] = $this->load->view('a_views/news_list', $row, true);
+                    }
+                    $d++;
                     break;
                 case 5:
-                    $oneNews['news5'][$i] = $this->load->view('a_views/news_list', $row, true);
+                    if($e==1){
+                    $oneNews['news5'][$e] = $this->load->view('a_views/news_list_first', $row, true);
+                    }else{
+                    $oneNews['news5'][$e] = $this->load->view('a_views/news_list', $row, true);
+                    }
+                    $e++;
                     break;
                 case 6:
-                    $oneNews['news6'][$i] = $this->load->view('a_views/news_list', $row, true);
+                    if($f==1){
+                    $oneNews['news6'][$f] = $this->load->view('a_views/news_list_first', $row, true);
+                    }else{
+                    $oneNews['news6'][$f] = $this->load->view('a_views/news_list', $row, true);
+                    }
+                    $f++;
                     break;
             }
-            $i++;
 //             print_r($row);
 //            echo '<br/>';
 //            foreach ($row as $key => $value) {
@@ -146,6 +180,17 @@ class First extends MY_Controller {
 
     public function coach_info() {
         $page = $this->load->view('a_views/coach_info', '', true);
+        $this->view($page);
+    }
+    
+    public function coach_center() {
+        //---------------------------------------
+        //some info insert;
+        //-----------------------------------------
+            $body['isCoach'] = false;
+            $body['book_date2']="afafdas";
+            $page = $this->load->view('coach_views/self_info', $body, true);
+
         $this->view($page);
     }
     public function forgetPwd() {
@@ -183,7 +228,7 @@ class First extends MY_Controller {
                 $this->session->set_userdata('TYPE',$stu_type);
                 $this->session->set_userdata('name', $username);
                 $sess=$this->session->all_userdata();
-                redirect();
+                    redirect();
                 echo '"insert success !"';
                 return ;
             }else{
@@ -213,7 +258,11 @@ class First extends MY_Controller {
                 $this->session->set_userdata('name', $username);
                 $sess=$this->session->all_userdata();
                 //print_r($sess);
-                redirect();
+                if($stu_type==2){
+                redirect();                   
+                }else{
+                 redirect('coach');
+                }
             } else {
                 echo 'insert error!';
             }
@@ -264,8 +313,24 @@ class First extends MY_Controller {
             } else {
                 $this->session->set_userdata('UID', $row['stu_id']);
                 $this->session->set_userdata('TYPE', $row['stu_type']);
-                $this->session->set_userdata('name', $name);
-                redirect();
+                if($row['stu_true_name']!=null){
+                    $this->session->set_userdata('name', $row['stu_true_name']);
+                } else if($row['stu_nick_name']!=null){
+                    $this->session->set_userdata('name', $row['stu_nick_name']);
+                }else{
+                    $this->session->set_userdata('name', $name);
+                }
+                if($row['stu_type']==3){
+                    redirect();
+                }else if($row['stu_type']==1){
+                    redirect('coach');
+                }else if($row['stu_type']==0){
+                    redirect('admin');
+                }else{
+                    redirect();
+                }
+                
+                
 
                 return true;
             }

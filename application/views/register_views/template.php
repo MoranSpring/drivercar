@@ -437,6 +437,7 @@
     <body>
         <div id="header">
             <div class="header">  
+                <center style="font-size:40px;color:#666;font-family:SimSUn;">我爱开车网</center>
                 <a class="png_bg"  onclick="myFunctions()">返回主页</a>
             </div>
         </div>
@@ -541,9 +542,12 @@
         </div>
 
         <!-- footer start -->
-        <div id="footer" class="clear">
-            <p>我爱开车网©版权所有 沪ICP备83823823号</p>
-        </div>
+       <center class="am-footer-miscs ">
+        <span>由
+            <a href="http://www.baidu.com/" title="kyle" target="_blank" class="">Kyle</a>提供技术支持</span>
+        <span>CopyRight©2015 52drivercar.com Inc.</span>
+        <span>鄂ICP备15005490号</span>
+    </center>
         <!-- footer end -->
     </body>
 </html>
