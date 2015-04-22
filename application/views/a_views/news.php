@@ -16,7 +16,7 @@
         <div id="con-con" class ="real_content artical">
             <h2 class="headline"><?= $news_title ?></h2>
             <div><?= $news_date ?></div>
-            <div>来源：中国新闻网</div><br/>
+            <div><?= $news_author ?></div><br/>
             <img  src="<?= $news_imge ?>"/>  <br/>   <br/>      
             <p>
                 <?= $news_content ?>

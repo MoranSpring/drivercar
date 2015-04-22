@@ -42,7 +42,7 @@
                                 <th>验证码</th>
                                 <td width="245">
                                     <div class="valid">
-                                        <input type="text" name="vcode"><img class="vcode" src="passport/vcode?_=1411476793" width="85" height="35" alt="">
+                                        <!--<input type="text" name="vcode"><img class="vcode" src="passport/vcode?_=1411476793" width="85" height="35" alt="">-->
                                     </div>
                                 </td>
                                 <td>
