@@ -46,7 +46,7 @@
     .co-self-edit-on:hover{
         color:#ddd;
     }
-     .co-self-edit-off{
+    .co-self-edit-off{
         display: none;
     }
 </style>
@@ -65,7 +65,11 @@
                     <ul class="co-self-info clearfix">
                         <li class="co-name">
                             <p><?= $coach_name ?></p>
-                            <div>个人介绍：<?= $coach_intro ?><a class="<?php if($isCoach==true) echo 'co-self-edit-on';else echo 'co-self-edit-off';?>"  href="<?= base_url() ?>index.php/coach/self_info_edit">资料编辑</a></div>
+                            <div>个人介绍：<?= $coach_intro ?><a class="<?php if ($isCoach == true)
+    echo 'co-self-edit-on';
+else
+    echo 'co-self-edit-off';
+?>"  href="<?= base_url() ?>index.php/coach/self_info_edit">资料编辑</a></div>
                         </li>
                         <li>
                             <ul class="co-self-third clearfix">
@@ -81,7 +85,7 @@
                                     所属驾培点：
                                 </li>
                                 <li>
-                                    <?= $coach_sch_name ?> <span class="am-icon-map-marker ml-red"></span>
+<?= $coach_sch_name ?> <span class="am-icon-map-marker ml-red"></span>
                                 </li>
                             </ul>
                             <ul class="co-self-third clearfix">
@@ -97,7 +101,7 @@
                                     手机号码：
                                 </li>
                                 <li>
-                                    <?= $coach_telnum ?>
+<?= $coach_telnum ?>
                                 </li>
                             </ul>
                             <ul class="co-self-third clearfix">
@@ -160,239 +164,8 @@
                             <span class="am-icon-star ml-red"></span>
                             <span class="am-icon-star ml-red"></span> 4.5 分
                         </div>
-                        <ul class="am-comments-list am-comments-list-flip">
-                            <li class="am-comment">
-                                <a href="#link-to-user-home">
-                                    <img src="" alt="" class="am-comment-avatar" width="48" height="48"/>
-                                </a>
+                        <ul class="coach_comment am-comments-list am-comments-list-flip">
 
-                                <div class="am-comment-main">
-                                    <header class="am-comment-hd">
-                                        <!--<h3 class="am-comment-title">评论标题</h3>-->
-                                        <div class="am-comment-meta">
-                                            <a href="#link-to-user" class="am-comment-author"><=$userName?></a>
-                                            评论于 <time datetime="2013-07-27T04:54:29-07:00" title="2013年7月27日 下午7:54 格林尼治标准时间+0800">2013-07-27 07:00</time>
-                                            <span style="float:right">评分：<span class="am-icon-star ml-red"></span>
-                                                <span class="am-icon-star ml-red"></span>
-                                                <span class="am-icon-star ml-red"></span>
-                                                <span class="am-icon-star ml-red"></span> 4星</span>
-                                        </div>
-                                    </header>
-
-                                    <div class="am-comment-bd">
-                                        <=$content?>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="am-comment">
-                                <a href="#link-to-user-home">
-                                    <img src="http://image.52drivercar.com/coach_imges/1428902329.jpg@!nail" alt="" class="am-comment-avatar" width="48" height="48"/>
-                                </a>
-
-                                <div class="am-comment-main">
-                                    <header class="am-comment-hd">
-                                        <!--<h3 class="am-comment-title">评论标题</h3>-->
-                                        <div class="am-comment-meta">
-                                            <a href="#link-to-user" class="am-comment-author"><=$userName?></a>
-                                            评论于 <time datetime="2013-07-27T04:54:29-07:00" title="2013年7月27日 下午7:54 格林尼治标准时间+0800"><=$time?></time>
-                                        </div>
-                                    </header>
-
-                                    <div class="am-comment-bd">
-                                        <=$content?>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="am-comment">
-                                <a href="#link-to-user-home">
-                                    <img src="http://image.52drivercar.com/coach_imges/1428902329.jpg@!nail" alt="" class="am-comment-avatar" width="48" height="48"/>
-                                </a>
-
-                                <div class="am-comment-main">
-                                    <header class="am-comment-hd">
-                                        <!--<h3 class="am-comment-title">评论标题</h3>-->
-                                        <div class="am-comment-meta">
-                                            <a href="#link-to-user" class="am-comment-author"><=$userName?></a>
-                                            评论于 <time datetime="2013-07-27T04:54:29-07:00" title="2013年7月27日 下午7:54 格林尼治标准时间+0800"><=$time?></time>
-                                        </div>
-                                    </header>
-
-                                    <div class="am-comment-bd">
-                                        <=$content?>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="am-comment">
-                                <a href="#link-to-user-home">
-                                    <img src="http://image.52drivercar.com/coach_imges/1428902329.jpg@!nail" alt="" class="am-comment-avatar" width="48" height="48"/>
-                                </a>
-
-                                <div class="am-comment-main">
-                                    <header class="am-comment-hd">
-                                        <!--<h3 class="am-comment-title">评论标题</h3>-->
-                                        <div class="am-comment-meta">
-                                            <a href="#link-to-user" class="am-comment-author"><=$userName?></a>
-                                            评论于 <time datetime="2013-07-27T04:54:29-07:00" title="2013年7月27日 下午7:54 格林尼治标准时间+0800"><=$time?></time>
-                                        </div>
-                                    </header>
-
-                                    <div class="am-comment-bd">
-                                        <=$content?>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="am-comment">
-                                <a href="#link-to-user-home">
-                                    <img src="http://image.52drivercar.com/coach_imges/1428902329.jpg@!nail" alt="" class="am-comment-avatar" width="48" height="48"/>
-                                </a>
-
-                                <div class="am-comment-main">
-                                    <header class="am-comment-hd">
-                                        <!--<h3 class="am-comment-title">评论标题</h3>-->
-                                        <div class="am-comment-meta">
-                                            <a href="#link-to-user" class="am-comment-author"><=$userName?></a>
-                                            评论于 <time datetime="2013-07-27T04:54:29-07:00" title="2013年7月27日 下午7:54 格林尼治标准时间+0800"><=$time?></time>
-                                        </div>
-                                    </header>
-
-                                    <div class="am-comment-bd">
-                                        <=$content?>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="am-comment">
-                                <a href="#link-to-user-home">
-                                    <img src="http://image.52drivercar.com/coach_imges/1428902329.jpg@!nail" alt="" class="am-comment-avatar" width="48" height="48"/>
-                                </a>
-
-                                <div class="am-comment-main">
-                                    <header class="am-comment-hd">
-                                        <!--<h3 class="am-comment-title">评论标题</h3>-->
-                                        <div class="am-comment-meta">
-                                            <a href="#link-to-user" class="am-comment-author"><=$userName?></a>
-                                            评论于 <time datetime="2013-07-27T04:54:29-07:00" title="2013年7月27日 下午7:54 格林尼治标准时间+0800"><=$time?></time>
-                                        </div>
-                                    </header>
-
-                                    <div class="am-comment-bd">
-                                        <=$content?>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="am-comment">
-                                <a href="#link-to-user-home">
-                                    <img src="http://image.52drivercar.com/coach_imges/1428902329.jpg@!nail" alt="" class="am-comment-avatar" width="48" height="48"/>
-                                </a>
-
-                                <div class="am-comment-main">
-                                    <header class="am-comment-hd">
-                                        <!--<h3 class="am-comment-title">评论标题</h3>-->
-                                        <div class="am-comment-meta">
-                                            <a href="#link-to-user" class="am-comment-author"><=$userName?></a>
-                                            评论于 <time datetime="2013-07-27T04:54:29-07:00" title="2013年7月27日 下午7:54 格林尼治标准时间+0800"><=$time?></time>
-                                        </div>
-                                    </header>
-
-                                    <div class="am-comment-bd">
-                                        <=$content?>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="am-comment">
-                                <a href="#link-to-user-home">
-                                    <img src="http://image.52drivercar.com/coach_imges/1428902329.jpg@!nail" alt="" class="am-comment-avatar" width="48" height="48"/>
-                                </a>
-
-                                <div class="am-comment-main">
-                                    <header class="am-comment-hd">
-                                        <!--<h3 class="am-comment-title">评论标题</h3>-->
-                                        <div class="am-comment-meta">
-                                            <a href="#link-to-user" class="am-comment-author"><=$userName?></a>
-                                            评论于 <time datetime="2013-07-27T04:54:29-07:00" title="2013年7月27日 下午7:54 格林尼治标准时间+0800"><=$time?></time>
-                                        </div>
-                                    </header>
-
-                                    <div class="am-comment-bd">
-                                        <=$content?>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="am-comment">
-                                <a href="#link-to-user-home">
-                                    <img src="http://image.52drivercar.com/coach_imges/1428902329.jpg@!nail" alt="" class="am-comment-avatar" width="48" height="48"/>
-                                </a>
-
-                                <div class="am-comment-main">
-                                    <header class="am-comment-hd">
-                                        <!--<h3 class="am-comment-title">评论标题</h3>-->
-                                        <div class="am-comment-meta">
-                                            <a href="#link-to-user" class="am-comment-author"><=$userName?></a>
-                                            评论于 <time datetime="2013-07-27T04:54:29-07:00" title="2013年7月27日 下午7:54 格林尼治标准时间+0800"><=$time?></time>
-                                        </div>
-                                    </header>
-
-                                    <div class="am-comment-bd">
-                                        <=$content?>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="am-comment">
-                                <a href="#link-to-user-home">
-                                    <img src="http://image.52drivercar.com/coach_imges/1428902329.jpg@!nail" alt="" class="am-comment-avatar" width="48" height="48"/>
-                                </a>
-
-                                <div class="am-comment-main">
-                                    <header class="am-comment-hd">
-                                        <!--<h3 class="am-comment-title">评论标题</h3>-->
-                                        <div class="am-comment-meta">
-                                            <a href="#link-to-user" class="am-comment-author"><=$userName?></a>
-                                            评论于 <time datetime="2013-07-27T04:54:29-07:00" title="2013年7月27日 下午7:54 格林尼治标准时间+0800"><=$time?></time>
-                                        </div>
-                                    </header>
-
-                                    <div class="am-comment-bd">
-                                        <=$content?>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="am-comment">
-                                <a href="#link-to-user-home">
-                                    <img src="http://image.52drivercar.com/coach_imges/1428902329.jpg@!nail" alt="" class="am-comment-avatar" width="48" height="48"/>
-                                </a>
-
-                                <div class="am-comment-main">
-                                    <header class="am-comment-hd">
-                                        <!--<h3 class="am-comment-title">评论标题</h3>-->
-                                        <div class="am-comment-meta">
-                                            <a href="#link-to-user" class="am-comment-author"><=$userName?></a>
-                                            评论于 <time datetime="2013-07-27T04:54:29-07:00" title="2013年7月27日 下午7:54 格林尼治标准时间+0800"><=$time?></time>
-                                        </div>
-                                    </header>
-
-                                    <div class="am-comment-bd">
-                                        <=$content?>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="am-comment">
-                                <a href="#link-to-user-home">
-                                    <img src="http://image.52drivercar.com/coach_imges/1428902329.jpg@!nail" alt="" class="am-comment-avatar" width="48" height="48"/>
-                                </a>
-
-                                <div class="am-comment-main">
-                                    <header class="am-comment-hd">
-                                        <!--<h3 class="am-comment-title">评论标题</h3>-->
-                                        <div class="am-comment-meta">
-                                            <a href="#link-to-user" class="am-comment-author"><=$userName?></a>
-                                            评论于 <time datetime="2013-07-27T04:54:29-07:00" title="2013年7月27日 下午7:54 格林尼治标准时间+0800"><=$time?></time>
-                                        </div>
-                                    </header>
-
-                                    <div class="am-comment-bd">
-                                        <=$content?>
-                                    </div>
-                                </div>
-                            </li>
                         </ul>
 
                     </div>
@@ -479,7 +252,7 @@
                                 <td>直角转弯</td>
                                 <td>2015-04-13</td>
                             </tr>
-                  
+
                             </tr>
                         </tbody>
                     </table>
@@ -489,5 +262,27 @@
         </div>
     </div>
 </div>
+<script>
+    var isTab1 = isTab2 = isTab3 = false;
+    function onDisplay(num) {
+        if (num === 1 && isTab1 === false) {
+        } else if (num === 2 && isTab2 === false) {
+            isTab2 = true;
+            $.ajax({
+                type: "POST",
+                dataType: "text",
+                url: "<?=  base_url()?>index.php/coach/get_coach_comment",
+                async: true,
+                data: {},
+                success: function (data) {
+                    $('.coach_comment').append(data);
+                    
+                    }
+                });
+        }
+
+    }
+
+</script>
 
 

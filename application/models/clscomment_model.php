@@ -43,6 +43,15 @@ class Clscomment_model extends CI_Model{
         $query = $this->db->get('ClsComment');
         return $query->result_array();
     }
+    public function select_coa_detail($id,$offset) {//返回该用户名所有信息
+        $this->db->select();
+        $this->db->where('com_to_id',$id);
+        $this->db->order_by("com_time", "desc");
+        $this->db->limit(10,$offset*10);
+        
+        $query = $this->db->get('ClsComment');
+        return $query->result_array();
+    }
     public function select_exist($id) {//返回该用户名所有信息
         $this->db->select('com_id');
         $this->db->where('com_cls_id',$id);

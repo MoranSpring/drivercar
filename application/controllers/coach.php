@@ -14,6 +14,7 @@ class Coach extends MY_Controller {
         $this->load->model('coachbook_model');
         $this->load->model('teachbook_model');
         $this->load->model('school_model');
+        $this->load->model('clscomment_model');
         $this->load->model('course_model');
     }
 
@@ -167,6 +168,25 @@ class Coach extends MY_Controller {
         
         $page = $this->load->view('coach_views/book_info', $comment_list, true);
         $this->view($page);
+    }
+    
+    public function get_coach_comment(){
+        $id = '1427162541';
+        $page="";
+        $result=$this->clscomment_model->select_coa_detail($id,0);
+        foreach ($result as $row) {
+            $page.= $this->load->view('coach_views/coach_comment_list',$row, true);
+        }
+        echo $page;
+    }
+    public function get_coach_study_record(){
+        $id = '1427162541';
+        $page="";
+        $result=$this->clscomment_model->select_coa_detail($id,0);
+        foreach ($result as $row) {
+            $page.= $this->load->view('coach_views/coach_comment_list',$row, true);
+        }
+        echo $page;
     }
 
     

@@ -30,6 +30,7 @@ and open the template in the editor.
         <?= $footer ?>
         <script>
             function setTab(name, cursel, n) {
+                 onDisplay(cursel);
                 for (i = 1; i <= n; i++) {
                     var thismenu = document.getElementById(name + i);
                     var con = document.getElementById("content" + i);
