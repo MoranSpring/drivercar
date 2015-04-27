@@ -5,7 +5,7 @@
 </style>
 <div data-am-widget="footer" class="am-footer am-footer-default  info_footer_clear" data-am-footer="{  }">
     <div class="am-footer-switch">
-        <span class="am-footer-ysp" data-rel="mobile" data-am-modal="{target: '#am-switch-mode'}">云适配版</span>
+        <span class="am-footer-ysp" data-rel="mobile" data-am-modal="{target: '#am-switch-mode'}">手机版</span>
         <span class="am-footer-divider">|</span>
         <a id="godesktop" data-rel="desktop" class="am-footer-desktop"
            href="javascript:">电脑版</a>

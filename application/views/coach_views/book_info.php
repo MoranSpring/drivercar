@@ -95,5 +95,25 @@
         }
     });
 </script>
+<script>
+    var isTab1 = isTab2 = isTab3 = false;
+    function onDisplay(num) {
+//        if (num === 1 && isTab1 === false) {
+//        } else if (num === 2 && isTab2 === false) {
+//            isTab2 = true;
+//            $.ajax({
+//                type: "POST",
+//                dataType: "text",
+//                url: "<?=  base_url()?>index.php/coach/get_coach_comment",
+//                async: true,
+//                data: {},
+//                success: function (data) {
+//                    $('.coach_comment').append(data);
+//                    
+//                    }
+//                });
+//        }
+    }
+</script>
 
 
