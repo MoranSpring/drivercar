@@ -49,6 +49,8 @@
     .co-self-edit-off{
         display: none;
     }
+    
+    
 </style>
 <div id="content" class="clearfix">
     <div id="con-coach-right">
