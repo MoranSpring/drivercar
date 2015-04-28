@@ -128,7 +128,7 @@
                 <li id="one1" style="width:100px" class="selected-li" onclick="setTab('one', 1, 4)">详细信息</li>
                 <li id="one2" style="width:100px" onclick="setTab('one', 2, 4)">地址/路线</li>
                 <li id="one3" style="width:100px" onclick="setTab('one', 3, 4)">学员点评</li>
-                <li id="one4" style="width:100px" onclick="setTab('one', 4, 4)">教练信息</li>
+                <li id="one4" style="width:100px;border-right:1px solid #aaa;" onclick="setTab('one', 4, 4)">教练信息</li>
             </ul>
             <div class="pos_content" style="height: auto;max-height: 500px; min-height: 300px; overflow: auto">
                 <div id="content1" class="clearfix">
@@ -163,6 +163,27 @@
         </div>
     </div>
 </div>
+<script>
+    var isTab1 = isTab2 = isTab3 = false;
+    function onDisplay(num) {
+//        if (num === 1 && isTab1 === false) {
+//        } else if (num === 2 && isTab2 === false) {
+//            isTab2 = true;
+//            $.ajax({
+//                type: "POST",
+//                dataType: "text",
+//                url: "<?=  base_url()?>index.php/coach/get_coach_comment",
+//                async: true,
+//                data: {},
+//                success: function (data) {
+//                    $('.coach_comment').append(data);
+//                    
+//                    }
+//                });
+//        }
+
+    }
+</script>
 
 
 

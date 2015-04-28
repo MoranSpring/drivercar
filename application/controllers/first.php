@@ -27,6 +27,7 @@ class First extends MY_Controller {
         $this->load->library('oss/alioss');
         $this->load->model('coach_model');
         $this->load->model('serialnumber_model');
+        $this->load->model('school_model');
     }
 
     public function index() {
@@ -194,6 +195,21 @@ class First extends MY_Controller {
         $body['book_date2'] = "afafdas";
         $page = $this->load->view('coach_views/self_info', $body, true);
 
+        $this->view($page);
+    }
+    public function coach_self_info(){
+//        $UID = $this->session->userdata('UID');
+        $UID='1427162541';
+        $result = $this->coach_model->select_detail($UID);
+        
+        $isCoach= $this->session->userdata('TYPE')==1?  true  : false;
+        $page="";
+        foreach ($result as $row) {
+            $schName = $this->school_model->select_name($row['coach_sch_id']);
+            $row['coach_sch_name'] = $schName[0]['jp_name'];
+            $row['isCoach'] = $isCoach;
+            $page = $this->load->view('coach_views/self_info',$row, true);
+        }
         $this->view($page);
     }
 
