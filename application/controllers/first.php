@@ -474,5 +474,10 @@ class First extends MY_Controller {
         $data = array('reg_email_str' => $reg_email_str, 'send_time' => $send_time, 'result' => $result);
         echo json_encode($data);
     }
+    function get_school_info(){
+        $city = $this->input->post("city",TRUE);
+        $result = $this->school_model->get_from_city($city);
+         echo json_encode($result);
+    }
 
 }

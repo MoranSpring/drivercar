@@ -13,7 +13,7 @@ and open the template in the editor.
         <link rel="stylesheet" type="text/css" href='<?= base_url() ?>application/css/index.css'>
         <link rel="shortcut icon" href="<?php echo base_url() . 'application/images/iconfont-suo.png' ?>" type="image/x-icon">
         <script src="<?php echo base_url() . 'application/js/jquery-1.7.1.min.js' ?>" type="text/javascript"></script>
-        <script src="<?php echo base_url() . 'application/js/jquery.cxselect.js' ?>" type="text/javascript"></script>
+        <script src="<?php echo base_url() . 'application/js/jquery.cxselect.min.js' ?>" type="text/javascript"></script>
         <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=RbYDrD0LPcQqzZTo21PFZ6kR"></script>
         <link rel="stylesheet" href="<?= base_url() ?>application/css/admin/amazeui.min.css"/>
         <link rel="stylesheet" href="<?= base_url() ?>application/css/admin/admin.css">
@@ -23,6 +23,7 @@ and open the template in the editor.
         <?= $navigation ?>
         <?= $content ?>
         <?= $footer ?>
+      
         <script>
             function setTab(name, cursel, n) {
 //                onDisplay(cursel);
@@ -55,46 +56,56 @@ and open the template in the editor.
                 selects: ['province', 'city', 'area'],
                 nodata: 'none'
             });
-            var lastCity=0;
-
+            var lastCity = 0;
             function saveLast() {
-                $('#citys').val()>100? refrashMap($('#citys').val()):($('#province').val()>100?refrashMap($('#province').val()):false);
-            }
-            function refrashMap(num){
-                if(num===lastCity){
-                    return false;
+                var city = $('#citys').val() > 100 ? $('#citys').val() : ($('#province').val() > 100 ? $('#province').val() : false);
+                if (city !== false && city !== lastCity) {
+                    lastCity = city;
+                    $.ajax({
+                        type: "POST",
+                        dataType: "text",
+                        url: "<?= base_url() ?>index.php/first/get_school_info",
+                        async: true,
+                        data: {city: city},
+                        success: function (data) {
+                            var json = eval("(" + data + ")");
+                            refrashMap(json);
+                        }});
                 }
-                lastCity=num;
-                alert(num);
-                 var map = new BMap.Map("allmap"); 
+            }
+            function refrashMap(json) {
+
+                var map = new BMap.Map("allmap");
                 map.centerAndZoom();
                 map.enableScrollWheelZoom();
                 var pointArray = new Array();
                 var markerArray = new Array();
-                for (var i = 0; i < 10; i++) {
-                    pointArray[i] = new BMap.Point(116.4122 + i / 10, 39.9422 + i / 10);
+                for (var i = 0; i < json.length; i++) {
+                    pointArray[i] = new BMap.Point(json[i].jp_gps_latitude, json[i].jp_gps_longitude);
                     markerArray[i] = new BMap.Marker(pointArray[i]);
                     markerArray[i].index = i;
                     map.addOverlay(markerArray[i]);
                     markerArray[i].addEventListener("mouseover", function () {
-                        this.openInfoWindow(infoWindow1);
+                        this.openInfoWindow(new BMap.InfoWindow(
+                                "<div style='width:300px;'>\n\
+                <ul class='clearfix' style='line-height:1.5em;font-size:0.8em;'> <li style='line-height:1.5em;font-size:0.8em;float:left;width:60%;'>\n\
+            <b>地址:</b>" + json[this.index].jp_detail_addr + "<br/>\n\
+            <b>电话:</b>" + json[this.index].jp_tel + "<br/>\n\
+            <b>评价:</b><img src='http://cdn2.iconfinder.com/data/icons/diagona/icon/16/031.png' /><br/>\n\
+            <a style='text-decoration:none;color:#2679BA;text-align:right;'>详情&gt;&gt;</a>\n\
+            </li><li style='float:left;width:40%;line-height:1em;font-size:0.8em;list-style:none;'>\n\
+            <img src=" + json[this.index].jp_imge + " width='120px'>\n\
+            </li></ul></div>"
+                                , {title: "<span style='font-size:14px;color:#0A8021'>" + json[this.index].jp_name + "</span>"}));
                     });
                     markerArray[i].addEventListener("click", function () {
                         alert(this.index);
                     });
                 }
                 map.setViewport(pointArray);
-                
+
             }
-             var opts1 = {title: '<span style="font-size:14px;color:#0A8021">如家快捷酒店</span>'};
-                var infoWindow1 = new BMap.InfoWindow(
-                        "<div style='line-height:1.8em;font-size:12px;'>\n\
-                          <b>地址:</b>北京市朝阳区高碑店小学旁</br>\n\
-                          <b>电话:</b>010-59921010</br>\n\
-                          <b>口碑：</b><img src='http://cdn2.iconfinder.com/data/icons/diagona/icon/16/031.png' />\n\
-                          <a style='text-decoration:none;color:#2679BA;float:right' href='#'>详情>></a>\n\
-                           </div>"
-                        , opts1);  // 创建信息窗口对象，引号里可以书写任意的html语句。
+
 
         </script>
 

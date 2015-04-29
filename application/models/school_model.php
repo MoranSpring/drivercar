@@ -46,4 +46,10 @@ class School_model extends CI_Model{
         $query = $this->db->get('School');
         return $query->result_array();
     }
+    public function get_from_city($city){
+         $this->db->select();
+        $this->db->where('jp_city',$city);
+        $query = $this->db->get('School');
+        return $query->result_array();
+    }
 }
