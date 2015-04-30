@@ -16,17 +16,17 @@
             
             <div class="pos_content">
                 <div id="content1" class="clearfix">
-                    <span>
+                    <div>
+                    <span style="line-height: 2em;">
                         目前选择地区：
-                    </span>
-                    <span id="city_china_val">
-                        <select id="province" class="province cxselect" data-first-title="选择省" onchange="saveLast()"></select>
-                        <select id="citys" class="city cxselect" data-first-title="选择市" onchange="saveLast()"></select>
+                    </span><span class="selected-city">武汉市</span>
+                    <span id="city_china_val" class="select-city" style="display: none;">
+                        <select id="province" class="province cxselect" data-first-title="选择省"></select>
+                        <select id="citys" class="city cxselect" data-first-title="选择市"></select>
                         <select id="area" class="area cxselect" data-first-title="选择地区" ></select>
-                    </span><input type="submit" value="Submit"/>
+                    </span><input class="btn-city" type="submit" value="更换"/></div>
                     <div class="map_father">
                         <div id="allmap"></div></div>
-                    
                 </div>
             </div>
 
@@ -99,6 +99,47 @@
         </div>
     </div>
 </div>
-
+<script>
+    $(function(){
+        $.ajax({
+                        type: "POST",
+                        dataType: "text",
+                        url: "<?= base_url() ?>index.php/first/get_school_info",
+                        async: true,
+                        data: {city: 1027},
+                        success: function (data) {
+                            var json = eval("(" + data + ")");
+                            refrashMap(json);
+                        }});
+    });
+    $('.btn-city').toggle(function(){
+        $('.select-city').css('display','inline');
+        $('.selected-city').css('display','none');
+        $(this).val("确定");
+    },function(){
+        $('.selected-city').css('display','inline');
+        $('.select-city').css('display','none');
+        $(this).val("更换");
+        if(saveLast()){
+            alert('success');
+             var pro = $('.province option:selected').text();
+            var cit = $('.city option:selected').text();
+            var are = $('.area option:selected').text();
+            if (pro == 0 || pro == "0" || pro == null) {
+                pro = "";
+            }
+            if (cit == 0 || cit == "0" || cit == null) {
+                cit = "";
+            }
+            if (are == 0 || are == "0" || are == null) {
+                are = "";
+            }
+            var span_con = pro + ' ' + cit + ' ' + are;
+            $('.selected-city').html(span_con);
+        }else{
+            alert("该地区未上线");
+        }
+    });
+</script>
 
 

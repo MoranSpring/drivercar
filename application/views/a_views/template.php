@@ -23,7 +23,7 @@ and open the template in the editor.
         <?= $navigation ?>
         <?= $content ?>
         <?= $footer ?>
-      
+
         <script>
             function setTab(name, cursel, n) {
 //                onDisplay(cursel);
@@ -71,7 +71,9 @@ and open the template in the editor.
                             var json = eval("(" + data + ")");
                             refrashMap(json);
                         }});
+                    return true;
                 }
+                return false;
             }
             function refrashMap(json) {
 
