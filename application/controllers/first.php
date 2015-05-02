@@ -172,9 +172,14 @@ class First extends MY_Controller {
         $this->view($page);
     }
 
-    public function school_info() {
-        $page = $this->load->view('a_views/school_info', '', true);
-        $this->view($page);
+    public function school_info($id='') {
+        if($id=='')exit (0);
+        $result = $this->school_model->get_from_id($id);
+        $list='';
+        foreach($result as $row){
+            $list= $this->load->view('a_views/school_info',$row, true);
+        }
+        $this->view($list);
     }
 
     public function ser_info() {
@@ -398,7 +403,7 @@ class First extends MY_Controller {
 
     public function getcityData() {
         
-        $retval = $this->_request('http://localhost:8888/application/js/cityData.min.json');
+        $retval = $this->_request('http://localhost:8080/application/js/cityData.min.json');
 
         if ($retval !== false) {
             echo $retval;
@@ -477,7 +482,15 @@ class First extends MY_Controller {
     function get_school_info(){
         $city = $this->input->post("city",TRUE);
         $result = $this->school_model->get_from_city($city);
-         echo json_encode($result);
+        $list='';
+        foreach($result as $row){
+            $list.=$this->load->view('a_views/school_list', $row, true);
+        }
+        $data=array(
+            'info'=>$result,
+            'list'=>$list
+        );
+         echo json_encode($data);
     }
 
 }

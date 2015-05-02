@@ -58,11 +58,11 @@
         <link type="text/css" href="<?= base_url() ?>application/css/ml.css" rel="stylesheet">
         <div>
             <div class="co-name" style="position:relative;padding-left: 350px; line-height: 5em;">
-                            <p>华科大驾校</p>
+                            <p><?=$jp_name?></p>
                           </div>
             <ul class="co-self clearfix">
                 <li style="width:30%;position:relative;z-index: 1;margin-top: -20px;">
-                    <img src="http://image.52drivecar.com/coach_imges/1428902329.jpg@!newsimg" class="am-img-thumbnail" height="220" width="300"/>
+                    <img src="<?= $jp_imge.'@!newsimg'?>" class="am-img-thumbnail" height="220" width="300"/>
                 </li>
                 <li style="width:70%">
                     <ul class="co-self-info clearfix">
@@ -81,7 +81,7 @@
                                     招生范围：
                                 </li>
                                 <li   style="width:300px">
-                                    江岸区 江汉区 乔口区
+                                    武汉市
                                 </li>
                             </ul>
                             <ul class="co-self-third clearfix">
@@ -89,7 +89,7 @@
                                     驾校地址：
                                 </li>
                                 <li  style="width:300px">
-                                    江岸区兴业路(解放大道佳园小区对面)
+                                    <?=$jp_detail_addr?>
                                 </li>
                             </ul>
                             <ul class="co-self-third clearfix">
@@ -97,7 +97,7 @@
                                     咨询电话：
                                 </li>
                                 <li  style="width:300px">
-                                    <span style="font-size: 1.3em;color:red;font-weight: bold;">13886090700</span>   
+                                    <span style="font-size: 1.3em;color:red;font-weight: bold;"><?=$jp_tel?></span>   
                                 </li>
                             </ul>
                             <ul class="co-self-third clearfix">

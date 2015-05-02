@@ -52,4 +52,10 @@ class School_model extends CI_Model{
         $query = $this->db->get('School');
         return $query->result_array();
     }
+    public function get_from_id($city){
+         $this->db->select();
+        $this->db->where('jp_id',$city);
+        $query = $this->db->get('School');
+        return $query->result_array();
+    }
 }

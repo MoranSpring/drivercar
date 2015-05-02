@@ -279,11 +279,10 @@ body{
 }
 .con2-ul li {
     color:#0e90d2;
-    border-bottom: 1px solid #aaa;
+    border-bottom: 1px dotted #aaa;
     list-style: none;
     display: block;
-
-    padding: 10px;
+    padding: 5px;
 }
 
 .con-div {
@@ -292,12 +291,11 @@ body{
     padding-left: 10px;
 }
 .con-div2 {
-    width:630px;
+    width:78%;
 }
 .con2-ul li div img{
-    height: 70px;
+    height: 90px;
     display: block;
-    border: 1px solid #000;
 
 }
 .con2-ul li div{
@@ -309,19 +307,21 @@ body{
 }
 .con2-div span {
     float:none;
-    display: block;
-    line-height: 25px;
-    height: 25px;
+    line-height: 1.5em;
+    height: 1.5em;
 }
 .con2-con{
     display: block;
 }
 .con2-con li{
-    text-align: center;
+    /*text-align: center;*/
     display: inline-block;
-    width:200px;
+    width:190px;
     border: 0;
     padding: 0;
+}
+.school-list:hover{
+    background:#ECEFF4;
 }
 .news {
     text-align: left;
@@ -383,6 +383,7 @@ body{
     clear: both;
     width:100%;
     margin-top: 3px;
+    min-height: 500px;
     border:1px solid #999999;
     background-color: #fff;
 }
