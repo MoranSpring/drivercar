@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>驾培网-登录</title>
+        <title>登陆 - 我爱开车网</title>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
         <link rel="shortcut icon" type="image/x-icon" href="res/homepage/favicon.ico?v=3.9" />
         <link href="<?= base_url() ?>application/css/login/screen.css" media="screen, projection" rel="stylesheet" type="text/css" >

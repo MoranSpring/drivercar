@@ -7,7 +7,7 @@
     <link type="text/css" href="<?= base_url() ?>application/css/admin/amazeui.chosen.css" rel="stylesheet">
 
     <div id="con-left">
-       <ul>
+        <ul>
             <li><a href="<?= base_url() . 'index.php/vipcenter/vip_center' ?>"><span>个人信息</span></a></li>
             <li><a href="<?= base_url() . 'index.php/vipcenter/study_progress' ?>"><span>学习进度</span></a></li>
             <li><a href="<?= base_url() . 'index.php/vipcenter/study_book' ?>"><span>预约培训</span></a></li>
@@ -22,7 +22,7 @@
         <div id="con-nav">
             <p><a href="void">首页</a> > <a href="void">会员中心</a> > 预约培训</p>
         </div>
-        
+
         <div id="con-con" class ="real_content "><form class="am-form">
                 <div class="ml_step_ul">
                     <ul class="clear">
@@ -75,7 +75,7 @@
                         <div class="am-u-sm-4 am-u-md-2 am-text-right">选择日期</div>
                         <div class="am-u-sm-8 am-u-md-10 ">
                             <!--<input type="text" class="am-form-field" id="select_date" name="news_date" style="width: 200px" placeholder="点击选择日期" data-am-datepicker="{format: 'yyyy-mm-dd'}" readonly/>-->
-                        <input type="text" id="datepicker"style="width: 200px"/>
+                            <input type="text" id="datepicker"style="width: 200px"/>
                         </div>
                     </div>
                     <div class="am-g am-margin-top">
@@ -176,10 +176,10 @@
                                 <p class="title">所选时段概况</p>
                                 <table id='data-table' class="am-table am-table-bordered ml-table">
                                     <thead>
-                                        <td></td>
-                                        <td>此时刻最大承载量</td>
-                                        <td>当前时段已被预约</td>
-                                        <td>剩余可约</td>
+                                    <td></td>
+                                    <td>此时刻最大承载量</td>
+                                    <td>当前时段已被预约</td>
+                                    <td>剩余可约</td>
                                     </thead>
                                     <tr>
                                         <td>倒库</td>
@@ -222,7 +222,7 @@
                     <div class="am-margin-xl">
                         <div  class="am-g am-padding" style="background: #EEE">
                             <h2>预约信息确认</h2>
-                            <p class="am-icon-user"> 预约人名 ：<span class="user-name"></span></p><br/>
+                            <p class="am-icon-user"> 预约人名：<span class="user-name"></span></p><br/>
                             <p class="am-icon-phone"> 预留电话：<span class="user-tel"></span></p><br/>
                             <p class="am-icon-file-text"> 预选节数：<span class="sum-cls-num"></span>节课</p>
                         </div><br />
@@ -236,7 +236,7 @@
                                 </tr>
                             </thead>
                             <tbody id="book-table-info">
-                                
+
                             </tbody>
                         </table>
                         <h3 class="am-text-right">您选了 <span class="sum-cls-num">8</span> 节课  共计：<span id="sum" class="am-icon-rmb" style="color:#990000;font-size: 18px;">3000</span>  积分</h3>
@@ -259,12 +259,16 @@
     </div>
     <script>
         $.cxSelect.defaults.url = "<?php echo base_url() . 'application/js/project.json' ?>";
-                $('#project_list').cxSelect({
-                    selects: ['cls_kind', 'cls_project'],
-                    nodata: 'none'
-                });
+        $('#project_list').cxSelect({
+            selects: ['cls_kind', 'cls_project'],
+            nodata: 'none'
+        });
+        function setInfo() {
+            $('.user-name').html('<?= $this->session->userdata('name');?>');
+            $('.user-tel').html('<?= $this->session->userdata('TEL');?>');
+        }
     </script>
-   
+
 
 
     <div class="am-modal am-modal-alert" tabindex="-1" id="your-modal">

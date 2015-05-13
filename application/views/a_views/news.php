@@ -10,7 +10,7 @@
     </div>
     <div id="con-right">
         <div id="con-nav">
-            <p><a href="void">首页</a> > <a href="void"> 驾培首页</a> > <a href="void"> 驾培资讯</a>> 新闻</p>
+            <p> <a href="<?= base_url() . 'index.php/first/sch_info' ?>"> 驾培资讯</a> >> 新闻</p>
         </div>
         <hr data-am-widget="divider" style="" class="am-divider am-divider-sm"/>
         <div id="con-con" class ="real_content artical">

@@ -40,6 +40,7 @@
 
 $route['default_controller'] = "first";
 $route['nanhu']="first/ser_info";
+$route['news/(:num)']="first/news/$1";
 $route['404_override'] = '';
 
 

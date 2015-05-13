@@ -17,11 +17,11 @@
 
             <tr>
                 <td>教练</td>
-                <td><?= $coa_name ?></td>
+                <td><a style="color:#FFF;text-decoration:underline;"  target='_blank' href="<?=  base_url()?>index.php/first/coach_self_info/<?=$book_coa_id?>"><?=$coa_name?></a></td>
             </tr>
             <tr>
                 <td>培训点</td>
-                <td><?= $sch_name ?></td>
+                <td><a style="color:#FFF;text-decoration:underline;"   target='_blank' href="<?=  base_url()?>index.php/first/school_info/<?=$book_sch_id?>"><?=$sch_name?></a></td>
             </tr>
             <tr>
                 <td>消费积分</td>

@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-        <title>驾途网-注册</title>
+        <title>注册 - 我爱开车网</title>
         <meta charset="UTF-8">
         <link type="text/css" href="<?= base_url() ?>application/css/register/reset.css" rel="stylesheet">
         <link type="text/css" href="<?= base_url() ?>application/css/register/public.css" rel="stylesheet">

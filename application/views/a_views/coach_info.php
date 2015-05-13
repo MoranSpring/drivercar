@@ -139,6 +139,11 @@
             alert("该地区未上线");
         }
     });
+     function AsyncChange(data) {
+        var json = eval("(" + data + ")");
+        refrashMap(json.info);
+        $('.con2-ul').html(json.list);
+    }
 </script>
 
 

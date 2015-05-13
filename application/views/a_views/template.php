@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
-        <title>我爱开车网-首页</title>
+        <title><?=$title?></title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="我爱开车网是国内首个驾驶培训预约学习平台，为用户提供客观的、第三方的驾培机构评价信息，同时也为用户提供汽车相关咨询服务。">
@@ -26,7 +20,7 @@ and open the template in the editor.
 
         <script>
             function setTab(name, cursel, n) {
-//                onDisplay(cursel);
+                onDisplay(cursel);
                 for (i = 1; i <= n; i++) {
                     var thismenu = document.getElementById(name + i);
                     var con = document.getElementById("content" + i);
@@ -68,8 +62,7 @@ and open the template in the editor.
                         async: true,
                         data: {city: city},
                         success: function (data) {
-                            var json = eval("(" + data + ")");
-                            refrashMap(json);
+                            AsyncChange(data);
                         }});
                     return true;
                 }

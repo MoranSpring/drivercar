@@ -25,7 +25,7 @@ class VipCenter extends MY_Controller {
 
     public function view($page = '') {
         $name = $this->session->userdata('name');
-       
+
         if ($name == null) {
             $body['header'] = $this->load->view('common_views/header', '', true);
             $body['content'] = $this->load->view('common_views/unlogin', '', true);
@@ -51,8 +51,9 @@ class VipCenter extends MY_Controller {
     }
 
     public function study_progress() {
-         if($this->session->userdata('TYPE')==2){
-        }else{
+        if ($this->session->userdata('TYPE') == 2) {
+            
+        } else {
             $this->view("you aren't vip!");
             return false;
         }
@@ -66,7 +67,7 @@ class VipCenter extends MY_Controller {
             $name = $this->coach_model->select_name($row['book_coa_id']);
             $data['Name'] = $name[0]['coach_name'];
             $data['course_num'] = $row['book_cls_num'];
-            $data['imageURL'] = $name[0]['coach_face']."@!nail";
+            $data['imageURL'] = $name[0]['coach_face'] . "@!nail";
             $sch_name = $this->school_model->select_name($row['book_sch_id']);
             $data['school'] = $sch_name[0]['jp_name'];
             $content['content'][$i] = $this->load->view('vip_views/content', $data, true);
@@ -78,8 +79,9 @@ class VipCenter extends MY_Controller {
     }
 
     public function study_book() {
-        if($this->session->userdata('TYPE')==2){
-        }else{
+        if ($this->session->userdata('TYPE') == 2) {
+            
+        } else {
             $this->view("you aren't vip!");
             return false;
         }
@@ -88,8 +90,9 @@ class VipCenter extends MY_Controller {
     }
 
     public function management() {
-        if($this->session->userdata('TYPE')==2){
-        }else{
+        if ($this->session->userdata('TYPE') == 2) {
+            
+        } else {
             $this->view("you aren't vip!");
             return false;
         }
@@ -104,16 +107,18 @@ class VipCenter extends MY_Controller {
             $list['book_date'] = $row['book_date'];
             $list['book_cls_num'] = $row['book_cls_num'];
             $list['book_state'] = $row['book_state'];
+            $list['book_coa_id'] = $row['book_coa_id'];
+            $list['book_sch_id'] = $row['book_sch_id'];
             $coachName = $this->coach_model->select_name($row['book_coa_id']);
             $list['coa_name'] = $coachName[0]['coach_name'];
             $schName = $this->school_model->select_name($row['book_sch_id']);
             $list['sch_name'] = $schName[0]['jp_name'];
-            $list['book_cls_name'] ="";
+            $list['book_cls_name'] = "";
             $courseName = $this->course_model->select($row['book_cls_id']);
             foreach ($courseName as $row) {
                 $list['book_cls_name'] = $row['cls_name'];
             }
-            
+
             $comment_list['unuse_list'][$j] = $this->load->view('vip_views/management_fur_list', $list, true);
             $j++;
         }
@@ -124,17 +129,19 @@ class VipCenter extends MY_Controller {
             $list['book_id'] = $row['book_id'];
             $list['book_date'] = $row['book_date'];
             $list['book_cls_num'] = $row['book_cls_num'];
+            $list['book_coa_id'] = $row['book_coa_id'];
+            $list['book_sch_id'] = $row['book_sch_id'];
             $coachName = $this->coach_model->select_name($row['book_coa_id']);
             $list['coa_name'] = $coachName[0]['coach_name'];
             $list['coa_face'] = $coachName[0]['coach_face'];
             $schName = $this->school_model->select_name($row['book_sch_id']);
             $list['sch_name'] = $schName[0]['jp_name'];
-            $list['exist']=0;
+            $list['exist'] = 0;
             $is_com_exist = $this->clscomment_model->select_exist($row['book_id']);
             foreach ($is_com_exist as $result) {
-                $list['exist']=1;
+                $list['exist'] = 1;
             }
-            $list['book_cls_name'] ="";
+            $list['book_cls_name'] = "";
             $courseName1 = $this->course_model->select($row['book_cls_id']);
             foreach ($courseName1 as $row) {
                 $list['book_cls_name'] = $row['cls_name'];
@@ -145,8 +152,9 @@ class VipCenter extends MY_Controller {
         $page = $this->load->view('vip_views/management', $comment_list, true);
         $this->view($page);
     }
-    public function tocomment(){
-         $id = $this->input->get('id');
+
+    public function tocomment() {
+        $id = $this->input->get('id');
         $result = $this->teachbook_model->select_from_id($id);
         $comment_list = array();
         foreach ($result as $row) {
@@ -154,11 +162,13 @@ class VipCenter extends MY_Controller {
             $list['book_date'] = $row['book_date'];
             $list['book_cls_num'] = $row['book_cls_num'];
             $list['book_suggest'] = $row['book_suggest'];
+            $list['book_coa_id'] = $row['book_coa_id'];
+            $list['book_sch_id'] = $row['book_sch_id'];
             $coachName = $this->coach_model->select_name($row['book_coa_id']);
             $list['coa_name'] = $coachName[0]['coach_name'];
             $schName = $this->school_model->select_name($row['book_sch_id']);
             $list['sch_name'] = $schName[0]['jp_name'];
-            $list['book_cls_name'] ="";
+            $list['book_cls_name'] = "";
             $courseName1 = $this->course_model->select($row['book_cls_id']);
             foreach ($courseName1 as $row2) {
                 $list['book_cls_name'] = $row2['cls_name'];
@@ -170,8 +180,9 @@ class VipCenter extends MY_Controller {
     }
 
     public function feedback() {
-        if($this->session->userdata('TYPE')==2){
-        }else{
+        if ($this->session->userdata('TYPE') == 2) {
+            
+        } else {
             $this->view("you aren't vip!");
             return false;
         }
@@ -184,15 +195,15 @@ class VipCenter extends MY_Controller {
         $i = 0;
         foreach ($result1 as $row) {
             $list['book_id'] = $row['book_id'];
-            $iscomment = $this->clscomment_model->select_detail($list['book_id'] );
-            if($iscomment==null){
+            $iscomment = $this->clscomment_model->select_detail($list['book_id']);
+            if ($iscomment == null) {
                 continue;
             }
             $list['book_date'] = $row['book_date'];
             $list['book_cls_num'] = $row['book_cls_num'];
             $coachName = $this->coach_model->select_name($row['book_coa_id']);
             $list['coa_name'] = $coachName[0]['coach_name'];
-            $list['coa_face'] = $coachName[0]['coach_face']."@!nail";
+            $list['coa_face'] = $coachName[0]['coach_face'] . "@!nail";
             $schName = $this->school_model->select_name($row['book_sch_id']);
             $list['sch_name'] = $schName[0]['jp_name'];
             $comment_list['comment_history_list'][$i] = $this->load->view('vip_views/comment_history_list', $list, true);
@@ -219,7 +230,7 @@ class VipCenter extends MY_Controller {
             'book_coa_id' => $book_coa_id,
             'book_date' => $book_date
         );
-        $result1 = $this->coachbook_model->select($data1,$time,$cls);
+        $result1 = $this->coachbook_model->select($data1, $time, $cls);
         $result2 = $this->teachbook_model->select_info_coa($data2);
         $both = array(
             'coachbook' => $result1,
@@ -258,13 +269,12 @@ class VipCenter extends MY_Controller {
         $id = $this->input->post("com_id");
         $name = $this->session->userdata('name');
         $result = $this->clscomment_model->select_detail($id);
-        $page='';
+        $page = '';
         foreach ($result as $row) {
-           $list['userName'] = $name;
-           $list['content'] = $row['com_content'];
-           $list['time'] = $row['com_time'];
-          $page.= $this->load->view('vip_views/comment_list', $list, true);
-            
+            $list['userName'] = $name;
+            $list['content'] = $row['com_content'];
+            $list['time'] = $row['com_time'];
+            $page.= $this->load->view('vip_views/comment_list', $list, true);
         }
         echo $page;
     }
@@ -288,17 +298,19 @@ class VipCenter extends MY_Controller {
             'com_level' => $level
         );
         $return = $this->clscomment_model->insert($data);
-            echo $return;
-    }
-    public function unbook(){
-        $id = $this->input->post("book_id");
-        $data=array(
-            'book_state'=>'7'
-        );
-        $return = $this->teachbook_model->update_state($id,$data);
         echo $return;
     }
-    public function get_course_name(){
+
+    public function unbook() {
+        $id = $this->input->post("book_id");
+        $data = array(
+            'book_state' => '7'
+        );
+        $return = $this->teachbook_model->update_state($id, $data);
+        echo $return;
+    }
+
+    public function get_course_name() {
         $id = $this->input->post("id");
         $return = $this->course_model->select($id);
         echo $return[0]["cls_name"];

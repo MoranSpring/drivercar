@@ -45,7 +45,7 @@ class First extends MY_Controller {
 //        redirect('vipcenter');
     }
 
-    public function view($page = '') {
+    public function view($title='',$page = '') {
 
         $name = $this->session->userdata('name');
         if ($name == null) {
@@ -60,6 +60,11 @@ class First extends MY_Controller {
             return false;
         } else {
             $body['content'] = $page;
+        }
+        if ($title == '') {
+           $body['title']="我爱开车网-首页";
+        } else {
+           $body['title'] = $title;
         }
 
         $body['footer'] = $this->load->view('common_views/footer', '', true);
@@ -164,32 +169,39 @@ class First extends MY_Controller {
 //        }
 
         $page = $this->load->view('a_views/sch_info', $oneNews, true);
-        $this->view($page);
+        $title="驾培资讯首页 - 我爱开车网";
+        $this->view($title,$page);
     }
 
     public function pos_info() {
         $page = $this->load->view('a_views/pos_info', '', true);
-        $this->view($page);
+        $title="驾培点信息 - 我爱开车网";
+        $this->view($title,$page);
     }
 
     public function school_info($id='') {
         if($id=='')exit (0);
         $result = $this->school_model->get_from_id($id);
         $list='';
+        $title='';
         foreach($result as $row){
             $list= $this->load->view('a_views/school_info',$row, true);
+            $title=$row['jp_name']. " - 我爱开车网";
         }
-        $this->view($list);
+        
+        $this->view($title,$list);
     }
 
     public function ser_info() {
         $page = $this->load->view('a_views/ser_info', '', true);
-        $this->view($page);
+        $title="服务指南 - 我爱开车网";
+        $this->view($title,$page);
     }
 
     public function coach_info() {
         $page = $this->load->view('a_views/coach_info', '', true);
-        $this->view($page);
+        $title="教练信息 - 我爱开车网";
+        $this->view($title,$page);
     }
 
     public function coach_center() {
@@ -199,8 +211,8 @@ class First extends MY_Controller {
         $body['isCoach'] = false;
         $body['book_date2'] = "afafdas";
         $page = $this->load->view('coach_views/self_info', $body, true);
-
-        $this->view($page);
+        $title="驾培点信息 - 我爱开车网";
+        $this->view($title,$page);
     }
     public function coach_self_info(){
 //        $UID = $this->session->userdata('UID');
@@ -214,8 +226,10 @@ class First extends MY_Controller {
             $row['coach_sch_name'] = $schName[0]['jp_name'];
             $row['isCoach'] = $isCoach;
             $page = $this->load->view('coach_views/self_info',$row, true);
+            $title=$row['coach_name']."教练员主页 - 我爱开车网";
         }
-        $this->view($page);
+        
+        $this->view($title,$page);
     }
 
     public function forgetPwd() {
@@ -345,6 +359,9 @@ class First extends MY_Controller {
                 } else {
                     $this->session->set_userdata('name', $name);
                 }
+                if($row['stu_tel'] != null){
+                    $this->session->set_userdata('TEL', $row['stu_tel']);
+                }
                 if ($row['stu_type'] == 3) {
                     redirect();
                 } else if ($row['stu_type'] == 1) {
@@ -392,13 +409,14 @@ class First extends MY_Controller {
 //--------------验证码------------------------
     public function news($id = '') {
         $news = $this->news_model->select_detail($id);
+        $title='';
         foreach ($news as $row) {
             $row['news_content'] = preg_replace('/\n/', '<p/><p>', $row['news_content']);
             $row['news_imge'].="@!newsimg";
             $page = $this->load->view('a_views/news', $row, true);
+            $title=$row['news_title']." - 我爱开车网";
         }
-
-        $this->view($page);
+        $this->view($title,$page);
     }
 
     public function getcityData() {
