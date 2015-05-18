@@ -97,43 +97,51 @@
             <div id="main_content" class="clearfix">
                 <div id="content1" class="clearfix">
                     <?php
+                    if (isset($news1)) {
                     foreach ($news1 as $row)
-                        echo $row;
-                        ?>
+                    echo $row;
+                    }?>
                 </div>
                 <div id="content2" style="display:none;" class="clearfix">
                     <?php
+                    if (isset($news2)) {
                     foreach ($news2 as $row)
-                        echo $row
-                        ?>
+                    echo $row;
+                    }?>
                     <!------------------------------------------------------>
                 </div>
                 <div id="content3" style="display:none" class="clearfix">
                     <?php
+                    if (isset($news3)) {
                     foreach ($news3 as $row)
-                        echo $row
-                        ?>
+                    echo $row;
+                    }?>
                 </div>
                 <div id="content4" style="display:none">
                     <?php
+                     if (isset($news4)) {
                     foreach ($news4 as $row)
-                        echo $row
-                        ?></div>
+                        echo $row;
+                     }?></div>
                 <div id="content5" style="display:none">
                     <?php
                     if (isset($news5)) {
                         foreach ($news5 as $row)
                             echo $row;
-                    }
-                    ?></div>
+                    }?></div>
                 <div id="content6" style="display:none">
                     <?php
+                    if (isset($news6)) {
                     foreach ($news6 as $row)
-                        echo $row
-                        ?></div>
+                        echo $row;
+                    }?></div>
 
             </div>
         </div>
 
     </div>
 </div>
+<script>
+    function onDisplay(num){}
+
+</script>

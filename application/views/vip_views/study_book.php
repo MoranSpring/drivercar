@@ -168,7 +168,7 @@
                         <div class="am-u-sm-6 am-u-md-6">
                             <div class="am-g am-margin-top">
                                 <div>你选了<span id="cls_num_box"></span>节课</div>
-                                <div>供需1000元钱</div>
+                                <div>供需<span>1000</span>元积分</div>
                                 <div id="cls_date_box"></div>
 
                             </div>
@@ -177,8 +177,8 @@
                                 <table id='data-table' class="am-table am-table-bordered ml-table">
                                     <thead>
                                     <td></td>
-                                    <td>此时刻最大承载量</td>
-                                    <td>当前时段已被预约</td>
+                                    <td>最大承载量</td>
+                                    <td>被预约</td>
                                     <td>剩余可约</td>
                                     </thead>
                                     <tr>

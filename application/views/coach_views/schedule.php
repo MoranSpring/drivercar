@@ -56,7 +56,6 @@
                                 <th width="12%" id="date5"></th>
                                 <th width="12%" id="date6"></th>
                                 <th width="12%" id="date7"></th>
-
                             </tr>
                         </thead>
                         <tbody>
@@ -71,7 +70,7 @@
                                 <td class="ml-item ml-coach-active" value="" date="date7" num="1"></td>
                             </tr>
                             <tr>
-                                <td value="1" name="">09:00--2:00</td>
+                                <td value="1" name="">09:00--10:00</td>
                                 <td class="ml-item ml-coach-active" value="" date="date1" num="2"></td>
                                 <td class="ml-item ml-coach-active" value="" date="date2" num="2"></td>
                                 <td class="ml-item ml-coach-active" value="" date="date3" num="2"></td>

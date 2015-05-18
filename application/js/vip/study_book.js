@@ -8,6 +8,7 @@ $(function () {
     $('#bt1').click(function () {
         if (check() === 100 || check() === 200) {
             step2();
+            isStaticCoach();
             get_project_name();
             $('.step_1').css('display', 'none');
             $('.step_2').css('display', 'block');
@@ -79,10 +80,11 @@ function selectCoach(sch_id) {
         success: function (data) {
             var json = eval("(" + data + ")");
             for (var i = 0; i < json.length; i++) {
-                $(".select_coach").removeAttr("disabled");
                 $('.select_coach').append("<option value='" + json[i].coach_id + "'>" + json[i].coach_name + "</option>");
             }
+            $(".select_coach").attr("disabled", "false");
             $('.select_coach').trigger('chosen:updated');
+            return true;
         }
     });
 }
@@ -313,6 +315,26 @@ function parseISO8601(dateStringInRange) {
         success: function (data) {
             var projectName=data;
             $('.cls_project').attr("projectName",projectName);
+        }});
+ }
+ function isStaticCoach(){
+     $.ajax({
+        type: "POST",
+        dataType: "text",
+        url: localhostPath + "/index.php/vipcenter/get_static_coach",
+        async: true,
+        data: {},
+        success: function (data) {
+           if(data!==0){
+               $(".select_sch").attr("disabled", "true");
+                var json = eval("(" + data + ")");
+                $(".select_sch option[value="+json.sc_sch +"]").attr("selected", true);
+                if(selectCoach(json.sc_sch)){
+                    $(".select_coach option[value="+json.sc_coa +"]").attr("selected", true);
+                    $(".select_coach").attr("disabled", "true");
+                };
+                
+           }
         }});
  }
 

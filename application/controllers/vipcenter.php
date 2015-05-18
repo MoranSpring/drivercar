@@ -14,6 +14,8 @@ class VipCenter extends MY_Controller {
         $this->load->model('course_model');
         $this->load->model('school_model');
         $this->load->model('clscomment_model');
+        $this->load->model('staticcoach_model');
+
     }
 
     public function index() {
@@ -314,6 +316,16 @@ class VipCenter extends MY_Controller {
         $id = $this->input->post("id");
         $return = $this->course_model->select($id);
         echo $return[0]["cls_name"];
+    }
+    public function get_static_coach(){
+        $UID = $this->session->userdata('UID');
+        $return = $this->staticcoach_model->select($UID);
+        $result='';
+        foreach($return as $row){
+            $result=$row;
+        }
+        echo $result=='' ? 0 : json_encode($result);
+       
     }
 
 }
