@@ -421,7 +421,7 @@ class First extends MY_Controller {
 
     public function getcityData() {
         
-        $retval = $this->_request('http://localhost:8888/application/js/cityData.min.json');
+        $retval = $this->_request('http://driver-un.oss-cn-shenzhen.aliyuncs.com/js/cityData.min.json');
 
         if ($retval !== false) {
             echo $retval;

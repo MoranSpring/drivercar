@@ -19,8 +19,9 @@ class Staticcoach_model extends CI_Model {
         return $result;
     }
 
-    public function select() {//返回该用户名所有信息
+    public function select($data) {//返回该用户名所有信息
         $this->db->select();
+        $this->db->where('sc_stu', $data);
         $query = $this->db->get('StaticCoach');
         return $query->result_array();
     }

@@ -21,7 +21,10 @@
  
                 <div id="content2" class="clearfix">
                     <div style="margin: 5px;">
-                        <?php foreach($comment_history_list as $row) echo $row; ?>
+                        <?php 
+                        if(isset($comment_history_list)){
+                        foreach($comment_history_list as $row) 
+                            echo $row;} ?>
                     </div>
 
 

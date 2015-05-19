@@ -312,7 +312,7 @@
 
                     var train_right_icon = document.getElementById("train_right_icon");
                     var train_wrong_icon = document.getElementById("train_wrong_icon");
-                    if (train_page_num != null || train_page_num != "") {
+                    if (train_page_num != null&& train_page_num != "") {
                         $.ajax({
                             type: "POST",
                             dataType: "text",

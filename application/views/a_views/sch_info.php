@@ -10,7 +10,7 @@
     </div>
     <div id="con-right" style="background: #f0f0f0;">
         <div id="con-nav">
-            <p><a href="void">首页</a> >>驾培资讯</p>
+            <p><a href="#">首页</a> >>驾培资讯</p>
         </div>
         <style>
             .news-wrap a:hover{

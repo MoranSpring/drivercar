@@ -18,8 +18,7 @@
         <div id="con-con" class ="real_content">
             <ul class="tab">
                 <li id="one1" class="selected-li" onclick="setTab('one', 1, 3)">未消费订单</li>
-                <li id="one2" onclick="setTab('one', 2, 3)">历史订单</li>
-                <li id="one3" onclick="setTab('one', 3, 3)" style="border-right:1px solid #aaa;">法律法规</li>
+                <li id="one2" onclick="setTab('one', 2, 3)" style="border-right:1px solid #aaa;">历史订单</li>
 
             </ul>
             <div id="main_content" class="clearfix">
@@ -77,10 +76,6 @@
                         </table>
                     </div>
                 </div>
-                <div id="content3" class="clearfix"   style="display:none;">
-                </div>
-
-
             </div>
         </div>
     </div>

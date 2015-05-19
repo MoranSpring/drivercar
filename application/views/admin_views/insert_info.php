@@ -7,7 +7,7 @@
                     <ul class="am-tabs-nav am-nav am-nav-tabs">
                         <li class="am-active"><a href="#tab1">新闻上传</a></li>
                         <li><a href="#tab2">驾校添加</a></li>
-                        <li><a href="#tab3">图片上传</a></li>
+                        <li><a href="#tab3">教练添加</a></li>
                     </ul>
                     <div class="am-tabs-bd">
 

@@ -47,7 +47,7 @@ $(function () {
     });
     getSchoolsInfo();
     get3Date();
-    $(".select_coach").attr("disabled", "true");
+    $(".select_coach").attr("disabled", true);
 });
 
 function getSchoolsInfo() {
@@ -82,11 +82,11 @@ function selectCoach(sch_id) {
             for (var i = 0; i < json.length; i++) {
                 $('.select_coach').append("<option value='" + json[i].coach_id + "'>" + json[i].coach_name + "</option>");
             }
-            $(".select_coach").attr("disabled", "false");
             $('.select_coach').trigger('chosen:updated');
-            return true;
         }
     });
+    $(".select_coach").removeAttr("disabled");
+    return true;
 }
 //--------------选择类-----------------
 function choice(date, cls)
@@ -325,13 +325,13 @@ function parseISO8601(dateStringInRange) {
         async: true,
         data: {},
         success: function (data) {
-           if(data!==0){
+           if(data!=0){
                $(".select_sch").attr("disabled", "true");
                 var json = eval("(" + data + ")");
                 $(".select_sch option[value="+json.sc_sch +"]").attr("selected", true);
                 if(selectCoach(json.sc_sch)){
                     $(".select_coach option[value="+json.sc_coa +"]").attr("selected", true);
-                    $(".select_coach").attr("disabled", "true");
+                    $(".select_coach").attr("disabled", true);
                 };
                 
            }

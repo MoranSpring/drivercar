@@ -7,8 +7,7 @@
         <link type="text/css" href="<?= base_url() ?>application/css/ml.css" rel="stylesheet">
         <ul class="tab">
             <li id="one1" class="selected-li" onclick="setTab('one', 1, 3)">已预约课程</li>
-            <li id="one2" onclick="setTab('one', 2, 3)">申诉退订</li>
-            <li id="one3" onclick="setTab('one', 3, 3)" style="border-right:1px solid #aaa;">搜索</li>
+            <li id="one2" onclick="setTab('one', 2, 3)"  style="border-right:1px solid #aaa;">申诉退订</li>
         </ul>
         <div class="pos_content">
             <div id="content1" class="clearfix">
@@ -26,8 +25,9 @@
                         </thead>
                         <tbody>
                             <?php
+                            if (isset($book_list)) {
                             foreach ($book_list as $row)
-                                echo $row;
+                            echo $row;}
                             ?>
                         </tbody>
                     </table>
@@ -61,9 +61,7 @@
                     </table>
                 </div>
             </div>
-            <div id="content3" style="display:none">
-                <input type="submit" name="Submit2" value="提交" onclick="firm()" />
-            </div>
+           
         </div>
 
 

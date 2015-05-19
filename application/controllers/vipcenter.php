@@ -62,6 +62,7 @@ class VipCenter extends MY_Controller {
         $UID = $this->session->userdata('UID');
         $result = $this->teachbook_model->get_book_info($UID);
         $i = 0;
+        $content='';
         foreach ($result as $row) {
 
             $data['date'] = $row['book_date'];
@@ -69,6 +70,7 @@ class VipCenter extends MY_Controller {
             $name = $this->coach_model->select_name($row['book_coa_id']);
             $data['Name'] = $name[0]['coach_name'];
             $data['course_num'] = $row['book_cls_num'];
+            $data['book_suggest'] = $row['book_suggest'];
             $data['imageURL'] = $name[0]['coach_face'] . "@!nail";
             $sch_name = $this->school_model->select_name($row['book_sch_id']);
             $data['school'] = $sch_name[0]['jp_name'];
@@ -324,7 +326,8 @@ class VipCenter extends MY_Controller {
         foreach($return as $row){
             $result=$row;
         }
-        echo $result=='' ? 0 : json_encode($result);
+        echo $result=='' ? '0' : json_encode($result);
+
        
     }
 
