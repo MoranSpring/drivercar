@@ -18,9 +18,10 @@ class Serialnumber_model extends CI_Model{
         return $result; 
     }
     
-    public function selectBySerNum($serial_num) {//根据序列号查找
+    public function selectBySerNum($serial_num,$ser_type) {//根据序列号查找
         $this->db->select();
         $this->db->where('serial_num',$serial_num);
+        $this->db->where('serial_type',$ser_type);
         $query = $this->db->get('SerialNumber');
         $data=$query->result_array();
         return $data;

@@ -37,7 +37,8 @@ class Register extends MY_Controller {
 //        $data=array(
 //            'serial_num'=>$vip_page_num
 //        );
-        $result = $this->serialnumber_model->selectBySerNum($vip_page_num);
+        $ser_type=$this->input->post('ser_type');
+        $result = $this->serialnumber_model->selectBySerNum($vip_page_num,$ser_type);
         foreach($result as $row){
             $serial_num=$row['serial_num'];
             $serial_valid=$row['serial_valid'];
@@ -64,7 +65,8 @@ class Register extends MY_Controller {
 //        $data=array(
 //            'serial_num'=>$train_page_num
 //        );
-        $result = $this->serialnumber_model->selectBySerNum($train_page_num);
+        $ser_type=$this->input->post('ser_type');
+        $result = $this->serialnumber_model->selectBySerNum($train_page_num,$ser_type);
         foreach($result as $row){
             $serial_num=$row['serial_num'];
             $serial_valid=$row['serial_valid'];

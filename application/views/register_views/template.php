@@ -259,12 +259,15 @@
                         }
                     }
                     return radio_val;
-                }//{"reg_email_str":"f3iu6mp6","send_time":1429249007,"result":true}
+                }
+                 //用户类型
+                  var vipstr = 2;
+                  var trainerstr = 1;
+                
                 function setSerialShowHide(check_val) {
                     var vip_serial_div = document.getElementById("vip_serial_div");
                     var train_serial_div = document.getElementById("train_serial_div");
-                    var vipstr = 2;
-                    var trainerstr = 1;
+                  
                     if (check_val == vipstr) {
                         vip_serial_div.style.display = "block";
                         train_serial_div.style.display = "none";
@@ -289,7 +292,7 @@
                             dataType: "text",
                             url: "<?= base_url() ?>index.php/register/ValiVipSerNum",
                             async: true,
-                            data: {vip_page_num: vip_page_num},
+                            data: {vip_page_num: vip_page_num,ser_type:vipstr},
                             success: function (data) {
                                 //alert(data);
                                 if (data == 1 || data == "1") {
@@ -309,7 +312,7 @@
                 });
                 $('#train_serial_num').blur(function () {
                     var train_page_num = $('#train_serial_num').val();
-
+                    
                     var train_right_icon = document.getElementById("train_right_icon");
                     var train_wrong_icon = document.getElementById("train_wrong_icon");
                     if (train_page_num != null&& train_page_num != "") {
@@ -318,7 +321,7 @@
                             dataType: "text",
                             url: "<?= base_url() ?>index.php/register/ValiTrainSerNum",
                             async: true,
-                            data: {train_page_num: train_page_num},
+                            data: {train_page_num: train_page_num,ser_type:trainerstr},
                             success: function (data) {
                                 if (data == 1 || data == "1") {
                                     train_wrong_icon.style.display = "none";
