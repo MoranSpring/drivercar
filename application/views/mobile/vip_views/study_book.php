@@ -34,38 +34,38 @@
                 教练预约
             </h1>
         </header>
-        <select data-am-selected>
-            <option value="a">Apple</option>
-            <option value="b">Banana</option>
-            <option value="o">Orange</option>
-            <option value="m">Mango</option>
-            <option value="d" disabled>禁用鸟</option>
-        </select>
-        <select data-am-selected>
-            <option value="a">Apple</option>
-            <option value="b">Banana</option>
-            <option value="o">Orange</option>
-            <option value="m">Mango</option>
-            <option value="d" disabled>禁用鸟</option>
-        </select>
-        <div class="am-form-group">
-      <label for="doc-select-1">下拉多选框</label>
-      <select id="doc-select-1" data-am-selected >
-        <option value="option1">选项一...</option>
-        <option value="option2">选项二.....</option>
-        <option value="option3">选项三........</option>
-      </select>
-      <span class="am-form-caret"></span>
-    </div>
-       <div class="ml_step_ul">
-                    <ul class="clear" style="padding-left:0;">
-                        <li id="ml-step1"class=" ml_li">01、选择课程</li>
-                        <li class=" ml_li"><img id="ml-step_img1"  src="<?= base_url() ?>application/images/cover.png" style="height: 40px; vertical-align:top"  height="40px" width="26" /></li>
-                        <li id="ml-step2" class=" ml_li">02、选择课程</li>
-                        <li class=" ml_li"><img id="ml-step_img2"  src="<?= base_url() ?>application/images/cover.png"  style="height: 40px; vertical-align:top" height="40px" width="26" /></li>
-                        <li id="ml-step3" class=" ml_li">03、完成选课</li>
-                    </ul>
-                </div>
+
+        <div class="ml_step_ul am-margin-top-sm">
+            <ul class="clear" style="padding-left:0;">
+                <li id="ml-step1"class=" ml_li">1.选择课程</li>
+                <li class=" ml_li"><img id="ml-step_img1"  src="<?= base_url() ?>application/images/cover.png" style="height: 40px; vertical-align:top"  height="40px" width="26" /></li>
+                <li id="ml-step2" class=" ml_li">2.选择课程</li>
+                <li class=" ml_li"><img id="ml-step_img2"  src="<?= base_url() ?>application/images/cover.png"  style="height: 40px; vertical-align:top" height="40px" width="26" /></li>
+                <li id="ml-step3" class=" ml_li">3.完成选课</li>
+                <li class=" ml_li"><img id="ml-step_img3"  src="<?= base_url() ?>application/images/cover.png"  style="height: 40px; vertical-align:top" height="40px" width="20" /></li>
+            </ul>
+        </div>
+
+        <div class="am-margin-top">
+            <label for="doc-select-1">下拉多选框</label>
+            <select id="doc-select-1" data-am-selected >
+                <option value="option1">选项一...</option>
+                <option value="option2">选项二.....</option>
+                <option value="option3">选项三........</option>
+            </select>
+        </div>
+        <div class="am-margin-top">
+            <label for="doc-select-1">下拉多选框</label>
+            <select id="doc-select-1" data-am-selected >
+                <option value="option1">选项一...</option>
+                <option value="option2">选项二.....</option>
+                <option value="option3">选项三........</option>
+            </select>
+        </div>
+        <div class="am-center am-margin-top-xl" style="width:210px">
+                        <button id="bt21" type="button" class=" am-btn am-btn-primary am-fl" style="width:100px" >上一步</button>
+                        <button id="bt22" type="button" class=" am-btn am-btn-primary am-fr" style="width:100px">下一步</button>
+                    </div>
 
 
 

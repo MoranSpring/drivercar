@@ -35,6 +35,12 @@ and open the template in the editor.
 .step_img_offoff{
     background: url(../images/step.png) center -100px no-repeat;
 }
+.step_end_img_off{
+    background: url(../images/end_step.png) center -50px no-repeat;
+}
+.step_end_img_on{
+    background: url(../images/end_step.png) center 0px no-repeat;
+}
 .ml_li{
     float:left;
     height:40px;
