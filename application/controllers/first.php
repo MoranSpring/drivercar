@@ -31,7 +31,16 @@ class First extends MY_Controller {
     }
 
     public function index() {
-        $this->view();
+//        $this->view();
+        
+         $this->load->library('user_agent');
+        if ($this->agent->is_mobile()) {
+            //echo "mobile"." ===". $this->agent->mobile();
+            $this->load->view('mobile/login_views/template');
+        } else {
+            //echo "computer";
+            $this->view();
+        }
      
 
 //        $bucket = 'driver-un';
@@ -43,6 +52,18 @@ class First extends MY_Controller {
 //                $this->load->view('test3');
 //        redirect('first/sch_info');
 //        redirect('vipcenter');
+    }
+    public function mobile() {
+            $this->load->view('mobile/login_views/template');
+    }
+    public function mobile_login() {
+            $this->load->view('mobile/login_views/login');
+    }
+    public function mobile_news() {
+            $this->load->view('mobile/login_views/template');
+    }
+    public function mobile_book() {
+            $this->load->view('mobile/vip_views/study_book');
     }
 
     public function view($title='',$page = '') {

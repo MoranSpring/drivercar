@@ -1,4 +1,4 @@
-﻿/*
+/*
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
@@ -43,6 +43,9 @@ and open the template in the editor.
 }
 .ml_li_width{
     width:30%;
+}
+.ml_li_width2{
+    width:28%;
 }
 .ml-table>thead>tr>th, .ml-table>tbody>tr>th, .ml-table>tfoot>tr>th, .ml-table>thead>tr>td, .ml-table>tbody>tr>td, .ml-table>tfoot>tr>td{
     line-height: 1em;
