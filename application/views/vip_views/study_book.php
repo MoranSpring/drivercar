@@ -99,7 +99,7 @@
                                             <td class="item" value="" date="date3" num="1"></td>
                                         </tr>
                                         <tr>
-                                            <td value="1" name="">09:00--2:00</td>
+                                            <td value="1" name="">09:00--10:00</td>
                                             <td class="item" value="" date="date1" num="2"></td>
                                             <td class="item" value="" date="date2" num="2"></td>
                                             <td class="item" value="" date="date3" num="2"></td>
