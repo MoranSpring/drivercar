@@ -112,18 +112,6 @@
             }
             $(document).ready(myFunction);
         </script>
-        <!--[if lt IE 9]>
-<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
-<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="<?= base_url() ?>application/js/admin/polyfill/rem.min.js"></script>
-<script src="<?= base_url() ?>application/js/admin/polyfill/respond.min.js"></script>
-<script src="<?= base_url() ?>application/js/admin/amazeui.legacy.js"></script>
-<![endif]-->
 
-        <!--[if (gte IE 9)|!(IE)]><!-->
-        <script src="<?php echo base_url() . 'application/js/admin/jquery.min.js' ?>" ></script>
-        <script src="<?= base_url() ?>application/js/admin/amazeui.min.js"></script>
-        <!--<![endif]-->
-        <script src="<?= base_url() ?>application/js/admin/app.js"></script>
     </body>
 </html>

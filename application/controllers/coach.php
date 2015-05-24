@@ -134,7 +134,9 @@ class Coach extends MY_Controller {
             }
             
             $coachName = $this->accesscontrol_model->selectUserName($row['book_stu_id']);
-            $list['stu_name'] = $coachName[0]['stu_true_name'];
+            foreach ($coachName as $row3) {
+                $list['stu_name'] = $row3['stu_true_name'];
+            }
             
             $schName = $this->school_model->select_name($row['book_sch_id']);
             $list['sch_name'] = $schName[0]['jp_name'];

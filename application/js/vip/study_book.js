@@ -4,7 +4,7 @@ var pos = curWwwPath.indexOf(pathName);
 var localhostPath = curWwwPath.substring(0, pos);
 //初始化
 $(function () {
-   
+
     $('#bt1').click(function () {
         if (check() === 100 || check() === 200) {
             step2();
@@ -66,7 +66,7 @@ function getSchoolsInfo() {
     });
 }
 
-    
+
 
 
 function selectCoach(sch_id) {
@@ -105,7 +105,22 @@ function choice(date, cls)
 //            $(this).css('background', '');
 //            refresh();
 //        });
-$(".ml-cls-active").live('click', function () {
+
+//--------jquery1.7------UNUSED------------------
+//$(".ml-cls-active").live('click', function () {
+//    if ($(this).attr('value') !== '8') {
+//        $(this).attr('value', '8');
+//        $(this).removeClass("ml-cls-active-defult");
+//        $(this).addClass("ml-cls-active-selected");
+//    } else {
+//        $(this).attr('value', '-1');
+//        $(this).removeClass("ml-cls-active-selected");
+//        $(this).addClass("ml-cls-active-defult");
+//    }
+//    refresh();
+//});
+//---------------------------------------
+$(document).on('click', '.ml-cls-active', function () {
     if ($(this).attr('value') !== '8') {
         $(this).attr('value', '8');
         $(this).removeClass("ml-cls-active-defult");
@@ -172,8 +187,8 @@ function init() {
     $('.item').css('background', '');
     refresh();
 }
-function get3Date(){
-     $("#datepicker").datepicker({
+function get3Date() {
+    $("#datepicker").datepicker({
         minDate: 0, maxDate: "+1M",
         onSelect: function (dateText) {
             init();
@@ -239,13 +254,16 @@ function submit() {
     var projectName = $('.cls_project').attr("projectName");
     var school_id = $('.select_sch').val();
     var coach_id = $('.select_coach').val();
+    //-----------jquery1.7 UNUSED------------
     var school_name = $('.select_sch option:selected').text();
     var coach_name = $('.select_coach  option:selected').text();
+
+
 //    alert(kind + '    ' + projectName + '    ' + school_name + '    ' + coach_name);
     var selArray = refresh();
     $('#book-table-info').empty();
     for (var i = 0; i < selArray.length; i++) {
-        $('#book-table-info').append("<tr><td>" + selArray[i].date + ", 第" + selArray[i].cls + "节课" + "</td><td><a  target='_blank' href='"+localhostPath+"/index.php/first/school_info/"+school_id+"'>" + school_name + "</a></td> <td><a  target='_blank' href='"+localhostPath+"/index.php/first/coach_self_info/"+coach_id+"'>" + coach_name + "</a></td><td>" + projectName + "</td>< /tr>");
+        $('#book-table-info').append("<tr><td>" + selArray[i].date + ", 第" + selArray[i].cls + "节课" + "</td><td><a  target='_blank' href='" + localhostPath + "/index.php/first/school_info/" + school_id + "'>" + school_name + "</a></td> <td><a  target='_blank' href='" + localhostPath + "/index.php/first/coach_self_info/" + coach_id + "'>" + coach_name + "</a></td><td>" + projectName + "</td></tr>");
     }
     $('.sum-cls-num').html(selArray.length);
 }
@@ -260,11 +278,15 @@ function toOnload() {
         dataType: "text",
         url: localhostPath + "/index.php/vipcenter/teach_book",
         async: true,
-        data: {book_coa_id: coach_id, book_sch_id: school_id, book_cls_id:project,json: json},
+        data: {book_coa_id: coach_id, book_sch_id: school_id, book_cls_id: project, json: json},
         success: function (data) {
-            if (data == 1){
-                alert("预约成功！");
-                window.location.href=localhostPath + "/index.php/vipcenter/vip_center";
+            if (data == 1) {
+                alert("预约成功！!!");
+                step1();
+                $('.step_1').css('display', 'block');
+                $('.step_2').css('display', 'none');
+                $('.step_3').css('display', 'none');
+                window.location.href = localhostPath + "/index.php/vipcenter/vip_center";
             }
             else {
                 alert("预约失败！");
@@ -291,50 +313,51 @@ function myAlert(content) {
 //    $modal.modal('open');
 }
 function parseISO8601(dateStringInRange) {
-   var isoExp = /^\s*(\d{4})-(\d\d)-(\d\d)\s*$/,
-       date = new Date(NaN), month,
-       parts = isoExp.exec(dateStringInRange);
+    var isoExp = /^\s*(\d{4})-(\d\d)-(\d\d)\s*$/,
+            date = new Date(NaN), month,
+            parts = isoExp.exec(dateStringInRange);
 
-   if(parts) {
-     month = +parts[2];
-     date.setFullYear(parts[1], month - 1, parts[3]);
-     if(month != date.getMonth() + 1) {
-       date.setTime(NaN);
-     }
-   }
-   return date;
- }
- function get_project_name(){
-     var project=$('.cls_project').val();
-     $.ajax({
+    if (parts) {
+        month = +parts[2];
+        date.setFullYear(parts[1], month - 1, parts[3]);
+        if (month != date.getMonth() + 1) {
+            date.setTime(NaN);
+        }
+    }
+    return date;
+}
+function get_project_name() {
+    var project = $('.cls_project').val();
+    $.ajax({
         type: "POST",
         dataType: "text",
         url: localhostPath + "/index.php/vipcenter/get_course_name",
         async: true,
         data: {id: project},
         success: function (data) {
-            var projectName=data;
-            $('.cls_project').attr("projectName",projectName);
+            var projectName = data;
+            $('.cls_project').attr("projectName", projectName);
         }});
- }
- function isStaticCoach(){
-     $.ajax({
+}
+function isStaticCoach() {
+    $.ajax({
         type: "POST",
         dataType: "text",
         url: localhostPath + "/index.php/vipcenter/get_static_coach",
         async: true,
         data: {},
         success: function (data) {
-           if(data!=0){
-               $(".select_sch").attr("disabled", "true");
+            if (data != 0) {
+                $(".select_sch").attr("disabled", "true");
                 var json = eval("(" + data + ")");
-                $(".select_sch option[value="+json.sc_sch +"]").attr("selected", true);
-                if(selectCoach(json.sc_sch)){
-                    $(".select_coach option[value="+json.sc_coa +"]").attr("selected", true);
+                $(".select_sch option[value=" + json.sc_sch + "]").attr("selected", true);
+                if (selectCoach(json.sc_sch)) {
+                    $(".select_coach option[value=" + json.sc_coa + "]").attr("selected", true);
                     $(".select_coach").attr("disabled", true);
-                };
-                
-           }
+                }
+                ;
+
+            }
         }});
- }
+}
 

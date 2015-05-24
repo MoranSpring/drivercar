@@ -11,6 +11,7 @@
         <script src="http://a.static.amazeui.org/assets/2.x/js/handlebars.min.js?v=i89kryv3"></script>
         <script src="http://cdn.amazeui.org/amazeui/2.3.0/js/amazeui.widgets.helper.min.js"></script>
         <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.3.0/css/amazeui.min.css">
+        <script  language="javascript" src="<?=base_url()?>application/js/login.js"></script>
     </head>
     <style>
         .clearfix:after {
@@ -34,17 +35,17 @@
                 登录
             </h1>
         </header>
-        <form class="am-form">
+        <form class="am-form"  id="form-login" method="post" action="<?= base_url()?>index.php/first/login_psw_check">
                 <div class="am-input-group am-margin">
                     <span class="am-input-group-label"><i class="am-icon-user am-icon-fw"></i></span>
-                    <input type="text" class="am-form-field" placeholder="Username">
+                    <input id="name" name="name"  type="text" class="am-form-field" autocomplete="off" value="" onfocus="check_onfocus()" onblur="check_onbulr(this.value)" placeholder="输入注册邮箱">
                 </div>
                 <div class="am-input-group  am-margin">
                     <span class="am-input-group-label"><i class="am-icon-lock am-icon-fw"></i></span>
-                    <input type="text" class="am-form-field" placeholder="Password">
+                    <input class="am-form-field" id="password" type="password" name="password" placeholder="请输入密码" autocomplete="off"  value="">
             </div>
             <div class="am-margin">
-             <button type="submit" class="am-btn am-btn-primary am-btn-block">登  录</button>
+             <button type="submit"   class="am-btn confirm am-btn-primary am-btn-block">登  录</button>
             </div>
         </form>
     <footer data-am-widget="footer" class="am-footer am-footer-default" data-am-footer="{  }">
