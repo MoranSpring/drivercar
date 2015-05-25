@@ -13,6 +13,5 @@
     </head>
     <?= $content?>
     <?= $footer?>
-    
 </html>
 

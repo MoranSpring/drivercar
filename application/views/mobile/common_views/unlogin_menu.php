@@ -11,7 +11,7 @@
                             <img class="am-circle" src="http://img3.douban.com/lpic/o626254.jpg" height="80px" height="80px"/>
                         </div>
                         <div class="am-u-sm-7 am-u-md-7" style="color:#fff">
-                            <lable type="button" class="am-btn-xl am-fl am-btn-secondary" style=" width:100px;text-align: center">请登录</lable>
+                            <lable type="button" class="am-btn-xl am-fl am-btn-secondary" onclick="window.location='<?= base_url()?>index.php/mobile/login'" style=" width:100px;text-align: center">请登录</lable>
                         </div>
 
                     </div>

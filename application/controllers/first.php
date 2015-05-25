@@ -397,12 +397,15 @@ class First extends MY_Controller {
                     $this->session->set_userdata('name', $row['stu_true_name']);
                 } else if ($row['stu_nick_name'] != null) {
                     $this->session->set_userdata('name', $row['stu_nick_name']);
-                } else {
+                }else {
                     $this->session->set_userdata('name', $name);
                 }
                 if ($row['stu_tel'] != null) {
                     $this->session->set_userdata('TEL', $row['stu_tel']);
                 }
+                if ($row['stu_face'] != null) {
+                    $this->session->set_userdata('face', $row['stu_face']);
+                } 
                 if ($row['stu_type'] == 3) {
                     redirect();
                 } else if ($row['stu_type'] == 1) {

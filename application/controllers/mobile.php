@@ -57,12 +57,21 @@ class Mobile extends MY_Controller {
         $title = "我爱开车网（手机版）- 首页";
         $this->view($title, $page);
     }
-
     public function login() {
         $page = $this->load->view('mobile/login_views/login', '', true);
         $title = " 登录 - 我爱开车网（手机版）";
         $this->view($title, $page);
     }
+    public function study_book() {
+        $page = $this->load->view('mobile/vip_views/study_book', '', true);
+        $title = " 教练预约 - 我爱开车网（手机版）";
+        $this->view($title, $page);
+    }
+    
+    
+    
+    
+    //----获得当前用户状态下的侧滑菜单
     public function getMenu(){
         $name = $this->session->userdata('name');
         $menu='';
