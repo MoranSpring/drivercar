@@ -47,7 +47,7 @@
                             <a href="##" class="">创业人物</a>
                         </li>
                         <li class="">
-                            <a href="##" class="">创业人物</a>
+                            <a href="#" class="">创业人物</a>
                         </li>
                          
                     </ul>
