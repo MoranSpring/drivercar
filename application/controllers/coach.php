@@ -54,19 +54,72 @@ class Coach extends MY_Controller {
         $body['footer'] = $this->load->view('common_views/footer', '', true);
         $this->load->view('coach_views/template', $body);
     }
+        public function getCoachGrade($coa_grade){
+        if($coa_grade==3){
+                $grade='C级';
+            }else if ($coa_grade==2) {
+                $grade='B级';
+            }else if($coa_grade==1) {
+                $grade='A级';
+            }else{
+                $grade='其他';
+            }
+            return $grade;
+    }
+    public function getCoachServType($serv_type){
+        if($serv_type==3){
+                $serv_con='科目二/科目三';
+            }else if ($serv_type==2) {
+                $serv_con='科目三';
+            }else if($serv_type==1) {
+                $serv_con='科目二';
+            }else{
+                $serv_con='其他';
+            }
+            return $serv_con;
+    }
     public function self_info(){
 //        $UID = $this->session->userdata('UID');
         $UID='1427162541';
-        $result = $this->coach_model->select_detail($UID);
-        
-        $isCoach= $this->session->userdata('TYPE')==1?  true  : false;
-        $page="";
+                //教练名
+        $body['coa_name']='';
+        //教练级别
+        $body['coa_grade']='';
+        //教练个人介绍
+        $body['coa_self_intro']='';
+        //教练所在驾校
+        $body['coa_sch_name']='';
+        //培训人数
+        $body['coa_stu_sum']='';
+        //教练手机号码
+        $body['coa_tel_number']='';
+        //教练服务类型
+        $body['coa_serv_type']='';
+        //教练服务类型
+        $body['coach_history_score']='';
+        //教练头像
+        $body['coa_face']='';
+        //是否为教练
+        $body['isCoach']='';
+       $body['isCoach']= $this->session->userdata('TYPE')==1?  true  : false;
+       $result=  $this->coach_model->selectAllinfoById($UID);
+       
         foreach ($result as $row) {
-            $schName = $this->school_model->select_name($row['coach_sch_id']);
-            $row['coach_sch_name'] = $schName[0]['jp_name'];
-            $row['isCoach'] = $isCoach;
-            $page = $this->load->view('coach_views/self_info',$row, true);
+            $body['coa_name']=$row['coach_name'];
+            $body['coa_grade']=  $this->getCoachGrade($row['coach_grade']);
+            $body['coa_self_intro']=$row['coach_intro'];
+            $body['coa_face']=$row['coach_face'];
+            $coa_sch_name=$this->school_model->getJPNameById($row['coach_sch_id']);
+            foreach ($coa_sch_name as $row2) {
+                $body['coa_sch_name']=$row2['jp_name'];
+            }
+            $body['coa_stu_sum']=$row['coach_stu_num'];
+            $body['coa_tel_number']=$row['coach_telnum'];
+            $body['coach_history_score']=$row['coach_history_score'];
+            $body['coa_serv_type']=$this->getCoachServType($row['coach_serv_type']);
         }
+        
+        $page = $this->load->view('coach_views/self_info',$body, true);
         $this->view($page);
     }
     public function teach_info(){
@@ -277,6 +330,23 @@ class Coach extends MY_Controller {
             'list'=>$comment_list
         );
          echo json_encode($data);
+    }
+     public function getCoaBaseInfo(){
+        $coa_id='1427162541';
+        $result=$this->coach_model->selectAllinfoById($coa_id);
+        foreach($result as $row){
+            $name=$row['coach_name'];
+            $age=$row['coach_old'];
+            $self_intro = $row['coach_intro'];
+            $driver_age = $row['coach_car_old'];
+            $tel_num = $row['coach_telnum'];
+            $serv_type = $row['coach_serv_type'];
+            $headurl=$row['coach_face'];
+        }
+        $data=array('name'=>$name,'age'=>$age,'self_intro'=>$self_intro,
+            'driver_age'=>$driver_age,'tel_num'=>$tel_num,'serv_type'=>$serv_type,'headurl'=>$headurl);
+        
+        echo json_encode($data);
     }
 
 }

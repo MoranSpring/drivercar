@@ -25,6 +25,8 @@ class Info_change extends MY_Controller {
         $this->load->model('accesscontrol_model');
         $this->load->model('news_model');
         $this->load->helper('date');
+        $this->load->library('oss/alioss');
+        $this->load->model('coach_model');
     }
 
     public function index() {
@@ -411,9 +413,170 @@ class Info_change extends MY_Controller {
             echo 'false'.false;
         }
     }
+    public function ChangeHeadPic() {
+       $this->load->view('headpic/headpic.php');
+    }
+    public function showHeadImg() {
+
+       $this->load->view('headpic/crop_image.php');
+
+    }
+    
+        public function submitHeadImg() {
+       //$body = $this->load->view('headpic/jcrop_image.class.php', '', true);
+       //$this->load->view('headpic/crop_submit.php');
+        $pic_name=$this->input->post('pic_name');
+        $x=$this->input->post('x');
+        $y=$this->input->post('y');
+        $w=$this->input->post('w');
+        $h=$this->input->post('h');
+        $targ_w = $targ_h = 250;
+        $picname=  basename($pic_name);
+        //$picname此处仅为文件名
+        //echo  'crop_submit  page ======>'.$picname;
+        
+        //上传文件的路径
+        $filep=$_SERVER['DOCUMENT_ROOT'].'/application/views/headpic'.'/upload/';
+
+
+        $data=array('filep'=>$filep,
+                    'picname'=>$picname,
+                    'x'=>$x,
+                    'y'=>$y,
+                    'w'=>$w,
+                    'h'=>$h,
+                    'targ_w'=>$targ_w,
+                    'targ_h'=>$targ_h);
+        $this->load->library('jcrop_image',$data);
+        
+        $file=$this->jcrop_image->crop();
+
+//        var_dump($file);
+        $img=$file['file'];
+        $img_name=$file['filename'];
+        $img_info=$this->getImgInfo($img);
+        $img_flag=$this->checkImg($img_info);
+        
+        //$image_name="coach_imges/headpic/".$img_name;
+        $image_name="headpic/".$img_name;
+        $head_cdnurl= 'http://image.52drivecar.com/'.$image_name .'.jpg';
+        //$default_url='http://driver-un.oss-cn-shenzhen.aliyuncs.com/coach_imges/headpic/default.jpg';
+        if($img_flag==true){
+              $status = $this->_upload_by_content($image_name,$img);
+              if ($status == 200) {
+                    $returndata=array('status'=>1,
+                        'cdnurl'=>$head_cdnurl,
+                        'error'=>'no error');
+              }else{
+                  $returndata=array('status'=>0,
+                        'cdnurl'=>null,
+                        'error'=>'something  is error');
+                 
+              }
+        }
+       
+        echo json_encode($returndata);
+        $this->load->helper('file');
+        delete_files($filep);
+        return ;
+    }
 
     
-    
+    public function getImgInfo($img) {
+        $img_info = getimagesize($img); 
+//        var_dump($img_info);     
+        switch ($img_info[2]) { 
+            case 1: 
+            $imgtype = "gif"; 
+            break; 
+            case 2: 
+            $imgtype = "jpg"; 
+            break; 
+            case 3: 
+            $imgtype = "png"; 
+            break; 
+        }
+        $img_type = $imgtype; 
+        $img_size = ceil(filesize($img)); //获取文件大小 
+        $new_img_info = array ( 
+        "type"=>$img_type,
+        "size"=>$img_size ,
+        );
+        return $new_img_info;
+    }
+    public function checkImg($img) {
+        if ((($img["type"] == "gif")  || ($img["type"] == "jpg") || ($img["type"] == "png")) && ($img["size"] < 2000000)) {  
+            return true;
+        } else {
+        return false;
+        }
+        return false;
+    }
 
+    function _upload_by_content($name,$path) {
+        $bucket = 'driver-un';
+        $object = $name . '.jpg';
+        $filepath = $path;  //英文
+  
+        $options = array(
+            ALIOSS::OSS_FILE_UPLOAD => $filepath,
+            'partSize' => 5242880,
+        );
+        $response = $this->alioss->create_mpu_object($bucket, $object, $options);
+        
+        return $response->status;
+    }
+    
+    public function baseInfoEdit(){
+        
+        $coa_id='1427162541';
+        $coa_name=  $this->input->post('coa_name');
+        $coa_age=  $this->input->post('coa_age');
+        $coa_self_intro=  $this->input->post('coa_self_intro');
+        $coa_car_old=  $this->input->post('coa_car_old');
+        $coa_telnum=  $this->input->post('coa_telnum');
+        $servType=  $this->input->post('servType');
+        $coach_face=  $this->input->post('headurl');
+        $data=array(
+                'coach_name' => $coa_name,
+                'coach_old' => $coa_age,
+                'coach_intro' => $coa_self_intro,
+                'coach_car_old' => $coa_car_old,
+                'coach_telnum' => $coa_telnum,
+                'coach_serv_type' => $servType,
+                'coach_face'=>$coach_face
+        );
+        $result = $this->coach_model->updateInfo($coa_id,$data);
+
+        if($result){
+            echo $result;
+        }  else {
+            echo $result;
+        }
+       
+    }
+    /**
+     * 修改注册会员的头像
+     */
+    public function VipHeadpicChange(){
+        $id =$this->session->userdata('UID');
+        $stu_face= $this->input->post('head_file');
+        $data=array(
+            'stu_face'=>$stu_face
+        );
+        $result = $this->accesscontrol_model->update_attr($id,$data);
+
+        if ($result == 1) {
+            $returndata=array('status'=>1,
+                'error'=>'success !');
+       }else{
+          $returndata=array('status'=>0,
+                'error'=>'something  is error !');
+       }
+        echo json_encode($returndata);
+        return ;
+    }
+    
+   
 }
 

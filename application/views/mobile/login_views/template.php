@@ -33,44 +33,33 @@
                 <a href="#title-link" class="">Amaze UI</a>
             </h1>
         </header>
-        <nav data-am-widget="menu" class="am-menu  am-menu-dropdown1" data-am-menu-collapse>
+        <nav data-am-widget="menu" class="am-menu  am-menu-dropdown1" data-am-menu-offcanvas>
             <a href="javascript: void(0)" class="am-menu-toggle">
                 <i class="am-menu-toggle-icon am-icon-list">.</i>
             </a>
-            <ul class="am-menu-nav am-avg-sm-1 am-collapse">
-                <li class="am-parent">
-                    <a href="##" class="">公司</a>
-                    <ul class="am-menu-sub am-collapse  am-avg-sm-2 ">
+            <div class="am-offcanvas">
+                <div class="am-offcanvas-bar">
+                    <ul class="am-menu-nav am-avg-sm-1">
                         <li class="">
-                            <a href="##" class="">公司</a>
-                        </li>
-                        <li class="">
-                            <a href="##" class="">人物</a>
-                        </li>
-                        <li class="">
-                            <a href="##" class="">趋势</a>
-                        </li>
-                        <li class="">
-                            <a href="##" class="">投融资</a>
-                        </li>
-                        <li class="">
-                            <a href="##" class="">创业公司</a>
+                            <div class="am-g am-margin">
                         </li>
                         <li class="">
                             <a href="##" class="">创业人物</a>
                         </li>
-                        <li class="am-menu-nav-channel">
-                            <a href="##" class="" title="公司">进入栏目 &raquo;</a>
+                        <li class="">
+                            <a href="##" class="">创业人物</a>
                         </li>
+                         
                     </ul>
-                </li>
+                </div>
+            </div>
         </nav>
         <div style="width:100%;" class="clearfix">
             <div style="float:left;width:31%;margin:  6px 0 0 6px;">
-                <a  href="<?=  base_url()?>index.php/first/mobile_login"  data-rel="accordion"><img  src="http://image.52drivecar.com/coach_imges/1428902550.jpg@!nail250"style="width:100%" height="auto"/></a>
+                <a  href="<?= base_url() ?>index.php/first/mobile_login"  data-rel="accordion"><img  src="http://image.52drivecar.com/coach_imges/1428902550.jpg@!nail250"style="width:100%" height="auto"/></a>
             </div>
             <div style="float:left;width:31%;margin: 6px 0 0 6px">
-                <a  href="<?=  base_url()?>index.php/first/mobile_book"  data-rel="accordion"><img src="http://image.52drivecar.com/coach_imges/1428902550.jpg@!nail250" style="width:100%" height="auto"  /></a>
+                <a  href="<?= base_url() ?>index.php/first/mobile_book"  data-rel="accordion"><img src="http://image.52drivecar.com/coach_imges/1428902550.jpg@!nail250" style="width:100%" height="auto"  /></a>
             </div><div style="float:left;width:31%;margin:  6px 0 0 6px;">
                 <img src="http://image.52drivecar.com/coach_imges/1428902550.jpg@!nail250"style="width:100%" height="auto"/>
             </div>
@@ -110,13 +99,13 @@
                  alt="春天的花开秋天的风以及冬天的落阳" />
             <figcaption class="am-figure-capition-btm">春天的花开秋天的风以及冬天的落阳</figcaption>
         </figure>
-<select data-am-selected>
-  <option value="a">Apple</option>
-  <option value="b">Banana</option>
-  <option value="o">Orange</option>
-  <option value="m">Mango</option>
-  <option value="d" disabled>禁用鸟</option>
-</select>
+        <select data-am-selected>
+            <option value="a">Apple</option>
+            <option value="b">Banana</option>
+            <option value="o">Orange</option>
+            <option value="m">Mango</option>
+            <option value="d" disabled>禁用鸟</option>
+        </select>
         <footer data-am-widget="footer" class="am-footer am-footer-default" data-am-footer="{  }">
             <div class="am-footer-switch">
                 <span class="am-footer-ysp" data-rel="mobile" data-am-modal="{target: '#am-switch-mode'}">云适配版</span>

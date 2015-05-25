@@ -46,6 +46,14 @@ class School_model extends CI_Model{
         $query = $this->db->get('School');
         return $query->result_array();
     }
+    
+ public function getJPNameById($id) {//根据Id返回驾培点名称
+        $this->db->select('jp_name');
+        $this->db->where('jp_id',$id);
+        $query = $this->db->get('School');
+        return $query->result_array();
+    }
+    
     public function get_from_city($city){
          $this->db->select();
         $this->db->where('jp_city',$city);

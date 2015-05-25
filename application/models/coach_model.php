@@ -48,4 +48,15 @@ class Coach_model extends CI_Model{
         $query = $this->db->get('Coach');
         return $query->result_array();
     }
+       public function selectAllinfoById($id) {//返回该用户名所有信息
+        $this->db->select();
+        $this->db->where('coach_id',$id);
+        $query = $this->db->get('Coach');
+        return $query->result_array();
+    }
+   public function updateInfo($id,$data) {//更新self_info_edit页面内容
+        $this->db->where('coach_id', $id);
+        $result=$this->db->update('Coach', $data); 
+        return $result;
+    }
 }

@@ -27,7 +27,6 @@ and open the template in the editor.
         <?= $header ?>
         <?= $navigation ?>
         <?= $content ?>
-        <?= $footer ?>
         <script>
             function setTab(name, cursel, n) {
                  onDisplay(cursel);

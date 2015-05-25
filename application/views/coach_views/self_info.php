@@ -61,13 +61,13 @@
         <div>
             <ul class="co-self clearfix">
                 <li style="width:25%">
-                    <img src="<?= $coach_face ?>@!nail250" class="am-img-thumbnail" height="250" width="250"/>
+                   <img src="<?= $coa_face ?>" class="am-img-thumbnail" height="250" width="250"/>
                 </li>
                 <li style="width:75%">
                     <ul class="co-self-info clearfix">
                         <li class="co-name">
-                            <p><?= $coach_name ?></p>
-                            <div>个人介绍：<?= $coach_intro ?><a class="<?php if ($isCoach == true)
+                            <p><?= $coa_name ?></p>
+                            <div>个人介绍：<?= $coa_self_intro ?><a class="<?php if ($isCoach == true)
     echo 'co-self-edit-on';
 else
     echo 'co-self-edit-off';
@@ -79,7 +79,7 @@ else
                                     等级：
                                 </li>
                                 <li>
-                                    专家级
+                                    <?=$coa_grade?>
                                 </li>
                             </ul>
                             <ul class="co-self-third clearfix">
@@ -87,7 +87,7 @@ else
                                     所属驾培点：
                                 </li>
                                 <li>
-<?= $coach_sch_name ?> <span class="am-icon-map-marker ml-red"></span>
+                                   <?= $coa_sch_name ?> <span class="am-icon-map-marker ml-red"></span>
                                 </li>
                             </ul>
                             <ul class="co-self-third clearfix">
@@ -95,7 +95,7 @@ else
                                     培训人数：
                                 </li>
                                 <li>
-                                    200人
+                                    <?=$coa_stu_sum ?>
                                 </li>
                             </ul>
                             <ul class="co-self-third clearfix">
@@ -103,7 +103,7 @@ else
                                     手机号码：
                                 </li>
                                 <li>
-<?= $coach_telnum ?>
+                                        <?=$coa_tel_number ?>
                                 </li>
                             </ul>
                             <ul class="co-self-third clearfix">
@@ -111,11 +111,19 @@ else
                                     历史评分：
                                 </li>
                                 <li>
-                                    <span class="am-icon-star ml-red"></span>
-                                    <span class="am-icon-star ml-red"></span>
-                                    <span class="am-icon-star ml-red"></span>
-                                    <span class="am-icon-star ml-red"></span>
-                                    4分
+                                    <?php
+                                         $num=intval($coach_history_score);
+                                         if($num>5){
+                                            $num=5;
+                                         }elseif ($num<0) {
+                                             $num=0;
+                                         }
+                                          for($i=0;$i<$num;$i++){ ?>  
+                                         <span class="am-icon-star ml-red"></span>
+                                    <?php     
+                                         }
+                                    ?>
+                                    <?=$coach_history_score ?>分
                                 </li>
                             </ul>
                             <ul class="co-self-third clearfix">
@@ -123,7 +131,7 @@ else
                                     提供服务类型：
                                 </li>
                                 <li>
-                                    科目二/科目三
+                                    <?=$coa_serv_type ?>
                                 </li>
                             </ul>
                             <ul class="co-self-third clearfix">

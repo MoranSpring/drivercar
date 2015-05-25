@@ -50,6 +50,10 @@
         display: none;
     }
 </style>
+<script type="text/javascript" src="<?= base_url() ?>application/js/headpic/ajaxfileupload.js"></script>
+<script type="text/javascript" src="<?= base_url() ?>application/js/headpic/artDialog4.1.6/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="<?= base_url() ?>application/js/headpic/artDialog4.1.6/plugins/iframeTools.js"></script>
+
 <div id="content" class="clearfix">
     <div id="con-coach-right">
         <div id="con-nav">
@@ -66,7 +70,7 @@
                                     姓名：
                                 </li>
                                 <li>
-                                    <input/>
+                                    <input id="coa_name"name="coa_name" value="" placeholder="姓名"/>
                                 </li>
                             </ul>
                             <ul class="co-self-third clearfix">
@@ -74,7 +78,7 @@
                                     年龄：
                                 </li>
                                 <li>
-                                    <input/>
+                                    <input id="coa_age" name="coa_age" placeholder="年龄"/>
                                 </li>
                             </ul>
                             <ul class="co-self-third clearfix">
@@ -82,7 +86,7 @@
                                     个人简介：
                                 </li>
                                 <li>
-                                    <textarea></textarea>
+                                     <textarea style="width:168px;max-height: 200px;max-width: 200px;" name="coa_self_intro" id="coa_self_intro" placeholder="个人简介"></textarea>
                                 </li>
                             </ul>
                             <ul class="co-self-third clearfix">
@@ -90,7 +94,7 @@
                                     驾龄：
                                 </li>
                                 <li>
-                                    <input/>
+                                    <input id="coa_car_old" name="coa_car_old" placeholder="驾龄"/>
                                 </li>
                             </ul>
                             <ul class="co-self-third clearfix">
@@ -98,7 +102,7 @@
                                     手机号码：
                                 </li>
                                 <li>
-                                    <input/>
+                                    <input id="coa_telnum" name="coa_telnum" placeholder="手机号码"/>
                                 </li>
                             </ul>
                             <ul class="co-self-third clearfix">
@@ -106,8 +110,8 @@
                                     提供服务类型：
                                 </li>
                                 <li>
-                                    <input type="checkbox" name="bike" />科目二<br/>
-                                    <input type="checkbox" name="car" />科目三
+                                    <input type="checkbox" id="coa_serv_type" name="coa_serv_type" value="2" />科目二<br/>
+                                    <input type="checkbox" id="coa_serv_type" name="coa_serv_type" value="3" />科目三
                                 </li>
                             </ul> 
                             <ul class="co-self-third clearfix">
@@ -115,19 +119,23 @@
                                     Filename:
                                 </li>
                                 <li>
-                                    <input type="file" name="file"   id="file"onchange="setImagePreview(this)"/> 
+                                    <!--<input type="file" name="file"   id="file"onchange="setImagePreview(this)"/>--> 
+                                    <input type="file" name="head_photo" id="head_photo" value="">  
+                                    <input type="hidden" name="photo_pic" id="photo_pic" value="">
                                 </li>
                             </ul> 
                             <ul class="co-self-third clearfix">
                                 <li>
-                                    <button style="float:right">summit</button>
+                                    <button style="float:right" id="coa_info_subedit">提交</button>
                                 </li>
                             </ul>
                         </li>
                     </ul>
                 </li>
                 <li style="width:40%;" id="localImag">
-                    <img src="http://image.52drivecar.com/coach_imges/1428902329.jpg@!nail250" id="news_preview" class="am-img-thumbnail" height="250" width="250"/>
+                    <div id="show_photo" class="show_photo" style="border:1px solid #f7f7f7;">
+                        <img id="head_photo_src" style="width:250px;height:250px;" src="<?=  base_url()?>application/images/default_head.gif">
+                    </div>
 
                 </li>
             </ul>
@@ -135,6 +143,118 @@
     </div>
 </div>
 <script>
+        var curWwwPath = window.document.location.href;
+    var pathName = window.document.location.pathname;
+    var pos = curWwwPath.indexOf(pathName);
+    var localhostPath = curWwwPath.substring(0, pos);
+    
+    var headurl=null;
+    $(document).ready(function(){
+        var Allinfo='';
+        var name=$('#coa_name');
+        var age=$('#coa_age');
+        var self_intro=$('#coa_self_intro');
+        var driver_age=$('#coa_car_old');
+        var telnum=$('#coa_telnum');
+        //var serv_type=$('#coa_serv_type');
+        
+        $.ajax({
+            type:"POST",
+            dataType:"text",
+            url:localhostPath+"/index.php/coach/getCoaBaseInfo",
+            async:true,
+            data:{},
+            success:function(data){
+                //alert(data);
+                Allinfo=eval("("+data+")");//转换为json对象
+                name.val(Allinfo.name);
+                age.val(Allinfo.age);
+                self_intro.val(Allinfo.self_intro);
+                driver_age.val(Allinfo.driver_age);
+                telnum.val(Allinfo.tel_num);
+                var servType=Allinfo.serv_type;
+                setServType(servType);
+                headurl=Allinfo.headurl;
+                $("#head_photo_src").attr('src',headurl);	
+            }
+        });
+        
+        function setServType(servType){
+            var obj=document.getElementsByName("coa_serv_type");
+            var flag0=false;
+            var flag1=false;
+            if(servType==3){
+                flag0=true;
+                flag1=true;
+            }else if(servType==2){
+                 flag0=false;
+                flag1=true;
+            }else if(servType==1){
+                flag0=true;
+                flag1=false;
+            }else{
+                 flag0=false;
+                flag1=false;
+            }
+            obj[0].checked=flag0;
+            obj[1].checked=flag1;
+        }    
+        function getServType(){
+            var obj=document.getElementsByName("coa_serv_type");
+            var flag0=obj[0].checked;
+            var flag1=obj[1].checked;
+            var servType;
+            if((flag0==true)&&(flag1==true)){
+                alert();
+                servType=3;
+            }else if((flag0==false)&&(flag1==true)){
+                servType=2;
+            }else if((flag0==true)&&(flag1==false)){
+                servType=1;
+            }else{
+                servType=0;
+            }
+            return servType;
+        }
+        
+        //http://image.52drivecar.com/coach_imges/headpic/1432187248.jpg
+        $('#coa_info_subedit').click(function(){
+            var servType=getServType();
+            var nameval=$('#coa_name').val();
+            var ageval=$('#coa_age').val();
+            var self_introval=$('#coa_self_intro').val();
+            var car_oldval=$('#coa_car_old').val();
+            var telnumval=$('#coa_telnum').val();
+            var headurl=$('#head_photo_src')[0].src;
+
+            
+            if(servType!=0){
+                $.ajax({
+                type:"POST",
+                dataType:"text",
+                url:localhostPath+"/index.php/info_change/baseInfoEdit",
+                async:true,
+                data:{coa_name:nameval,coa_age:ageval,
+                    coa_self_intro:self_introval,
+                    coa_car_old:car_oldval,
+                    coa_telnum:telnumval,servType:servType,headurl:headurl},
+                success:function(data){
+                    if(data==1||data==true){
+                        history.go(-1);
+                     }
+                }
+                
+            });
+            }else{
+                alert("请选择培训内容");
+                return;
+            }
+            
+        });
+        
+    });
+    
+    
     function setImagePreview(docObj) {
 
 //    var imgObjPreview=document.getElementById(preview);  
@@ -173,6 +293,83 @@
         }
         return true;
     }
+    function show_head(head_file){
+    if(head_file!=null){
+        //设置头像URL
+        $("#head_photo_src").attr('src',head_file);	
+    }else{
+        $("#head_photo_src").attr('src',headurl);
+    }
+    }
+    
 </script> 
+<!--此为头像修改部分的JS代码-->
+<script>
+    var headpicBaseUrl="<?= base_url() ?>application/views/headpic/";
+$(document).ready(function(e){
+        
+	//var fileuploadpath="<?= base_url() ?>application/views/headpic/;
+        var path="<?= base_url() ?>application/views/headpic/upload.php";
+        
+	$('#head_photo').live('change',function(){ 
+                                  
+		ajaxFileUploadview('head_photo','photo_pic',path);
+                
+	});	
 
+});
 
+//文件上传带预览
+function ajaxFileUploadview(imgid,hiddenid,url){
+
+	$.ajaxFileUpload({
+			url:url,
+			secureuri:false,
+			fileElementId:imgid,
+			dataType: 'json',
+			data:{name:'login', id:'id'},
+			success: function (data, status)
+			{
+				if(typeof(data.error) != 'undefined')
+				{
+					if(data.error != '')
+					{
+						var dialog = art.dialog({title:false,fixed: true,padding:0});
+						dialog.time(2).content("<div class='tips'>"+data.error+"</div>");
+					}else{
+
+						var resp = data.msg;						
+						if(resp != '0000'){
+							var dialog = art.dialog({title:false,fixed: true,padding:0});
+							dialog.time(2).content("<div class='tips'>"+data.error+"</div>");
+							return false;
+						}else{
+							$('#'+hiddenid).val(data.imgurl);
+                                                        
+                                                        //art.dialog.data('img',data.imgurl);
+                                                        
+                                                        var crop_url="<?= base_url() ?>index.php/info_change/showHeadImg?imgurl="+data.imgurl;
+                                                        
+							art.dialog.open(crop_url,{
+								title: '裁剪头像',
+								width:'680px',
+								height:'400px'
+							});						
+							
+							//dialog.time(3).content("<div class='msg-all-succeed'>上传成功！</div>");
+						}
+
+					}
+				}
+			},
+			error: function (data, status, e)
+			{
+
+				dialog.time(3).content("<div class='tips'>"+e+"</div>");
+			}
+		})
+
+	    return false;
+	}
+        
+</script> 

@@ -35,7 +35,7 @@
                 登录
             </h1>
         </header>
-        <form class="am-form"  id="form-login" method="post" action="<?= base_url()?>index.php/first/login_psw_check">
+        <form class="am-form"  id="form-login" method="post" onsubmit="return checkForm(this)" action="<?= base_url()?>index.php/first/login_psw_check">
                 <div class="am-input-group am-margin">
                     <span class="am-input-group-label"><i class="am-icon-user am-icon-fw"></i></span>
                     <input id="name" name="name"  type="text" class="am-form-field" autocomplete="off" value="" onfocus="check_onfocus()" onblur="check_onbulr(this.value)" placeholder="输入注册邮箱">

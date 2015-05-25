@@ -32,8 +32,8 @@ class First extends MY_Controller {
 
     public function index() {
 //        $this->view();
-        
-         $this->load->library('user_agent');
+
+        $this->load->library('user_agent');
         if ($this->agent->is_mobile()) {
             //echo "mobile"." ===". $this->agent->mobile();
             $this->load->view('mobile/login_views/template');
@@ -41,7 +41,7 @@ class First extends MY_Controller {
             //echo "computer";
             $this->view();
         }
-     
+
 
 //        $bucket = 'driver-un';
 //	$object = 'logo.jpg';	
@@ -53,20 +53,24 @@ class First extends MY_Controller {
 //        redirect('first/sch_info');
 //        redirect('vipcenter');
     }
+
     public function mobile() {
-            $this->load->view('mobile/login_views/template');
-    }
-    public function mobile_login() {
-            $this->load->view('mobile/login_views/login');
-    }
-    public function mobile_news() {
-            $this->load->view('mobile/login_views/template');
-    }
-    public function mobile_book() {
-            $this->load->view('mobile/vip_views/study_book');
+        $this->load->view('mobile/login_views/template');
     }
 
-    public function view($title='',$page = '') {
+    public function mobile_login() {
+        $this->load->view('mobile/login_views/login');
+    }
+
+    public function mobile_news() {
+        $this->load->view('mobile/login_views/template');
+    }
+
+    public function mobile_book() {
+        $this->load->view('mobile/vip_views/study_book');
+    }
+
+    public function view($title = '', $page = '') {
 
         $name = $this->session->userdata('name');
         if ($name == null) {
@@ -83,9 +87,9 @@ class First extends MY_Controller {
             $body['content'] = $page;
         }
         if ($title == '') {
-           $body['title']="我爱开车网-首页";
+            $body['title'] = "我爱开车网-首页";
         } else {
-           $body['title'] = $title;
+            $body['title'] = $title;
         }
 
         $body['footer'] = $this->load->view('common_views/footer', '', true);
@@ -190,39 +194,40 @@ class First extends MY_Controller {
 //        }
 
         $page = $this->load->view('a_views/sch_info', $oneNews, true);
-        $title="驾培资讯首页 - 我爱开车网";
-        $this->view($title,$page);
+        $title = "驾培资讯首页 - 我爱开车网";
+        $this->view($title, $page);
     }
 
     public function pos_info() {
         $page = $this->load->view('a_views/pos_info', '', true);
-        $title="驾培点信息 - 我爱开车网";
-        $this->view($title,$page);
+        $title = "驾培点信息 - 我爱开车网";
+        $this->view($title, $page);
     }
 
-    public function school_info($id='') {
-        if($id=='')exit (0);
+    public function school_info($id = '') {
+        if ($id == '')
+            exit(0);
         $result = $this->school_model->get_from_id($id);
-        $list='';
-        $title='';
-        foreach($result as $row){
-            $list= $this->load->view('a_views/school_info',$row, true);
-            $title=$row['jp_name']. " - 我爱开车网";
+        $list = '';
+        $title = '';
+        foreach ($result as $row) {
+            $list = $this->load->view('a_views/school_info', $row, true);
+            $title = $row['jp_name'] . " - 我爱开车网";
         }
-        
-        $this->view($title,$list);
+
+        $this->view($title, $list);
     }
 
     public function ser_info() {
         $page = $this->load->view('a_views/ser_info', '', true);
-        $title="服务指南 - 我爱开车网";
-        $this->view($title,$page);
+        $title = "服务指南 - 我爱开车网";
+        $this->view($title, $page);
     }
 
     public function coach_info() {
         $page = $this->load->view('a_views/coach_info', '', true);
-        $title="教练信息 - 我爱开车网";
-        $this->view($title,$page);
+        $title = "教练信息 - 我爱开车网";
+        $this->view($title, $page);
     }
 
     public function coach_center() {
@@ -232,25 +237,26 @@ class First extends MY_Controller {
         $body['isCoach'] = false;
         $body['book_date2'] = "afafdas";
         $page = $this->load->view('coach_views/self_info', $body, true);
-        $title="驾培点信息 - 我爱开车网";
-        $this->view($title,$page);
+        $title = "驾培点信息 - 我爱开车网";
+        $this->view($title, $page);
     }
-    public function coach_self_info(){
+
+    public function coach_self_info() {
 //        $UID = $this->session->userdata('UID');
-        $UID='1427162541';
+        $UID = '1427162541';
         $result = $this->coach_model->select_detail($UID);
-        
-        $isCoach= $this->session->userdata('TYPE')==1?  true  : false;
-        $page="";
+
+        $isCoach = $this->session->userdata('TYPE') == 1 ? true : false;
+        $page = "";
         foreach ($result as $row) {
             $schName = $this->school_model->select_name($row['coach_sch_id']);
             $row['coach_sch_name'] = $schName[0]['jp_name'];
             $row['isCoach'] = $isCoach;
-            $page = $this->load->view('coach_views/self_info',$row, true);
-            $title=$row['coach_name']."教练员主页 - 我爱开车网";
+            $page = $this->load->view('coach_views/self_info', $row, true);
+            $title = $row['coach_name'] . "教练员主页 - 我爱开车网";
         }
-        
-        $this->view($title,$page);
+
+        $this->view($title, $page);
     }
 
     public function forgetPwd() {
@@ -334,7 +340,7 @@ class First extends MY_Controller {
         $name = $this->input->get('name');
         $Result = $this->accesscontrol_model->loginSelect($name);
         if ($Result == null) {
-            echo "no exist";
+            echo "用户不存在";
 //            echo 'This user is not exist.';
             return false;
         } else {
@@ -359,6 +365,21 @@ class First extends MY_Controller {
         $this->load->view('login_views/template', $data);
     }
 
+    public function psw_isRight() {
+        $name = $this->input->post('name');
+        $psw = $this->input->post('password');
+        $Result = $this->accesscontrol_model->loginSelect($name);
+        foreach ($Result as $row) {
+            if ($row['stu_pwd'] != md5($psw)) {
+                echo '1';
+            } else {
+                echo '0';
+            }
+            exit();
+        }
+        echo '999';
+    }
+
     public function login_psw_check() {
         $name = $this->input->post('name');
         $psw = $this->input->post('password');
@@ -368,8 +389,8 @@ class First extends MY_Controller {
                 $data = array(
                     'error' => '密码错误！'
                 );
-                $this->load->view('login_views/template', $data);
-                return false;
+                echo false;
+                exit();
             } else {
                 $this->session->set_userdata('UID', $row['stu_id']);
                 $this->session->set_userdata('TYPE', $row['stu_type']);
@@ -380,7 +401,7 @@ class First extends MY_Controller {
                 } else {
                     $this->session->set_userdata('name', $name);
                 }
-                if($row['stu_tel'] != null){
+                if ($row['stu_tel'] != null) {
                     $this->session->set_userdata('TEL', $row['stu_tel']);
                 }
                 if ($row['stu_type'] == 3) {
@@ -392,17 +413,11 @@ class First extends MY_Controller {
                 } else {
                     redirect();
                 }
-
-
-
                 return true;
             }
             exit();
         }
-        $data = array(
-            'error' => '密码错误！'
-        );
-        $this->load->view('login_views/template', $data);
+        echo false;
     }
 
     public function login_exit() {
@@ -430,18 +445,18 @@ class First extends MY_Controller {
 //--------------验证码------------------------
     public function news($id = '') {
         $news = $this->news_model->select_detail($id);
-        $title='';
+        $title = '';
         foreach ($news as $row) {
             $row['news_content'] = preg_replace('/\n/', '<p/><p>', $row['news_content']);
             $row['news_imge'].="@!newsimg";
             $page = $this->load->view('a_views/news', $row, true);
-            $title=$row['news_title']." - 我爱开车网";
+            $title = $row['news_title'] . " - 我爱开车网";
         }
-        $this->view($title,$page);
+        $this->view($title, $page);
     }
 
     public function getcityData() {
-        
+
         $retval = $this->_request('http://driver-un.oss-cn-shenzhen.aliyuncs.com/js/cityData.min.json');
 
         if ($retval !== false) {
@@ -518,18 +533,19 @@ class First extends MY_Controller {
         $data = array('reg_email_str' => $reg_email_str, 'send_time' => $send_time, 'result' => $result);
         echo json_encode($data);
     }
-    function get_school_info(){
-        $city = $this->input->post("city",TRUE);
+
+    function get_school_info() {
+        $city = $this->input->post("city", TRUE);
         $result = $this->school_model->get_from_city($city);
-        $list='';
-        foreach($result as $row){
+        $list = '';
+        foreach ($result as $row) {
             $list.=$this->load->view('a_views/school_list', $row, true);
         }
-        $data=array(
-            'info'=>$result,
-            'list'=>$list
+        $data = array(
+            'info' => $result,
+            'list' => $list
         );
-         echo json_encode($data);
+        echo json_encode($data);
     }
 
 }

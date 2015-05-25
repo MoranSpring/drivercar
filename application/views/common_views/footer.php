@@ -1,8 +1,4 @@
-<style>
-    .info_footer_clear{
-        clear: both;
-    }
-</style>
+
 <div data-am-widget="footer" class="am-footer am-footer-default  info_footer_clear" data-am-footer="{  }">
     <div class="am-footer-switch">
         <span class="am-footer-ysp" data-rel="mobile" data-am-modal="{target: '#am-switch-mode'}">手机版</span>
@@ -45,3 +41,8 @@
     </div>
 </div>
 </div>
+<style>
+    .info_footer_clear{
+        clear: both;
+    }
+</style>

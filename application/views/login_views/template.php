@@ -17,14 +17,14 @@
         </div>
         <div class="logina-main main clearfix">
             <div class="tab-con">
-                <form id="form-login" method="post" action="<?= base_url()?>index.php/first/login_psw_check">
+                <form id="form-login" method="post" onsubmit="return checkForm(this)"  action="<?= base_url()?>index.php/first/login_psw_check">
                     <div id='login-error' class="error-tip"></div>
                     <table border="0" cellspacing="0" cellpadding="0">
                         <tbody>
                             <tr>
                                 <th>账户</th>
                                 <td width="245">
-                                    <input id="name" type="text" name="name" placeholder="电子邮箱/手机号" autocomplete="off" value="" onfocus="check_onfocus()" onblur="check_onbulr(this.value)">
+                                    <input id="name" type="text" name="name" placeholder="电子邮箱/手机号" autocomplete="off"  value="" onfocus="check_onfocus()" onblur="check_onbulr(this.value)">
                                     
                                 </td>
                                 <td  class="name_alert">
@@ -61,7 +61,7 @@
                             <tr>
                                 <th></th>
                                 <td width="245"><input class="confirm" type="submit" value="登  录"></td>
-                                <td><?php  echo$error;?></td>
+                                <td><span class="login_info"></span></td>
                             </tr>
                         </tbody>
                     </table>

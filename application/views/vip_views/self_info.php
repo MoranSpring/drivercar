@@ -1,5 +1,8 @@
 <script src="<?php echo base_url() . 'application/js/jquery.cxselect.min.js' ?>" type="text/javascript"></script>
 <script src="<?php echo base_url() . 'application/js/vip/self_info.js' ?>" type="text/javascript"></script>
+<script type="text/javascript" src="<?= base_url() ?>application/js/headpic/ajaxfileupload.js"></script>
+<script type="text/javascript" src="<?= base_url() ?>application/js/headpic/artDialog4.1.6/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="<?= base_url() ?>application/js/headpic/artDialog4.1.6/plugins/iframeTools.js"></script>
 <div id="content" class="clearfix">
     <div id="con-left">
         <ul>
@@ -94,8 +97,22 @@
                                     </div>
                                 </div>
                             </li>
+                            <li class="testli">        
+                                <div class="am-g">
+                                    <div class="am-u-sm-3 am-u-md-3 am-text-right">
+                                        用户头像:  
+                                    </div>
+                                    <div id="info_change_div" class="am-u-sm-9 am-u-md-9 am-u-end col-end info_change_div" >
+                                        <input type="file" name="head_photo" id="head_photo" value="">
+                                        <input type="hidden" name="photo_pic" id="photo_pic" value="">
+                                    </div>
+                                </div>
+                            </li>
                         </ul>   
-                       
+                       <div id="show_photo" class="show_photo" >
+                             <img id="head_photo_src" style="width:150px;height:150px;" src="http://driver-un.oss-cn-shenzhen.aliyuncs.com/headpic/default.jpg" alt="">
+                             
+                     </div>
 <!--                    </form>-->
                 </div>
                 <div >
@@ -277,4 +294,106 @@
             lastValue = select.options[lastIndex].value;
         }
     }
+</script>
+<!--此为头像修改部分的JS代码-->
+<script>
+
+    
+    var headpicBaseUrl="<?= base_url() ?>application/views/headpic/";
+    var allInfo=null;
+$(document).ready(function(e){
+        
+	//var fileuploadpath="<?= base_url() ?>application/views/headpic/;
+        var path="<?= base_url() ?>application/views/headpic/upload.php";
+	$('#head_photo').live('change',function(){ 
+		ajaxFileUploadview('head_photo','photo_pic',path);
+	});
+        $.ajax({
+            type: "POST",
+            dataType: "text",
+            url: "<?= base_url() ?>index.php/info_change/getAllInfo",
+            async: true,
+            success: function (data) {
+                allInfo = eval("(" + data + ")");
+                //alert("allInfo.stu_face====>"+allInfo[0].stu_face);
+                var vipHeadurl=allInfo[0].stu_face;
+                $("#head_photo_src").attr('src',vipHeadurl);
+        }});
+
+});
+
+    function show_head(head_file){
+        if(head_file!=null){
+            //设置头像URL
+            $("#head_photo_src").attr('src',head_file);	
+            $.ajax({
+                    type: "POST",
+                    dataType: "text",
+                    url: "<?= base_url() ?>index.php/info_change/VipHeadpicChange",
+                    async: true,
+                    data: {head_file: head_file},
+                    success: function (data) {
+                        var result = eval("(" + data + ")");
+                        if(result.status == 1){
+                            alert("头像修改成功");
+                        }else{
+                            alert("头像修改失败！");
+                        }
+            }});
+        }else{
+            
+        }
+    }
+//文件上传带预览
+function ajaxFileUploadview(imgid,hiddenid,url){
+	$.ajaxFileUpload({
+			url:url,
+			secureuri:false,
+			fileElementId:imgid,
+			dataType: 'json',
+			data:{name:'login', id:'id'},
+			success: function (data, status)
+			{
+				if(typeof(data.error) != 'undefined')
+				{
+					if(data.error != '')
+					{
+						var dialog = art.dialog({title:false,fixed: true,padding:0});
+						dialog.time(2).content("<div class='tips'>"+data.error+"</div>");
+					}else{
+
+						var resp = data.msg;						
+						if(resp != '0000'){
+							var dialog = art.dialog({title:false,fixed: true,padding:0});
+							dialog.time(2).content("<div class='tips'>"+data.error+"</div>");
+							return false;
+						}else{
+							$('#'+hiddenid).val(data.imgurl);
+                                                        
+                                                        //art.dialog.data('img',data.imgurl);
+                                                        
+                                                        var crop_url="<?= base_url() ?>index.php/info_change/showHeadImg?imgurl="+data.imgurl;
+                                                        
+							art.dialog.open(crop_url,{
+								title: '裁剪头像',
+								width:'680px',
+								height:'400px'
+							});						
+							
+							//dialog.time(3).content("<div class='msg-all-succeed'>上传成功！</div>");
+						}
+
+					}
+				}
+			},
+			error: function (data, status, e)
+			{
+
+				dialog.time(3).content("<div class='tips'>"+e+"</div>");
+			}
+		})
+
+	    return false;
+	}
+
 </script>
