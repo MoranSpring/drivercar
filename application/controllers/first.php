@@ -32,13 +32,12 @@ class First extends MY_Controller {
 
     public function index() {
 //        $this->view();
-
         $this->load->library('user_agent');
         if ($this->agent->is_mobile()) {
             //echo "mobile"." ===". $this->agent->mobile();
-            $this->load->view('mobile/login_views/template');
+//            $this->load->view('mobile/login_views/template');
+            redirect('mobile');
         } else {
-            //echo "computer";
             $this->view();
         }
 

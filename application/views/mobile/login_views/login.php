@@ -13,16 +13,6 @@
         <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.3.0/css/amazeui.min.css">
         <script  language="javascript" src="<?=base_url()?>application/js/login.js"></script>
     </head>
-    <style>
-        .clearfix:after {
-            visibility: hidden;
-            display: block;
-            font-size: 0;
-            content: ".";
-            clear: both;
-            height: 0;
-        }
-    </style>
     <body>
         <header data-am-widget="header" class="am-header am-header-default">
             <div class="am-header-left am-header-nav">

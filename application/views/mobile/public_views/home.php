@@ -1,28 +1,4 @@
-<html>
-    <head>
-        <title>首页</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="我爱开车网是国内首个驾驶培训预约学习平台，为用户提供客观的、第三方的驾培机构评价信息，同时也为用户提供汽车相关咨询服务。">
-        <link rel="shortcut icon" href="<?php echo base_url() . 'application/images/iconfont-suo.png' ?>" type="image/x-icon">
-        <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-        <script src="<?php echo base_url() . 'application/js/jquery.cxselect.min.js' ?>" type="text/javascript"></script>
-        <script src="http://cdn.amazeui.org/amazeui/2.3.0/js/amazeui.min.js" type="text/javascript"></script>
-        <script src="http://a.static.amazeui.org/assets/2.x/js/handlebars.min.js?v=i89kryv3"></script>
-        <script src="http://cdn.amazeui.org/amazeui/2.3.0/js/amazeui.widgets.helper.min.js"></script>
-        <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.3.0/css/amazeui.min.css">
-    </head>
-    <style>
-        .clearfix:after {
-            visibility: hidden;
-            display: block;
-            font-size: 0;
-            content: ".";
-            clear: both;
-            height: 0;
-        }
-    </style>
-    <body>
+<body>
         <header data-am-widget="header" class="am-header am-header-default">
             <div class="am-header-left am-header-nav" >
                 <a href="#left-link" class="" >
@@ -88,4 +64,3 @@
         </select>
 
     </body>
-</html>
