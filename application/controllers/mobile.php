@@ -67,6 +67,11 @@ class Mobile extends MY_Controller {
         $title = " 教练预约 - 我爱开车网（手机版）";
         $this->view($title, $page);
     }
+        public function management() {
+        $page = $this->load->view('mobile/vip_views/management', '', true);
+        $title = "学习管理 - 我爱开车网（手机版）";
+        $this->view($title, $page);
+    }
     
     
     

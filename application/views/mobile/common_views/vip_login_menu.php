@@ -50,7 +50,7 @@
                             <a href="<?= base_url()?>index.php/mobile/study_book" class=""style="background:#555;border-bottom: 1px dashed #999;color: #ddd">预约培训</a>
                         </li>
                         <li class="">
-                            <a href="##" class=""style="background:#555;border-bottom: 1px dashed #999;color: #ddd">学习管理</a>
+                            <a href="<?= base_url() ?>index.php/mobile/management" class=""style="background:#555;border-bottom: 1px dashed #999;color: #ddd">学习管理</a>
                         </li>
                         <li class="">
                             <a href="##" class=""style="background:#555;border-bottom: 1px dashed #999;color: #ddd">我的积分</a>
