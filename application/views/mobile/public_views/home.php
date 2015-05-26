@@ -42,42 +42,42 @@
     </div><ul class="am-avg-sm-4 boxes">
         <li class="box box-top">
             <a href="http://www.baidu.com" style="height: 100%">
-                <img class="home-img" src="http://192.168.10.137:8888/application/images/mobile/coach_book.png" style="width:100%;"/>
+                <img class="home-img" src="http://222.20.108.14:8888/application/images/mobile/coach_book.png" style="width:100%;"/>
             </a>
         </li>
         <li class="box box-top">
             <a href="http://www.baidu.com" style="height: 100%">
-                <img class="home-img" src="http://192.168.10.137:8888/application/images/mobile/school.png" style="width:100%;"/>
+                <img class="home-img" src="http://222.20.108.14:8888/application/images/mobile/school.png" style="width:100%;"/>
             </a>
         </li>
         <li class="box box-top">
             <a href="http://www.baidu.com" style="height: 100%">
-                <img class="home-img" src="http://192.168.10.137:8888/application/images/mobile/coach.png" style="width:100%;"/>
+                <img class="home-img" src="http://222.20.108.14:8888/application/images/mobile/coach.png" style="width:100%;"/>
             </a>
         </li>
         <li class="box box-top box-reight">
             <a href="http://www.baidu.com" style="height: 100%">
-                <img class="home-img" src="http://192.168.10.137:8888/application/images/mobile/news.png" style="width:100%;"/>
+                <img class="home-img" src="http://222.20.108.14:8888/application/images/mobile/news.png" style="width:100%;"/>
             </a>
         </li>
         <li class="box box-bottom">
             <a href="http://www.baidu.com" style="height: 100%">
-                <img class="home-img" src="http://192.168.10.137:8888/application/images/mobile/coach_book.png" style="width:100%;"/>
+                <img class="home-img" src="http://222.20.108.14:8888/application/images/mobile/coach_book.png" style="width:100%;"/>
             </a>
         </li>
         <li class="box box-bottom">
             <a href="http://www.baidu.com" style="height: 100%">
-                <img class="home-img" src="http://192.168.10.137:8888/application/images/mobile/coach_book.png" style="width:100%;"/>
+                <img class="home-img" src="http://222.20.108.14:8888/application/images/mobile/coach_book.png" style="width:100%;"/>
             </a>
         </li>
         <li class="box box-bottom">
             <a href="http://www.baidu.com" style="height: 100%">
-                <img class="home-img" src="http://192.168.10.137:8888/application/images/mobile/coach_book.png" style="width:100%;"/>
+                <img class="home-img" src="http://222.20.108.14:8888/application/images/mobile/coach_book.png" style="width:100%;"/>
             </a>
         </li>
         <li class="box box-bottom box-reight">
             <a href="http://www.baidu.com" style="height: 100%">
-                <img class="home-img" src="http://192.168.10.137:8888/application/images/mobile/coach_book.png" style="width:100%;"/>
+                <img class="home-img" src="http://222.20.108.14:8888/application/images/mobile/coach_book.png" style="width:100%;"/>
             </a>
         </li>
        
