@@ -10,7 +10,7 @@
 .star_ul li .three-star{width:79px;background-position:0 -60px;z-index:30;}
 .star_ul li .four-star{width:105px;background-position:0 -30px;z-index:20;}
 .star_ul li .five-star{width:129px;margin-right:0;background-position:0 0;z-index:10;}
-.s_result{padding:6px 0 0 5px;}
+.s_result{/* padding:6px 0 0 5px; */}
 
 .square_ul{background:url(images/star.png) no-repeat 0 -222px;width:146px;z-index:10;position:relative;height:20px;}
 .square_ul li{float:left;margin-right:1px;width:29px;height:20px;}
