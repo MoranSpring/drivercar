@@ -23,7 +23,7 @@
         <div class="am-u-sm-5 am-u-md-5"><span class="am-text-sm" style="line-height: 35px">消费<span class="am-icon-rmb" style="color:#900;font-weight: bold;">100</span>分</div>
         <div class="am-u-sm-3 am-u-md-3"><lable type="button" class="am-btn  am-radius am-btn-success am-btn-sm <?php if($exist==1)  echo 'unbook_end'; else echo 'teach-comment';?>"  value="<?=$book_id?>"><?php if($exist==1)  echo '已评价'; else echo '评价';?></lable></div>
         <div class="am-u-sm-4 am-u-md-4 am-text-sm am-text-right">
-            <a href='http//:www.baidu.com'  style="color:#999;line-height: 35px">详情>></a>
+            <a href='l'  style="color:#999;line-height: 35px">详情>></a>
         </div>
     </div>
 </div>

@@ -106,6 +106,7 @@ class Mobile extends MY_Controller {
         $result = $this->teachbook_model->select_history_detail($UID, $time, $cls);
         $i = 0;
         foreach ($result as $row) {
+            if($i>9){break;}
             $list['book_id'] = $row['book_id'];
             $list['book_date'] = $row['book_date'];
             $list['book_cls_num'] = $row['book_cls_num'];
@@ -134,7 +135,28 @@ class Mobile extends MY_Controller {
         $this->view($title, $page);
     }
     public function tocomment() {
-        $page = $this->load->view('mobile/vip_views/tocomment', '', true);
+        $id = $this->input->get('id');
+        $result = $this->teachbook_model->select_from_id($id);
+        $comment_list = array();
+        foreach ($result as $row) {
+            $list['book_id'] = $row['book_id'];
+            $list['book_date'] = $row['book_date'];
+            $list['book_cls_num'] = $row['book_cls_num'];
+            $list['book_suggest'] = $row['book_suggest'];
+            $list['book_coa_id'] = $row['book_coa_id'];
+            $list['book_sch_id'] = $row['book_sch_id'];
+            $coachName = $this->coach_model->select_name($row['book_coa_id']);
+            $list['coa_name'] = $coachName[0]['coach_name'];
+            $schName = $this->school_model->select_name($row['book_sch_id']);
+            $list['sch_name'] = $schName[0]['jp_name'];
+            $list['book_cls_name'] = "";
+            $courseName1 = $this->course_model->select($row['book_cls_id']);
+            foreach ($courseName1 as $row2) {
+                $list['book_cls_name'] = $row2['cls_name'];
+            }
+            $comment_list['feedback_content'] = $this->load->view('mobile/vip_views/feedback_content', $list, true);
+        }
+        $page = $this->load->view('mobile/vip_views/tocomment',$comment_list, true);
         $title = "学习评价 - 我爱开车网（手机版）";
         $this->view($title, $page);
     }
@@ -143,6 +165,19 @@ class Mobile extends MY_Controller {
         $title = "订单详情 - 我爱开车网（手机版）";
         $this->view($title, $page);
     }
+     public function news() {
+          $body['menu']=$this->getMenu();
+        $page = $this->load->view('mobile/public_views/news', $body, true);
+        $title = "新闻 - 我爱开车网（手机版）";
+        $this->view($title, $page);
+    }
+    public function coach_home() {
+          $body['menu']=$this->getMenu();
+        $page = $this->load->view('mobile/public_views/coach_home', $body, true);
+        $title = "教练详情 - 我爱开车网（手机版）";
+        $this->view($title, $page);
+    }
+
     
     
     

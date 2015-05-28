@@ -51,7 +51,7 @@
             </a>
         </li>
         <li class="box box-top">
-            <a href="http://www.baidu.com" style="height: 100%">
+            <a href="<?=  base_url()?>index.php/mobile/coach_home" style="height: 100%">
                 <img class="home-img" src="http://192.168.10.137:8888/application/images/mobile/coach.png" style="width:100%;"/>
             </a>
         </li>

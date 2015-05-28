@@ -187,6 +187,9 @@
         </div>
     </div>
     <script>
+         function iAmMobile(){
+        return null;
+    }
         $.cxSelect.defaults.url = "<?php echo base_url() . 'application/js/project.json' ?>";
         $('#project_list').cxSelect({
             selects: ['cls_kind', 'cls_project'],

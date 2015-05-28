@@ -40,6 +40,33 @@
 
         </div>
     </div>
-
-
+<script>
+    $('.teach-comment').on("click", function () {
+        window.location.href = "<?= base_url() . 'index.php/mobile/tocomment?id=' ?>" + $(this).attr('value');
+    });
+    $('.unbook').on("click", function () {
+        if (confirm("你确定要申请退订吗?"))
+        {
+            var book_id = $(this).attr('book_id');
+            var thisData = $(this);
+            $.ajax({
+                type: "POST",
+                dataType: "text",
+                url: "<?= base_url() ?>index.php/vipcenter/unbook",
+                async: true,
+                data: {book_id: book_id},
+                success: function (data) {
+                    if (data == 1) {
+                        thisData.addClass('unbook_end');
+                        thisData.html('已申请');
+                        thisData.removeClass('unbook');
+                    }
+                    else {
+                        alert("申请失败！");
+                    }
+                }
+            });
+        }
+    });
+</script>
 </body>

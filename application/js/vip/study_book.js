@@ -286,7 +286,12 @@ function toOnload() {
                 $('.step_1').css('display', 'block');
                 $('.step_2').css('display', 'none');
                 $('.step_3').css('display', 'none');
-                window.location.href = localhostPath + "/index.php/vipcenter/vip_center";
+                if (typeof (iAmMobile) === 'function') {
+                window.location.href = document.referrer;
+            }else{
+               window.location.href = localhostPath + "/index.php/vipcenter/vip_center";
+            }
+                
             }
             else {
                 alert("预约失败！");
