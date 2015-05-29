@@ -177,6 +177,12 @@ class Mobile extends MY_Controller {
         $title = "教练详情 - 我爱开车网（手机版）";
         $this->view($title, $page);
     }
+    public function two_screen() {
+//          $body['menu']=$this->getMenu();
+        $page = $this->load->view('mobile/public_views/two_screen', '', true);
+        $title = "切换 - 我爱开车网（手机版）";
+        $this->view($title, $page);
+    }
 
     
     
