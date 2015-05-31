@@ -26,13 +26,13 @@
                             <span class="am-active">2</span>/4</div>某天 也许会相遇 相遇在这个好地方</div>
                 </li>
                 <li>
-                    <img src="http://global.bing.com/az/hprichbg/rb/UchisarCastle_EN-US10838608428_1920x1080.jpg">
+                    <img src="http://s.cn.bing.net/az/hprichbg/rb/TheLuxorHotel_ZH-CN12121725266_1920x1080.jpg">
                     <div class="am-slider-desc am-text-xs">
                         <div class="am-slider-counter">
                             <span class="am-active">3</span>/4</div>不要太担心 只因为我相信 终会走过这条遥远的道路</div>
                 </li>
                 <li>
-                    <img src="http://global.bing.com/az/hprichbg/rb/DumbartonOaksGardens_EN-US12360736195_1920x1080.jpg">
+                    <img src="http://s.cn.bing.net/az/hprichbg/rb/MovingWalkway_ZH-CN9842297711_1920x1080.jpg">
                     <div class="am-slider-desc am-text-xs">
                         <div class="am-slider-counter">
                             <span class="am-active">4</span>/4</div>OH PARA PARADISE 是否那么重要 你是否那么地遥远</div>
@@ -42,42 +42,42 @@
     </div><ul class="am-avg-sm-4 boxes">
         <li class="box box-top">
             <a href="http://www.baidu.com" style="height: 100%">
-                <img class="home-img" src="http://192.168.10.137:8888/application/images/mobile/coach_book.png" style="width:100%;"/>
+                <img class="home-img" src="http://222.20.108.14:8888/application/images/mobile/coach_book.png" style="width:100%;"/>
             </a>
         </li>
         <li class="box box-top">
-            <a href="http://www.baidu.com" style="height: 100%">
-                <img class="home-img" src="http://192.168.10.137:8888/application/images/mobile/school.png" style="width:100%;"/>
+            <a href="<?=  base_url()?>index.php/mobile/two_screen" style="height: 100%">
+                <img class="home-img" src="http://222.20.108.14:8888/application/images/mobile/school.png" style="width:100%;"/>
             </a>
         </li>
         <li class="box box-top">
             <a href="<?=  base_url()?>index.php/mobile/coach_home" style="height: 100%">
-                <img class="home-img" src="http://192.168.10.137:8888/application/images/mobile/coach.png" style="width:100%;"/>
+                <img class="home-img" src="http://222.20.108.14:8888/application/images/mobile/coach.png" style="width:100%;"/>
             </a>
         </li>
         <li class="box box-top box-reight">
             <a href="http://www.baidu.com" style="height: 100%">
-                <img class="home-img" src="http://192.168.10.137:8888/application/images/mobile/news.png" style="width:100%;"/>
+                <img class="home-img" src="http://222.20.108.14:8888/application/images/mobile/news.png" style="width:100%;"/>
             </a>
         </li>
         <li class="box box-bottom">
             <a href="http://www.baidu.com" style="height: 100%">
-                <img class="home-img" src="http://192.168.10.137:8888/application/images/mobile/coach_book.png" style="width:100%;"/>
+                <img class="home-img" src="http://222.20.108.14:8888/application/images/mobile/coach_book.png" style="width:100%;"/>
             </a>
         </li>
         <li class="box box-bottom">
             <a href="http://www.baidu.com" style="height: 100%">
-                <img class="home-img" src="http://192.168.10.137:8888/application/images/mobile/coach_book.png" style="width:100%;"/>
+                <img class="home-img" src="http://222.20.108.14:8888/application/images/mobile/coach_book.png" style="width:100%;"/>
             </a>
         </li>
         <li class="box box-bottom">
             <a href="http://www.baidu.com" style="height: 100%">
-                <img class="home-img" src="http://192.168.10.137:8888/application/images/mobile/coach_book.png" style="width:100%;"/>
+                <img class="home-img" src="http://222.20.108.14:8888/application/images/mobile/coach_book.png" style="width:100%;"/>
             </a>
         </li>
         <li class="box box-bottom box-reight">
             <a href="http://www.baidu.com" style="height: 100%">
-                <img class="home-img" src="http://192.168.10.137:8888/application/images/mobile/coach_book.png" style="width:100%;"/>
+                <img class="home-img" src="http://222.20.108.14:8888/application/images/mobile/coach_book.png" style="width:100%;"/>
             </a>
         </li>
        

@@ -12,7 +12,7 @@
     <?= $menu ?>
     <div style='max-height: 150px;overflow: hidden'>
         <div style="top:0;height:150px;width:100%;position: relative;z-index: -10;overflow: hidden;" >
-            <img src="http://sm.cndesign.com/upload/works/20131123_9F39A635207981923194045.jpg" width="100%" style="">
+            <img src="http://img.juimg.com/tuku/yulantu/140107/328161-14010G9202266.jpg" width="100%" style="">
         </div>
         <div style="position:relative;top:-150px; width:100%;height:150px;overflow:hidden;">
             <div class="am-padding-top-sm">

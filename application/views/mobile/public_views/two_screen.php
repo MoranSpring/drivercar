@@ -1,3 +1,40 @@
+<style>
+        .am-page {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+        #mobile-index {
+            -webkit-transform: translate(0%,0);
+            -ms-transform: translate(0%,0);
+            transform: translate(0%,0);
+            -webkit-transition: all .3s ease-in-out;
+            transition: all .3s ease-in-out;
+        }
+        #demo-list-page {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: #FFF;
+            -webkit-transition: all .3s ease-in-out;
+            transition: all .3s ease-in-out;
+            -webkit-transform: translate(100%,0);
+            -ms-transform: translate(100%,0);
+            transform: translate(100%,0);
+        }
+        .demo-list-active #mobile-index {
+            -webkit-transform: translate(-100%,0);
+            -ms-transform: translate(-100%,0);
+            transform: translate(-100%,0);
+        }
+        .demo-list-active #demo-list-page {
+            display: block;
+            -webkit-transform: translate(0%,0);
+            -ms-transform: translate(0%,0);
+            transform: translate(0%,0);
+        }
+    </style>
 <body>
     <div class="am-page" id="mobile-index"> 
         <header data-am-widget="header" class="am-header am-header-default">
@@ -16,8 +53,8 @@
         <div id="widget-list"> 
             <ul class="am-list">
                 <li class="am-padding-top-xs am-padding-bottom-xs">
-                    <div class="am-g">
-                        <div onclick="test();" class="am-u-sm-3  am-u-md-3" style="padding:3px;">
+                    <div  onclick="test();" class="am-g">
+                        <div class="am-u-sm-3  am-u-md-3" style="padding:3px;">
                             <img class="am-img am-img-thumbnail" src="http://android-wallpapers.25pp.com/20140404/1630/533e6da6023b320_900x675.jpg" height="100%"/>
                         </div>
                         <div class="am-u-sm-8 am-u-md-8" style="font-size: 0.8em">
@@ -64,43 +101,7 @@
             </div>
         </div>
     </div>
-    <style>
-        .am-page {
-            position: relative;
-            height: 100%;
-            width: 100%;
-            overflow: hidden;
-        }
-        #mobile-index {
-            -webkit-transform: translate(0%,0);
-            -ms-transform: translate(0%,0);
-            transform: translate(0%,0);
-            -webkit-transition: all .3s ease-in-out;
-            transition: all .3s ease-in-out;
-        }
-        #demo-list-page {
-            position: absolute;
-            top: 0;
-            left: 0;
-            background-color: #FFF;
-            -webkit-transition: all .3s ease-in-out;
-            transition: all .3s ease-in-out;
-            -webkit-transform: translate(100%,0);
-            -ms-transform: translate(100%,0);
-            transform: translate(100%,0);
-        }
-        .demo-list-active #mobile-index {
-            -webkit-transform: translate(-100%,0);
-            -ms-transform: translate(-100%,0);
-            transform: translate(-100%,0);
-        }
-        .demo-list-active #demo-list-page {
-            display: block;
-            -webkit-transform: translate(0%,0);
-            -ms-transform: translate(0%,0);
-            transform: translate(0%,0);
-        }
-    </style>
+    
     <script>
         function test() {
             $('#demo-list-page').css('display', 'block');
