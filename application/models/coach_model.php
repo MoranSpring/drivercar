@@ -34,8 +34,9 @@ class Coach_model extends CI_Model{
         $query = $this->db->get('Coach');
         return $query->result_array();
     }
-    public function select_coach($id) {//返回该用户名所有信息
+    public function select_coach($id) {//通过驾校查找该驾校下的教练信息
         $this->db->select('coach_id');
+        $this->db->select('coach_face');
         $this->db->select('coach_name');
         $this->db->where('coach_sch_id',$id);
         $query = $this->db->get('Coach');

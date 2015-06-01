@@ -95,10 +95,7 @@ class Mobile extends MY_Controller {
             $schName = $this->school_model->select_name($row['book_sch_id']);
             $list['sch_name'] = $schName[0]['jp_name'];
             $list['book_cls_name'] = "";
-            $courseName = $this->course_model->select($row['book_cls_id']);
-            foreach ($courseName as $row) {
-                $list['book_cls_name'] = $row['cls_name'];
-            }
+            $list['course'] = $this->getClassType($row['book_cls_id']);
 
             $comment_list['unuse_list'][$j] = $this->load->view('mobile/vip_views/management_fur_list', $list, true);
             $j++;
@@ -122,11 +119,7 @@ class Mobile extends MY_Controller {
             foreach ($is_com_exist as $result) {
                 $list['exist'] = 1;
             }
-            $list['book_cls_name'] = "";
-            $courseName1 = $this->course_model->select($row['book_cls_id']);
-            foreach ($courseName1 as $row) {
-                $list['book_cls_name'] = $row['cls_name'];
-            }
+            $list['course'] = $this->getClassType($row['book_cls_id']);
             $comment_list['list'][$i] = $this->load->view('mobile/vip_views/management_list', $list, true);
             $i++;
         }
@@ -161,7 +154,31 @@ class Mobile extends MY_Controller {
         $this->view($title, $page);
     }
      public function book_detail() {
-        $page = $this->load->view('mobile/vip_views/book_detail', '', true);
+          if ($this->session->userdata('TYPE') == 2) {
+        } else {
+            $this->view("you aren't vip!");
+            return false;
+        }
+        $id = $this->input->get('id');
+        $isFinish = $this->input->get('isFinish');
+        $result = $this->teachbook_model->select_detail_by_id($id);
+        $data='';
+        foreach ($result as $row) {
+            $data['date'] = $row['book_date'];
+            $data['isFinish']=$isFinish;//'0'表示'已经学习'，其他为'未学习'；
+            $data['course'] = $this->getClassType($row['book_cls_id']);
+            $course= $this->course_model->select($row['book_cls_id']);
+            $data['course_content'] = $course[0]['cls_name'];
+            $name = $this->coach_model->select_name($row['book_coa_id']);
+            $data['Name'] = $name[0]['coach_name'];
+            $data['imageURL'] = $name[0]['coach_face'] . "@!nail";
+            $data['course_num'] = $row['book_cls_num'];
+            $data['book_suggest'] = $row['book_suggest'];
+            
+            $sch_name = $this->school_model->select_name($row['book_sch_id']);
+            $data['school'] = $sch_name[0]['jp_name'];
+        }
+        $page = $this->load->view('mobile/vip_views/book_detail', $data, true);
         $title = "订单详情 - 我爱开车网（手机版）";
         $this->view($title, $page);
     }
@@ -182,6 +199,30 @@ class Mobile extends MY_Controller {
         $page = $this->load->view('mobile/public_views/two_screen', '', true);
         $title = "切换 - 我爱开车网（手机版）";
         $this->view($title, $page);
+    }
+    public function select_coach(){
+        $city= $this->input->get('city');
+        $school= $this->school_model->get_from_city(1027);
+        $i=0;
+        $body='';
+    foreach($school as $row){
+        $body['school'][$i] = $this->load->view('mobile/public_views/school_list', $row, true);
+        $i++;
+    }
+        $page = $this->load->view('mobile/public_views/select_coach', $body, true);
+        $title = "选择教练 - 我爱开车网（手机版）";
+        $this->view($title, $page);
+    }
+    
+    
+    public function get_course(){    //通过学校id 获得该校的教练详细信息。。。
+        $id= $this->input->post('id');
+        $coach = $this->coach_model->select_coach($id);
+        $AllCoach='';
+        foreach($coach as $row){
+            $AllCoach.=$this->load->view('mobile/public_views/coach_list', $row, true);
+        }
+        echo $AllCoach;
     }
 
     

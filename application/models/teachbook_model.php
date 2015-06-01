@@ -38,6 +38,12 @@ class Teachbook_model extends CI_Model {
         $query = $this->db->get('TeachBook');
         return $query->result_array();
     }
+     public function select_detail_by_id($id) {//返回该用户名所有信息
+        $this->db->select();
+        $this->db->where('book_id', $id);
+        $query = $this->db->get('TeachBook');
+        return $query->result_array();
+    }
 
     public function select_history_detail($id, $time, $cls) {//返回该用户名所有信息
         $this->db->select();

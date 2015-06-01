@@ -60,5 +60,18 @@ class MY_Controller extends CI_Controller {
         }
         return 11;
     }
+    public function getClassType($id='021'){
+        $type=($id-$id%10)/10;
+        if($type==1){
+            return '科目一';
+        }else if($type==2){
+            return  '科目二';
+        }else if($type==3){
+            return '科目三';
+        }else{
+            return '其他';
+        }
+        
+    }
 
 }

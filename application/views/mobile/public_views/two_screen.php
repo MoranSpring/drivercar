@@ -34,8 +34,10 @@
             -ms-transform: translate(0%,0);
             transform: translate(0%,0);
         }
+        ul>li{
+            border: 1px dashed #dedede !important;
+        }
     </style>
-<body>
     <div class="am-page" id="mobile-index"> 
         <header data-am-widget="header" class="am-header am-header-default">
         <div class="am-header-left am-header-nav" >
@@ -46,6 +48,7 @@
         <h1 class="am-header-title">
             <a href="#title-link" class="">驾培点</a>
         </h1>
+            
     </header>
         <div class="am-text-lg am-padding-xs" style="background:#ccc;border-bottom: 1px solid #ccc;">
             武汉市<label class="am-btn-success am-btn am-btn-xs" style="float:right;">更换</label>
@@ -90,13 +93,57 @@
         <h1 class="am-header-title">
             订单详情
         </h1>
+            <div class="am-header-right am-header-nav" >
+            <span href="#left-link" class="" >
+                <label class="am-btn am-btn-danger">确定</label>
+            </span>
+        </div>
     </header>
         <div id="demo-list">
             <div id="demo-scroller" style="transition: 0ms cubic-bezier(0.1, 0.57, 0.1, 1); -webkit-transition: 0ms cubic-bezier(0.1, 0.57, 0.1, 1); transform: translate(0px, 0px) translateZ(0px);">
                 <ul class="am-list widget-list">
-                    <li><a href="/widgets/accordion/default/0">default (圆角灰边)</a></li>
-                    <li><a href="/widgets/accordion/basic/0">basic (极简无边框)</a></li>  
-                    <li><a href="/widgets/accordion/gapped/0">gapped (扁平分离边框)</a></li>
+                    <li class="am-padding-top-xs am-padding-bottom-xs">
+                        <div  onclick="test();" class="am-g">
+                        <div class="am-u-sm-3  am-u-md-3" style="padding:3px;">
+                            <img class="am-img am-img-thumbnail" src="http://android-wallpapers.25pp.com/20140404/1630/533e6da6023b320_900x675.jpg" height="100%"/>
+                        </div>
+                        <div class="am-u-sm-7 am-u-md-7" style="font-size: 0.8em">
+                            <div class="am-text-lg">
+                                刘德华<span class="am-fr" style="font-size: 0.8em;"><span style="color:#f00;font-size: 1.2em;">100</span>积分/课时</span>
+                            </div>
+                            <div>
+                                口碑：好，有111人点评
+                            </div>
+                            <div>
+                              本月预约人数：100人
+                            </div>
+                        </div>
+                        <div class="coa_selected am-u-sm-2 am-u-md-2" value='false' style="padding: 0;">
+                            <span class="coa_check am-icon-check-circle-o am-text-center" style="width:67px;height:67px;line-height:67px;font-size:43px;color:#ccc;">&nbsp;</span>
+                        </div>
+                    </div>
+                    </li>
+                    <li class="am-padding-top-xs am-padding-bottom-xs">
+                        <div  onclick="test();" class="am-g">
+                        <div class="am-u-sm-3  am-u-md-3" style="padding:3px;">
+                            <img class="am-img am-img-thumbnail" src="http://android-wallpapers.25pp.com/20140404/1630/533e6da6023b320_900x675.jpg" height="100%"/>
+                        </div>
+                        <div class="am-u-sm-7 am-u-md-7" style="font-size: 0.8em">
+                            <div class="am-text-lg">
+                                刘德华<span class="am-fr" style="font-size: 0.8em;"><span style="color:#f00;font-size: 1.2em;">100</span>积分/课时</span>
+                            </div>
+                            <div>
+                                口碑：好，有111人点评
+                            </div>
+                            <div>
+                              本月预约人数：100人
+                            </div>
+                        </div>
+                        <div class="coa_selected am-u-sm-2 am-u-md-2" value='false' style="padding: 0;">
+                            <span class="coa_check am-icon-check-circle-o am-text-center" style="width:67px;height:67px;line-height:67px;font-size:43px;color:#ccc;">&nbsp;</span>
+                        </div>
+                    </div>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -106,13 +153,14 @@
         function test() {
             $('#demo-list-page').css('display', 'block');
             setTimeout(function(){$('body').addClass('demo-list-active');},1);
-     
         }
         function back() {
             $('body').removeClass('demo-list-active');
             setTimeout(function(){$('#demo-list-page').css('display', 'none');},300);
-
         }
+        $('.coa_selected').on('click',function(){
+            $(this).attr('value')==='true' ? $(this).children('.coa_check').css('color','#aaa') : $(this).children('.coa_check').css('color','#f00');
+            $(this).attr('value')==='true' ? $(this).attr('value','false') : $(this).attr('value','true');
+        });
     </script>
-</body>
 
