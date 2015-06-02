@@ -1,5 +1,5 @@
 $(function () {
-    step1();
+           step1();
 });
 function step1() {
     $('#ml-step1').css('background', 'url(/application/images/on_pixel.png)');

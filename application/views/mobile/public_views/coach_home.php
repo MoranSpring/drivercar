@@ -1,6 +1,6 @@
 <header data-am-widget="header" class="am-header am-header-default">
     <div class="am-header-left am-header-nav" >
-        <a href="javascript:history.go(-1)">
+        <a href="javascript:history.back()">
             <img class="am-header-icon-custom" src="data:image/svg+xml;charset=utf-8,&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 12 20&quot;&gt;&lt;path d=&quot;M10,0l2,2l-8,8l8,8l-2,2L0,10L10,0z&quot; fill=&quot;%23fff&quot;/&gt;&lt;/svg&gt;"
                  alt="" />&nbsp;
         </a>
@@ -10,7 +10,7 @@
     </h1>
 </header>
 <?= $menu ?>
-<div style='max-height: 150px;overflow: hidden'>
+<div  style='max-height: 150px;overflow: hidden'>
     <div style="top:0;height:150px;width:100%;position: relative;z-index: -10;overflow: hidden;" >
         <img src="http://img.juimg.com/tuku/yulantu/140107/328161-14010G9202266.jpg" width="100%" style="">
     </div>
@@ -26,7 +26,7 @@
                 <div style="color:#fff;top:-88px;;heght:75px;position:relative;padding-left: 100px;">
                     <div class="clearfix">
                         <span style="float:left;font-size: 1.5em;color:#d2ffca;">刘德华</span>
-                        <a style=""><span class="am-icon-map-marker" style="text-decoration: underline;padding-right: 10px;float:right;height: 38px;;line-height: 38px;font-size: 1.1em;color:#fff">南湖驾校</span></a><br/>
+                        <a  style=""><span class="am-icon-map-marker" style="text-decoration: underline;padding-right: 10px;float:right;height: 38px;;line-height: 38px;font-size: 1.1em;color:#fff">南湖驾校</span></a><br/>
                     </div>
 
                     <span style="font-size: 0.8em;color:#ccc;">个人签名：我就是我我就是这么屌屌屌屌屌屌！</span>
@@ -54,7 +54,7 @@
                     <span>手机号码：</span><br/>
                     <span>培训类型：</span><br/>
                     <span>培训人数：</span><br/>
-                    <span>本月培训学员：</span><br/>
+                    <span>本月培训：</span><br/>
 
                 </div>
                 <div class='am-u-sm-5 am-u-md-5 am-text-left' style="border-right: 1px dashed #ddd;">
@@ -105,9 +105,9 @@
                 </div>
                 <div class='am-u-sm-8 am-u-md-8'>
                     <div class='clearfix'>
-                        <a href='tel:15071078963'>
-                            <span  class='am-icon-trophy' style='font-size: 50px;color:#fbcb09;'></span>&nbsp;综合评分：
-                            <span class='am-text-center' style='color:#e00;'>4.96分</span>
+                        <a  href='tel:15071078963'>
+                            <span  class='am-icon-trophy' style='font-size: 50px;color:#fbcb09;'></span>&nbsp;综合评分:
+                            <span class='am-text-center' style='color:#e00;'>4.9分</span>
                         </a></div>
                     <div>有8000人点评&nbsp;&nbsp;&nbsp;<a href="" style='color:#999;float:right;'>详情>></a></div>
 

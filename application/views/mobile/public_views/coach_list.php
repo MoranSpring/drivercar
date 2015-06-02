@@ -1,5 +1,5 @@
 <li class="am-padding-top-xs am-padding-bottom-xs">
-    <div  class="am-g" value='<?=$coach_id?>'>
+    <div  class="this_coach am-g" value='<?=$coach_id?>'>
         <div class="am-u-sm-3  am-u-md-3" style="padding:3px;">
             <a href='<?=base_url()?>index.php/mobile/coach_home'><img class="am-img am-img-thumbnail" src="<?=$coach_face?>@!mob-nails" height="100%"/></a>
         </div>

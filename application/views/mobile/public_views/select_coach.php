@@ -41,8 +41,9 @@
 <div class="am-page" id="mobile-index"> 
     <header data-am-widget="header" class="am-header am-header-default">
         <div class="am-header-left am-header-nav" >
-            <a href="#left-link" class="" >
-                <i class="am-header-icon am-icon-home am-icon">&nbsp</i>
+            <a href="javascript:history.back();">
+                <img class="am-header-icon-custom" src="data:image/svg+xml;charset=utf-8,&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 12 20&quot;&gt;&lt;path d=&quot;M10,0l2,2l-8,8l8,8l-2,2L0,10L10,0z&quot; fill=&quot;%23fff&quot;/&gt;&lt;/svg&gt;"
+                     alt="" />&nbsp;
             </a>
         </div>
         <h1 class="am-header-title">
@@ -77,11 +78,11 @@
             </a>
         </div>
         <h1 class="am-header-title">
-            订单详情
+            选择教练
         </h1>
         <div class="am-header-right am-header-nav" >
             <span href="#left-link" class="" >
-                <label class="am-btn am-btn-danger">确定</label>
+                <label onclick="summit()" class="am-btn am-btn-danger">确定</label>
             </span>
         </div>
     </header>
@@ -109,13 +110,32 @@
     var pathName = window.document.location.pathname;
     var pos = curWwwPath.indexOf(pathName);
     var localhostPath = curWwwPath.substring(0, pos);
-    function test(id) {
+
+    var selected_shcool = '';
+    var selected_coach = '';
+    $(function () {
+        var histroy = curWwwPath.split('#')[1];
+        if (typeof (histroy) === 'string') {
+            histroyReload(histroy);
+        }
+    });
+    function test(value) {
+        var id = value.getAttribute('value');
+        selected_school = id;
+        window.location.href = "#" + id;
         $('#demo-list-page').css('display', 'block');
         setTimeout(function () {
             $('body').addClass('demo-list-active');
         }, 1);
         setTimeout(openModel, 300);
-        getCoach(id.getAttribute('value'));
+        getCoach(id);
+    }
+    function histroyReload(id) {
+        $('#demo-list-page').css('display', 'block');
+        $('body').addClass('demo-list-active');
+        openModel();
+        selected_school = id;
+        getCoach(id);
     }
 
     function back() {
@@ -139,10 +159,39 @@
             }});
     }
     function reBind() {
+        selected_coach = '';
         $('.coa_selected').on('click', function () {
-            $(this).attr('value') === 'true' ? $(this).children('.coa_check').css('color', '#aaa') : $(this).children('.coa_check').css('color', '#f00');
-            $(this).attr('value') === 'true' ? $(this).attr('value', 'false') : $(this).attr('value', 'true');
+            if ($(this).attr('value') === 'true') {
+                selected_coach = '';
+                $('.coa_selected').children('.coa_check').css('color', '#ccc');
+                $('.coa_selected').attr('value', 'false');
+            } else {
+                selected_coach = $(this).parent('.this_coach').attr('value');
+                $('.coa_selected').children('.coa_check').css('color', '#ccc');
+                $(this).children('.coa_check').css('color', '#f00');
+                $('.coa_selected').attr('value', 'false');
+                $(this).attr('value', 'true');
+            }
         });
+    }
+    function summit() {
+        if (selected_coach!=''&&selected_school!='') {
+            $.ajax({
+                type: "GET",
+                url: localhostPath + "/index.php/mobile/to_change_coach",
+                async: true,
+                data:{coach_id:selected_coach,school_id:selected_school},
+                success: function (data) {
+                    if(data==1){
+                        window.location.href = document.referrer;
+                    }else{
+                        alert('选择出错！');
+                    }
+                }
+            });
+        } else {
+            alert('请选择教练.');
+        }
     }
 
     function openModel() {

@@ -30,28 +30,28 @@
     </header>
     <?= $menu ?>
     <div class="am-margin-sm">
-        <div data-am-widget="slider" class="am-slider  am-slider-c3" data-am-slider='{&quot;controlNav&quot;:false}'>
+        <div data-am-widget="slider" class="am-slider  am-slider-c3" style="max-height:200px;min-height: 177px;" data-am-slider='{&quot;controlNav&quot;:false}'>
             <ul class="am-slides">
                 <li>
-                    <img src="http://s.cn.bing.net/az/hprichbg/rb/TheLuxorHotel_ZH-CN12121725266_1920x1080.jpg">
+                    <img src="http://image.52drivecar.com/news_imges/1429669168.jpg@!topnews">
                     <div class="am-slider-desc am-text-xs">
                         <div class="am-slider-counter">
                             <span class="am-active">1</span>/4</div>远方 有一个地方 那里种有我们的梦想</div>
                 </li>
                 <li>
-                    <img src="http://s.cn.bing.net/az/hprichbg/rb/MovingWalkway_ZH-CN9842297711_1920x1080.jpg">
+                    <img src="http://image.52drivecar.com/news_imges/1429461478.jpg@!topnews">
                     <div class="am-slider-desc am-text-xs">
                         <div class="am-slider-counter">
                             <span class="am-active">2</span>/4</div>某天 也许会相遇 相遇在这个好地方</div>
                 </li>
                 <li>
-                    <img src="http://s.cn.bing.net/az/hprichbg/rb/TheLuxorHotel_ZH-CN12121725266_1920x1080.jpg">
+                    <img src="http://image.52drivecar.com/1426697515.jpg@!topnews">
                     <div class="am-slider-desc am-text-xs">
                         <div class="am-slider-counter">
                             <span class="am-active">3</span>/4</div>不要太担心 只因为我相信 终会走过这条遥远的道路</div>
                 </li>
                 <li>
-                    <img src="http://s.cn.bing.net/az/hprichbg/rb/MovingWalkway_ZH-CN9842297711_1920x1080.jpg">
+                    <img src="http://image.52drivecar.com/news_imges/1429461553.jpg@!topnews">
                     <div class="am-slider-desc am-text-xs">
                         <div class="am-slider-counter">
                             <span class="am-active">4</span>/4</div>OH PARA PARADISE 是否那么重要 你是否那么地遥远</div>

@@ -15,7 +15,7 @@ class Staticcoach_model extends CI_Model {
     }
 
     public function insert($data) {    //把数据增加到sites表中.
-        $result = $this->db->insert('News', $data);
+        $result = $this->db->insert('StaticCoach', $data);
         return $result;
     }
 
@@ -25,7 +25,19 @@ class Staticcoach_model extends CI_Model {
         $query = $this->db->get('StaticCoach');
         return $query->result_array();
     }
-
+    
+    public function selectByStu($data) {//通过学员id查询已选的教练和驾培点
+        $this->db->select();
+        $this->db->where('sc_stu', $data);
+        $query = $this->db->get('StaticCoach');
+        return $query->result_array();
+    }
+    public function update($id, $data) {
+        $this->db->where('sc_stu', $id);
+        $result = $this->db->update('StaticCoach', $data);
+        return $result;
+    }
+    
     public function select_detail($id) {//返回该用户名所有信息
         $this->db->select();
         $this->db->where('news_id', $id);
@@ -33,11 +45,7 @@ class Staticcoach_model extends CI_Model {
         return $query->result_array();
     }
 
-    public function update_TopNews($id, $data) {
-        $this->db->where('news_postion', $id);
-        $result = $this->db->update('NewsTop', $data);
-        return $result;
-    }
+
 
     public function select_TopNews() {
         $this->db->select();
