@@ -6,7 +6,7 @@
 <link type="text/css" href="<?= base_url() ?>application/css/mobile/study_book.css" rel="stylesheet">
 <header data-am-widget="header" class="am-header am-header-default">
     <div class="am-header-left am-header-nav">
-        <a href="javascript:history.back();">
+        <a href="javascript:SBBack();">
             <img class="am-header-icon-custom" src="data:image/svg+xml;charset=utf-8,&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 12 20&quot;&gt;&lt;path d=&quot;M10,0l2,2l-8,8l8,8l-2,2L0,10L10,0z&quot; fill=&quot;%23fff&quot;/&gt;&lt;/svg&gt;"
                  alt="" />&nbsp;
         </a>
@@ -81,7 +81,7 @@
                     </div>
                 </div>
                 <div class='am-u-sm-3 am-u-md-3 am-text-center' style='margin:0px;padding:0px;'>
-                    <a  href='<?=  base_url()?>index.php/mobile/select_coach' style="line-height: 50px;font-size: 20px;color:#bbb;">
+                    <a  href='<?= base_url() ?>index.php/mobile/select_coach' style="line-height: 50px;font-size: 20px;color:#bbb;">
                         <span class="am-icon-exchange">&nbsp;</span>
                     </a>
                 </div>
@@ -217,8 +217,15 @@
     </div>
 </div>
 <script>
+    var curWwwPath = window.document.location.href;
+    var pathName = window.document.location.pathname;
+    var pos = curWwwPath.indexOf(pathName);
+    var localhostPath = curWwwPath.substring(0, pos);
     function iAmMobile() {
         return null;
+    }
+    function SBBack() {
+        window.location.href = localhostPath+"/index.php/mobile";
     }
     $.cxSelect.defaults.url = "<?php echo base_url() . 'application/js/project.json' ?>";
     $('#project_list').cxSelect({

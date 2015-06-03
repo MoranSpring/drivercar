@@ -1,4 +1,4 @@
-<footer data-am-widget="footer" class="am-footer am-footer-default am-margin-lg" data-am-footer="{  }" style="background: #eee;">
+<footer data-am-widget="footer" class="am-footer am-footer-default am-margin-lg" data-am-footer="{  }" style="background:url('<?=  base_url()?>application/images/mobile/bg_EEE.png');">
     <div class="am-footer-switch">
         <span class="am-footer-ysp" data-rel="mobile" data-am-modal="{target: '#am-switch-mode'}">手机版</span>
         <span class="am-footer-divider">|</span>

@@ -76,6 +76,7 @@ class Mobile extends MY_Controller {
 
     public function management() {
         if ($this->session->userdata('TYPE') == 2) {
+            
         } else {
             $this->view("you aren't vip!");
             return false;
@@ -162,6 +163,7 @@ class Mobile extends MY_Controller {
 
     public function book_detail() {
         if ($this->session->userdata('TYPE') == 2) {
+            
         } else {
             $this->view("you aren't vip!");
             return false;
@@ -201,6 +203,19 @@ class Mobile extends MY_Controller {
         $body['menu'] = $this->getMenu();
         $page = $this->load->view('mobile/public_views/coach_home', $body, true);
         $title = "教练详情 - 我爱开车网（手机版）";
+        $this->view($title, $page);
+    }
+
+    public function school_home() {
+        $body['menu'] = $this->getMenu();
+        $page = $this->load->view('mobile/public_views/school_home', $body, true);
+        $title = "培训点详情 - 我爱开车网（手机版）";
+        $this->view($title, $page);
+    }
+        public function map_sch_pos() {
+        $body['menu'] = $this->getMenu();
+        $page = $this->load->view('mobile/public_views/map_sch_pos', $body, true);
+        $title = "驾培点地址 - 我爱开车网（手机版）";
         $this->view($title, $page);
     }
 
@@ -253,10 +268,9 @@ class Mobile extends MY_Controller {
 
             $_sch_name = $this->school_model->select_name($row['sc_sch']);
             $data['school_id'] = $row['sc_sch'];
-            foreach($_sch_name as $row2){
+            foreach ($_sch_name as $row2) {
                 $data['school'] = $row2['jp_name'];
             }
-            
         }
         echo json_encode($data);
     }

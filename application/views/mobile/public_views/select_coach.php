@@ -41,7 +41,7 @@
 <div class="am-page" id="mobile-index"> 
     <header data-am-widget="header" class="am-header am-header-default">
         <div class="am-header-left am-header-nav" >
-            <a href="javascript:history.back();">
+            <a href="javascript:HomeBack();">
                 <img class="am-header-icon-custom" src="data:image/svg+xml;charset=utf-8,&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 12 20&quot;&gt;&lt;path d=&quot;M10,0l2,2l-8,8l8,8l-2,2L0,10L10,0z&quot; fill=&quot;%23fff&quot;/&gt;&lt;/svg&gt;"
                      alt="" />&nbsp;
             </a>
@@ -114,15 +114,26 @@
     var selected_shcool = '';
     var selected_coach = '';
     $(function () {
-        var histroy = curWwwPath.split('#')[1];
+        var histroy = window.document.location.href.split('#')[1];
         if (typeof (histroy) === 'string') {
-            histroyReload(histroy);
+            var paramStep = histroy.split('&')[0];
+            histroyReload(paramStep.split('=')[1]);
         }
     });
     function test(value) {
         var id = value.getAttribute('value');
         selected_school = id;
-        window.location.href = "#" + id;
+        var isHasHistroy = window.document.location.href.split('#')[1];
+        if (typeof (isHasHistroy) === 'string') {
+            var paramStep = isHasHistroy.split('&')[1];
+            var step = paramStep.split('=')[1];
+            step = step - (-1);
+            window.location.href = "#id=" + id + "&step=" + step;
+
+        } else {
+            window.location.href = "#id=" + id + "&step=1";
+        }
+
         $('#demo-list-page').css('display', 'block');
         setTimeout(function () {
             $('body').addClass('demo-list-active');
@@ -138,11 +149,23 @@
         getCoach(id);
     }
 
-    function back() {
+    function back() {      //次页面返回
         $('body').removeClass('demo-list-active');
         setTimeout(function () {
             $('#demo-list-page').css('display', 'none');
         }, 300);
+    }
+    function HomeBack() {  //主页面返回
+        var isHasHistroy = window.document.location.href.split('#')[1];
+        if (typeof (isHasHistroy) === 'string') {
+            var paramStep = isHasHistroy.split('&')[1];
+            var step = paramStep.split('=')[1];
+            step = step - (-1);
+            step=0-step;
+            history.go(step);
+        } else {
+           history.go(-1);
+        }
     }
     function getCoach(id) {
         $('.coach_list').html('');
@@ -175,16 +198,16 @@
         });
     }
     function summit() {
-        if (selected_coach!=''&&selected_school!='') {
+        if (selected_coach != '' && selected_school != '') {
             $.ajax({
                 type: "GET",
                 url: localhostPath + "/index.php/mobile/to_change_coach",
                 async: true,
-                data:{coach_id:selected_coach,school_id:selected_school},
+                data: {coach_id: selected_coach, school_id: selected_school},
                 success: function (data) {
-                    if(data==1){
+                    if (data == 1) {
                         window.location.href = document.referrer;
-                    }else{
+                    } else {
                         alert('选择出错！');
                     }
                 }

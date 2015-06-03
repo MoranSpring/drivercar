@@ -11,7 +11,9 @@
         <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.3.0/css/amazeui.min.css">
         <link type="text/css" href="<?= base_url() ?>application/css/ml.css" rel="stylesheet">
     </head>
-    <body  style="background:#eee;">
+    <body  style="background:url('<?=  base_url()?>application/images/mobile/bg_EEE.png');">
+
+
     <?= $content?>
     <?= $footer?>
     </body>

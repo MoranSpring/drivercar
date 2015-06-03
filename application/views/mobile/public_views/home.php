@@ -59,9 +59,9 @@
             </ul>
         </div>
     </div>
-<ul class="am-avg-sm-4 boxes" style='background: #fff;'>
+<ul class="am-avg-sm-4 boxes">
         <li class="box box-top">
-            <a href="http://www.baidu.com" style="height: 100%">
+            <a href="<?=  base_url()?>index.php/mobile/school_home" style="height: 100%">
                 <img class="home-img" src="http://192.168.10.137:8888/application/images/mobile/coach_book.png" style="width:100%;"/>
             </a>
         </li>
@@ -81,7 +81,7 @@
             </a>
         </li>
         <li class="box box-bottom">
-            <a href="http://www.baidu.com" style="height: 100%">
+            <a href="<?=  base_url()?>index.php/mobile/map_sch_pos" style="height: 100%">
                 <img class="home-img" src="http://192.168.10.137:8888/application/images/mobile/coach_book.png" style="width:100%;"/>
             </a>
         </li>

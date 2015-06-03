@@ -273,6 +273,10 @@ function toOnload() {
     var school_id = $('.select_sch').attr('id');
     var coach_id = $('.select_coa').attr('id');
     var project = $('.cls_project').val();
+    if(school_id==''||coach_id==''||project==''){
+        alert('信息有误！');
+        return false;
+    }
     var selArray = refresh();
     var json = JSON.stringify(selArray);
     $.ajax({
