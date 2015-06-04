@@ -1,4 +1,5 @@
 <?php
+
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 /*
@@ -12,15 +13,18 @@ if (!defined('BASEPATH'))
  *
  * @author Kyle
  */
-class Coach_model extends CI_Model{
+class Coach_model extends CI_Model {
+
     function __construct() {
         parent::__construct();
         $this->load->database();
     }
+
     public function insert($data) {    //把数据增加到sites表中.
-        $result=$this->db->insert('Coach', $data); 
+        $result = $this->db->insert('Coach', $data);
         return $result;
     }
+
     public function select_simple() {//返回该用户名所有信息
         $this->db->select('news_id');
         $this->db->select('news_title');
@@ -28,36 +32,49 @@ class Coach_model extends CI_Model{
         $query = $this->db->get('Coach');
         return $query->result_array();
     }
+
     public function select_detail($id) {//返回该用户名所有信息
         $this->db->select();
-        $this->db->where('coach_id',$id);
+        $this->db->where('coach_id', $id);
         $query = $this->db->get('Coach');
         return $query->result_array();
     }
+
     public function select_coach($id) {//通过驾校查找该驾校下的教练信息
         $this->db->select('coach_id');
         $this->db->select('coach_face');
         $this->db->select('coach_name');
-        $this->db->where('coach_sch_id',$id);
+        $this->db->where('coach_sch_id', $id);
         $query = $this->db->get('Coach');
         return $query->result_array();
     }
+
     public function select_name($id) {//返回该用户名所有信息
         $this->db->select('coach_name');
         $this->db->select('coach_face');
-        $this->db->where('coach_id',$id);
-        $query = $this->db->get('Coach');
-        return $query->result_array();
-    }
-       public function selectAllinfoById($id) {//返回该用户名所有信息
-        $this->db->select();
-        $this->db->where('coach_id',$id);
-        $query = $this->db->get('Coach');
-        return $query->result_array();
-    }
-   public function updateInfo($id,$data) {//更新self_info_edit页面内容
         $this->db->where('coach_id', $id);
-        $result=$this->db->update('Coach', $data); 
+        $query = $this->db->get('Coach');
+        return $query->result_array();
+    }
+
+    public function selectAllinfoById($id) {//返回该用户名所有信息
+        $this->db->select();
+        $this->db->where('coach_id', $id);
+        $query = $this->db->get('Coach');
+        return $query->result_array();
+    }
+
+    public function updateInfo($id, $data) {//更新self_info_edit页面内容
+        $this->db->where('coach_id', $id);
+        $result = $this->db->update('Coach', $data);
         return $result;
     }
+
+    public function selectIdBySchool($id) {//返回该用户名所有信息
+        $this->db->select();
+        $this->db->where('coach_sch_id', $id);
+        $query = $this->db->get('Coach');
+        return $query->result_array();
+    }
+
 }

@@ -14,31 +14,52 @@
         武汉市<label class="am-btn-success am-btn am-btn-xs" style="float:right;">更换</label>
     </div>
     <div id="widget-list"> 
-        <ul class="am-list">
-            <li class="am-padding-top-xs am-padding-bottom-xs ml-ontouch">
-                <div  class="this_coach am-g" value='<= $coach_id ?>'>
-                    <div class="am-u-sm-4  am-u-md-4" style="padding:3px;">
-                        <a href='<= base_url() ?>index.php/mobile/coach_home'><img class="am-img am-img-thumbnail" src="http://image.52drivecar.com/testImage.jpg@!mob-nails" style="height:75px;"/></a>
-                    </div>
-                    <div class="am-u-sm-8 am-u-md-8" style="font-size: 0.8em">
-                        <div class="am-g" style="font-size: 1.4em;line-height: 35px;">
-                            <span class="am-fl" style="color:#555;text-overflow:ellipsis;width:30%;overflow:hidden;white-space:nowrap; ">邓紫棋</span>
-                           
-                            <span class="am-fr am-icon-map-marker" style="margin-right: 5px;font-size: 0.9em;color:#999">南湖驾校</span>
-                        </div>
-                        <div class="am-g" style="color:#01b6ce;line-height: 22px;">
-                            评价：<span class="am-icon-star" style="color:#f00"></span>
-                            <span class="am-icon-star" style="color:#f00"></span>
-                            <span class="am-icon-star" style="color:#f00"></span>
-                            <span class="am-icon-star" style="color:#f00"></span>[有1111人点评]
-                        </div>
-                        <div class="am-g" style='color:#999;line-height: 22px;text-overflow:ellipsis;width:100%;overflow:hidden;display:block;white-space:nowrap; '>
-                            男，教龄:15年，月培训：30人
-                        </div>
-                    </div>
-                </div>
-            </li>
-
+        <ul class="am-list coach_list_box">
         </ul>
     </div>
+    <!----------------------加载提示框。。。。。--------------------------------->
+<div class="loading am-modal am-modal-loading am-modal-no-btn" tabindex="-1" id="my-modal-loading">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">正在加载...</div>
+        <div class="am-modal-bd">
+            <span class="am-icon-spinner am-icon-spin"></span>
+        </div>
+    </div>
+</div>
+    <script>
+    $(function () {
+        var ip = '<?= $info ?>';
+        var json = eval("(" + ip + ")");
+        openModel();
+        loadCoach('1027');
+    });
+    function loadCoach(ip) {
+        $.ajax({
+            type: "POST",
+            dataType: "text",
+            url: "<?= base_url() ?>index.php/mobile/get_coach_by_city",
+            async: true,
+            data: {ip: ip},
+            success: function (data) {
+                $('.coach_list_box').html(data);
+                closeModel();
+                reBind();
+            }});
+    }
+    function reBind() {
+        $('.this_coach').on('click', function () {
+            var id=$(this).attr('value');
+           window.document.location.href='<?=  base_url()?>index.php/mobile/coach_home/'+id;
+        });
+    }
+    function openModel() {
+        $('.loading').modal();
+    }
+    function closeModel() {
+        $('.loading').modal('close');
+    }
+
+
+
+</script>
 </div>

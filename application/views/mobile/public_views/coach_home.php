@@ -17,7 +17,7 @@
     <div style="position:relative;top:-150px; width:100%;height:150px;overflow:hidden;">
         <div class="am-padding-top-sm">
             <div class="am-margin-left-sm" style="position:relative;">
-                <img class="am-img am-circle" src="http://image.52drivecar.com/headpic/1432714949.jpg" style="height:100px;width:100px;" />
+                <img class="am-img am-circle" src="<?=$coach_face?>@!nail250" style="height:100px;width:100px;" />
             </div>
             <div class="am-margin-left-sm" style="padding:0;position:relative;top:-100px;">
                 <div  style="margin-top:12px;margin-bottom: 12px;left:50px;min-heght:76px;position:relative;line-height:76px;z-index: -1;background: #000;filter:alpha(opacity=50);-moz-opacity:0.5;-khtml-opacity: 0.5;opacity: 0.5; ">
@@ -25,11 +25,11 @@
                 </div>
                 <div style="color:#fff;top:-88px;;heght:75px;position:relative;padding-left: 100px;">
                     <div class="clearfix">
-                        <span style="float:left;font-size: 1.5em;color:#d2ffca;">刘德华</span>
-                        <a  style=""><span class="am-icon-map-marker" style="text-decoration: underline;padding-right: 10px;float:right;height: 38px;;line-height: 38px;font-size: 1.1em;color:#fff">南湖驾校</span></a><br/>
+                        <span style="float:left;font-size: 1.5em;color:#d2ffca;"><?=$coach_name?></span>
+                        <a  href="<?=base_url()?>index.php/mobile/school_home/<?=$coach_sch_id?>"><span class="am-icon-map-marker" style="text-decoration: underline;padding-right: 10px;float:right;height: 38px;;line-height: 38px;font-size: 1.1em;color:#fff">南湖驾校</span></a><br/>
                     </div>
 
-                    <span style="font-size: 0.8em;color:#ccc;">个人签名：我就是我我就是这么屌屌屌屌屌屌！</span>
+                    <span style="font-size: 0.8em;color:#ccc;">个人签名：<?=$coach_intro?></span>
                 </div>
 
             </div>
@@ -41,7 +41,7 @@
     <section class="am-panel am-panel-default" style='border-color:#ddd;'>
         <header class="am-panel-hd" style='background: #fff'>
             <div class="clearfix">
-                <span style='float:left'>刘德华教练</span>
+                <span style='float:left'><?=$coach_name?>教练</span>
                 <a style="color:#f00;float:right;">累计评价：<span  class="am-icon-star">&nbsp;</span><span class="am-icon-star">&nbsp;</span><span class="am-icon-star">&nbsp;</span><span class="am-icon-star">&nbsp;</span></a><br/>
             </div>
         </header>
@@ -58,9 +58,9 @@
 
                 </div>
                 <div class='am-u-sm-5 am-u-md-5 am-text-left' style="border-right: 1px dashed #ddd;">
-                    <span>C级</span><br/>
-                    <span>南湖驾校</span><br/>
-                    <span>15071078963</span><br/>
+                    <span> <?=$coach_grade?>级</span><br/>
+                    <span><?=$sch_name?></span><br/>
+                    <span><?=$coach_telnum?></span><br/>
                     <span>科目二/科目三</span><br/>
                     <span>45</span><br/>
                     <span>29人</span><br/>
@@ -68,7 +68,7 @@
                 </div>
                 <div class='am-u-sm-3 am-u-md-3 am-text-center' style='padding: 0;'>
                     <div class='clearfix'  style='border-bottom: 1px dashed #ddd;'>
-                        <a href='tel:15071078963'>
+                        <a href='tel:<?=$coach_telnum?>'>
                             <span  class='am-icon-phone am-text-center' style='height:75px;line-height: 75px;font-size: 35px;color:#009cda;'>&nbsp;</span>
                         </a></div>
                     <div  class='clearfix'  style='font-size: 35px;'>
@@ -88,10 +88,7 @@
             </div>
         </header>
         <div class="am-panel-bd" style='padding:0; color:#888;'>
-            梁教练 ，女， 教练员；<br/>
-            隶属于：远航驾校，有15年教龄；<br/>
-            2015年--您好！感谢驾校一点通招生平台，给我们提供认识的机会。感谢您选择远航驾校学车，远航驾校欢迎您！ 
-        </div>
+           <?=$coach_intro?>
     </section>
     <div class="am-panel am-panel-default">
         <div class="am-panel-bd" style='margin:0px;'>
@@ -107,7 +104,7 @@
                     <div class='clearfix'>
                         <a  href='tel:15071078963'>
                             <span  class='am-icon-trophy' style='font-size: 50px;color:#fbcb09;'></span>&nbsp;综合评分:
-                            <span class='am-text-center' style='color:#e00;'>4.9分</span>
+                            <span class='am-text-center' style='color:#e00;'> <?=$coach_history_score?></span>
                         </a></div>
                     <div>有8000人点评&nbsp;&nbsp;&nbsp;<a href="" style='color:#999;float:right;'>详情>></a></div>
 

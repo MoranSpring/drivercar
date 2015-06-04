@@ -69,6 +69,11 @@ class Mobile extends MY_Controller {
     }
 
     public function study_book() {
+        $uid=$this->session->userdata('UID');
+        if($uid==FALSE){
+            redirect('mobile/login');
+            exit();
+        }
         $page = $this->load->view('mobile/vip_views/study_book_new', '', true);
         $title = " 教练预约 - 我爱开车网（手机版）";
         $this->view($title, $page);
@@ -199,14 +204,24 @@ class Mobile extends MY_Controller {
         $this->view($title, $page);
     }
 
-    public function coach_home() {
+    public function coach_home($id) {
+        $coach = $this->coach_model->select_detail($id);
+        foreach ($coach as $row) {
+            $sch_name = $this->school_model->select_name($row['coach_sch_id']);
+            $body=$row;
+            $body['sch_name']=$sch_name[0]['jp_name'];
+        }
         $body['menu'] = $this->getMenu();
         $page = $this->load->view('mobile/public_views/coach_home', $body, true);
         $title = "教练详情 - 我爱开车网（手机版）";
         $this->view($title, $page);
     }
 
-    public function school_home() {
+    public function school_home($id) {
+        $school = $this->school_model->get_from_id($id);
+        foreach ($school as $row) {
+            $body=$row;
+        }
         $body['menu'] = $this->getMenu();
         $page = $this->load->view('mobile/public_views/school_home', $body, true);
         $title = "培训点详情 - 我爱开车网（手机版）";
@@ -221,15 +236,18 @@ class Mobile extends MY_Controller {
     }
 
     public function main_school_list() {
-        $ip = '113.57.191.74';
-        $ip=$this->getip();
-        $body['ip'] = $ip;
+        $info = '113.57.191.74';
+        $info=$this->getCityByIp();
+        $body['info'] = $info;
         $page = $this->load->view('mobile/public_views/main_school_list', $body, true);
         $title = "培训点查询- 我爱开车网（手机版）";
         $this->view($title, $page);
     }
 
     public function main_coach_list() {
+        $info = '113.57.191.74';
+        $info=$this->getCityByIp();
+        $body['info'] = $info;
         $page = $this->load->view('mobile/public_views/main_coach_list', $body, true);
         $title = "教练查询- 我爱开车网（手机版）";
         $this->view($title, $page);
@@ -330,6 +348,29 @@ class Mobile extends MY_Controller {
         );
         echo json_encode($data);
     }
+    public function get_school_by_city(){
+        $city = $this->input->post('city');
+        $school = $this->school_model->get_from_city(1027);
+        $body = '';
+        foreach ($school as $row) {
+            $body.= $this->load->view('mobile/public_views/school_list_content', $row, true);
+        }
+        echo $body;
+        
+    }
+    public function get_coach_by_city(){
+        $city = $this->input->post('city');
+        $school = $this->school_model->get_from_city(1027);
+        $body = '';
+        foreach ($school as $row) {
+            $coach = $this->coach_model->selectIdBySchool($row['jp_id']);
+            foreach($coach as $row2){
+               $body.= $this->load->view('mobile/public_views/coach_list_content', $row2, true);
+            }
+        }
+        echo $body;
+        
+    }
 
     /**
      * AJAX请求方法！*********END
@@ -351,7 +392,7 @@ class Mobile extends MY_Controller {
         
     }
 
-    function getip() {
+    function getCityByIp() {
         $unknown = 'unknown';
         if (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && $_SERVER['HTTP_X_FORWARDED_FOR'] && strcasecmp($_SERVER['HTTP_X_FORWARDED_FOR'], $unknown)) {
             $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
@@ -365,7 +406,11 @@ class Mobile extends MY_Controller {
         if (false !== strpos($ip, ',')) {
             $ip = reset(explode(',', $ip));
         }
-        return $ip;
+         $retval = $this->_request('http://ip.taobao.com/service/getIpInfo.php?ip='.$ip);
+        if ($retval !== false) {
+            return $retval;
+        }
+        return '';
     }
 
 }

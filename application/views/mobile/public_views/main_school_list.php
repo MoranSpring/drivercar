@@ -14,18 +14,53 @@
         武汉市<label class="am-btn-success am-btn am-btn-xs" style="float:right;">更换</label>
     </div>
     <div id="widget-list"> 
-        <ul class="am-list">
+        <ul class="am-list school_list_box">
         </ul>
     </div>
 </div>
+<!----------------------加载提示框。。。。。--------------------------------->
+<div class="loading am-modal am-modal-loading am-modal-no-btn" tabindex="-1" id="my-modal-loading">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">正在加载...</div>
+        <div class="am-modal-bd">
+            <span class="am-icon-spinner am-icon-spin"></span>
+        </div>
+    </div>
+</div>
 <script>
-    var ip = '<?=$ip?>';
-    alert(ip);
-    var url = "http://ip.taobao.com/service/getIpInfo.php?ip=" + ip;
-    $.getJSON(url, function (json) {
-        var myprovince2 = json.data.area;
-        var mycity2 = json.data.region;
-        alert("您所在的城市是：" + myprovince2 + mycity2);
+    $(function () {
+        var ip = '<?= $info ?>';
+        var json = eval("(" + ip + ")");
+        openModel();
+        loadSchool('1027');
     });
+    function loadSchool(ip) {
+        $.ajax({
+            type: "POST",
+            dataType: "text",
+            url: "<?= base_url() ?>index.php/mobile/get_school_by_city",
+            async: true,
+            data: {ip: ip},
+            success: function (data) {
+                $('.school_list_box').html(data);
+                closeModel();
+                reBind();
+            }});
+    }
+    function reBind() {
+        selected_coach = '';
+        $('.this_school').on('click', function () {
+            var id=$(this).attr('value');
+           window.document.location.href='<?=  base_url()?>index.php/mobile/school_home/'+id;
+        });
+    }
+    function openModel() {
+        $('.loading').modal();
+    }
+    function closeModel() {
+        $('.loading').modal('close');
+    }
+
+
 
 </script>

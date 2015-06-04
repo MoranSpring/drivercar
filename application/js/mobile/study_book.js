@@ -265,7 +265,7 @@ function submit() {
     var selArray = refresh();
     $('#book-table-info').empty();
     for (var i = 0; i < selArray.length; i++) {
-        $('#book-table-info').append("<tr><td>" + selArray[i].date + ", 第" + selArray[i].cls + "节课" + "</td><td><a  target='_blank' href='" + localhostPath + "/index.php/first/school_info/" + school_id + "'>" + school_name + "</a></td> <td><a  target='_blank' href='" + localhostPath + "/index.php/first/coach_self_info/" + coach_id + "'>" + coach_name + "</a></td><td>" + projectName + "</td></tr>");
+        $('#book-table-info').append("<tr><td>" + selArray[i].date + ", 第" + selArray[i].cls + "节课" + "</td><td><a  target='_blank' href='" + localhostPath + "/index.php/mobile/school_home/" + school_id + "'>" + school_name + "</a></td> <td><a  target='_blank' href='" + localhostPath + "/index.php/mobile/coach_home/" + coach_id + "'>" + coach_name + "</a></td><td>" + projectName + "</td></tr>");
     }
     $('.sum-cls-num').html(selArray.length);
 }

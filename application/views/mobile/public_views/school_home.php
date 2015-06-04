@@ -22,7 +22,7 @@
                 </div>
                 <div  style="color:#fff;top:-85px;heght:75px;position:relative;" class='am-text-center'>
                     <div class="clearfix">
-                        <span  style="font-size: 1.5em;color:#FFF;">华科大培训点</span>
+                        <span  style="font-size: 1.5em;color:#FFF;"><?=$jp_name?></span>
                     </div>
                 </div>
             </div>
@@ -50,14 +50,14 @@
                 </div>
                 <div class='am-u-sm-5 am-u-md-6 am-text-left'  style='padding:0;'>
                     <span style='display: block;line-height:30px; color:#f00;font-weight: bold;font-size: 1.4em;'>3400</span>
-                    <a href="<?= base_url() ?>index.php/mobile/map_sch_pos#1428900946"><span class='am-icon-map-marker' style='line-height:30px;text-decoration: underline;color:#900525;text-overflow:ellipsis;width:100%;overflow:hidden;display:block;white-space:nowrap; '>驾校地址驾校址驾校地址驾校址驾校地址驾校址</span></a>
-                    <span style='display: block;line-height:30px; '>15071078963</span>
+                    <a href="<?= base_url() ?>index.php/mobile/map_sch_pos#<?=$jp_id?>"><span class='am-icon-map-marker' style='line-height:30px;text-decoration: underline;color:#900525;text-overflow:ellipsis;width:100%;overflow:hidden;display:block;white-space:nowrap; '><?=$jp_detail_addr?></span></a>
+                    <span style='display: block;line-height:30px; '><?=$jp_tel?></span>
                     <span style='display: block;line-height:30px; '>1234</span>
                     <span style='display: block;line-height:30px; '>45</span>
                 </div>
                 <div class='am-u-sm-3 am-u-md-3 am-text-center' style='padding: 0;border-left: 1px dashed #ddd;'>
                     <div class='clearfix'  style='border-bottom: 1px dashed #ddd;'>
-                        <a href='tel:15071078963'>
+                        <a href='tel:<?=$jp_tel?>'>
                             <span  class='am-icon-phone am-text-center' style='height:75px;line-height: 75px;font-size: 35px;color:#009cda;'>&nbsp;</span>
                         </a></div>
                     <div  class='clearfix'  style='font-size: 35px;'>
@@ -94,11 +94,8 @@
                         </li>
                     </ul>
                 </div>
-                
-            梁教练 ，女， 教练员；<br/>
-            隶属于：远航驾校，有15年教龄；<br/>
-            2015年--您好！感谢驾校一点通招生平台，给我们提供认识的机会。感谢您选择远航驾校学车，远航驾校欢迎您！ 
-            </div>
+                <?=$jp_intro?>
+           </div>
 
         </div>
     </section>
@@ -111,7 +108,7 @@
         <div class="am-panel-bd clearfix" style='color:#888;'>
             乘坐122，123路公交车，在茶山路下车步行三十米<br/>
             乘坐地铁在光谷c出口出门走100米即到<br/>
-            <a href="<?= base_url() ?>index.php/mobile/map_sch_pos#1428900946" style="float:right;">地图详情>></a> 
+            <a href="<?= base_url() ?>index.php/mobile/map_sch_pos#<?=$jp_id?>" style="float:right;">地图详情>></a> 
         </div>
     </section>
     <section class="am-panel am-panel-default"  style='border-color:#ddd;'>

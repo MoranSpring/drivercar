@@ -1,11 +1,11 @@
 <li class="am-padding-top-xs am-padding-bottom-xs ml-ontouch">
-    <div  class="this_coach am-g" value='<= $coach_id ?>'>
+    <div  class="this_coach am-g this_coach" value='<?= $coach_id ?>'>
         <div class="am-u-sm-4  am-u-md-4" style="padding:3px;">
-            <a href='<= base_url() ?>index.php/mobile/coach_home'><img class="am-img am-img-thumbnail" src="http://image.52drivecar.com/testImage.jpg@!mob-nails" style="height:75px;"/></a>
+            <img class="am-img am-img-thumbnail" src="<?=$coach_face?>@!mob-nails" style="height:75px;"/>
         </div>
         <div class="am-u-sm-8 am-u-md-8" style="font-size: 0.8em">
             <div class="am-g" style="font-size: 1.4em;line-height: 35px;">
-                <span class="am-fl" style="color:#555;text-overflow:ellipsis;width:30%;overflow:hidden;white-space:nowrap; ">邓紫棋</span>
+                <span class="am-fl" style="color:#555;text-overflow:ellipsis;width:30%;overflow:hidden;white-space:nowrap; "><?=$coach_name?></span>
 
                 <span class="am-fr am-icon-map-marker" style="margin-right: 5px;font-size: 0.9em;color:#999">南湖驾校</span>
             </div>

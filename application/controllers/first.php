@@ -486,30 +486,6 @@ class First extends MY_Controller {
         echo $result;
     }
 
-    function _request($url, $posts = null) {
-        if (is_array($posts) && !empty($posts)) {
-            foreach ($posts as $key => $value) {
-                $post[] = $key . '=' . urlencode($value);
-            }
-            $posts = implode('&', $post);
-        }
-
-        $curl = curl_init();
-
-        $options = array(
-            CURLOPT_URL => $url,
-            CURLOPT_CONNECTTIMEOUT => 2,
-            CURLOPT_TIMEOUT => 10,
-            CURLOPT_RETURNTRANSFER => true
-        );
-
-        curl_setopt_array($curl, $options);
-
-        $retval = curl_exec($curl);
-
-        return $retval;
-    }
-
     public function sendEmail($mail_address, $mail_con, $mail_time) {
         $this->load->library('email');
         $this->email->from('kyleml@126.com', '我爱开车网');

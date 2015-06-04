@@ -45,7 +45,6 @@
                 var json = eval("(" + data + ")");
                 refrashMap(json);
             }});
-
     }
     function refrashMap(json) {
         var map = new BMap.Map("allmap");
