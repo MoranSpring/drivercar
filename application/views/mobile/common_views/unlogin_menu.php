@@ -1,5 +1,5 @@
 <nav data-am-widget="menu" class="am-menu  am-menu-dropdown1" data-am-menu-offcanvas>
-    <a href="javascript: void(0)" class="am-menu-toggle">
+    <a href="javascript: void(0)" class="am-menu-toggle ml-ontouch">
         <i class="am-menu-toggle-icon am-icon-list am-icon">&nbsp</i>
     </a>
     <div class="am-offcanvas">

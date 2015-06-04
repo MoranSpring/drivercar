@@ -40,7 +40,7 @@
         <div class="am-panel-bd" style='padding:0; color:#888;'>
 
             <div class='am-g'>
-                <div class='am-u-sm-3 am-u-md-3 am-text-right' style='padding:0;'>
+                <div class='am-u-sm-4 am-u-md-3 am-text-right' style='padding:0;'>
                     <span style='display: block;line-height:30px; '>学车价格：</span>
                     <span style='display: block;line-height:30px; '>驾校地址：</span>
                     <span style='display: block;line-height:30px; '>联系电话：</span>
@@ -48,12 +48,12 @@
                     <span style='display: block;line-height:30px; '>本月培训：</span>
 
                 </div>
-                <div class='am-u-sm-6 am-u-md-6 am-text-left'  style='padding:0;font-size: 1.2em'>
-                    <span style='display: block;color:#f00;font-weight: bold;'>3400</span>
-                    <a><span class='am-icon-map-marker' style='text-decoration: underline;color:#900525;text-overflow:ellipsis;width:100%;overflow:hidden;display:block;white-space:nowrap; '>驾校地址驾校址驾校地址驾校址驾校地址驾校址</span></a>
-                    <span style='display: block;'>15071078963</span>
-                    <span style='display: block;'>1234</span>
-                    <span style='display: block;'>45</span>
+                <div class='am-u-sm-5 am-u-md-6 am-text-left'  style='padding:0;'>
+                    <span style='display: block;line-height:30px; color:#f00;font-weight: bold;font-size: 1.4em;'>3400</span>
+                    <a href="<?= base_url() ?>index.php/mobile/map_sch_pos#1428900946"><span class='am-icon-map-marker' style='line-height:30px;text-decoration: underline;color:#900525;text-overflow:ellipsis;width:100%;overflow:hidden;display:block;white-space:nowrap; '>驾校地址驾校址驾校地址驾校址驾校地址驾校址</span></a>
+                    <span style='display: block;line-height:30px; '>15071078963</span>
+                    <span style='display: block;line-height:30px; '>1234</span>
+                    <span style='display: block;line-height:30px; '>45</span>
                 </div>
                 <div class='am-u-sm-3 am-u-md-3 am-text-center' style='padding: 0;border-left: 1px dashed #ddd;'>
                     <div class='clearfix'  style='border-bottom: 1px dashed #ddd;'>
@@ -62,7 +62,7 @@
                         </a></div>
                     <div  class='clearfix'  style='font-size: 35px;'>
                         <a href='tel:15071078963'>
-                            <span class='am-icon-users  am-text-center'  style='height:75px;line-height: 75px;font-size: 35px;color:#aab;'>&nbsp;</span></a>
+                            <span class='am-icon-users  am-text-center' title="教练团队" style='height:75px;line-height: 75px;font-size: 35px;color:#aab;'>&nbsp;</span></a>
                     </div>
 
                 </div>
@@ -77,9 +77,29 @@
             </div>
         </header>
         <div class="am-panel-bd" style='padding:0; color:#888;'>
+            <div class="am-margin">
+                <div data-am-widget="slider" class="am-slider am-margin-sm am-slider-a1" data-am-slider='{&quot;directionNav&quot;:false}'>
+                    <ul class="am-slides">
+                        <li>
+                            <img src="http://7jpqbr.com1.z0.glb.clouddn.com/bing-1.jpg">
+                        </li>
+                        <li>
+                            <img src="http://7jpqbr.com1.z0.glb.clouddn.com/bing-2.jpg">
+                        </li>
+                        <li>
+                            <img src="http://7jpqbr.com1.z0.glb.clouddn.com/bing-3.jpg">
+                        </li>
+                        <li>
+                            <img src="http://7jpqbr.com1.z0.glb.clouddn.com/bing-4.jpg">
+                        </li>
+                    </ul>
+                </div>
+                
             梁教练 ，女， 教练员；<br/>
             隶属于：远航驾校，有15年教龄；<br/>
             2015年--您好！感谢驾校一点通招生平台，给我们提供认识的机会。感谢您选择远航驾校学车，远航驾校欢迎您！ 
+            </div>
+
         </div>
     </section>
     <section class="am-panel am-panel-default"  style='border-color:#ddd;'>
@@ -88,10 +108,10 @@
                 <span>地址/路线</span>
             </div>
         </header>
-        <div class="am-panel-bd" style='color:#888;'>
+        <div class="am-panel-bd clearfix" style='color:#888;'>
             乘坐122，123路公交车，在茶山路下车步行三十米<br/>
             乘坐地铁在光谷c出口出门走100米即到<br/>
-            <a>地图详情>></a> 
+            <a href="<?= base_url() ?>index.php/mobile/map_sch_pos#1428900946" style="float:right;">地图详情>></a> 
         </div>
     </section>
     <section class="am-panel am-panel-default"  style='border-color:#ddd;'>

@@ -10,7 +10,7 @@
             <div>
                 口碑：好，有111人点评
             </div>
-            <div>
+            <div style='text-overflow:ellipsis;width:100%;overflow:hidden;display:block;white-space:nowrap; '>
                 武汉市><?=$jp_detail_addr?>
             </div>
         </div>

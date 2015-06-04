@@ -212,10 +212,26 @@ class Mobile extends MY_Controller {
         $title = "培训点详情 - 我爱开车网（手机版）";
         $this->view($title, $page);
     }
-        public function map_sch_pos() {
+
+    public function map_sch_pos() {
         $body['menu'] = $this->getMenu();
         $page = $this->load->view('mobile/public_views/map_sch_pos', $body, true);
         $title = "驾培点地址 - 我爱开车网（手机版）";
+        $this->view($title, $page);
+    }
+
+    public function main_school_list() {
+        $ip = '113.57.191.74';
+        $ip=$this->getip();
+        $body['ip'] = $ip;
+        $page = $this->load->view('mobile/public_views/main_school_list', $body, true);
+        $title = "培训点查询- 我爱开车网（手机版）";
+        $this->view($title, $page);
+    }
+
+    public function main_coach_list() {
+        $page = $this->load->view('mobile/public_views/main_coach_list', $body, true);
+        $title = "教练查询- 我爱开车网（手机版）";
         $this->view($title, $page);
     }
 
@@ -299,6 +315,22 @@ class Mobile extends MY_Controller {
         echo $result;
     }
 
+    public function get_map_info() {
+        $id = $this->input->post("school_id", TRUE);
+        $result = $this->school_model->get_from_id($id);
+        $list = '';
+        $content = '';
+        foreach ($result as $row) {
+            $content = $this->load->view('mobile/public_views/map_content', $row, true);
+            $list = $row;
+        }
+        $data = array(
+            'content' => $content,
+            'list' => $list
+        );
+        echo json_encode($data);
+    }
+
     /**
      * AJAX请求方法！*********END
      * **********************************************************
@@ -313,6 +345,27 @@ class Mobile extends MY_Controller {
             $menu = $this->load->view('mobile/common_views/vip_login_menu', $data, true);
         }
         return $menu;
+    }
+    public function testIp(){
+        echo $this->getip();
+        
+    }
+
+    function getip() {
+        $unknown = 'unknown';
+        if (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && $_SERVER['HTTP_X_FORWARDED_FOR'] && strcasecmp($_SERVER['HTTP_X_FORWARDED_FOR'], $unknown)) {
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        } elseif (isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] && strcasecmp($_SERVER['REMOTE_ADDR'], $unknown)) {
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
+  
+        //处理多层代理的情况
+        //或者使用正则方式：$ip = preg_match("/[\d\.]{7,15}/", $ip, $matches) ? $matches[0] : $unknown;
+       // * --/
+        if (false !== strpos($ip, ',')) {
+            $ip = reset(explode(',', $ip));
+        }
+        return $ip;
     }
 
 }

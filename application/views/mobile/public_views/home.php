@@ -13,14 +13,10 @@
         .box-reight{
             border-right: 1px solid #fff  !important;
         }
-
-        .home-img:hover{
-            background:#eee;
-        }
     </style>    
 <header data-am-widget="header" class="am-header am-header-default">
         <div class="am-header-left am-header-nav" >
-            <a href="#left-link" class="" >
+            <a href="#left-link" class="ml-ontouch" >
                 <i class="am-header-icon am-icon-home am-icon">&nbsp</i>
             </a>
         </div>
@@ -60,43 +56,43 @@
         </div>
     </div>
 <ul class="am-avg-sm-4 boxes">
-        <li class="box box-top">
+        <li class="box box-top ml-ontouch">
             <a href="<?=  base_url()?>index.php/mobile/school_home" style="height: 100%">
                 <img class="home-img" src="http://192.168.10.137:8888/application/images/mobile/coach_book.png" style="width:100%;"/>
             </a>
         </li>
-        <li class="box box-top">
-            <a href="<?=  base_url()?>index.php/mobile/select_coach" style="height: 100%">
+        <li class="box box-top ml-ontouch">
+            <a href="<?=  base_url()?>index.php/mobile/main_school_list" style="height: 100%">
                 <img class="home-img" src="http://192.168.10.137:8888/application/images/mobile/school.png" style="width:100%;"/>
             </a>
         </li>
-        <li class="box box-top">
-            <a href="<?=  base_url()?>index.php/mobile/coach_home" style="height: 100%">
+        <li class="box box-top ml-ontouch">
+            <a href="<?=  base_url()?>index.php/mobile/main_coach_list" style="height: 100%">
                 <img class="home-img" src="http://192.168.10.137:8888/application/images/mobile/coach.png" style="width:100%;"/>
             </a>
         </li>
-        <li class="box box-top box-reight">
+        <li class="box box-top box-reight ml-ontouch">
             <a href="<?=  base_url()?>index.php/mobile/news" style="height: 100%">
                 <img class="home-img" src="http://192.168.10.137:8888/application/images/mobile/news.png" style="width:100%;"/>
             </a>
         </li>
-        <li class="box box-bottom">
+        <li class="box box-bottom ml-ontouch">
             <a href="<?=  base_url()?>index.php/mobile/map_sch_pos" style="height: 100%">
                 <img class="home-img" src="http://192.168.10.137:8888/application/images/mobile/coach_book.png" style="width:100%;"/>
             </a>
         </li>
-        <li class="box box-bottom">
-            <a href="http://www.baidu.com" style="height: 100%">
+        <li class="box box-bottom ml-ontouch">
+            <a href="" style="height: 100%">
                 <img class="home-img" src="http://192.168.10.137:8888/application/images/mobile/coach_book.png" style="width:100%;"/>
             </a>
         </li>
-        <li class="box box-bottom">
-            <a href="http://www.baidu.com" style="height: 100%">
+        <li class="box box-bottom ml-ontouch">
+            <a href="" style="height: 100%">
                 <img class="home-img" src="http://192.168.10.137:8888/application/images/mobile/coach_book.png" style="width:100%;"/>
             </a>
         </li>
-        <li class="box box-bottom box-reight">
-            <a href="http://www.baidu.com" style="height: 100%">
+        <li class="box box-bottom box-reight ml-ontouch">
+            <a href="" style="height: 100%">
                 <img class="home-img" src="http://192.168.10.137:8888/application/images/mobile/coach_book.png" style="width:100%;"/>
             </a>
         </li>

@@ -1,6 +1,6 @@
 <script type="text/javascript" src="http://api.map.baidu.com/api?type=quick&ak=RbYDrD0LPcQqzZTo21PFZ6kR&v=1.0"></script>
 <header data-am-widget="header" class="am-header am-header-default">
-    <div class="am-header-left am-header-nav" >
+    <div class="am-header-left am-header-nav ml-ontouch">
         <a href="javascript:history.back()">
             <img class="am-header-icon-custom" src="data:image/svg+xml;charset=utf-8,&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 12 20&quot;&gt;&lt;path d=&quot;M10,0l2,2l-8,8l8,8l-2,2L0,10L10,0z&quot; fill=&quot;%23fff&quot;/&gt;&lt;/svg&gt;"
                  alt="" />&nbsp;
@@ -14,61 +14,55 @@
 <div style='padding: 0;margin: 0;'>
     <div id="allmap"style='width:100%;height:100%'></div>
 </div>
+<!----------------------加载提示框。。。。。--------------------------------->
+<div class="loading am-modal am-modal-loading am-modal-no-btn" tabindex="-1" id="my-modal-loading">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">正在加载地图...</div>
+        <div class="am-modal-bd">
+            <span class="am-icon-spinner am-icon-spin"></span>
+        </div>
+    </div>
+</div>
 <script>
-//    var map = new BMap.Map("allmap");
-//    map.centerAndZoom(new BMap.Point(116.384, 39.925), 14);
-//
-//    map.addControl(new BMap.ZoomControl());  //添加地图缩放控件
-//    map.addControl(new BMap.ScaleControl()); // 添加比例尺控件
-//    var marker1 = new BMap.Marker(new BMap.Point(116.384, 39.925));  //创建标注
-//    map.addOverlay(marker1);                 // 将标注添加到地图中
-//    //创建信息窗口
-//    var infoWindow1 = new BMap.InfoWindow("普通标注");
-//    marker1.addEventListener("click", function () {
-//        this.openInfoWindow(infoWindow1);
-//    });
-        $(function () {
+    $(function () {
+        openModel();
+        var histroy = window.document.location.href.split('#')[1];
+        if (typeof (histroy) === 'string') {
+            loadMap(histroy);
+        } else {
+            history.back();
+        }
+
+    });
+    function loadMap(id) {
         $.ajax({
             type: "POST",
             dataType: "text",
-            url: "<?= base_url() ?>index.php/first/get_school_info",
+            url: "<?= base_url() ?>index.php/mobile/get_map_info",
             async: true,
-            data: {city: 1027},
+            data: {school_id: id},
             success: function (data) {
                 var json = eval("(" + data + ")");
-                refrashMap(json.info);
-                $('.con2-ul').html(json.list);
-
+                refrashMap(json);
             }});
-    });
+
+    }
     function refrashMap(json) {
-
         var map = new BMap.Map("allmap");
-        map.centerAndZoom();
-//        map.enableScrollWheelZoom();
-        var pointArray = new Array();
-        var markerArray = new Array();
-        for (var i = 0; i < json.length; i++) {
-            pointArray[i] = new BMap.Point(json[i].jp_gps_latitude, json[i].jp_gps_longitude);
-            markerArray[i] = new BMap.Marker(pointArray[i]);
-            markerArray[i].index = i;
-            map.addOverlay(markerArray[i]);
-            markerArray[i].addEventListener("click", function () {
-                this.openInfoWindow(new BMap.InfoWindow(
-                        "<div style='width:200px;'>\n\
-                <ul class='clearfix' style='margin:0;padding:0;line-height:1.5em;font-size:1em;'> <li style='line-height:1.5em;font-size:0.8em;float:left;width:100%;'>\n\
-            <b>地址:</b>" + json[this.index].jp_detail_addr + "<br/>\n\
-            <b>电话:</b>" + json[this.index].jp_tel + "<br/>\n\
-            <b>评价:</b><img src='http://cdn2.iconfinder.com/data/icons/diagona/icon/16/031.png' /><br/>\n\
-            </li></ul></div>"
-                        , {title: "<span style='color:#FFF'>" + json[this.index].jp_name + "</span><a href='http://www.baidu.com/' style='text-decoration:none;color:#2679BA;float:right;text-align:right;'>详情&gt;&gt;</a>"}));
-            });
-            markerArray[i].addEventListener("click", function () {
-//                alert(this.index);
-            });
-        }
-        map.setViewport(pointArray);
-
+        var point = new BMap.Point(json.list.jp_gps_latitude, json.list.jp_gps_longitude);
+        map.centerAndZoom(point, 15);
+        map.addControl(new BMap.ZoomControl());
+        var marker = new BMap.Marker(point);
+        map.addOverlay(marker);
+        var infoWindow = new BMap.InfoWindow(json.content, {title: "<span style='color:#FFF'>" + json.list.jp_name + "</span>"});
+        marker.openInfoWindow(infoWindow);
+        closeModel();
+    }
+    function openModel() {
+        $('.loading').modal();
+    }
+    function closeModel() {
+        $('.loading').modal('close');
     }
 </script>
 
