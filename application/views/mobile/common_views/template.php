@@ -14,6 +14,7 @@
     <body  style="background:url('<?= base_url() ?>application/images/mobile/bg_EEE.png');">
 
 
+
         <?= $content ?>
         <?= $footer ?>
         <script>

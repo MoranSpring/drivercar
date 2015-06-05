@@ -12,7 +12,6 @@ and open the template in the editor.
     list-style: none;
     display: block;
     color: white;
-
 }
 .clearfix:after {
     visibility: hidden;
@@ -183,7 +182,102 @@ and open the template in the editor.
 .ml-loading center{
     padding: 300px;
 }
+/**
+**************我的色彩****************************************************************
+**/
+.ml-color-bg-main{
+    background-color: #414551 !important;
+}
+.ml-color-bg-alert{
+    background-color: #cd4f67;
+    /*background-color: #c72741;*/
+}
+.ml-btn-normal{
+    background-color: #3b95d3;
+    color:#FFF;
+    border-color: #3b95d3;
+}
+.ml-btn-normal:hover, .ml-btn-normal:focus {
+color: #fff;
+text-decoration: none;
+}
 
+.ml-btn-fobiden{
+    background-color: #d4ddd8;
+    color:#FFF;
+}
+.ml-btn-fobiden:hover, .ml-btn-fobiden:focus {
+color: #fff;
+text-decoration: none;
+}
+.ml-btn-danger{
+    background-color: #c72741;
+    color:#FFF;
+}
+.ml-btn-danger:hover, .ml-btn-danger:focus {
+color: #fff;
+text-decoration: none;
+}
+.ml-color-white{
+    color:#FFF;
+}
+.ml-color-gray{
+    color:#ccc;
+}
+.ml-color-title{
+    color:#FFF7c6;
+    /*color:#45bec9;*/
+}
+.ml-color-currency{
+    color:#f69439;
+    /*color:#e8b81a;*/
+    /*color:#ebbb03;*/
+}
+.ml-comment-star-1{
+    color:#f97599;
+}
+.ml-comment-star-2{
+    color:#f74d7b;
+}
+.ml-comment-star-3{
+    color:#f4245e;
+}
+.ml-comment-star-4{
+    color:#e30b49;
+}
+.ml-comment-star-5{
+    color:#f69439;
+}
+.ml-level-star-1{
+    color:#46f070;
+}
+.ml-level-star-2{
+    color:#1fed62;
+}
+.ml-level-star-3{
+    color:#11d050;
+}
+.ml-level-star-4{
+    color:#0ea941;
+}
+.ml-level-star-5{
+    color:#0b8231;
+}
+.ml-color-cls-1{
+    background-color:#856a57;
+}
+.ml-color-cls-2{
+    background-color:#704849;
+}
+.ml-color-cls-3{
+    background-color:#bf963a;
+}
+.ml-color-a{
+    color:#4e6260;
+}
+.ml-color-a:hover{
+    color:#9e6260;
+}
 
 
 

@@ -2,13 +2,13 @@
     <div class="am-footer-switch">
         <span class="am-footer-ysp" data-rel="mobile" data-am-modal="{target: '#am-switch-mode'}">手机版</span>
         <span class="am-footer-divider">|</span>
-        <a id="godesktop" data-rel="desktop" class="am-footer-desktop"
+        <a id="godesktop" data-rel="desktop" class="am-footer-desktop ml-color-title"
            href="javascript:">电脑版</a>
     </div>
     <div class="am-footer-miscs ">
         <p>由
             <a href="http://www.52drivecar.com/" title="Kyle" target="_blank" class="">Kyle</a>提供技术支持</p>
-        <span>CopyRight©2015 52drivercar.com Inc.</span><br/>
+        <span>CopyRight©2015 52drivecar.com Inc.</span><br/>
         <span>鄂ICP备15005490号</span>
     </div>
     <div data-am-widget="gotop" class="am-gotop am-gotop-fixed">

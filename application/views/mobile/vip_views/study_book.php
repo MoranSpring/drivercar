@@ -4,7 +4,7 @@
 <script src="<?php echo base_url() . 'application/js/vip/study_book.js' ?>" type="text/javascript"></script>
 <script src="<?= base_url() ?>application/js/jqueryui/datepicker-zh-cn.js"></script>
 <link type="text/css" href="<?= base_url() ?>application/css/mobile/study_book.css" rel="stylesheet">
-<header data-am-widget="header" class="am-header am-header-default">
+<header data-am-widget="header" class="am-header am-header-default ml-color-bg-main">
     <div class="am-header-left am-header-nav">
         <a href="javascript:history.back();">
             <img class="am-header-icon-custom" src="data:image/svg+xml;charset=utf-8,&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 12 20&quot;&gt;&lt;path d=&quot;M10,0l2,2l-8,8l8,8l-2,2L0,10L10,0z&quot; fill=&quot;%23fff&quot;/&gt;&lt;/svg&gt;"
@@ -42,7 +42,7 @@
         </select>
     </div>
     <div class="am-center am-margin-top-xl" style="width:100px">
-        <button id="bt1" type="button" class=" am-btn am-btn-primary" style="width:100px" >下一步</button>
+        <button id="bt1" type="button" class=" am-btn  am-radius ml-btn-normal" style="width:100px" >下一步</button>
     </div>
 </div>
 
@@ -150,8 +150,8 @@
         </div>
     </div>
     <div class="am-center am-margin-top-sm am-g" style="width:210px">
-        <button id="bt21" type="button" class=" am-btn am-btn-primary am-fl" style="width:100px" >上一步</button>
-        <button id="bt22" type="button" class=" am-btn am-btn-primary am-fr" style="width:100px">下一步</button>
+        <button id="bt21" type="button" class=" am-btn am-radius ml-btn-normal am-fl" style="width:100px" >上一步</button>
+        <button id="bt22" type="button" class=" am-btn am-radius ml-btn-normal am-fr" style="width:100px">下一步</button>
     </div>
 </div>
 <div class="step_3" style="display:none">
@@ -181,8 +181,8 @@
         <h3 class="am-text-right">您选了 <span class="sum-cls-num">8</span> 节课  共计：<span id="sum" style="color:#990000;font-size: 18px;">3000</span>  积分</h3>
     </div>
     <div class="am-center am-margin-top-sm am-g" style="width:210px">
-        <button id="bt31" type="button" class=" am-btn am-btn-primary am-fl" style="width:100px" >上一步</button>
-        <button id="bt32" type="button" class=" am-btn am-btn-danger am-fr" style="width:100px">确   定</button>
+        <button id="bt31" type="button" class=" am-btn am-radius ml-btn-normal am-fl" style="width:100px" >上一步</button>
+        <button id="bt32" type="button" class=" am-btn am-radius ml-btn-danger am-fr" style="width:100px">确   定</button>
     </div>
 </div>
 <script>

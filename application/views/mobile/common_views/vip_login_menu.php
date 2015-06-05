@@ -12,7 +12,7 @@
                         </div>
                         <div class="am-u-sm-7 am-u-md-7" style="color:#fff">
                             <span class=" am-text-lg am-fl"  style="color:#fff"><?= $this->session->userdata('name'); ?></span>
-                            <lable type="button" class="am-btn-sm am-fr am-btn-warning" onclick="window.location='<?= base_url()?>index.php/first/login_exit'"  style="width:50px;text-align: center">退出</lable>
+                            <lable type="button" class="am-btn-sm am-fr am-btn-warning am-radius" onclick="window.location='<?= base_url()?>index.php/first/login_exit'"  style="width:50px;text-align: center">退出</lable>
                         </div>
                         <div class="am-u-sm-8 am-u-md-8 am-text-lg"  style="color:#fff">学员，下午好！</div>
                     </div>

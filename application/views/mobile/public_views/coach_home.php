@@ -1,4 +1,4 @@
-<header data-am-widget="header" class="am-header am-header-default">
+<header data-am-widget="header" class="am-header am-header-default ml-color-bg-main">
     <div class="am-header-left am-header-nav" >
         <a href="javascript:history.back()">
             <img class="am-header-icon-custom" src="data:image/svg+xml;charset=utf-8,&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 12 20&quot;&gt;&lt;path d=&quot;M10,0l2,2l-8,8l8,8l-2,2L0,10L10,0z&quot; fill=&quot;%23fff&quot;/&gt;&lt;/svg&gt;"
@@ -6,7 +6,7 @@
         </a>
     </div>
     <h1 class="am-header-title">
-        <a href="#title-link" class="">教练详情</a>
+        <a href="#title-link" class="ml-color-white">教练详情</a>
     </h1>
 </header>
 <?= $menu ?>
@@ -25,11 +25,11 @@
                 </div>
                 <div style="color:#fff;top:-88px;;heght:75px;position:relative;padding-left: 100px;">
                     <div class="clearfix">
-                        <span style="float:left;font-size: 1.5em;color:#d2ffca;"><?=$coach_name?></span>
+                        <span class="ml-color-title" style="float:left;font-size: 1.5em;"><?=$coach_name?></span>
                         <a  href="<?=base_url()?>index.php/mobile/school_home/<?=$coach_sch_id?>"><span class="am-icon-map-marker" style="text-decoration: underline;padding-right: 10px;float:right;height: 38px;;line-height: 38px;font-size: 1.1em;color:#fff">南湖驾校</span></a><br/>
                     </div>
 
-                    <span style="font-size: 0.8em;color:#ccc;">个人签名：<?=$coach_intro?></span>
+                    <span class="ml-color-gray" style="font-size: 0.8em;">个人签名：<?=$coach_intro?></span>
                 </div>
 
             </div>
@@ -42,7 +42,7 @@
         <header class="am-panel-hd" style='background: #fff'>
             <div class="clearfix">
                 <span style='float:left'><?=$coach_name?>教练</span>
-                <a style="color:#f00;float:right;">累计评价：<span  class="am-icon-star">&nbsp;</span><span class="am-icon-star">&nbsp;</span><span class="am-icon-star">&nbsp;</span><span class="am-icon-star">&nbsp;</span></a><br/>
+                <a class="ml-comment-star-4" style="float:right;">累计评价：<span  class="am-icon-star">&nbsp;</span><span class="am-icon-star">&nbsp;</span><span class="am-icon-star">&nbsp;</span><span class="am-icon-star">&nbsp;</span></a><br/>
             </div>
         </header>
         <div class="am-panel-bd" style='padding:0; color:#888;'>

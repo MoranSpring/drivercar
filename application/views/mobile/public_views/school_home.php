@@ -1,4 +1,4 @@
-<header data-am-widget="header" class="am-header am-header-default">
+<header data-am-widget="header" class="am-header am-header-default ml-color-bg-main">
     <div class="am-header-left am-header-nav" >
         <a href="javascript:history.back()">
             <img class="am-header-icon-custom" src="data:image/svg+xml;charset=utf-8,&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 12 20&quot;&gt;&lt;path d=&quot;M10,0l2,2l-8,8l8,8l-2,2L0,10L10,0z&quot; fill=&quot;%23fff&quot;/&gt;&lt;/svg&gt;"
@@ -22,7 +22,7 @@
                 </div>
                 <div  style="color:#fff;top:-85px;heght:75px;position:relative;" class='am-text-center'>
                     <div class="clearfix">
-                        <span  style="font-size: 1.5em;color:#FFF;"><?=$jp_name?></span>
+                        <span class="ml-color-title"  style="font-size: 1.5em;"><?=$jp_name?></span>
                     </div>
                 </div>
             </div>
@@ -34,7 +34,7 @@
         <header class="am-panel-hd" style='background: #fff'>
             <div class="clearfix">
                 <span style='float:left'>培训点简介</span>
-                <a style="color:#f00;float:right;">累计评价：<span  class="am-icon-star">&nbsp;</span><span class="am-icon-star">&nbsp;</span><span class="am-icon-star">&nbsp;</span><span class="am-icon-star">&nbsp;</span></a><br/>
+                <a class="ml-level-star-5">&nbsp;&nbsp;&nbsp;<span  class="am-icon-star">&nbsp;</span><span class="am-icon-star">&nbsp;</span><span class="am-icon-star">&nbsp;</span><span class="am-icon-star">&nbsp;</span></a><br/>
             </div>
         </header>
         <div class="am-panel-bd" style='padding:0; color:#888;'>
@@ -49,8 +49,8 @@
 
                 </div>
                 <div class='am-u-sm-5 am-u-md-6 am-text-left'  style='padding:0;'>
-                    <span style='display: block;line-height:30px; color:#f00;font-weight: bold;font-size: 1.4em;'>3400</span>
-                    <a href="<?= base_url() ?>index.php/mobile/map_sch_pos#<?=$jp_id?>"><span class='am-icon-map-marker' style='line-height:30px;text-decoration: underline;color:#900525;text-overflow:ellipsis;width:100%;overflow:hidden;display:block;white-space:nowrap; '><?=$jp_detail_addr?></span></a>
+                    <span class="ml-color-currency" style='display: block;line-height:30px;font-weight: bold;font-size: 1.4em;'>3400</span>
+                    <a class="ml-color-a" href="<?= base_url() ?>index.php/mobile/map_sch_pos#<?=$jp_id?>"><span class='am-icon-map-marker' style='line-height:30px;text-decoration: underline;text-overflow:ellipsis;width:100%;overflow:hidden;display:block;white-space:nowrap; '><?=$jp_detail_addr?></span></a>
                     <span style='display: block;line-height:30px; '><?=$jp_tel?></span>
                     <span style='display: block;line-height:30px; '>1234</span>
                     <span style='display: block;line-height:30px; '>45</span>
@@ -108,7 +108,7 @@
         <div class="am-panel-bd clearfix" style='color:#888;'>
             乘坐122，123路公交车，在茶山路下车步行三十米<br/>
             乘坐地铁在光谷c出口出门走100米即到<br/>
-            <a href="<?= base_url() ?>index.php/mobile/map_sch_pos#<?=$jp_id?>" style="float:right;">地图详情>></a> 
+            <a class="ml-color-a" href="<?= base_url() ?>index.php/mobile/map_sch_pos#<?=$jp_id?>" style="float:right;">地图详情>></a> 
         </div>
     </section>
     <section class="am-panel am-panel-default"  style='border-color:#ddd;'>

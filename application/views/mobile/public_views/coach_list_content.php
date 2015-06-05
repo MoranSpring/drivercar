@@ -1,7 +1,7 @@
 <li class="am-padding-top-xs am-padding-bottom-xs ml-ontouch">
     <div  class="this_coach am-g this_coach" value='<?= $coach_id ?>'>
         <div class="am-u-sm-4  am-u-md-4" style="padding:3px;">
-            <img class="am-img am-img-thumbnail" src="<?=$coach_face?>@!mob-nails" style="height:75px;"/>
+            <img class="am-img am-img-thumbnail"alt='他妈的怎么就不出现了呢' onerror="<?=  base_url()?>application/images/logo.png" title='教练头像' src="<?=$coach_face?>@!mob-nails" style="height:75px;"/>
         </div>
         <div class="am-u-sm-8 am-u-md-8" style="font-size: 0.8em">
             <div class="am-g" style="font-size: 1.4em;line-height: 35px;">
