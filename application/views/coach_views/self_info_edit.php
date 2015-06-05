@@ -134,7 +134,7 @@
                 </li>
                 <li style="width:40%;" id="localImag">
                     <div id="show_photo" class="show_photo" style="border:1px solid #f7f7f7;">
-                        <img id="head_photo_src" style="width:250px;height:250px;" src="<?=  base_url()?>application/images/default_head.gif">
+                        <img id="head_photo_src" style="width:250px;height:250px;" src="">
                     </div>
 
                 </li>
@@ -143,7 +143,7 @@
     </div>
 </div>
 <script>
-        var curWwwPath = window.document.location.href;
+    var curWwwPath = window.document.location.href;
     var pathName = window.document.location.pathname;
     var pos = curWwwPath.indexOf(pathName);
     var localhostPath = curWwwPath.substring(0, pos);
@@ -156,7 +156,39 @@
         var self_intro=$('#coa_self_intro');
         var driver_age=$('#coa_car_old');
         var telnum=$('#coa_telnum');
-        //var serv_type=$('#coa_serv_type');
+      
+
+       
+        function isName(name){
+            var pattern=/[\u4e00-\u9fa5]{2,4}/;
+            if (!pattern.exec(name)){
+                return false;
+            }else{
+                return true;
+            }  
+        }
+        function isAge(age){
+            if (age<18||age>70){
+                return false;
+            }else{
+                return true;
+            }  
+        }
+        function isDriveAge(drive_age,age){
+            if(isAge(drive_age)&&(age-drive_age>18)){
+                return false;
+            }else{
+                return true;
+            }  
+        }
+        function isTel(tel){
+            var pattern=/((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/;
+            if (!pattern.exec(tel)){    
+                return false;
+            }else{
+                return true;
+            } 
+        }
         
         $.ajax({
             type:"POST",
@@ -175,6 +207,9 @@
                 var servType=Allinfo.serv_type;
                 setServType(servType);
                 headurl=Allinfo.headurl;
+                if(headurl==null){
+                    headurl='http://driver-un.oss-cn-shenzhen.aliyuncs.com/headpic/default.jpg';
+                }
                 $("#head_photo_src").attr('src',headurl);	
             }
         });
@@ -205,7 +240,6 @@
             var flag1=obj[1].checked;
             var servType;
             if((flag0==true)&&(flag1==true)){
-                alert();
                 servType=3;
             }else if((flag0==false)&&(flag1==true)){
                 servType=2;
@@ -217,7 +251,7 @@
             return servType;
         }
         
-        //http://image.52drivecar.com/coach_imges/headpic/1432187248.jpg
+        
         $('#coa_info_subedit').click(function(){
             var servType=getServType();
             var nameval=$('#coa_name').val();
@@ -226,8 +260,22 @@
             var car_oldval=$('#coa_car_old').val();
             var telnumval=$('#coa_telnum').val();
             var headurl=$('#head_photo_src')[0].src;
-
             
+            if(!isName(nameval)){
+                alert("姓名格式错误");
+                return;
+            }else if(!isAge(ageval)){
+                alert("年龄范围不符合");
+                return;
+            }else if(!isDriveAge(car_oldval)){
+                 alert("范围不符合");
+                 return;
+            }else if(!isTel(telnumval)){
+                alert("电话号码不正确");
+                return;
+            }else{
+                
+            }
             if(servType!=0){
                 $.ajax({
                 type:"POST",
@@ -305,16 +353,14 @@
 </script> 
 <!--此为头像修改部分的JS代码-->
 <script>
-    var headpicBaseUrl="<?= base_url() ?>application/views/headpic/";
+var headpicBaseUrl="<?= base_url() ?>application/views/headpic/";
 $(document).ready(function(e){
         
 	//var fileuploadpath="<?= base_url() ?>application/views/headpic/;
         var path="<?= base_url() ?>application/views/headpic/upload.php";
         
-	$('#head_photo').live('change',function(){ 
-                                  
-		ajaxFileUploadview('head_photo','photo_pic',path);
-                
+	$('#head_photo').live('change',function(){  
+		ajaxFileUploadview('head_photo','photo_pic',path); 
 	});	
 
 });
@@ -364,7 +410,6 @@ function ajaxFileUploadview(imgid,hiddenid,url){
 			},
 			error: function (data, status, e)
 			{
-
 				dialog.time(3).content("<div class='tips'>"+e+"</div>");
 			}
 		})
@@ -373,3 +418,4 @@ function ajaxFileUploadview(imgid,hiddenid,url){
 	}
         
 </script> 
+

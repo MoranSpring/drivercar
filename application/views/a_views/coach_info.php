@@ -35,7 +35,7 @@
                     <li id="one1" class="selected-li"  style="border-right:1px solid #aaa;">教练信息</li>
                 </ul>
                 <div class="sch_content clearfix">
-                    <ul class="coach_list">
+                    <ul class="coach_list" id="coach_list">
                         <li>
                             <a href="#">
                                 <img class="coachimg am-img-bdrs" src="http://cn.bing.com/az/hprichv/LondonTrainStation_GettyRR_139321755_ZH-CN742316019.jpg">
@@ -90,9 +90,6 @@
                                 <div class="coa_comment">当前评分 <img class="comm_" src="<?= base_url() . 'application/images/star5.png' ?>" ><span>4.7</span>分</div>
                             </a>
                         </li>
-
-
-
                     </ul>
                 </div>
             </div>
@@ -104,12 +101,13 @@
         $.ajax({
             type: "POST",
             dataType: "text",
-            url: "<?= base_url() ?>index.php/first/get_school_info",
+            url: "<?= base_url() ?>index.php/coach/get_coach_info",
             async: true,
             data: {city: 1027},
             success: function (data) {
                 var json = eval("(" + data + ")");
-                refrashMap(json);
+                refrashMap(json.info);
+                $('#coach_list').html(json.list);
             }});
     });
     $('.btn-city').toggle(function () {
@@ -142,7 +140,7 @@
      function AsyncChange(data) {
         var json = eval("(" + data + ")");
         refrashMap(json.info);
-        $('.con2-ul').html(json.list);
+        $('#coach_list').html(json.list);
     }
 </script>
 

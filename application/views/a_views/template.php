@@ -58,7 +58,7 @@
                     $.ajax({
                         type: "POST",
                         dataType: "text",
-                        url: "<?= base_url() ?>index.php/first/get_school_info",
+                        url: "<?= base_url() ?>index.php/coach/get_coach_info",
                         async: true,
                         data: {city: city},
                         success: function (data) {
@@ -94,12 +94,29 @@
                                 , {title: "<span style='font-size:14px;color:#0A8021'>" + json[this.index].jp_name + "</span>"}));
                     });
                     markerArray[i].addEventListener("click", function () {
-                        alert(this.index);
+                        //此处为点击图中锚点所触发的事件 
+                        //alert(this.index);
+                        //alert(json[this.index].jp_id);
+                        var school_id=json[this.index].jp_id;
+                        var school_name=json[this.index].jp_name;
+                        $.ajax({
+                            type:"POST",
+                            dataType:"text",
+                            url:"<?=  base_url()?>index.php/coach/getCoachByAnchor",
+                            anysc:true,
+                            data:{school_id:school_id,school_name:school_name},
+                            success:function(data){
+                                var json=eval("("+data+")");
+                                $('#coach_list').html(json.list);
+                            }
+                        });
+                        
                     });
                 }
                 map.setViewport(pointArray);
 
             }
+           
 
 
         </script>

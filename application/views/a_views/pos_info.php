@@ -24,7 +24,9 @@
                         <select id="area" class="area cxselect" data-first-title="选择地区" ></select>
                     </span><input class="am-btn-primary am-btn-ls btn-city" type="submit" value="更换"/></div>
                 <div class="map_father">
-                    <div id="allmap"></div></div>
+                    <div id="allmap"></div>
+                        
+                </div>
             </div>
 
             <div class ="real_content">

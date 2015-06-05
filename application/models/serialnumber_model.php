@@ -26,7 +26,7 @@ class Serialnumber_model extends CI_Model{
         $data=$query->result_array();
         return $data;
     }
-    public function SerValidChange($serial_num,$attr_arr) {//根据序列号查找
+    public function SerValidChange($serial_num) {//根据序列号查找
 //        $this->db->select();
 //        $this->db->where('serial_num',$serial_num);
 //        $query = $this->db->get('SerialNumber');
@@ -35,6 +35,7 @@ class Serialnumber_model extends CI_Model{
 //            $serial_valid=$row['serial_valid'];
 //        }
 //        if($serial_valid==1){
+            $attr_arr = array('serial_valid' => 0);
             $this->db->where('serial_num',$serial_num);
             $result=$this->db->update('SerialNumber', $attr_arr);
 //        }else{

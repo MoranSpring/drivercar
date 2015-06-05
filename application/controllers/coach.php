@@ -19,15 +19,6 @@ class Coach extends MY_Controller {
     }
 
     public function index() {
-//        $this->view();
-//        $bucket = 'driver-un';
-//	$object = 'logo.jpg';	
-//	$file_path ="C:\\Users\\KYLE\\Desktop\\logo.png";
-//	$response = $this->alioss->upload_file_by_file($bucket,$object,$file_path);
-//	$this->_format($response);
-//        $this->load->view('test2');
-//        redirect('first/sch_info');
-//         $this->load->view('test3');
         $this->view();
     }
 
@@ -55,7 +46,11 @@ class Coach extends MY_Controller {
         $this->load->view('coach_views/template', $body);
     }
         public function getCoachGrade($coa_grade){
-        if($coa_grade==3){
+            if($coa_grade==5){
+                $grade='E级';
+            }else if($coa_grade==4){
+                $grade='D级';
+            }else if ($coa_grade==3) {
                 $grade='C级';
             }else if ($coa_grade==2) {
                 $grade='B级';
@@ -64,7 +59,7 @@ class Coach extends MY_Controller {
             }else{
                 $grade='其他';
             }
-            return $grade;
+        return $grade;
     }
     public function getCoachServType($serv_type){
         if($serv_type==3){
@@ -79,9 +74,9 @@ class Coach extends MY_Controller {
             return $serv_con;
     }
     public function self_info(){
-//        $UID = $this->session->userdata('UID');
-        $UID='1427162541';
-                //教练名
+        $UID = $this->session->userdata('UID');
+        //$UID='1427162541';
+        //教练名
         $body['coa_name']='';
         //教练级别
         $body['coa_grade']='';
@@ -101,7 +96,8 @@ class Coach extends MY_Controller {
         $body['coa_face']='';
         //是否为教练
         $body['isCoach']='';
-       $body['isCoach']= $this->session->userdata('TYPE')==1?  true  : false;
+        $default_head='http://driver-un.oss-cn-shenzhen.aliyuncs.com/headpic/default.jpg';
+       $body['isCoach']= $this->session->userdata('TYPE')==1?  true : false;
        $result=  $this->coach_model->selectAllinfoById($UID);
        
         foreach ($result as $row) {
@@ -118,7 +114,9 @@ class Coach extends MY_Controller {
             $body['coach_history_score']=$row['coach_history_score'];
             $body['coa_serv_type']=$this->getCoachServType($row['coach_serv_type']);
         }
-        
+        if($body['coa_face']==null){
+            $body['coa_face']=$default_head;
+        }
         $page = $this->load->view('coach_views/self_info',$body, true);
         $this->view($page);
     }
@@ -332,8 +330,9 @@ class Coach extends MY_Controller {
          echo json_encode($data);
     }
      public function getCoaBaseInfo(){
-        $coa_id='1427162541';
-        $result=$this->coach_model->selectAllinfoById($coa_id);
+        $coa_user_id=$this->session->userdata('UID');
+        //$coa_id='1427162541';
+        $result=$this->coach_model->selectAllinfoById($coa_user_id);
         foreach($result as $row){
             $name=$row['coach_name'];
             $age=$row['coach_old'];
@@ -347,6 +346,146 @@ class Coach extends MY_Controller {
             'driver_age'=>$driver_age,'tel_num'=>$tel_num,'serv_type'=>$serv_type,'headurl'=>$headurl);
         
         echo json_encode($data);
+    }
+    
+    
+        /**
+     * 根据城市代号获取驾校信息
+     */
+    function get_school_info() {
+        $city = $this->input->post("city", TRUE);
+        $result = $this->school_model->get_from_city($city);
+        $list = '';
+        foreach ($result as $row) {
+            $list.=$this->load->view('a_views/school_list', $row, true);
+        }
+        $data = array(
+            'info' => $result,
+            'list' => $list
+        );
+        echo json_encode($data);
+    }
+    /**
+     * 获取教练的信息显示在coach_info.php页面下方的列表中
+     */
+    public function get_coach_info(){
+        $city=$this->input->post("city",TRUE);
+        $result=$this->school_model->get_from_city($city);
+        //var_dump($result);
+        //数组长度
+        $len=count($result);
+        //驾校id，驾校名
+        $school=array();
+        
+        for($i=0;$i<$len;$i++){
+            //$school['id'.$i]=;
+            //驾校id
+            $id=$result[$i]['jp_id'];
+            $school[$id]=$result[$i]['jp_name'];
+        }
+        //var_dump($school);
+        
+        //for($j=0;$j<$len;$j++){
+         $coach_data=array();
+        $temp=0;
+        foreach ($school as $key => $value){    
+            //根据驾校的id查询该驾校所有的教练
+            $res=$this->coach_model->getCoachBySchoolId($key);
+            $row='';
+            if($res->result_array()>0){
+                $row=$res->result_array();
+            }
+            for($p=0;$p<count($row);$p++){
+                $coach_data[$temp]=$row[$p];
+                $temp++;
+            }
+        }
+        //所有教练数据保存在$coach_data数组中
+        //var_dump($coach_data);
+        $coa_list='';
+        for($q=0;$q<count($coach_data);$q++){
+            
+            //头像
+            $coach_info['coa_face']=$coach_data[$q]['coach_face'];
+            //教练名
+            $coach_info['coa_name']=$coach_data[$q]['coach_name'];
+            //驾校名
+            $coach_info['coa_school']=$school[$coach_data[$q]['coach_sch_id']];
+            //收费标准,根据级别调用收费标准定义函数
+            $coach_info['coa_grade_price']=  $this->getPriceByLevel($coach_data[$q]['coach_grade']);
+            //历史评论人数
+            if($coach_data[$q]['coach_stu_num']==null){
+                $coach_info['coa_comment_total']=rand(1000,9999);
+            }else{
+                $coach_info['coa_comment_total']=$coach_data[$q]['coach_stu_num'];
+            }
+            //当前评分
+            $coach_info['coa_history_score']=$coach_data[$q]['coach_history_score'];
+            
+            $coa_list.=$this->load->view('a_views/coach_list',$coach_info,true);
+            
+        }
+        $data=array(
+            'info'=>$result,
+            'list'=>$coa_list
+        );
+        echo json_encode($data);
+    }
+    
+    function getCoachByAnchor(){
+        $school_id=$this->input->post('school_id');
+        $school_name=$this->input->post('school_name');
+        $coach_data=array();
+       
+        //根据驾校的id查询该驾校所有的教练
+        $res=$this->coach_model->getCoachBySchoolId($school_id);
+        //$row='';
+        if($res->result_array()>0){
+            $coach_data=$res->result_array();
+        }
+//        for($p=0;$p<count($row);$p++){
+//            $coach_data[$p]=$row[$p];
+//        }
+        //所有教练数据保存在$coach_data数组中
+        //var_dump($coach_data);
+        $coa_list='';
+        for($q=0;$q<count($coach_data);$q++){
+            
+            //头像
+            $coach_info['coa_face']=$coach_data[$q]['coach_face'];
+            //教练名
+            $coach_info['coa_name']=$coach_data[$q]['coach_name'];
+            //驾校名
+            $coach_info['coa_school']=$school_name;
+            //收费标准,根据级别调用收费标准定义函数
+            $coach_info['coa_grade_price']=  $this->getPriceByLevel($coach_data[$q]['coach_grade']);
+            //历史评论人数
+            if($coach_data[$q]['coach_stu_num']==null){
+                $coach_info['coa_comment_total']=rand(1000,9999);
+            }else{
+                $coach_info['coa_comment_total']=$coach_data[$q]['coach_stu_num'];
+            }
+            //当前评分
+            $coach_info['coa_history_score']=$coach_data[$q]['coach_history_score'];
+            
+            $coa_list.=$this->load->view('a_views/coach_list',$coach_info,true);
+            
+        }
+        $data=array(
+            //'info'=>$result,
+            'list'=>$coa_list
+        );
+        echo json_encode($data);
+    }
+    
+    function getPriceByLevel($level) {
+        $price='';
+        if($level>0&&$level<6){
+            $price=200-20*$level;
+        }else{
+            $price=100;
+        }
+        return $price;
     }
 
 }

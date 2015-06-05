@@ -18,7 +18,7 @@
     </div>
     <div id="con-right">
         <div id="con-nav">
-            <p><a href="void">首页</a> > <a href="void">会员中心</a> >个人信息</p>
+            <p><a href="void">首页</a> > <a href="void">会员中心</a> >个人信息修改</p>
         </div>
         <div id="con-con" class ="real_content ">
             <div class="info_change">

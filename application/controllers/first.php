@@ -40,17 +40,6 @@ class First extends MY_Controller {
         } else {
             $this->view();
         }
-
-
-//        $bucket = 'driver-un';
-//	$object = 'logo.jpg';	
-//	$file_path ="C:\\Users\\KYLE\\Desktop\\logo.png";
-//	$response = $this->alioss->upload_file_by_file($bucket,$object,$file_path);
-//	$this->_format($response);
-//        $this->load->view('ad_views/ad');
-//                $this->load->view('test3');
-//        redirect('first/sch_info');
-//        redirect('vipcenter');
     }
 
     public function mobile() {
@@ -70,7 +59,6 @@ class First extends MY_Controller {
     }
 
     public function view($title = '', $page = '') {
-
         $name = $this->session->userdata('name');
         if ($name == null) {
             $body['header'] = $this->load->view('common_views/header', '', true);
@@ -90,7 +78,6 @@ class First extends MY_Controller {
         } else {
             $body['title'] = $title;
         }
-
         $body['footer'] = $this->load->view('common_views/footer', '', true);
         $this->load->view('a_views/template', $body);
     }
@@ -187,10 +174,7 @@ class First extends MY_Controller {
 //            }
 //            $i++;
         }
-//        foreach ($temparray as $row) {
-//            print_r($row);
-//            echo '<br/>';
-//        }
+
 
         $page = $this->load->view('a_views/sch_info', $oneNews, true);
         $title = "驾培资讯首页 - 我爱开车网";
@@ -272,9 +256,7 @@ class First extends MY_Controller {
         $password = $this->input->post('userpass');
         $email = $this->input->post('useremail');
         $stu_type = $this->input->post('user_type');
-
         $reg_time = $this->getTime();
-
         $Uid = time();
         $datas = array(
             'stu_id' => $Uid,
@@ -285,17 +267,18 @@ class First extends MY_Controller {
             'stu_reg_time' => $reg_time
         );
         if ($stu_type == 3) {
+            //将数据插入用户表,普通注册用户
             $result = $this->accesscontrol_model->insert($datas);
             if ($result == 1) {
+                //设置session
                 $this->session->set_userdata('UID', $Uid);
                 $this->session->set_userdata('TYPE', $stu_type);
                 $this->session->set_userdata('name', $username);
-                $sess = $this->session->all_userdata();
                 redirect();
-                echo '"insert success !"';
+                echo '"regist success !"';
                 return;
             } else {
-                echo 'insert  error !';
+                echo 'regist  error !';
                 return;
             }
         }
@@ -307,33 +290,40 @@ class First extends MY_Controller {
         } elseif ($stu_type == 1) {
             $serial_num = $train_serial_num;
         } else {
+            echo  '用户类型异常';
             exit(0);
         }
-        //$sernum_row=$this->serialnumber_model->selectBySerNum($serial_num);
-        //$sernum_row[0]['serial_valid']=0;
-        $attr_arr = array('serial_valid' => 0);
-        $ser_num_vali = $this->serialnumber_model->SerValidChange($serial_num, $attr_arr);
+        
+        $ser_num_vali = $this->serialnumber_model->SerValidChange($serial_num);
         if ($ser_num_vali) {
             $result = $this->accesscontrol_model->insert($datas);
             if ($result == 1) {
                 $this->session->set_userdata('UID', $Uid);
                 $this->session->set_userdata('TYPE', $stu_type);
                 $this->session->set_userdata('name', $username);
-                $sess = $this->session->all_userdata();
-                //print_r($sess);
                 if ($stu_type == 2) {
                     redirect();
-                } else {
+                } else if($stu_type == 1){
+                    $coach_id=  time();
+                    $attr=array('coach_id'=>$coach_id,'coach_user_id'=>$Uid);
+                    $result1=$this->coach_model->insert($attr);
+                    $this->session->set_userdata('coach_id', $coach_id);
                     redirect('coach');
+                }else{
+                    exit();
                 }
             } else {
                 echo 'insert error!';
             }
             echo '序列号状态修改成功！';
         } else {
-            echo '序列号状态修改失败！';
+            echo '无效序列号！';
         }
     }
+    
+
+   
+    
 
     public function login_check() {
         $name = $this->input->get('name');
@@ -394,8 +384,9 @@ class First extends MY_Controller {
                 $this->session->set_userdata('UID', $row['stu_id']);
                 $this->session->set_userdata('TYPE', $row['stu_type']);
                 if ($row['stu_true_name'] != null) {
-                    $this->session->set_userdata('name', $row['stu_true_name']);
-                } else if ($row['stu_nick_name'] != null) {
+                    $this->session->set_userdata('true_name', $row['stu_true_name']);
+                }
+                if ($row['stu_nick_name'] != null) {
                     $this->session->set_userdata('name', $row['stu_nick_name']);
                 }else {
                     $this->session->set_userdata('name', $name);
@@ -413,7 +404,7 @@ class First extends MY_Controller {
                 } else if ($row['stu_type'] == 0) {
                     redirect('admin');
                 } else {
-                    redirect();
+                  redirect();
                 }
                 return true;
             }
@@ -486,6 +477,30 @@ class First extends MY_Controller {
         echo $result;
     }
 
+    function _request($url, $posts = null) {
+        if (is_array($posts) && !empty($posts)) {
+            foreach ($posts as $key => $value) {
+                $post[] = $key . '=' . urlencode($value);
+            }
+            $posts = implode('&', $post);
+        }
+
+        $curl = curl_init();
+
+        $options = array(
+            CURLOPT_URL => $url,
+            CURLOPT_CONNECTTIMEOUT => 2,
+            CURLOPT_TIMEOUT => 10,
+            CURLOPT_RETURNTRANSFER => true
+        );
+
+        curl_setopt_array($curl, $options);
+
+        $retval = curl_exec($curl);
+
+        return $retval;
+    }
+
     public function sendEmail($mail_address, $mail_con, $mail_time) {
         $this->load->library('email');
         $this->email->from('kyleml@126.com', '我爱开车网');
@@ -511,8 +526,7 @@ class First extends MY_Controller {
         $data = array('reg_email_str' => $reg_email_str, 'send_time' => $send_time, 'result' => $result);
         echo json_encode($data);
     }
-
-    function get_school_info() {
+        function get_school_info() {
         $city = $this->input->post("city", TRUE);
         $result = $this->school_model->get_from_city($city);
         $list = '';
@@ -525,5 +539,6 @@ class First extends MY_Controller {
         );
         echo json_encode($data);
     }
+    
 
 }

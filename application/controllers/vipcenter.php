@@ -15,14 +15,12 @@ class VipCenter extends MY_Controller {
         $this->load->model('school_model');
         $this->load->model('clscomment_model');
         $this->load->model('staticcoach_model');
+        $this->load->library('oss/alioss');
 
     }
 
     public function index() {
-//        $this->view('management');
-//        $this->management();
         $this->view();
-//
     }
 
     public function view($page = '') {
@@ -36,20 +34,21 @@ class VipCenter extends MY_Controller {
             $body['header'] = $this->load->view('common_views/header_logined', $data, true);
         }
         $body['navigation'] = $this->load->view('common_views/navigation', '', true);
-        if ($page == '' && $name != null) {
-            $body['content'] = $this->load->view('vip_views/self_info', '', true);
+        if ($page == ''&& $name != null) {
+           $this->self_home();
+           return false;
         } else if ($page != '' && $name != null) {
             $body['content'] = $page;
         }
-
         $body['footer'] = $this->load->view('common_views/footer', '', true);
         $this->load->view('vip_views/template', $body);
     }
 
     //--------------会员中心------------------------
     public function vip_center() {
-        $page = $this->load->view('vip_views/self_info', '', true);
-        $this->view($page);
+        $page = $this->load->view('vip_views/self_home', '', true);
+        $this->self_home();
+        //$this->view($page);
     }
 
     public function study_progress() {
@@ -64,7 +63,6 @@ class VipCenter extends MY_Controller {
         $i = 0;
         $content='';
         foreach ($result as $row) {
-
             $data['date'] = $row['book_date'];
             $data['course'] = '科目二';
             $name = $this->coach_model->select_name($row['book_coa_id']);
@@ -327,8 +325,105 @@ class VipCenter extends MY_Controller {
             $result=$row;
         }
         echo $result=='' ? '0' : json_encode($result);
-
-       
     }
+    public function self_home(){
+        $UID = $this->session->userdata('UID');
+        //用户头像
+        //$stu_face
+        $body['stu_face']='';                        
+        //$UID='1427162541';
+        //用户名
+        $body['stu_name']='';
+        //个人介绍
+        $body['stu_self_intro']='';
+        //用户类型
+        $body['stu_type']='';
+        //性别
+        $body['stu_sex']='';
+        //年龄
+        $body['stu_age']='';
+        //所在地：
+        $body['stu_living_place']='';     
+        //邮箱：
+        $body['stu_email']='';     
+        //注册时间
+        $body['stu_reg_time']='';
+        //最近登录时间
+        $body['stu_last_logtime']='';
+        $body['isVip']=$this->session->userdata('TYPE')==2 ? true :false;
+         
+        
+       $default_head='http://driver-un.oss-cn-shenzhen.aliyuncs.com/headpic/default.jpg';
+       $result=  $this->accesscontrol_model->selectById($UID);
+       
+        foreach ($result as $row) {
+            if($row['stu_nick_name']!=null){
+                $body['stu_name']=$row['stu_nick_name'];
+            }else{
+                $body['stu_name']=$row['stu_name'];
+            }
+           
+            if($body['stu_face']==null){
+                $body['stu_face']=$row['stu_face'];
+            }else{
+                $body['stu_face']=$default_head;
+            }
+            $body['stu_type']= $this->getUserType($row['stu_type']) ;
+            
+            $body['stu_sex']=  $this->getUserGender($row['stu_sex']);
+            
+            $body['stu_age']=  $row['stu_age'];
+            $body['stu_living_place']=  $row['stu_living_place'];
+            $body['stu_email']=  $row['stu_email'];
+            $body['stu_reg_time']=  $row['stu_reg_time'];
+            $body['stu_last_logtime']=  $row['stu_last_logtime'];
+            $body['stu_self_intro']=$row['stu_self_intro'];
+        }
+        
+        $page = $this->load->view('vip_views/self_home',$body, true);
+        $this->view($page);
+    }
+    
+    function getUserType($num){
+        $type=null;
+        if($num==3){
+            $type='免费会员';
+        }else if($num==2){
+            $type='学员';
+        }else if($num==1){
+            $type='教练';
+        }else{
+            $type='游客';
+        }
+        return $type;
+    }
+    function getUserGender($num) {
+         $type=null;
+        if($num==0){
+            $type='女';
+        }else if($num==1){
+            $type='男';
+        }else{
+            $type='外星人';
+        }
+        return $type;
+    }
+    public function self_info(){
+        $page = $this->load->view('vip_views/self_info', "", true);
+        $this->view($page);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 }

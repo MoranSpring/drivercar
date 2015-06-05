@@ -97,7 +97,10 @@
                     return  randomChars;
                 }
 
-                //{"reg_email_str":"cdvcqhew","send_time":1429246459,"result":true}
+                /**
+                * 设置再次发送邮件时间
+                * @param {type} countdown 单位为秒
+                * @returns {undefined}                 */
                 function setTime(countdown) {
                     var btn_reg_emailkey=$('#send_reg_emailkey');
                     if (countdown == 0) {
@@ -114,7 +117,7 @@
                         setTime(countdown)
                     },1000);
                 }
-                //{"reg_email_str":"pwqzayn5","send_time":1429244818,"result":true}
+                //
                 $('#send_reg_emailkey').click(function () {
                     $("#send_reg_emailkey").attr("disabled", true);
                     var countdown=10;
@@ -127,19 +130,17 @@
                             async: true,
                             data:{email:email},
                             success: function (data) {
-//                                is_user_exist = data;
                                 if (data == "1"||data==true){
-                                    $("#mail_span").html('<img src="<?= base_url() ?>application/images/text_error.png"><font color=red>该邮箱已被注册，请更换~</font>');
-                                    //$("#send_reg_emailkey").attr("disabled", true);
+                                    $("#mail_span").html('<img src="<?= base_url() ?>application/images/text_error.png"><font color=red>该邮箱已被注册，请更换~</font>');   
                                     $("#btn_sub").attr("disabled", true);
                                     $("#send_reg_emailkey").attr("disabled", false);
                                 }else{
                                     setTime(countdown);
                                     $("#mail_span").html("<font color=green>恭喜,邮箱可以注册 !</font>");
-                                    //$("#send_reg_emailkey").attr("disabled", false).css("color","green");
+                                   
                                     var reg_email = $('#mail').val();
                                     var reg_email_str = randomAlphanumeric('text', 8, '0123456789abcdefghijkmnpqrstuvwxyz');
-                                         $.ajax({
+                                        $.ajax({
                                         type: "POST",
                                         dataType: "text",
                                         url: "<?= base_url() ?>index.php/first/RegmailVali",
@@ -172,7 +173,7 @@
                 });
                 //检测是否超时，传入参数为Unix时间戳，且first大于second
                 function  isValiKeyTimeout(first_time, second_time) {
-                    alert(first_time+":"+second_time);
+                    //alert(first_time+":"+second_time);
                     var count = first_time - second_time;
                     //为方便测试  设置为60，实际应为600
                     if (count > 0 && count<200) {
@@ -181,7 +182,7 @@
                         return false;
                     }
                 }
-                //发送验证邮件返回的结果{"reg_email_str":"jpekj7a1","send_time":1429245588,"result":true}
+                //发送验证邮件返回的结果
                 $('#reg_mail_key').blur(function () {
                     var regpage_mail_key = $('#reg_mail_key').val();
                     regpage_mail_key=$.trim(regpage_mail_key);
@@ -190,8 +191,8 @@
                     var cur_time = Math.round(new Date().getTime() / 1000);
                     if (regpage_mail_key != null||regpage_mail_key != "") {
                         if (isValiKeyTimeout(cur_time, send_time)) {
-                           //{"reg_email_str":"vxxzr5hw","send_time":1429243467,"result":true}         
-                           alert(regpage_mail_key+"::"+reg_email_str2);
+                                    
+                            //alert(regpage_mail_key+"::"+reg_email_str2);
                             if (isStrSame(regpage_mail_key, reg_email_str2)) {
                                 emailkey_flag=true; 
                                 $('#mailkey_span').html("<font color=green>验证码正确</font>");

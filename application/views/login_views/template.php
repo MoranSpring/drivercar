@@ -25,7 +25,6 @@
                                 <th>账户</th>
                                 <td width="245">
                                     <input id="name" type="text" name="name" placeholder="电子邮箱/手机号" autocomplete="off"  value="" onfocus="check_onfocus()" onblur="check_onbulr(this.value)">
-                                    
                                 </td>
                                 <td  class="name_alert">
                                 </td>
@@ -42,7 +41,6 @@
                                 <th>验证码</th>
                                 <td width="245">
                                     <div class="valid">
-                                        <!--<input type="text" name="vcode"><img class="vcode" src="passport/vcode?_=1411476793" width="85" height="35" alt="">-->
                                     </div>
                                 </td>
                                 <td>

@@ -529,7 +529,8 @@ class Info_change extends MY_Controller {
     
     public function baseInfoEdit(){
         
-        $coa_id='1427162541';
+//        $coa_id='1427162541';
+        $coa_id=$this->session->userdata('UID');
         $coa_name=  $this->input->post('coa_name');
         $coa_age=  $this->input->post('coa_age');
         $coa_self_intro=  $this->input->post('coa_self_intro');

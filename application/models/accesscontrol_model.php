@@ -49,7 +49,7 @@ class Accesscontrol_model extends CI_Model{
         $query = $this->db->get('AccessControl');
         return $query->result_array();
     }
-    public function loginMailExist($email){//返回该用户名对应的密码
+    public function loginMailExist($email){//注册时验证邮箱是否存在
          $this->db->select();
          $this->db->where('stu_email',$email);
         $query = $this->db->get('AccessControl');
