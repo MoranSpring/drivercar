@@ -59,20 +59,11 @@ class VipCenter extends MY_Controller {
             return false;
         }
         $UID = $this->session->userdata('UID');
-        $result = $this->teachbook_model->get_book_info($UID);
+        $result = $this->teachbook_model->get_book_infos($UID);
         $i = 0;
         $content='';
         foreach ($result as $row) {
-            $data['date'] = $row['book_date'];
-            $data['course'] = '科目二';
-            $name = $this->coach_model->select_name($row['book_coa_id']);
-            $data['Name'] = $name[0]['coach_name'];
-            $data['course_num'] = $row['book_cls_num'];
-            $data['book_suggest'] = $row['book_suggest'];
-            $data['imageURL'] = $name[0]['coach_face'] . "@!nail";
-            $sch_name = $this->school_model->select_name($row['book_sch_id']);
-            $data['school'] = $sch_name[0]['jp_name'];
-            $content['content'][$i] = $this->load->view('vip_views/content', $data, true);
+            $content['content'][$i] = $this->load->view('vip_views/content', $row, true);
             $i++;
         }
         $year['year'] = $this->load->view('vip_views/year_list', $content, true);
@@ -411,6 +402,11 @@ class VipCenter extends MY_Controller {
     public function self_info(){
         $page = $this->load->view('vip_views/self_info', "", true);
         $this->view($page);
+    }
+    public function test_join(){
+        $UID='1426568565';
+        $result=$this->teachbook_model->get_book_infos($UID);
+        echo json_encode($result);
     }
     
     

@@ -1,9 +1,9 @@
 
 <li class="cls">
-    <p class="date" onload="set_date()"><?=$date?>
+    <p class="date" onload="set_date()"><?=$book_date?>
     </p>
     <p class="intro">
-        <span class="am-badge am-badge-primary am-text-xl" ><?= $course ?></span>
+        <span class="am-badge am-badge-primary am-text-xl" ><?= $cls_name ?></span>
     </p>
     <p class="version">
         已通过
@@ -13,23 +13,23 @@
             <tbody>
                 <tr>
                     <td>内容 </td>
-                    <td>倒库</td>
+                    <td><?=$cls_name?></td>
                 </tr>
                 <tr>
                     <td>节数</td>
-                    <td>第<?= $course_num ?>节课</td>
+                    <td>第<?= $book_cls_num ?>节课</td>
                 </tr>
 
                 <tr class="am-active">
                     <td>教练</td>
                     <td><ul id="coach" class="clearfix">
                             <li style="float:left;">
-                                <img class="am-img-thumbnail am-circle" src="<?= $imageURL ?>" width="70" height="70"/>
+                                <img class="am-img-thumbnail am-circle" src="<?= $coach_face ?>@!nail" width="70" height="70"/>
                             </li>
                             <li style="float:left;">
                                 <ul>
                                     <li>
-                                        <?= $Name ?>
+                                        <?= $coach_name ?>
                                     </li>
                                     <li>
                                         教练等级：<span class="am-icon-star ml-red"></span><span class="am-icon-star ml-red"></span><span class="am-icon-star ml-red"></span><span class="am-icon-star-half-o ml-red"></span>
@@ -40,7 +40,7 @@
                 </tr>
                 <tr>
                     <td>地点</td>
-                    <td><?= $school ?></td>
+                    <td><?= $jp_name ?></td>
                 </tr>
                 <tr>
                     <td>积分消费</td>
