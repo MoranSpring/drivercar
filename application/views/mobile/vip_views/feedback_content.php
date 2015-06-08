@@ -12,16 +12,16 @@
             </tr>
             <tr>
                 <td>项目</td>
-                <td><?= $book_cls_name ?></td>
+                <td><?= $cls_name ?></td>
             </tr>
 
             <tr>
                 <td>教练</td>
-                <td><a style="color:#add;text-decoration:underline;"  target='_blank' href="<?= base_url() ?>index.php/first/coach_self_info/<?=$book_coa_id?>"><?=$coa_name?></a></td>
+                <td><a style="color:#add;text-decoration:underline;"  target='_blank' href="<?= base_url() ?>index.php/mobile/coach_home/<?=$book_coa_id?>"><?=$coach_name?></a></td>
             </tr>
             <tr>
                 <td>培训点</td>
-                <td><a style="color:#add;text-decoration:underline;"   target='_blank' href="<?= base_url() ?>index.php/first/school_info/<?=$book_sch_id?>"><?=$sch_name?></a></td>
+                <td><a style="color:#add;text-decoration:underline;"   target='_blank' href="<?= base_url() ?>index.php/mobile/school_home/<?=$book_sch_id?>"><?=$jp_name?></a></td>
             </tr>
             <tr>
                 <td>消费积分</td>

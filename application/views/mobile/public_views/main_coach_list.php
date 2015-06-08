@@ -28,8 +28,8 @@
 </div>
     <script>
     $(function () {
-        var ip = '<?= $info ?>';
-        var json = eval("(" + ip + ")");
+//        var ip = "<?= $info ?>";
+//        var json = eval("(" + + ")");
         openModel();
         loadCoach('1027');
     });

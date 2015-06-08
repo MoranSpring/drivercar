@@ -13,27 +13,33 @@
     .box-reight{
         border-right: 1px solid #fff  !important;
     }
+    .unview{
+        display:none;
+    }
 </style>    
 <header data-am-widget="header" class="am-header am-header-default ml-color-bg-main">
     <div class="am-header-nav am-dropdown " data-am-dropdown>
-        
-        <a href="#left-link" class="am-text-center am-dropdown-toggle" style="height:49px;font-size:1.2em;position: relative;left:-10px;padding-left: 10px;">
+
+        <a href="#left-link" class="am-text-center <?php if ($islogin == 1) echo 'am-dropdown-toggle'; ?> " style="height:49px;font-size:1.2em;position: relative;left:-10px;padding-left: 10px;">
             <span class="am-header-icon am-icon-envelope-o am-icon" style="position: relative;font-size:1.3em">&nbsp</span>
-            <div style="position: relative;top:-37px;right:-20px;width:10px;height:10px;border-radius: 50%;background: #f00;"></div>
+            <div class="<?php if ($islogin == 0) echo 'unview'; ?>" style="position: relative;top:-37px;right:-20px;width:10px;height:10px;border-radius: 50%;background: #f00;"></div>
         </a>
         <div class="am-dropdown-content am-text-sm" style="width:168px;color:#000;padding:0;">
             <ul class="am-list am-list-static" style="border:0;margin-bottom: 2px;">
-                <li  class="ml-ontouch" style="border:0px;border-bottom: 1px dashed #ccc;margin-bottom: 0px;padding-right: 5px;padding-left: 5px;">
-                    <span class="am-badge am-badge-danger am-round" >2</span>
+                <li onclick="javascript:window.location.href = '<?= base_url() ?>index.php/mobile/management'"  class="ml-ontouch" style="border:0px;border-bottom: 1px dashed #ccc;margin-bottom: 0px;padding-right: 5px;padding-left: 5px;">
+                    <span class="am-badge am-badge-danger am-round" ><?= $un_study ?></span>
                     预约提醒
                 </li>
-                <li class="ml-ontouch" style="border:0px;border-bottom: 1px dashed #ccc;margin-bottom: 0px;padding-right: 5px;padding-left: 5px;">
+                <li onclick="javascript:window.location.href = '<?= base_url() ?>index.php/mobile/management'" class="ml-ontouch" style="border:0px;border-bottom: 1px dashed #ccc;margin-bottom: 0px;padding-right: 5px;padding-left: 5px;">
                     <span class="am-badge am-badge-danger am-round" >8</span>
-                    最新消息
+                    教练建议
                 </li>
-                <li class="ml-ontouch" style="border:0px;margin-bottom: -2px;padding-right: 5px;padding-left: 5px;">
-                     <span class="am-badge am-badge-danger am-round" >18</span>
-                    最近电话
+                <li onclick="javascript:window.location.href = '<?= base_url() ?>index.php/mobile/management'" class="ml-ontouch" style="border:0px;margin-bottom: -2px;padding-right: 5px;padding-left: 5px;">
+                    <span class="am-badge am-badge-danger am-round" ><?php
+                        if (isset($un_comment) && $un_comment > 0)
+                            echo $un_comment;
+                        ?></span>
+                    待评价
                 </li>
             </ul>
         </div>
@@ -41,7 +47,7 @@
     <h1 class="am-header-title">
         <a href="#title-link" class="">我爱开车网</a>
     </h1>
-    
+
 </header>
 <?= $menu ?>
 <div class="am-margin-sm">

@@ -249,6 +249,7 @@ class VipCenter extends MY_Controller {
                 'book_coa_id' => $book_coa_id,
                 'book_sch_id' => $book_sch_id,
                 'book_cls_id' => $book_cls_id,
+                'book_state'=>1,
                 'book_date' => $row['date'],
                 'book_cls_num' => $row['cls'],
             );

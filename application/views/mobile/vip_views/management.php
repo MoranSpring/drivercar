@@ -46,18 +46,43 @@
     $('.unbook').on("click", function () {
         if (confirm("你确定要申请退订吗?"))
         {
+            var today = new Date();
+            var nowHour = today.getHours();
+            var date=$(this).closest('.fur-list').find('.this-date').html()
+            var gap = get_gap_of_date(date);
+            if(gap>=3){
+               alert('直接退掉！');
+            }else if(gap===2){
+               alert('扣5%！');
+            }else if(gap===1){
+               alert('扣10%！');
+            }else if(gap===0&&nowHour<19){
+               alert(nowHour);
+               alert('扣20%！');
+            }else if(gap===0&&nowHour>=19){
+               alert('扣20%！且必须教练同意！');
+            }else{
+                alert('你退你大爷！！');
+            }
             var book_id = $(this).attr('book_id');
             var thisData = $(this);
             $.ajax({
                 type: "POST",
                 dataType: "text",
-                url: "<?= base_url() ?>index.php/vipcenter/unbook",
+                url: "<?= base_url() ?>index.php/mobile/unbook",
                 async: true,
                 data: {book_id: book_id},
                 success: function (data) {
                     if (data == 1) {
+                        if(gap>0){
+                            thisData.html('已退订');
+                        }else if(gap==1&&nowHour<19){
+                            thisData.html('已退订');
+                        }else{
+                            thisData.html('已申请');
+                        }
                         thisData.addClass('unbook_end');
-                        thisData.html('已申请');
+                        
                         thisData.removeClass('unbook');
                     }
                     else {
@@ -67,4 +92,11 @@
             });
         }
     });
+    function get_gap_of_date(date){
+    var mDate= new Date(date);
+    var today = new Date();
+    var days = mDate.getTime() - today.getTime();
+    var gap=parseInt(days/86400000);
+    return gap;
+    }
 </script>

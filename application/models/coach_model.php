@@ -29,9 +29,12 @@ class Coach_model extends CI_Model{
         return $query->result_array();
     }
     public function select_detail($id) {//返回该用户名所有信息
-        $this->db->select();
+        $this->db->select('Coach.*');
+        $this->db->select('School.jp_name');
         $this->db->where('coach_id',$id);
-        $query = $this->db->get('Coach');
+        $this->db->from('Coach');
+        $this->db->join('School', 'School.jp_id=Coach.coach_sch_id');
+        $query = $this->db->get();
         return $query->result_array();
     }
     public function select_coach($id) {//返回该用户名所有信息

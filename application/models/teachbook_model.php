@@ -40,13 +40,6 @@ class Teachbook_model extends CI_Model {
         return $query->result_array();
     }
 
-    public function select_detail_by_id($id) {//返回该用户名所有信息
-        $this->db->select();
-        $this->db->where('book_id', $id);
-        $query = $this->db->get('TeachBook');
-        return $query->result_array();
-    }
-
     public function select_history_detail($id, $time, $cls) {//返回该用户名所有信息
         $this->db->select();
         $this->db->where('book_stu_id', $id);
@@ -62,6 +55,48 @@ class Teachbook_model extends CI_Model {
         $this->db->order_by("book_date", "desc");
         $this->db->order_by("book_cls_num", "desc");
         $query2 = $this->db->get('TeachBook');
+        $query = array_merge($query2->result_array(), $query1->result_array());
+        return $query;
+    }
+
+    public function select_history_details($id, $time, $cls) {//读取选课信息历史信息，用join
+        $this->db->select('TeachBook.*');
+        $this->db->select('Coach.coach_name');
+        $this->db->select('Coach.coach_face');
+        $this->db->select('Course.cls_name');
+        $this->db->select('ClsComment.com_id');
+        $this->db->select('School.jp_name');
+        $this->db->where('book_stu_id', $id);
+        $STATE = array('1', '7');
+        $this->db->where_in('book_state', $STATE);
+        $this->db->where('book_date <', $time);
+        $this->db->from('TeachBook');
+        $this->db->join('Coach', 'Coach.coach_id=TeachBook.book_coa_id');
+        $this->db->join('Course', 'Course.cls_id=TeachBook.book_cls_id');
+        $this->db->join('School', 'School.jp_id=TeachBook.book_sch_id');
+        $this->db->join('ClsComment', 'ClsComment.com_cls_id=TeachBook.book_id', 'left');
+        $this->db->order_by("book_date", "desc");
+        $this->db->order_by("book_cls_num", "desc");
+        $query1 = $this->db->get();
+
+        $this->db->select('TeachBook.*');
+        $this->db->select('Coach.coach_name');
+        $this->db->select('Coach.coach_face');
+        $this->db->select('ClsComment.com_id');
+        $this->db->select('Course.cls_name');
+        $this->db->select('School.jp_name');
+        $this->db->where('book_stu_id', $id);
+        $this->db->where_in('book_state', $STATE);
+        $this->db->where('book_date', $time);
+        $this->db->where('book_cls_num <', $cls);
+        $this->db->from('TeachBook');
+        $this->db->join('Coach', 'Coach.coach_id=TeachBook.book_coa_id');
+        $this->db->join('Course', 'Course.cls_id=TeachBook.book_cls_id');
+        $this->db->join('School', 'School.jp_id=TeachBook.book_sch_id');
+        $this->db->join('ClsComment', 'ClsComment.com_cls_id=TeachBook.book_id', 'left');
+        $this->db->order_by("book_date", "desc");
+        $this->db->order_by("book_cls_num", "desc");
+        $query2 = $this->db->get();
         $query = array_merge($query2->result_array(), $query1->result_array());
         return $query;
     }
@@ -85,6 +120,44 @@ class Teachbook_model extends CI_Model {
         return $query;
     }
 
+    public function select_further_details($id, $time, $cls) {//返回选课未消费选课订单详情
+        $this->db->select('TeachBook.*');
+        $this->db->select('Coach.coach_name');
+        $this->db->select('Coach.coach_face');
+        $this->db->select('Course.cls_name');
+        $this->db->select('School.jp_name');
+        $this->db->where('book_stu_id', $id);
+        $STATE = array('1', '7');
+        $this->db->where_in('book_state', $STATE);
+        $this->db->where('book_date >', $time);
+        $this->db->from('TeachBook');
+        $this->db->join('Coach', 'Coach.coach_id=TeachBook.book_coa_id');
+        $this->db->join('Course', 'Course.cls_id=TeachBook.book_cls_id');
+        $this->db->join('School', 'School.jp_id=TeachBook.book_sch_id');
+        $this->db->order_by("book_date", "desc");
+        $this->db->order_by("book_cls_num", "desc");
+        $query1 = $this->db->get();
+
+        $this->db->select('TeachBook.*');
+        $this->db->select('Coach.coach_name');
+        $this->db->select('Coach.coach_face');
+        $this->db->select('Course.cls_name');
+        $this->db->select('School.jp_name');
+        $this->db->where('book_stu_id', $id);
+        $this->db->where_in('book_state', $STATE);
+        $this->db->where('book_date', $time);
+        $this->db->where('book_cls_num >', $cls);
+        $this->db->from('TeachBook');
+        $this->db->join('Coach', 'Coach.coach_id=TeachBook.book_coa_id');
+        $this->db->join('Course', 'Course.cls_id=TeachBook.book_cls_id');
+        $this->db->join('School', 'School.jp_id=TeachBook.book_sch_id');
+        $this->db->order_by("book_date", "desc");
+        $this->db->order_by("book_cls_num", "desc");
+        $query2 = $this->db->get();
+        $query = array_merge($query2->result_array(), $query1->result_array());
+        return $query;
+    }
+
     public function select_further_detail_coa($id, $time, $cls) {//返回该用户名所有信息
         $this->db->select();
         $this->db->where('book_coa_id', $id);
@@ -104,7 +177,7 @@ class Teachbook_model extends CI_Model {
         return $query;
     }
 
-    public function select_further_unbook_coa($id, $time, $cls) {//返回该用户名所有信息
+    public function select_further_unbook_coa($id, $time, $cls) {//返回退订的所有订单
         $this->db->select();
         $this->db->where('book_coa_id', $id);
         $this->db->where('book_date >', $time);
@@ -132,25 +205,38 @@ class Teachbook_model extends CI_Model {
         return $query->result_array();
     }
 
-    public function select_coa_id($id) {//返回该用户名所有信息
+    public function select_coa_id($id) {
         $this->db->select('book_coa_id');
         $this->db->where('book_id', $id);
         $query = $this->db->get('TeachBook');
         return $query->result_array();
     }
 
-    public function select_info_coa($data) {//返回该用户名所有信息
+    public function select_info_coa($data) {//返回该教练被预约的课程时间
         $this->db->select('book_cls_num');
         $this->db->where('book_date', $data['book_date']);
+        $STATE = array('1', '7');
+        $this->db->where_in('book_state', $STATE);
         $this->db->where('book_coa_id', $data['book_coa_id']);
         $query = $this->db->get('TeachBook');
         return $query->result_array();
     }
 
-    public function select_from_id($id) {
-        $this->db->select();
+    public function select_from_id($id) {//通过id查找订单详情。。。join
+        $this->db->select('TeachBook.*');
+        $this->db->select('Coach.coach_name');
+        $this->db->select('Coach.coach_face');
+        $this->db->select('Course.cls_name');
+        $this->db->select('School.jp_name');
+        $this->db->select('ClsComment.com_content');
+        $this->db->select('ClsComment.com_level');
         $this->db->where('book_id', $id);
-        $query = $this->db->get('TeachBook');
+        $this->db->from('TeachBook');
+        $this->db->join('Coach', 'Coach.coach_id=TeachBook.book_coa_id');
+        $this->db->join('Course', 'Course.cls_id=TeachBook.book_cls_id', 'left');
+        $this->db->join('School', 'School.jp_id=TeachBook.book_sch_id');
+        $this->db->join('ClsComment', 'ClsComment.com_cls_id=TeachBook.book_id', 'left');
+        $query = $this->db->get();
         return $query->result_array();
     }
 
@@ -207,6 +293,44 @@ class Teachbook_model extends CI_Model {
         $this->db->join('School', 'School.jp_id=TeachBook.book_sch_id');
 
         $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function un_study_cla_sum($id, $time, $cls) {//未学习的课程数统计
+        $this->db->where('book_stu_id', $id);
+        $this->db->where('book_date >', $time);
+        $STATE = array('1', '7');
+        $this->db->where_in('book_state', $STATE);
+        $this->db->from('TeachBook');
+        $query1 = $this->db->count_all_results();
+
+        $this->db->select('TeachBook.*');
+        $this->db->select('School.jp_name');
+        $this->db->where('book_stu_id', $id);
+        $this->db->where('book_date', $time);
+        $this->db->where_in('book_state', $STATE);
+        $this->db->where('book_cls_num >', $cls);
+        $this->db->from('TeachBook');
+        $query2 = $this->db->count_all_results();
+        $query = $query1 + $query2;
+        return $query;
+    }
+
+    public function un_comment_cla_sum($id, $time) {//未学习的课程数统计
+        $this->db->where('book_stu_id', $id);
+        $this->db->where('book_date <', $time);
+
+        $this->db->where('ClsComment.com_cls_id', null);
+        $this->db->from('TeachBook');
+        $this->db->join('ClsComment', 'ClsComment.com_cls_id=TeachBook.book_id', 'left');
+        $query = $this->db->count_all_results();
+        return $query;
+    }
+
+    public function get_book_date_by_id($id) {
+        $this->db->select('book_date');
+        $this->db->where('book_id', $id);
+        $query = $this->db->get('TeachBook');
         return $query->result_array();
     }
 

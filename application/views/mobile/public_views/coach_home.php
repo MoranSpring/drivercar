@@ -26,7 +26,7 @@
                 <div style="color:#fff;top:-88px;;heght:75px;position:relative;padding-left: 100px;">
                     <div class="clearfix">
                         <span class="ml-color-title" style="float:left;font-size: 1.5em;"><?=$coach_name?></span>
-                        <a  href="<?=base_url()?>index.php/mobile/school_home/<?=$coach_sch_id?>"><span class="am-icon-map-marker" style="text-decoration: underline;padding-right: 10px;float:right;height: 38px;;line-height: 38px;font-size: 1.1em;color:#fff">南湖驾校</span></a><br/>
+                        <a  href="<?=base_url()?>index.php/mobile/school_home/<?=$coach_sch_id?>"><span class="am-icon-map-marker" style="text-decoration: underline;padding-right: 10px;float:right;height: 38px;;line-height: 38px;font-size: 1.1em;color:#fff"><?=$jp_name?></span></a><br/>
                     </div>
 
                     <span class="ml-color-gray" style="font-size: 0.8em;">个人签名：<?=$coach_intro?></span>
@@ -59,7 +59,7 @@
                 </div>
                 <div class='am-u-sm-5 am-u-md-5 am-text-left' style="border-right: 1px dashed #ddd;">
                     <span> <?=$coach_grade?>级</span><br/>
-                    <span><?=$sch_name?></span><br/>
+                    <span><?=$jp_name?></span><br/>
                     <span><?=$coach_telnum?></span><br/>
                     <span>科目二/科目三</span><br/>
                     <span>45</span><br/>

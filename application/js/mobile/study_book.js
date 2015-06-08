@@ -57,11 +57,11 @@ function getCoachInfo() {
         success: function (data) {
                 var json = eval("(" + data + ")");
                 if (json.exist == '1') {
-                $('.coa_img').attr('src', json.imageURL);
-                $('.select_sch').text(json.school);
-                $('.select_sch').attr('id', json.school_id);
-                $('.select_coa').text(json.coach);
-                $('.select_coa').attr('id', json.coach_id);
+                $('.coa_img').attr('src', json.coach_face);
+                $('.select_sch').text(json.jp_name);
+                $('.select_sch').attr('id', json.sc_sch);
+                $('.select_coa').text(json.coach_name);
+                $('.select_coa').attr('id', json.sc_coa);
             }else{
                 $('.coa_exist').css('display','none');
                 $('.coa_unexist').css('display','block');
