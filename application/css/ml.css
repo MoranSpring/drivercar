@@ -230,8 +230,9 @@ text-decoration: none;
 }
 .ml-color-currency{
     color:#f69439;
-    /*color:#e8b81a;*/
-    /*color:#ebbb03;*/
+    font-weight: bold;
+    /* color:#e8b81a; */
+    /* color:#ebbb03; */
 }
 .ml-comment-star-1{
     color:#f97599;

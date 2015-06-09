@@ -59,6 +59,7 @@ function getCoachInfo() {
                 if (json.exist == '1') {
                 $('.coa_img').attr('src', json.coach_face);
                 $('.select_sch').text(json.jp_name);
+                $('.select-coa-cost').text(json.coach_cls_cost);
                 $('.select_sch').attr('id', json.sc_sch);
                 $('.select_coa').text(json.coach_name);
                 $('.select_coa').attr('id', json.sc_coa);
@@ -268,6 +269,9 @@ function submit() {
         $('#book-table-info').append("<tr><td>" + selArray[i].date + ", 第" + selArray[i].cls + "节课" + "</td><td><a  target='_blank' href='" + localhostPath + "/index.php/mobile/school_home/" + school_id + "'>" + school_name + "</a></td> <td><a  target='_blank' href='" + localhostPath + "/index.php/mobile/coach_home/" + coach_id + "'>" + coach_name + "</a></td><td>" + projectName + "</td></tr>");
     }
     $('.sum-cls-num').html(selArray.length);
+    var cost=$('.select-coa-cost').text();
+    var sum=selArray.length*cost;
+    $('#sum').html(sum);
 }
 function toOnload() {
     var school_id = $('.select_sch').attr('id');
@@ -282,7 +286,7 @@ function toOnload() {
     $.ajax({
         type: "POST",
         dataType: "text",
-        url: localhostPath + "/index.php/vipcenter/teach_book",
+        url: localhostPath + "/index.php/mobile/teach_book",
         async: true,
         data: {book_coa_id: coach_id, book_sch_id: school_id, book_cls_id: project, json: json},
         success: function (data) {
@@ -293,11 +297,19 @@ function toOnload() {
                 $('.step_2').css('display', 'none');
                 $('.step_3').css('display', 'none');
                 if (typeof (iAmMobile) === 'function') {
-                    window.location.href = document.referrer;
+                    window.location.href = localhostPath + "/index.php/mobile";
                 } else {
                     window.location.href = localhostPath + "/index.php/vipcenter/vip_center";
                 }
 
+            }else if(data == 3){
+               alert('余额不足'); 
+            }
+            else if(data == 7){
+               alert('插入时出现异常'); 
+            }
+            else if(data == 9){
+               alert('返回异常'); 
             }
             else {
                 alert("预约失败！");

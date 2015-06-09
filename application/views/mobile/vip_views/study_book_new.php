@@ -72,8 +72,9 @@
                             <img class="coa_img am-radius" src="" style="height: 50px;width:50px;"/>
                         </div>
                         <div class='am-u-sm-9'>
-                            <span  class='select_coa am-text-center' id="" style='font-size: 1em;line-height: 25px;color:#888;'></span><br/>
-                            <span  class='select_sch am-text-center' id="" style='line-height: 25px;font-size: 0.8em;color:#aaa;'></span>
+                            <span  class='select_coa am-text-center' id="" style='font-size: 1em;line-height: 25px;color:#888;'></span>
+                            <span class='am-fr' id="" style='font-size: 0.8em;line-height: 25px;color:#888;'><span style="font-size: 1.5em;" class="select-coa-cost ml-color-currency">100</span> C币/课时&nbsp;</span><br/>
+                            <span  class='select_sch' id="" style='line-height: 25px;font-size: 0.8em;color:#aaa;display: block;'></span>
                         </div>
                     </div>
                     <div class="coa_unexist" style="display: none;">
@@ -209,7 +210,7 @@
 
             </tbody>
         </table>
-        <h3 class="am-text-right">您选了 <span class="sum-cls-num">8</span> 节课  共计：<span id="sum" style="color:#990000;font-size: 18px;">3000</span>  积分</h3>
+        <h3 class="am-text-right">您选了 <span class="sum-cls-num">8</span> 节课  共计：<span id="sum" style="color:#990000;font-size: 18px;"></span>  C币</h3>
     </div>
     <div class="am-center am-margin-top-sm am-g" style="width:210px">
         <button id="bt31" type="button" class=" am-btn  am-radius ml-btn-normal am-fl" style="width:100px" >上一步</button>

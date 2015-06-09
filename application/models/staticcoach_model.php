@@ -30,6 +30,7 @@ class Staticcoach_model extends CI_Model {
     public function selectByStu($data) {//通过学员id查询已选的教练和驾培点
         $this->db->select();
         $this->db->select('Coach.coach_name');
+        $this->db->select('Coach.coach_cls_cost');
         $this->db->select('Coach.coach_face');
         $this->db->select('School.jp_name');
         $this->db->where('sc_stu', $data);

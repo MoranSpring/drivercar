@@ -252,14 +252,23 @@ class Teachbook_model extends CI_Model {
         return $result;
     }
 
-    public function select_detail_from_time($coachID, $time1, $time2) {//返回该用户名所有信息
-        $this->db->select();
+    public function select_detail_from_time($coachID, $time1, $time2) {//教练查询教学情况，通过
+       $this->db->select('TeachBook.*');
+        $this->db->select('Course.cls_name');
+        $this->db->select('School.jp_name');
+        $this->db->select('AccessControl.stu_true_name');
+        $this->db->select('AccessControl.stu_name');
+        $this->db->select('AccessControl.stu_nick_name');
         $this->db->where('book_coa_id', $coachID);
         $this->db->where('book_date >=', $time1);
         $this->db->where('book_date <=', $time2);
         $this->db->order_by("book_date", "asc");
         $this->db->order_by("book_cls_num", "asc");
-        $query = $this->db->get('TeachBook');
+        $this->db->from('TeachBook');
+        $this->db->join('AccessControl', 'AccessControl.stu_id=TeachBook.book_stu_id');
+        $this->db->join('Course', 'Course.cls_id=TeachBook.book_cls_id');
+        $this->db->join('School', 'School.jp_id=TeachBook.book_sch_id');
+        $query = $this->db->get();
         return $query->result_array();
     }
 
@@ -327,8 +336,8 @@ class Teachbook_model extends CI_Model {
         return $query;
     }
 
-    public function get_book_date_by_id($id) {
-        $this->db->select('book_date');
+    public function select_by_id($id) {
+        $this->db->select();
         $this->db->where('book_id', $id);
         $query = $this->db->get('TeachBook');
         return $query->result_array();

@@ -32,6 +32,8 @@ class Mobile extends MY_Controller {
         $this->load->model('course_model');
         $this->load->model('clscomment_model');
         $this->load->model('staticcoach_model');
+        $this->load->model('usercoin_model');
+        $this->load->model('consumption_model');
     }
 
     public function index() {
@@ -132,50 +134,6 @@ class Mobile extends MY_Controller {
         $page = $this->load->view('mobile/vip_views/tocomment', $comment_list, true);
         $title = "学习评价 - 我爱开车网（手机版）";
         $this->view($title, $page);
-    }
-
-    public function unbook() {
-        $id = $this->input->post("book_id");
-        $date = '';
-        $dateArray = $this->teachbook_model->get_book_date_by_id($id);
-        foreach ($dateArray as $row) {
-            $date = $row['book_date'];
-        }
-        $nowStamp = time();
-        $thisStamp = strtotime($date);
-        $nowHour = getdate()['hours'];
-        $gap = floor(($thisStamp - $nowStamp ) / 86400);
-        if ($gap >= 3) {
-//               alert('直接退掉！');
-            $data = array(
-                'book_state' => '6'//直接退掉;
-            );
-        } else if ($gap == 2) {
-//               alert('扣5%！');
-           $data = array(
-                'book_state' => '6'//直接退掉;
-            );
-        } else if ($gap == 1) {
-//               alert('扣10%！');
-           $data = array(
-                'book_state' => '6'//直接退掉;
-            );
-        } else if ($gap == 0 && $nowHour < 19) {
-           $data = array(
-                'book_state' => '6'//直接退掉;
-            );
-//               alert('扣20%！');
-        } else if ($gap == 0 && $nowHour >= 19) {
-//               alert('扣20%！且必须教练同意！');
-            $data = array(
-                'book_state' => '7'//请求退课;
-            );
-        } else {
-            echo '你退你大爷！！';
-            return false;
-        }
-        $return = $this->teachbook_model->update_state($id, $data);
-        echo $return;
     }
 
     public function book_detail() {
@@ -299,6 +257,77 @@ class Mobile extends MY_Controller {
         echo json_encode($data);
     }
 
+    public function unbook() {
+        $UID = $this->session->userdata('UID');
+        $id = $this->input->post("book_id");
+        $date = '';
+        $spare_money=0;//学员余额
+        $coach_coin = 0; //读出该教练的单节课的积分
+        
+        $dateArray = $this->teachbook_model->select_by_id($id);
+        foreach ($dateArray as $row) {
+            if($row['book_state']==6){  //判断该订单是否已经被退掉了
+                echo '您已经退了，别再来退了好不？';
+                return false;
+            }
+            $date = $row['book_date'];
+            $coach_coin_array = $this->coach_model->selectCostById($row['book_coa_id']); //读出该教练的单节课的积分
+            foreach ($coach_coin_array as $value) {
+                $coach_coin=$value['coach_cls_cost'];
+            }unset($value);
+            $spare_money_array = $this->usercoin_model->selectById($row['book_stu_id']); //读出学员剩余的积分数
+            foreach ($spare_money_array as $value) {
+                $spare_money=$value['uc_num'];
+            }unset($value);
+        }
+
+        $nowStamp = time();
+        $thisStamp = strtotime($date);
+        $nowHour = getdate()['hours'];
+        $gap = floor(($thisStamp - $nowStamp ) / 86400);
+        if ($gap >= 3) {
+//               alert('直接退掉！');
+            $data = array(
+                'book_state' => '6'//直接退掉;
+            );
+            $spare_money=$spare_money+$coach_coin;
+        } else if ($gap == 2) {
+//               alert('扣5%！');
+            $data = array(
+                'book_state' => '6'//直接退掉;
+            );
+            $spare_money=$spare_money+$coach_coin*0.95;
+        } else if ($gap == 1) {
+//               alert('扣10%！');
+            $data = array(
+                'book_state' => '6'//直接退掉;
+            );
+            $spare_money=$spare_money+($coach_coin*0.9);
+        } else if ($gap == 0 && $nowHour < 19) {
+            $data = array(
+                'book_state' => '6'//直接退掉;
+            );
+            $spare_money=$spare_money+($coach_coin*0.8);
+//               alert('扣20%！');
+        } else if ($gap == 0 && $nowHour >= 19) {
+//               alert('扣20%！且必须教练同意！');
+            $data = array(
+                'book_state' => '7'//请求退课;
+            );
+        } else {
+            echo '你退你大爷！！';
+            return false;
+        }
+        //去扣除积分
+        $COIN = array('uc_num' => round($spare_money,2));
+        $result_coin = $this->usercoin_model->update($UID, $COIN);
+        if($result_coin==1){
+            $return = $this->teachbook_model->update_state($id, $data);
+        }
+        
+        echo $return;
+    }
+
     public function to_change_coach() {
         $UID = $this->session->userdata('UID');
         $coach_id = $this->input->get('coach_id');
@@ -360,6 +389,89 @@ class Mobile extends MY_Controller {
             }
         }
         echo $body;
+    }
+
+    public function teach_book() {
+        $book_id = time();
+        $book_stu_id = $this->session->userdata('UID');
+        $book_coa_id = $this->input->post('book_coa_id');
+        $book_sch_id = $this->input->post('book_sch_id');
+        $book_cls_id = $this->input->post('book_cls_id');
+        $json = $this->input->post('json');
+        $bookArray = json_decode($json, true);
+
+        //判断用户余额是否充足！
+        $SUM = 0; //最终的费用
+        $USERCOIN = 0; //用户剩余的积分数
+        $COAHCOIN=0;//教练单节课积分
+        $clsnum = count($bookArray);
+        $coach_coin_array= $this->coach_model->selectCostById($book_coa_id); //读出该教练的单节课的积分
+        foreach ($coach_coin_array as $row) {
+            $COAHCOIN=$row['coach_cls_cost'];
+            $SUM = $row['coach_cls_cost'] * $clsnum; //计算出总价格
+        }
+        unset($row);
+        $user_coin_result = $this->usercoin_model->selectById($book_stu_id);
+        foreach ($user_coin_result as $row) {
+            $USERCOIN = $row['uc_num'];
+        }
+        if ($SUM > 0 && $USERCOIN > 0) {
+            $spare_money = $USERCOIN - $SUM;
+            if ($spare_money >= 0) {
+                //去扣除积分
+                $data = array('uc_num' => $spare_money);
+                $result_coin = $this->usercoin_model->update($book_stu_id, $data);
+                if ($result_coin == 1) {
+                    //正常执行
+                } else {
+                    //插入时出现异常
+                    echo 7;
+                    return false;
+                }
+            } else {
+                //余额不足
+                echo 3;
+                return false;
+            }
+        } else {
+            //返回异常
+            echo 9;
+            return false;
+        }
+
+        $DateArray = array();
+        $RecordArray = array();
+        foreach ($bookArray as $row) {
+            $book_id = time() . rand(1, 100);
+            $newDate = array(
+                'book_id' => $book_id,
+                'book_stu_id' => $book_stu_id,
+                'book_coa_id' => $book_coa_id,
+                'book_sch_id' => $book_sch_id,
+                'book_cls_id' => $book_cls_id,
+                'book_state' => 1,
+                'book_date' => $row['date'],
+                'book_cls_num' => $row['cls'],
+                'book_time'=>$this->getTime()
+            );
+            array_push($DateArray, $newDate);
+            
+            $csm_record=array(
+                'csm_id' => 'csm'.$book_id,
+                'csm_rec_id' => $book_id,
+                'csm_stu_id' => $book_stu_id,
+                'csm_in_out' => '1',
+                'csm_type' => '学车费用',
+                'csm_coin' => $COAHCOIN,
+                'csm_date'=>$this->getTime()
+            );
+            array_push($RecordArray, $csm_record);
+        }
+        $result = $this->teachbook_model->insert($DateArray);
+        if($result==1){
+            $result = $this->consumption_model->insert($RecordArray);
+        }
+        echo $result;
     }
 
     /**

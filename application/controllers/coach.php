@@ -299,28 +299,8 @@ class Coach extends MY_Controller {
          $comment_list = "";
         $j = 0;
         foreach ($result as $row) {
-            $list['book_id'] = $row['book_id'];
-            $list['book_date'] = $row['book_date'];
-            $list['book_cls_num'] = $row['book_cls_num'];
-            $list['book_suggest'] = $row['book_suggest'];
-            
-            $list['book_cls_name'] ="";
-            $courseName1 = $this->course_model->select($row['book_cls_id']);
-            foreach ($courseName1 as $row1) {
-                $list['book_cls_name'] = $row1['cls_name'];
-            }
-            
-            $coachName = $this->accesscontrol_model->selectUserName($row['book_stu_id']);
-            foreach ($coachName as $row3) {
-                $list['stu_name'] = $row3['stu_true_name'];
-            }
-            $schName = $this->school_model->select_name($row['book_sch_id']);
-            foreach ($schName as $row2) {
-                $list['sch_name'] = $row2['jp_name'];
-            }
-            $comment_list.= $this->load->view('coach_views/teach_info_list', $list, true);
+            $comment_list.= $this->load->view('coach_views/teach_info_list', $row, true);
             $j++;
-           
         }
         $data=array(
             'course_num'=>$j,
