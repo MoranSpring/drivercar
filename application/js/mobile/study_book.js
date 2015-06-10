@@ -305,11 +305,14 @@ function toOnload() {
             }else if(data == 3){
                alert('余额不足'); 
             }
-            else if(data == 7){
+            else if(data == 11){
                alert('插入时出现异常'); 
             }
             else if(data == 9){
                alert('返回异常'); 
+            }
+            else if(data == 7){
+               alert('该课程已被别人选走了'); 
             }
             else {
                 alert("预约失败！");

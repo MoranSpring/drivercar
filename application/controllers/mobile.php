@@ -34,6 +34,7 @@ class Mobile extends MY_Controller {
         $this->load->model('staticcoach_model');
         $this->load->model('usercoin_model');
         $this->load->model('consumption_model');
+        $this->load->model('cash_model');
     }
 
     public function index() {
@@ -259,25 +260,26 @@ class Mobile extends MY_Controller {
 
     public function unbook() {
         $UID = $this->session->userdata('UID');
-        $id = $this->input->post("book_id");
+        $id = $this->input->post("book_id", TRUE);
         $date = '';
-        $spare_money=0;//学员余额
+        $spare_money = 0; //学员余额
         $coach_coin = 0; //读出该教练的单节课的积分
-        
+        $need_back = 0; //应该返还的钱
+
         $dateArray = $this->teachbook_model->select_by_id($id);
         foreach ($dateArray as $row) {
-            if($row['book_state']==6){  //判断该订单是否已经被退掉了
+            if ($row['book_state'] == 6) {  //判断该订单是否已经被退掉了
                 echo '您已经退了，别再来退了好不？';
                 return false;
             }
             $date = $row['book_date'];
             $coach_coin_array = $this->coach_model->selectCostById($row['book_coa_id']); //读出该教练的单节课的积分
             foreach ($coach_coin_array as $value) {
-                $coach_coin=$value['coach_cls_cost'];
+                $coach_coin = $value['coach_cls_cost'];
             }unset($value);
             $spare_money_array = $this->usercoin_model->selectById($row['book_stu_id']); //读出学员剩余的积分数
             foreach ($spare_money_array as $value) {
-                $spare_money=$value['uc_num'];
+                $spare_money = $value['uc_num'];
             }unset($value);
         }
 
@@ -290,24 +292,28 @@ class Mobile extends MY_Controller {
             $data = array(
                 'book_state' => '6'//直接退掉;
             );
-            $spare_money=$spare_money+$coach_coin;
+            $need_back = $coach_coin;
+            $spare_money = $spare_money + $need_back;
         } else if ($gap == 2) {
 //               alert('扣5%！');
             $data = array(
                 'book_state' => '6'//直接退掉;
             );
-            $spare_money=$spare_money+$coach_coin*0.95;
+            $need_back = $coach_coin * 0.95;
+            $spare_money = $spare_money + $need_back;
         } else if ($gap == 1) {
 //               alert('扣10%！');
             $data = array(
                 'book_state' => '6'//直接退掉;
             );
-            $spare_money=$spare_money+($coach_coin*0.9);
+            $need_back = $coach_coin * 0.9;
+            $spare_money = $spare_money + $need_back;
         } else if ($gap == 0 && $nowHour < 19) {
             $data = array(
                 'book_state' => '6'//直接退掉;
             );
-            $spare_money=$spare_money+($coach_coin*0.8);
+            $need_back = $coach_coin * 0.8;
+            $spare_money = $spare_money + $need_back;
 //               alert('扣20%！');
         } else if ($gap == 0 && $nowHour >= 19) {
 //               alert('扣20%！且必须教练同意！');
@@ -318,14 +324,33 @@ class Mobile extends MY_Controller {
             echo '你退你大爷！！';
             return false;
         }
-        //去扣除积分
-        $COIN = array('uc_num' => round($spare_money,2));
-        $result_coin = $this->usercoin_model->update($UID, $COIN);
-        if($result_coin==1){
-            $return = $this->teachbook_model->update_state($id, $data);
+        $back_money = round($spare_money, 2);     //退款后用户余额
+
+        $csm_record = array(//消费记录
+            'csm_id' => 'csm' . $nowStamp,
+            'csm_rec_id' => $id,
+            'csm_stu_id' => $UID,
+            'csm_in_out' => '2',
+            'csm_type' => "退订退款",
+            'csm_coin' => $need_back,
+            'csm_date' => $this->getTime()
+        );
+        //资金操作！---------------------------------------消费记录---修改退定状态--订单id--写入用户余额--用户id
+        $return = $this->cash_model->back_money($csm_record, $data, $id, $back_money, $UID);
+        if ($return === TRUE)
+            echo 1;
+        else {
+            echo false;
         }
-        
-        echo $return;
+        //去扣除积分
+//        $COIN = array('uc_num' => $back_money);
+//        $result_coin = $this->usercoin_model->update($UID, $COIN);
+//        if($result_coin==1){
+//            $return = $this->teachbook_model->update_state($id, $data);
+//        }
+//        if($return==1){
+//            $return = $this->consumption_model->insert($csm_record);
+//        }
     }
 
     public function to_change_coach() {
@@ -394,20 +419,41 @@ class Mobile extends MY_Controller {
     public function teach_book() {
         $book_id = time();
         $book_stu_id = $this->session->userdata('UID');
-        $book_coa_id = $this->input->post('book_coa_id');
-        $book_sch_id = $this->input->post('book_sch_id');
-        $book_cls_id = $this->input->post('book_cls_id');
-        $json = $this->input->post('json');
+        $book_coa_id = $this->input->post('book_coa_id', TRUE);
+        $book_sch_id = $this->input->post('book_sch_id', TRUE);
+        $book_cls_id = $this->input->post('book_cls_id', TRUE);
+        $json = $this->input->post('json', TRUE);
         $bookArray = json_decode($json, true);
+        $clsnum = count($bookArray); //看客户总共选了多少节课
+        //判断传过来的json是否用重复时间
+        for ($i = 0; $i < $clsnum; $i++) {
+            $temp_day = $bookArray[$i]['date'];
+            $temp_cls = $bookArray[$i]['cls'];
+            for ($j = $i + 1; $j < $clsnum; $j++) {
+                if ($temp_day == $bookArray[$j]['date'] && $temp_cls == $bookArray[$j]['cls']) {
+                    array_splice($bookArray, $j, 1);
+                    $clsnum--;
+                    $j--;
+                }
+            }
+        }
+        //判断传来的课程时间跟数据库中的时间是否冲突，防止选课前刚刚被被人选走课程
+        $is_exist_array = $this->teachbook_model->check_is_exist($bookArray,$book_coa_id); //读出该教练的单节课的积分
+        foreach($is_exist_array as $row){
+            //有节课被别人已经选走
+            echo 7;
+            return false;
+        }
+
+
 
         //判断用户余额是否充足！
         $SUM = 0; //最终的费用
         $USERCOIN = 0; //用户剩余的积分数
-        $COAHCOIN=0;//教练单节课积分
-        $clsnum = count($bookArray);
-        $coach_coin_array= $this->coach_model->selectCostById($book_coa_id); //读出该教练的单节课的积分
+        $COAHCOIN = 0; //教练单节课积分
+        $coach_coin_array = $this->coach_model->selectCostById($book_coa_id); //读出该教练的单节课的积分
         foreach ($coach_coin_array as $row) {
-            $COAHCOIN=$row['coach_cls_cost'];
+            $COAHCOIN = $row['coach_cls_cost'];
             $SUM = $row['coach_cls_cost'] * $clsnum; //计算出总价格
         }
         unset($row);
@@ -415,19 +461,12 @@ class Mobile extends MY_Controller {
         foreach ($user_coin_result as $row) {
             $USERCOIN = $row['uc_num'];
         }
+        unset($row);
         if ($SUM > 0 && $USERCOIN > 0) {
             $spare_money = $USERCOIN - $SUM;
             if ($spare_money >= 0) {
                 //去扣除积分
-                $data = array('uc_num' => $spare_money);
-                $result_coin = $this->usercoin_model->update($book_stu_id, $data);
-                if ($result_coin == 1) {
-                    //正常执行
-                } else {
-                    //插入时出现异常
-                    echo 7;
-                    return false;
-                }
+                $data = array('uc_num' => $spare_money);//消费后用户余额
             } else {
                 //余额不足
                 echo 3;
@@ -441,10 +480,11 @@ class Mobile extends MY_Controller {
 
         $DateArray = array();
         $RecordArray = array();
+        $count=  rand(0, 1000);
         foreach ($bookArray as $row) {
-            $book_id = time() . rand(1, 100);
+            $book_id=time().$count;
             $newDate = array(
-                'book_id' => $book_id,
+                'book_id' =>$book_id ,
                 'book_stu_id' => $book_stu_id,
                 'book_coa_id' => $book_coa_id,
                 'book_sch_id' => $book_sch_id,
@@ -452,26 +492,29 @@ class Mobile extends MY_Controller {
                 'book_state' => 1,
                 'book_date' => $row['date'],
                 'book_cls_num' => $row['cls'],
-                'book_time'=>$this->getTime()
+                'book_time' => $this->getTime()
             );
             array_push($DateArray, $newDate);
-            
-            $csm_record=array(
-                'csm_id' => 'csm'.$book_id,
+
+            $csm_record = array(
+                'csm_id' => 'csm' . $book_id,
                 'csm_rec_id' => $book_id,
                 'csm_stu_id' => $book_stu_id,
                 'csm_in_out' => '1',
                 'csm_type' => '学车费用',
                 'csm_coin' => $COAHCOIN,
-                'csm_date'=>$this->getTime()
+                'csm_date' => $this->getTime()
             );
             array_push($RecordArray, $csm_record);
+            $count++;
         }
-        $result = $this->teachbook_model->insert($DateArray);
-        if($result==1){
-            $result = $this->consumption_model->insert($RecordArray);
+        $result = $this->cash_model->teach_book_waste_money($DateArray,$RecordArray,$book_stu_id,$data) ;
+        if ($result == true) {
+            echo 1;
+        }else{
+            echo 11;//数据插入冲突
         }
-        echo $result;
+        
     }
 
     /**
@@ -516,6 +559,31 @@ class Mobile extends MY_Controller {
     }
 
     function testDB() {
+        $array[0] = array(
+            'day' => '2015-06-11',
+            'cls' => '4',
+        );
+        $array[1] = array(
+            'day' => '2015-06-11',
+            'cls' => '45',
+        );
+
+
+
+        $clsnum = count($array);
+        for ($i = 0; $i < $clsnum; $i++) {
+            $temp_day = $array[$i]['day'];
+            $temp_cls = $array[$i]['cls'];
+            for ($j = $i + 1; $j < $clsnum; $j++) {
+                if ($temp_day == $array[$j]['day'] && $temp_cls == $array[$j]['cls']) {
+                    array_splice($array, $j, 1);
+                    $clsnum--;
+                    $j--;
+                }
+            }
+        }
+        echo $clsnum;
+//        $result_fur = $this->teachbook_model->check_is_exist($array);
 //        echo strtotime("2015-03-31");
 //        echo getdate()['hours'];
 //        $date = "2015-03-31";

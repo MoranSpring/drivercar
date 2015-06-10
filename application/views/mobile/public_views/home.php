@@ -47,7 +47,6 @@
     <h1 class="am-header-title">
         <a href="#title-link" class="">我爱开车网</a>
     </h1>
-
 </header>
 <?= $menu ?>
 <div class="am-margin-sm">

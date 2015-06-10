@@ -342,5 +342,20 @@ class Teachbook_model extends CI_Model {
         $query = $this->db->get('TeachBook');
         return $query->result_array();
     }
+    public function check_is_exist($data,$book_coa_id){
+        $this->db->select();
+        $where='';
+        foreach($data as  $row){
+            $one="(book_date='".$row['date']. "' AND book_cls_num='".$row['cls']."' AND book_coa_id='".$book_coa_id."' AND book_state!='6')";
+            if($where!=''){
+                $where=$where." OR ".$one;
+            }else{
+                $where=$one;
+            }
+        }
+        $this->db->where($where);
+        $query = $this->db->get('TeachBook');
+        return $query->result_array();
+    }
 
 }
