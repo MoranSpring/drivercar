@@ -1,4 +1,4 @@
-<div id="com_inventory" class="am-margin" book_id="<?=$book_id?>">
+<div id="com_inventory" class="am-margin" book_id="<?= $book_id ?>">
     <h2>请对本次教学情况打分：</h2>
     <table class="am-table"  style="background:#fff; color: #aaa">
         <tbody>
@@ -17,19 +17,23 @@
 
             <tr>
                 <td>教练</td>
-                <td><a style="color:#add;text-decoration:underline;"  target='_blank' href="<?= base_url() ?>index.php/mobile/coach_home/<?=$book_coa_id?>"><?=$coach_name?></a></td>
+                <td><a class="ml-color-a" style="text-decoration:underline;"  target='_blank' href="<?= base_url() ?>index.php/mobile/coach_home/<?= $book_coa_id ?>"><?= $coach_name ?></a></td>
             </tr>
             <tr>
                 <td>培训点</td>
-                <td><a style="color:#add;text-decoration:underline;"   target='_blank' href="<?= base_url() ?>index.php/mobile/school_home/<?=$book_sch_id?>"><?=$jp_name?></a></td>
+                <td><a class="ml-color-a" style="text-decoration:underline;"   target='_blank' href="<?= base_url() ?>index.php/mobile/school_home/<?= $book_sch_id ?>"><?= $jp_name ?></a></td>
             </tr>
             <tr>
                 <td>消费积分</td>
-                <td>100RMB</td>
+                <td><span class="ml-color-currency"><?= $coach_cls_cost ?></span>&nbsp;C币</td>
+            </tr>
+            <tr>
+                <td>下单时间</td>
+                <td><span><?= $book_time ?></span></td>
             </tr>
             <tr>
                 <td>教学建议</td>
-                <td><?= $book_suggest ?></td>
+                <td><?php if($book_suggest=='')echo '教练还未给建议';else echo $book_suggest; ?></td>
             </tr>
         </tbody>
     </table>
@@ -49,9 +53,9 @@
     <div style="width:100%;" class="clearfix">
         <p style="float:left">教练教学 : <p>
         <div style="float:left; width:100%;">
-            <textarea id="comment_content" style=" width:100%; height: 100px"></textarea>
+            <textarea id="comment_content" placeholder="请输写点儿评价吧，别写太少了哦~"  style=" width:100%; height: 100px"></textarea>
             <div>
-                <label class="am-btn am-btn-primary" style="float:right;" onclick="comment()">确定</label>
+                <label class="am-btn ml-btn-normal am-radius" style="float:right;" onclick="comment()">确定</label>
             </div>
         </div>
     </div>

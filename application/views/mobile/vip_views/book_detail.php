@@ -80,7 +80,11 @@
         </tr>
         <tr>
             <td>积分消费</td>
-            <td>100RMB</td>
+            <td><span class="ml-color-currency"><?= $coach_cls_cost ?></span>&nbsp;C币</td>
+        </tr>
+        <tr>
+            <td>下单时间</td>
+            <td><span><?= $book_time ?></span></td>
         </tr>
         <tr class="<?php
         if ($isFinish != 0) {

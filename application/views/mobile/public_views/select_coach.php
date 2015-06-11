@@ -70,7 +70,7 @@
 
 
 <div class="am-page" id="demo-list-page" style="display: none;">
-    <header data-am-widget="header" class="am-header am-header-default">
+    <header data-am-widget="header" class="am-header am-header-default ml-color-bg-main">
         <div class="am-header-left am-header-nav">
             <a onclick="back();">
                 <img class="am-header-icon-custom" src="data:image/svg+xml;charset=utf-8,&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 12 20&quot;&gt;&lt;path d=&quot;M10,0l2,2l-8,8l8,8l-2,2L0,10L10,0z&quot; fill=&quot;%23fff&quot;/&gt;&lt;/svg&gt;"
@@ -121,6 +121,7 @@
         }
     });
     function test(value) {
+        window.scroll(0,0);
         var id = value.getAttribute('value');
         selected_school = id;
         var isHasHistroy = window.document.location.href.split('#')[1];
@@ -150,6 +151,7 @@
     }
 
     function back() {      //次页面返回
+        window.scroll(0,0);
         $('body').removeClass('demo-list-active');
         setTimeout(function () {
             $('#demo-list-page').css('display', 'none');

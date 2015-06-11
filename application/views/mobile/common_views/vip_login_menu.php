@@ -18,7 +18,7 @@
                     </div>
                 </li>
                 <li class="">
-                    <a href="##" class=""style="background:#333;border-bottom: 1px dotted #999;">首页</a>
+                    <a href="<?= base_url()?>index.php/mobile/vip_home" class=""style="background:#333;border-bottom: 1px dotted #999;">个人主页</a>
                 </li>
                 <li class="am-parent">
                     <a href="##" class=""style="background:#333;border-bottom: 1px dotted #999">驾培资讯</a>

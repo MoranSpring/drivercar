@@ -175,6 +175,36 @@ class Mobile extends MY_Controller {
         $this->view($title, $page);
     }
 
+    public function vip_home($id = '') {
+        $isSelf = FALSE;
+        $UID = '';
+        //访问用户类型判断，是否是该用户本人
+        if ($id == '') {
+            if ($this->session->userdata('UID') == FALSE) {
+                echo 'fobiden visitor!';
+                return FALSE;
+            }else{
+                $UID=$this->session->userdata('UID') ;
+                $isSelf = TRUE;
+            }
+        } else{
+            if($id==$this->session->userdata('UID')){
+                 $UID=$this->session->userdata('UID');
+                $isSelf = TRUE;
+            }else{
+                $UID=$id;
+            }
+        }
+//            $coach = $this->coach_model->select_detail($id);
+//        foreach ($coach as $row) {
+//            $body = $row;
+//        }
+        $body['menu'] = $this->getMenu();
+        $page = $this->load->view('mobile/vip_views/vip_home', $body, true);
+        $title = "个人主页 - 我爱开车网（手机版）";
+        $this->view($title, $page);
+    }
+
     public function school_home($id) {
         $school = $this->school_model->get_from_id($id);
         foreach ($school as $row) {
@@ -438,8 +468,8 @@ class Mobile extends MY_Controller {
             }
         }
         //判断传来的课程时间跟数据库中的时间是否冲突，防止选课前刚刚被被人选走课程
-        $is_exist_array = $this->teachbook_model->check_is_exist($bookArray,$book_coa_id); //读出该教练的单节课的积分
-        foreach($is_exist_array as $row){
+        $is_exist_array = $this->teachbook_model->check_is_exist($bookArray, $book_coa_id); //读出该教练的单节课的积分
+        foreach ($is_exist_array as $row) {
             //有节课被别人已经选走
             echo 7;
             return false;
@@ -466,7 +496,7 @@ class Mobile extends MY_Controller {
             $spare_money = $USERCOIN - $SUM;
             if ($spare_money >= 0) {
                 //去扣除积分
-                $data = array('uc_num' => $spare_money);//消费后用户余额
+                $data = array('uc_num' => $spare_money); //消费后用户余额
             } else {
                 //余额不足
                 echo 3;
@@ -480,11 +510,11 @@ class Mobile extends MY_Controller {
 
         $DateArray = array();
         $RecordArray = array();
-        $count=  rand(0, 1000);
+        $count = rand(0, 1000);
         foreach ($bookArray as $row) {
-            $book_id=time().$count;
+            $book_id = time() . $count;
             $newDate = array(
-                'book_id' =>$book_id ,
+                'book_id' => $book_id,
                 'book_stu_id' => $book_stu_id,
                 'book_coa_id' => $book_coa_id,
                 'book_sch_id' => $book_sch_id,
@@ -508,13 +538,21 @@ class Mobile extends MY_Controller {
             array_push($RecordArray, $csm_record);
             $count++;
         }
-        $result = $this->cash_model->teach_book_waste_money($DateArray,$RecordArray,$book_stu_id,$data) ;
+        $result = $this->cash_model->teach_book_waste_money($DateArray, $RecordArray, $book_stu_id, $data);
         if ($result == true) {
             echo 1;
-        }else{
-            echo 11;//数据插入冲突
+        } else {
+            echo 11; //数据插入冲突
         }
-        
+    }
+     public function get_consumpation(){
+        $UID=$this->session->userdata('UID');
+        $result = $this->consumption_model->select_by_stu($UID);
+        $page='';
+        foreach($result as $row){
+            $page .= $this->load->view('mobile/vip_views/consumption_list', $row, true);
+        }
+            echo $page;
     }
 
     /**
@@ -536,6 +574,7 @@ class Mobile extends MY_Controller {
     public function testIp() {
         echo $this->getip();
     }
+   
 
     function getCityByIp() {
         $unknown = 'unknown';

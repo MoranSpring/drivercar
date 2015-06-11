@@ -20,10 +20,11 @@ class Consumption_model extends CI_Model {
         return $result;
     }
 
-    public function select($data) {//返回该用户名所有信息
+    public function select_by_stu($data) {//通过用户id来查找记录
         $this->db->select();
-        $this->db->where('sc_stu', $data);
-        $query = $this->db->get('StaticCoach');
+        $this->db->where('csm_stu_id', $data);
+        $this->db->order_by("csm_date", "desc");
+        $query = $this->db->get('Consumption');
         return $query->result_array();
     }
 }

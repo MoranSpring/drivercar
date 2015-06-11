@@ -63,6 +63,7 @@ class Teachbook_model extends CI_Model {
         $this->db->select('TeachBook.*');
         $this->db->select('Coach.coach_name');
         $this->db->select('Coach.coach_face');
+        $this->db->select('Coach.coach_cls_cost');
         $this->db->select('Course.cls_name');
         $this->db->select('ClsComment.com_id');
         $this->db->select('School.jp_name');
@@ -124,6 +125,7 @@ class Teachbook_model extends CI_Model {
         $this->db->select('TeachBook.*');
         $this->db->select('Coach.coach_name');
         $this->db->select('Coach.coach_face');
+        $this->db->select('Coach.coach_cls_cost');
         $this->db->select('Course.cls_name');
         $this->db->select('School.jp_name');
         $this->db->where('book_stu_id', $id);
@@ -226,6 +228,7 @@ class Teachbook_model extends CI_Model {
         $this->db->select('TeachBook.*');
         $this->db->select('Coach.coach_name');
         $this->db->select('Coach.coach_face');
+        $this->db->select('Coach.coach_cls_cost');
         $this->db->select('Course.cls_name');
         $this->db->select('School.jp_name');
         $this->db->select('ClsComment.com_content');
