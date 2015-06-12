@@ -84,7 +84,7 @@ class Mobile extends MY_Controller {
         $uid = $this->session->userdata('UID');
         if ($uid == FALSE) {
             redirect('mobile/login');
-            exit();
+            return false;
         }
         $page = $this->load->view('mobile/vip_views/study_book_new', '', true);
         $title = " 教练预约 - 我爱开车网（手机版）";
@@ -181,18 +181,18 @@ class Mobile extends MY_Controller {
         //访问用户类型判断，是否是该用户本人
         if ($id == '') {
             if ($this->session->userdata('UID') == FALSE) {
-                echo 'fobiden visitor!';
+                redirect('mobile/login');
                 return FALSE;
-            }else{
-                $UID=$this->session->userdata('UID') ;
+            } else {
+                $UID = $this->session->userdata('UID');
                 $isSelf = TRUE;
             }
-        } else{
-            if($id==$this->session->userdata('UID')){
-                 $UID=$this->session->userdata('UID');
+        } else {
+            if ($id == $this->session->userdata('UID')) {
+                $UID = $this->session->userdata('UID');
                 $isSelf = TRUE;
-            }else{
-                $UID=$id;
+            } else {
+                $UID = $id;
             }
         }
 //            $coach = $this->coach_model->select_detail($id);
@@ -545,15 +545,61 @@ class Mobile extends MY_Controller {
             echo 11; //数据插入冲突
         }
     }
-     public function get_consumpation(){
-        $UID=$this->session->userdata('UID');
+
+    public function get_consumpation() {
+        $UID = $this->session->userdata('UID');
         $result = $this->consumption_model->select_by_stu($UID);
-        $page='';
-        foreach($result as $row){
+        $page = '';
+        foreach ($result as $row) {
             $page .= $this->load->view('mobile/vip_views/consumption_list', $row, true);
         }
-            echo $page;
+        echo $page;
     }
+
+    public function get_study_record() {
+        $UID = $this->session->userdata('UID');
+        $result = $this->teachbook_model->select_study_record($UID);
+        $page = $this->load->view('mobile/vip_views/study_step/step_zero', '', true);
+        $flag = 0;
+        $flag2 = 0;
+        $page_step2='';
+        $page_step3='';
+        foreach ($result as $row) {
+            if ($flag == 0) {
+                $page = $this->load->view('mobile/vip_views/study_step/step_one', '', true);
+                $page.=$this->load->view('mobile/vip_views/study_step/step_two', '', true);
+                $flag=1;
+            }
+            if ($this->getClassType($row['book_cls_id']) == '科目二') {
+                $page_step2.=$this->load->view('mobile/vip_views/study_step/step_content', $row, true);
+            }
+            if ($this->getClassType($row['book_cls_id']) == '科目三') {
+                $page_step3.=$this->load->view('mobile/vip_views/study_step/step_content', $row, true);
+            }
+        }
+         if ($page_step3 != '') {
+             $page .= $page_step2;
+             $page.=$this->load->view('mobile/vip_views/study_step/step_three', '', true);
+             $page .= $page_step3;
+            }
+            else{
+                $page .= $page_step2;
+                 $page .= $this->load->view('mobile/vip_views/study_step/stepend', '', true);
+            }
+        echo $page;
+    }
+    public function get_coach_comment() {
+        $UID = $this->session->userdata('UID');
+        $result = $this->teachbook_model->select_coach_comment($UID);
+        $page='';
+        foreach($result as $row){
+            if($row['book_suggest']!=''){
+            $page .= $this->load->view('mobile/vip_views/coach_comment_list', $row, true);
+            }
+        }
+         echo $page;
+    }
+    
 
     /**
      * AJAX请求方法！*********END
@@ -574,7 +620,6 @@ class Mobile extends MY_Controller {
     public function testIp() {
         echo $this->getip();
     }
-   
 
     function getCityByIp() {
         $unknown = 'unknown';

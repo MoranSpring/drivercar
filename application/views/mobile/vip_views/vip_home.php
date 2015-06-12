@@ -34,9 +34,13 @@
         -ms-transform: translate(0%,0);
         transform: translate(0%,0);
     }
-    ul>li{
-        border: 1px solid #dedede !important;
+    .ml-comment-avatar {
+        float: left;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
     }
+
 </style>
 <script src="<?php echo base_url() . 'application/js/jquery.Jcrop.js' ?>" type="text/javascript"></script>
 <link rel="stylesheet" href="<?php echo base_url() . 'application/css/jquery.Jcrop.css' ?>">
@@ -103,7 +107,7 @@
             </div>
         </section>
         <section class="am-panel am-panel-default" style='border-color:#ddd;'>
-            <div onclick="change()" class="am-g ml-ontouch" style="margin: 0;border-bottom: 1px solid #ddd;">
+            <div onclick="change(3)" class="am-g ml-ontouch" style="margin: 0;border-bottom: 1px solid #ddd;">
                 <div class="am-u-sm-10 " style="height:50px;font-size: 1em;margin: 0;">
                     <span class="" style="line-height:50px;font-size: 1.1em;color:#888;">教练反馈</span>
                 </div>
@@ -198,7 +202,7 @@
                     background: url('<?= base_url() ?>application/images/mobile/time1.png') 0 -210px no-repeat;
                 }
             </style>
-            <div class="all-page Record" style='display:none;font-size: 1em'><!--学习记录-->
+            <div class="all-page Record" style='display:none;background:#666;font-size: 1em;color:#fff;'><!--学习记录-->
                 <div class='am-g'>
                     <div class='am-u-sm-3' style='padding:0;'>
                         &nbsp;
@@ -209,78 +213,25 @@
                         </div>
                     </div>
                 </div>
-                <div class='am-g'>
-                    <div class='am-u-sm-3 am-text-right' style='padding:0;'>
+                <div class="record_container">
 
-                        <span style='line-height:70px;color:#aaa;'>2014.11.12</span>
-
-                    </div>
-                    <div class='am-u-sm-9' style='padding:0;'>
-                        <div class="clock-step-1" style='height:70px;width:42px;float:left;'>
-                        </div><span style='line-height:70px;background:#856a57;padding: 5px;border-radius: 3px;color:#FFF'>&nbsp;科目一&nbsp;</span>&nbsp;&nbsp;<span class='am-icon-check' style='color:green;line-height:40px;'>&nbsp;已通过</span>
-                    </div>
                 </div>
-                <div class='am-g'>
-                    <div class='am-u-sm-3 am-text-right' style='padding:0;'>
-                        <span style='line-height:70px;color:#aaa;'>2014.11.12</span>
-                    </div>
-                    <div class='am-u-sm-9' style='padding:0;'>
-                        <div class="clock-step-1" style='height:70px;width:42px;float:left;'>
-                        </div><span style='line-height:70px;background:#704849;padding: 5px;border-radius: 3px;color:#FFF'>&nbsp;科目二&nbsp;</span>&nbsp;&nbsp;<span class='am-icon-angle-double-right' style='color:#bf963a;line-height:40px;'>&nbsp;学习中</span>
-                    </div>
-                </div>
-                <div class='am-g'>
-                    <div class='am-u-sm-3 am-text-right' style='padding:0;'>
-                        <span style='line-height:70px;color:#aaa;'>2014.11.12</span>
-                    </div>
-                    <div class='am-u-sm-9' style='padding:0;'>
-                        <div class="clock-step-2" style='height:70px;width:70px;float:left;'>
-                        </div><span style='line-height:70px;'>上坡起步</span>
-                    </div>
-                </div>
-                <div class='am-g'>
-                    <div class='am-u-sm-3 am-text-right' style='padding:0;'>
-                        <span style='line-height:70px;color:#aaa;'>2014.11.12</span>
-                    </div>
-                    <div class='am-u-sm-9' style='padding:0;'>
-                        <div class="clock-step-2" style='height:70px;width:70px;float:left;'>
-                        </div><span style='line-height:70px;'>上坡起步</span>
-                    </div>
-                </div>
-                <div class='am-g'>
-                    <div class='am-u-sm-3 am-text-right' style='padding:0;'>
-                        <span style='line-height:70px;color:#aaa;'>2014.11.12</span>
-                    </div>
-                    <div class='am-u-sm-9' style='padding:0;'>
-                        <div class="clock-step-2" style='height:70px;width:70px;float:left;'>
-                        </div><span style='line-height:70px;'>上坡起步</span>
-                    </div>
-                </div>
-                <div class='am-g'>
-                    <div class='am-u-sm-3 am-text-right' style='padding:0;'>
-                        <span style='line-height:70px;color:#aaa;'>2014.11.12</span>
-                    </div>
-                    <div class='am-u-sm-9' style='padding:0;'>
-                        <div class="clock-step-2" style='height:70px;width:70px;float:left;'>
-                        </div><span style='line-height:70px;'>上坡起步</span>
-                    </div>
-                </div>
-                <div class='am-g'>
-                    <div class='am-u-sm-3 am-text-right' style='padding:0;'>
-                        <span style='line-height:70px;color:#aaa;'>2014.11.12</span>
-                    </div>
-                    <div class='am-u-sm-9' style='padding:0;'>
-                        <div class="clock-end" style='height:70px;width:42px;float:left;'>
-                        </div><span style='line-height:70px;background:#bf963a;padding: 5px;border-radius: 3px;color:#FFF'>&nbsp;科目三&nbsp;</span>&nbsp;&nbsp;<span class='am-icon-exclamation' style='color:#aaa;line-height:40px;'>&nbsp;未学习</span>
-                    </div>
-                </div>
-
-
-
-
-
-                <!--这中间是不同功能的显示的div-->
             </div>
+            <div class="all-page coach_comment" style='display:none;font-size: 1em'><!--教练评价-->
+                <ul class="am-comments-list am-comments-list-flip am-padding coach_comment_container">
+
+                </ul>
+
+
+            </div>
+            <div class="all-page coach_comment" style='display:none;font-size: 1em'><!--教练评价-->
+                <ul class="am-comments-list am-comments-list-flip am-padding coach_comment_container">
+
+                </ul>
+
+
+            </div>
+            <!--这中间是不同功能的显示的div-->
         </div>
     </div>
 </div>
@@ -314,6 +265,13 @@
             case 2:
                 $('.Record').css('display', 'block');
                 $('.my_title').html('学习记录');
+                study_record();
+                break;
+            case 3:
+                $('.coach_comment').css('display', 'block');
+                $('.my_title').html('教练建议');
+                coach_comment();
+
                 break;
             case 5:
                 $('.comsumpation').css('display', 'block');
@@ -325,7 +283,7 @@
         setTimeout(function () {
             $('body').addClass('demo-list-active');
         }, 1);
-//        setTimeout(openModel, 300);
+        setTimeout(openModel, 300);
     }
     function Consumpation() {
         $.ajax({
@@ -335,6 +293,39 @@
             async: true,
             success: function (data) {
                 $('.csm-list-container').html(data);
+                closeModel();
+            }});
+    }
+    function coach_comment() {
+        $.ajax({
+            type: "POST",
+            dataType: "text",
+            url: localhostPath + "/index.php/mobile/get_coach_comment",
+            async: true,
+            success: function (data) {
+                $('.coach_comment_container').html(data);
+                closeModel();
+            }});
+    }
+        function user_comment() {
+        $.ajax({
+            type: "POST",
+            dataType: "text",
+            url: localhostPath + "/index.php/mobile/get_user_comment",
+            async: true,
+            success: function (data) {
+                $('.user_comment_container').html(data);
+                closeModel();
+            }});
+    }
+    function study_record() {
+        $.ajax({
+            type: "POST",
+            dataType: "text",
+            url: localhostPath + "/index.php/mobile/get_study_record",
+            async: true,
+            success: function (data) {
+                $('.record_container').html(data);
                 closeModel();
             }});
     }

@@ -39,6 +39,33 @@ class Teachbook_model extends CI_Model {
         $query = $this->db->get('TeachBook');
         return $query->result_array();
     }
+        public function select_study_record($id) {//学习进度查询并按照课程排序
+        $this->db->select('TeachBook.*');
+        $this->db->select('Course.cls_name');
+        $STATE = array('1', '7');
+        $this->db->where_in('book_state', $STATE);
+        $this->db->where('book_stu_id', $id);
+         $this->db->order_by("book_date", "asc");
+         $this->db->from('TeachBook');
+         $this->db->join('Course', 'Course.cls_id=TeachBook.book_cls_id');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+    public function select_coach_comment($id) {//学习进度查询并按照课程排序
+        $this->db->select('TeachBook.*');
+        $this->db->select('Course.cls_name');
+        $this->db->select('Coach.coach_name');
+        $this->db->select('Coach.coach_face');
+        $STATE = array('1', '7');
+        $this->db->where_in('book_state', $STATE);
+        $this->db->where('book_stu_id', $id);
+         $this->db->order_by("book_date", "asc");
+         $this->db->from('TeachBook');
+        $this->db->join('Coach', 'Coach.coach_id=TeachBook.book_coa_id');
+         $this->db->join('Course', 'Course.cls_id=TeachBook.book_cls_id');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 
     public function select_history_detail($id, $time, $cls) {//返回该用户名所有信息
         $this->db->select();
