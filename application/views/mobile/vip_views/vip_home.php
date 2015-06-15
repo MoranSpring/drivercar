@@ -203,16 +203,7 @@
                 }
             </style>
             <div class="all-page Record" style='display:none;background:#666;font-size: 1em;color:#fff;'><!--学习记录-->
-                <div class='am-g'>
-                    <div class='am-u-sm-3' style='padding:0;'>
-                        &nbsp;
-                    </div>
-                    <div class='am-u-sm-9' style='padding:0;'>
-                        <div class='clock' style='height:70px;width:42px'>
 
-                        </div>
-                    </div>
-                </div>
                 <div class="record_container">
 
                 </div>
