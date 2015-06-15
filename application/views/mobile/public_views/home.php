@@ -102,12 +102,12 @@
             </a>
         </li>
         <li class="box box-bottom ml-ontouch">
-            <a href="<?= base_url() ?>index.php/mobile/map_sch_pos" style="height: 100%">
+            <a href="<?= base_url() ?>index.php/mobile/map_main" style="height: 100%">
                 <img class="home-img" src="<?= base_url() ?>application/images/mobile/coach_book.png" style="width:100%;"/>
             </a>
         </li>
         <li class="box box-bottom ml-ontouch">
-            <a href="" style="height: 100%">
+            <a href="<?= base_url() ?>index.php/mobile/register" style="height: 100%">
                 <img class="home-img" src="<?= base_url() ?>application/images/mobile/coach_book.png" style="width:100%;"/>
             </a>
         </li>

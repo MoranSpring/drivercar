@@ -64,14 +64,14 @@
         <div style="position:relative;top:-120px; width:100%;height:120px;overflow:hidden;">
             <div class="am-padding-top-sm">
                 <div class="am-margin-left-sm" style="position:relative;">
-                    <img onclick="test()" id="elemend" class="am-img am-circle" src="http://image.52drivecar.com/headpic/1433138880.jpg@!nail250" style="height:100px;width:100px;" />
+                    <img onclick="test()" id="elemend" class="am-img am-circle" src="<?= $face ?>@!nail250" style="height:100px;width:100px;" />
                 </div>
                 <div style="color:#fff;top:-88px;;heght:45px;position:relative;padding-left: 120px;">
                     <div class="clearfix">
-                        <span  style="float:left;font-size: 1.5em;">小白脸</span>
+                        <span  style="float:left;font-size: 1.5em;"><?= $name ?></span>
                     </div>
 
-                    <span class="ml-color-gray" style="font-size: 1em;">余额：<span class="ml-color-currency">1200</span>&nbsp;C币</span>
+                    <span class="ml-color-gray" style="font-size: 1em;">余额：<span class="ml-color-currency"><?= $coin ?></span>&nbsp;C币</span>
                 </div>
 
             </div>
@@ -116,9 +116,9 @@
                 </div>
 
             </div>
-            <div onclick="change()" class="am-g ml-ontouch" style="margin: 0;">
+            <div onclick="javascript:window.location.href='<?=  base_url()?>index.php/mobile/management' "  class="am-g ml-ontouch" style="margin: 0;">
                 <div class="am-u-sm-10" style="height:50px;font-size: 1em;margin: 0;">
-                    <span class="" style="line-height:50px;font-size: 1.1em;color:#888;">我的评价</span>
+                    <span class="" style="line-height:50px;font-size: 1.1em;color:#888;">学习管理</span>
                 </div>
                 <div class="am-u-sm-2 am-text-center" style="height:50px;font-size: 1em;padding: 0;margin: 0;">
                     <span class="am-icon-angle-right" style="line-height:50px;font-size: 1.5em;color:#ccc;">&nbsp;</span>
@@ -138,7 +138,7 @@
             </div>
             <div onclick="change()" class="am-g ml-ontouch" style="margin: 0;border-bottom: 1px solid #ddd;">
                 <div class="am-u-sm-10" style="height:50px;font-size: 1em;margin: 0;">
-                    <span class="" style="line-height:50px;font-size: 1.1em;color:#888;">联系方式：1256989870</span>
+                    <span class="" style="line-height:50px;font-size: 1.1em;color:#888;">联系方式：<?= $tel ?></span>
                 </div>
                 <div class="am-u-sm-2 am-text-center" style="height:50px;font-size: 1em;padding: 0;margin: 0;">
                     <span class="am-icon-angle-right" style="line-height:50px;font-size: 1.5em;color:#ccc;">&nbsp;</span>
@@ -202,7 +202,7 @@
                     background: url('<?= base_url() ?>application/images/mobile/time1.png') 0 -210px no-repeat;
                 }
             </style>
-            <div class="all-page Record" style='display:none;background:#666;font-size: 1em;color:#fff;'><!--学习记录-->
+            <div class="all-page Record" style='display:none;font-size: 1em;'><!--学习记录-->
 
                 <div class="record_container">
 
@@ -247,6 +247,18 @@
             var paramStep = histroy.split('&')[0];
             histroyReload(paramStep.split('=')[1]);
         }
+    });
+    $(function () {
+        var geolocation = new $.AMUI.Geolocation();
+        var $demoArea = $('#doc-geo-demo');
+
+        geolocation.get({timeout: 7000}).then(function (position) {
+            // console.log(position.coords);
+            var contentString = '你的位置：\n\t纬度 ' + position.coords.latitude +
+                    '，\n\t经度 ' + position.coords.longitude + '，\n\t精确度 ' +
+                    position.coords.accuracy;
+  alert(contentString);
+    });
     });
     function  change(id) {
         window.scroll(0, 0);
@@ -298,7 +310,7 @@
                 closeModel();
             }});
     }
-        function user_comment() {
+    function user_comment() {
         $.ajax({
             type: "POST",
             dataType: "text",

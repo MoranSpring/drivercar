@@ -79,6 +79,11 @@ class Mobile extends MY_Controller {
         $title = " 登录 - 我爱开车网（手机版）";
         $this->view($title, $page);
     }
+        public function register() {
+        $page = $this->load->view('mobile/register_views/register', '', true);
+        $title = " 注册 - 我爱开车网（手机版）";
+        $this->view($title, $page);
+    }
 
     public function study_book() {
         $uid = $this->session->userdata('UID');
@@ -95,7 +100,7 @@ class Mobile extends MY_Controller {
         if ($this->session->userdata('TYPE') == 2) {
             
         } else {
-            $this->view("you aren't vip!");
+            echo 'you are not vip!';
             return false;
         }
         $UID = $this->session->userdata('UID');
@@ -199,7 +204,14 @@ class Mobile extends MY_Controller {
 //        foreach ($coach as $row) {
 //            $body = $row;
 //        }
+        $body['name'] = $this->session->userdata('name');
+        $body['face'] = $this->session->userdata('face');
+        $body['tel'] = $this->session->userdata('TEL');
         $body['menu'] = $this->getMenu();
+        $coach = $this->usercoin_model->selectbyId($UID);
+        foreach ($coach as $row) {
+            $body['coin'] = $row['uc_num'];
+        }
         $page = $this->load->view('mobile/vip_views/vip_home', $body, true);
         $title = "个人主页 - 我爱开车网（手机版）";
         $this->view($title, $page);
@@ -220,6 +232,12 @@ class Mobile extends MY_Controller {
         $body['menu'] = $this->getMenu();
         $page = $this->load->view('mobile/public_views/map_sch_pos', $body, true);
         $title = "驾培点地址 - 我爱开车网（手机版）";
+        $this->view($title, $page);
+    }
+
+    public function map_main() {
+        $page = $this->load->view('mobile/public_views/map_main', '', true);
+        $title = "我的位置 - 我爱开车网（手机版）";
         $this->view($title, $page);
     }
 
@@ -562,13 +580,13 @@ class Mobile extends MY_Controller {
         $page = $this->load->view('mobile/vip_views/study_step/step_zero', '', true);
         $flag = 0;
         $flag2 = 0;
-        $page_step2='';
-        $page_step3='';
+        $page_step2 = '';
+        $page_step3 = '';
         foreach ($result as $row) {
             if ($flag == 0) {
                 $page = $this->load->view('mobile/vip_views/study_step/step_one', '', true);
                 $page.=$this->load->view('mobile/vip_views/study_step/step_two', '', true);
-                $flag=1;
+                $flag = 1;
             }
             if ($this->getClassType($row['book_cls_id']) == '科目二') {
                 $page_step2.=$this->load->view('mobile/vip_views/study_step/step_content', $row, true);
@@ -577,29 +595,28 @@ class Mobile extends MY_Controller {
                 $page_step3.=$this->load->view('mobile/vip_views/study_step/step_content', $row, true);
             }
         }
-         if ($page_step3 != '') {
-             $page .= $page_step2;
-             $page.=$this->load->view('mobile/vip_views/study_step/step_three', '', true);
-             $page .= $page_step3;
-            }
-            else{
-                $page .= $page_step2;
-                 $page .= $this->load->view('mobile/vip_views/study_step/stepend', '', true);
-            }
+        if ($page_step3 != '') {
+            $page .= $page_step2;
+            $page.=$this->load->view('mobile/vip_views/study_step/step_three', '', true);
+            $page .= $page_step3;
+        } else {
+            $page .= $page_step2;
+            $page .= $this->load->view('mobile/vip_views/study_step/stepend', '', true);
+        }
         echo $page;
     }
+
     public function get_coach_comment() {
         $UID = $this->session->userdata('UID');
         $result = $this->teachbook_model->select_coach_comment($UID);
-        $page='';
-        foreach($result as $row){
-            if($row['book_suggest']!=''){
-            $page .= $this->load->view('mobile/vip_views/coach_comment_list', $row, true);
+        $page = '';
+        foreach ($result as $row) {
+            if ($row['book_suggest'] != '') {
+                $page .= $this->load->view('mobile/vip_views/coach_comment_list', $row, true);
             }
         }
-         echo $page;
+        echo $page;
     }
-    
 
     /**
      * AJAX请求方法！*********END
