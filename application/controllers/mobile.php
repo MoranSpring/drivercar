@@ -492,9 +492,6 @@ class Mobile extends MY_Controller {
             echo 7;
             return false;
         }
-
-
-
         //判断用户余额是否充足！
         $SUM = 0; //最终的费用
         $USERCOIN = 0; //用户剩余的积分数

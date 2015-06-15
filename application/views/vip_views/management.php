@@ -82,7 +82,7 @@
 </div>
 <script>
     $('.teach-comment').live("click", function () {
-        window.location.href = "<?= base_url() . 'index.php/mobile/tocomment?id=' ?>" + $(this).attr('value');
+        window.location.href = "<?= base_url() . 'index.php/vipcenter/tocomment?id=' ?>" + $(this).attr('value');
     });
     $('.unbook').live("click", function () {
         if (confirm("你确定要申请退订吗?"))

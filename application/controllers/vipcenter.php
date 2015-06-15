@@ -16,6 +16,9 @@ class VipCenter extends MY_Controller {
         $this->load->model('clscomment_model');
         $this->load->model('staticcoach_model');
         $this->load->library('oss/alioss');
+        $this->load->model('usercoin_model');
+        $this->load->model('consumption_model');
+        $this->load->model('cash_model');
 
     }
 
@@ -92,54 +95,20 @@ class VipCenter extends MY_Controller {
         $UID = $this->session->userdata('UID');
         $time = $this->getDate();
         $cls = $this->getCurrentCls();
-        $result_fur = $this->teachbook_model->select_further_detail($UID, $time, $cls);
+        $result_fur = $this->teachbook_model->select_further_details($UID, $time, $cls);
         $comment_list = array();
         $j = 0;
         foreach ($result_fur as $row) {
-            $list['book_id'] = $row['book_id'];
-            $list['book_date'] = $row['book_date'];
-            $list['book_cls_num'] = $row['book_cls_num'];
-            $list['book_state'] = $row['book_state'];
-            $list['book_coa_id'] = $row['book_coa_id'];
-            $list['book_sch_id'] = $row['book_sch_id'];
-            $coachName = $this->coach_model->select_name($row['book_coa_id']);
-            $list['coa_name'] = $coachName[0]['coach_name'];
-            $schName = $this->school_model->select_name($row['book_sch_id']);
-            $list['sch_name'] = $schName[0]['jp_name'];
-            $list['book_cls_name'] = "";
-            $courseName = $this->course_model->select($row['book_cls_id']);
-            foreach ($courseName as $row) {
-                $list['book_cls_name'] = $row['cls_name'];
-            }
-
-            $comment_list['unuse_list'][$j] = $this->load->view('vip_views/management_fur_list', $list, true);
+            $row['course'] = $this->getClassType($row['book_cls_id']);
+            $comment_list['unuse_list'][$j] = $this->load->view('vip_views/management_fur_list', $row, true);
             $j++;
-        }
+        }unset($row);
 
-        $result = $this->teachbook_model->select_history_detail($UID, $time, $cls);
+        $result = $this->teachbook_model->select_history_details($UID, $time, $cls);
         $i = 0;
         foreach ($result as $row) {
-            $list['book_id'] = $row['book_id'];
-            $list['book_date'] = $row['book_date'];
-            $list['book_cls_num'] = $row['book_cls_num'];
-            $list['book_coa_id'] = $row['book_coa_id'];
-            $list['book_sch_id'] = $row['book_sch_id'];
-            $coachName = $this->coach_model->select_name($row['book_coa_id']);
-            $list['coa_name'] = $coachName[0]['coach_name'];
-            $list['coa_face'] = $coachName[0]['coach_face'];
-            $schName = $this->school_model->select_name($row['book_sch_id']);
-            $list['sch_name'] = $schName[0]['jp_name'];
-            $list['exist'] = 0;
-            $is_com_exist = $this->clscomment_model->select_exist($row['book_id']);
-            foreach ($is_com_exist as $result) {
-                $list['exist'] = 1;
-            }
-            $list['book_cls_name'] = "";
-            $courseName1 = $this->course_model->select($row['book_cls_id']);
-            foreach ($courseName1 as $row) {
-                $list['book_cls_name'] = $row['cls_name'];
-            }
-            $comment_list['list'][$i] = $this->load->view('vip_views/management_list', $list, true);
+            $row['course'] = $this->getClassType($row['book_cls_id']);
+            $comment_list['list'][$i] = $this->load->view('vip_views/management_list', $row, true);
             $i++;
         }
         $page = $this->load->view('vip_views/management', $comment_list, true);
@@ -235,28 +204,98 @@ class VipCenter extends MY_Controller {
     public function teach_book() {
         $book_id = time();
         $book_stu_id = $this->session->userdata('UID');
-        $book_coa_id = $this->input->post('book_coa_id');
-        $book_sch_id = $this->input->post('book_sch_id');
-        $book_cls_id = $this->input->post('book_cls_id');
-        $json = $this->input->post('json');
+        $book_coa_id = $this->input->post('book_coa_id', TRUE);
+        $book_sch_id = $this->input->post('book_sch_id', TRUE);
+        $book_cls_id = $this->input->post('book_cls_id', TRUE);
+        $json = $this->input->post('json', TRUE);
         $bookArray = json_decode($json, true);
+        $clsnum = count($bookArray); //看客户总共选了多少节课
+        //判断传过来的json是否用重复时间
+        for ($i = 0; $i < $clsnum; $i++) {
+            $temp_day = $bookArray[$i]['date'];
+            $temp_cls = $bookArray[$i]['cls'];
+            for ($j = $i + 1; $j < $clsnum; $j++) {
+                if ($temp_day == $bookArray[$j]['date'] && $temp_cls == $bookArray[$j]['cls']) {
+                    array_splice($bookArray, $j, 1);
+                    $clsnum--;
+                    $j--;
+                }
+            }
+        }
+        //判断传来的课程时间跟数据库中的时间是否冲突，防止选课前刚刚被被人选走课程
+        $is_exist_array = $this->teachbook_model->check_is_exist($bookArray, $book_coa_id); //读出该教练的单节课的积分
+        foreach ($is_exist_array as $row) {
+            //有节课被别人已经选走
+            echo 7;
+            return false;
+        }
+        //判断用户余额是否充足！
+        $SUM = 0; //最终的费用
+        $USERCOIN = 0; //用户剩余的积分数
+        $COAHCOIN = 0; //教练单节课积分
+        $coach_coin_array = $this->coach_model->selectCostById($book_coa_id); //读出该教练的单节课的积分
+        foreach ($coach_coin_array as $row) {
+            $COAHCOIN = $row['coach_cls_cost'];
+            $SUM = $row['coach_cls_cost'] * $clsnum; //计算出总价格
+        }
+        unset($row);
+        $user_coin_result = $this->usercoin_model->selectById($book_stu_id);
+        foreach ($user_coin_result as $row) {
+            $USERCOIN = $row['uc_num'];
+        }
+        unset($row);
+        if ($SUM > 0 && $USERCOIN > 0) {
+            $spare_money = $USERCOIN - $SUM;
+            if ($spare_money >= 0) {
+                //去扣除积分
+                $data = array('uc_num' => $spare_money); //消费后用户余额
+            } else {
+                //余额不足
+                echo 3;
+                return false;
+            }
+        } else {
+            //返回异常
+            echo 9;
+            return false;
+        }
+
         $DateArray = array();
+        $RecordArray = array();
+        $count = rand(0, 1000);
         foreach ($bookArray as $row) {
-            $book_id = time() . rand(1, 100);
+            $book_id = time() . $count;
             $newDate = array(
                 'book_id' => $book_id,
                 'book_stu_id' => $book_stu_id,
                 'book_coa_id' => $book_coa_id,
                 'book_sch_id' => $book_sch_id,
                 'book_cls_id' => $book_cls_id,
-                'book_state'=>1,
+                'book_state' => 1,
                 'book_date' => $row['date'],
                 'book_cls_num' => $row['cls'],
+                'book_time' => $this->getTime()
             );
             array_push($DateArray, $newDate);
+
+            $csm_record = array(
+                'csm_id' => 'csm' . $book_id,
+                'csm_rec_id' => $book_id,
+                'csm_stu_id' => $book_stu_id,
+                'csm_in_out' => '1',
+                'csm_type' => '学车费用',
+                'csm_coin' => $COAHCOIN,
+                'csm_date' => $this->getTime()
+            );
+            array_push($RecordArray, $csm_record);
+            $count++;
         }
-        $result = $this->teachbook_model->insert($DateArray);
-        echo $result;
+        $result = $this->cash_model->teach_book_waste_money($DateArray, $RecordArray, $book_stu_id, $data);
+        if ($result == true) {
+            echo 1;
+        } else {
+            echo 11; //数据插入冲突
+        }
     }
 
     public function get_comment() {
