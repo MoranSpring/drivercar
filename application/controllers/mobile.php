@@ -755,7 +755,7 @@ class Mobile extends MY_Controller {
     }
 
     public function testIp() {
-        echo $this->getTime('1440000000');
+       
      }
 
     private function _get_card_id() {
