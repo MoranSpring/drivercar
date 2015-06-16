@@ -28,6 +28,7 @@ class First extends MY_Controller {
         $this->load->model('coach_model');
         $this->load->model('serialnumber_model');
         $this->load->model('school_model');
+        $this->load->model('usercoin_model');
     }
 
     public function index() {
@@ -269,6 +270,14 @@ class First extends MY_Controller {
         if ($stu_type == 3) {
             //将数据插入用户表,普通注册用户
             $result = $this->accesscontrol_model->insert($datas);
+            $coin_data=array(
+                'uc_id'=>'coin'.$Uid,
+                'uc_stu_id'=>$Uid,
+                'uc_num'=>0
+            );
+            if ($result == 1) {
+                $result = $this->usercoin_model->insert($coin_data);
+            }
             if ($result == 1) {
                 //设置session
                 $this->session->set_userdata('UID', $Uid);
@@ -287,7 +296,7 @@ class First extends MY_Controller {
         $train_serial_num = $this->input->post('train_serial_num');
         if ($stu_type == 2) {
             $serial_num = $vip_serial_num;
-        } elseif ($stu_type == 1) {
+        } else if ($stu_type == 1) {
             $serial_num = $train_serial_num;
         } else {
             echo  '用户类型异常';
@@ -297,6 +306,14 @@ class First extends MY_Controller {
         $ser_num_vali = $this->serialnumber_model->SerValidChange($serial_num);
         if ($ser_num_vali) {
             $result = $this->accesscontrol_model->insert($datas);
+            $coin_data=array(
+                'uc_id'=>'coin'.$Uid,
+                'uc_stu_id'=>$Uid,
+                'uc_num'=>3000
+            );
+            if ($result == 1) {
+                $result = $this->usercoin_model->insert($coin_data);
+            }
             if ($result == 1) {
                 $this->session->set_userdata('UID', $Uid);
                 $this->session->set_userdata('TYPE', $stu_type);

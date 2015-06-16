@@ -39,12 +39,13 @@ class Teachbook_model extends CI_Model {
         $query = $this->db->get('TeachBook');
         return $query->result_array();
     }
-        public function select_study_record($id) {//学习进度查询并按照课程排序
+        public function select_study_record($id,$time) {//学习进度查询并按照课程排序
         $this->db->select('TeachBook.*');
         $this->db->select('Course.cls_name');
         $STATE = array('1', '7');
         $this->db->where_in('book_state', $STATE);
         $this->db->where('book_stu_id', $id);
+        $this->db->where('book_date <', $time);
          $this->db->order_by("book_date", "asc");
          $this->db->from('TeachBook');
          $this->db->join('Course', 'Course.cls_id=TeachBook.book_cls_id');

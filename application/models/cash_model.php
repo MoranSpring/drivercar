@@ -45,7 +45,7 @@ class Cash_model extends CI_Model {
         }
     }
 
-    public function teach_book_waste_money($DateArray,$RecordArray,$book_stu_id,$data) {    //把数据增加到Consumption表中.
+    public function teach_book_waste_money($DateArray, $RecordArray, $book_stu_id, $data) {    //把数据增加到Consumption表中.
         $where = '';
         foreach ($DateArray as $row) {
             $one = "("
@@ -110,6 +110,58 @@ class Cash_model extends CI_Model {
         $this->db->where('sc_stu', $data);
         $query = $this->db->get('StaticCoach');
         return $query->result_array();
+    }
+
+    public function insert_recharge_card($data) {//返回该用户名所有信息
+        $result = $this->db->insert('RechargeCard', $data);
+        return $result;
+    }
+
+    public function purchase_by_card($UID, $money, $RecordArray, $RechargeArray) {
+
+        $RechargeCardSQL = "UPDATE RechargeCard  SET "
+                . "rc_purchaser='" . $UID . "',"
+                . "rc_purchase_time='" . $RechargeArray['rc_purchase_time'] . "',"
+                . "rc_state='1' "
+                . " WHERE rc_card_id=" . "'" . $RechargeArray['rc_card_id'] . "' AND rc_psw='".$RechargeArray['rc_card_psw']."' AND rc_state='0';";
+
+
+        $csm_where = '';
+        foreach ($RecordArray as $row) {
+            $csm_one = "("
+                    . "'" . $row['csm_id'] . "',"
+                    . "'" . $row['csm_rec_id'] . "',"
+                    . "'" . $row['csm_stu_id'] . "',"
+                    . "'" . $row['csm_in_out'] . "',"
+                    . "'" . $row['csm_type'] . "',"
+                    . "'" . $row['csm_coin'] . "',"
+                    . "'" . $row['csm_date'] . "'"
+                    . ")";
+            if ($csm_where != '') {
+                $csm_where = $csm_where . " , " . $csm_one;
+            } else {
+                $csm_where = $csm_one;
+            }
+        }
+        $RecordSQL = "INSERT INTO Consumption(csm_id,csm_rec_id,csm_stu_id,csm_in_out,csm_type,csm_coin,csm_date)"
+                . "  VALUES " . $csm_where . ";";
+
+
+        $PayMoneySQL = "UPDATE UserCoin"
+                . " SET uc_num= uc_num+" . $money
+                . " WHERE uc_stu_id=" . "'" . $UID . "';";
+
+        $this->db->trans_start();
+        $this->db->query($RechargeCardSQL);
+        $this->db->query($RecordSQL);
+        $this->db->query($PayMoneySQL);
+        $this->db->trans_complete();
+        if ($this->db->trans_status() === FALSE) {
+            // 生成一条错误信息... 或者使用 log_message() 函数来记录你的错误信息
+            return false;
+        } else {
+            return true;
+        }
     }
 
 }

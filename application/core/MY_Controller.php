@@ -11,8 +11,8 @@ class MY_Controller extends CI_Controller {
         $this->load->helper('url');
     }
 
-    public function getTime() {
-        $timeArray = getdate();
+    public function getTime($time = '') {
+        $timeArray = $time == '' ? getdate() : getdate($time);
         $CurrentTime = $timeArray["year"] . "-" . $timeArray["mon"] . "-" . $timeArray["mday"] . " " . $timeArray["hours"] . ":" . $timeArray["minutes"] . ":" . $timeArray["seconds"];
         return $CurrentTime;
     }

@@ -35,6 +35,7 @@ class Mobile extends MY_Controller {
         $this->load->model('usercoin_model');
         $this->load->model('consumption_model');
         $this->load->model('cash_model');
+        $this->load->model('rechargecard_model');
     }
 
     public function index() {
@@ -79,8 +80,14 @@ class Mobile extends MY_Controller {
         $title = " 登录 - 我爱开车网（手机版）";
         $this->view($title, $page);
     }
-        public function register() {
+
+    public function register() {
         $page = $this->load->view('mobile/register_views/register', '', true);
+        $title = " 注册 - 我爱开车网（手机版）";
+        $this->view($title, $page);
+    }
+        public function recharge_success() {
+        $page = $this->load->view('mobile/vip_views/recharge_success', '', true);
         $title = " 注册 - 我爱开车网（手机版）";
         $this->view($title, $page);
     }
@@ -97,10 +104,10 @@ class Mobile extends MY_Controller {
     }
 
     public function management() {
-        if ($this->session->userdata('TYPE') == 2) {
+        if ($this->session->userdata('TYPE') == 2||$this->session->userdata('TYPE') == 3) {
             
         } else {
-            echo 'you are not vip!';
+            redirect();
             return false;
         }
         $UID = $this->session->userdata('UID');
@@ -216,7 +223,11 @@ class Mobile extends MY_Controller {
         $title = "个人主页 - 我爱开车网（手机版）";
         $this->view($title, $page);
     }
-
+    public function self_info_edit() {
+        $page = $this->load->view('mobile/vip_views/self_info_edit', '', true);
+        $title = "信息编辑 - 我爱开车网（手机版）";
+        $this->view($title, $page);
+    }
     public function school_home($id) {
         $school = $this->school_model->get_from_id($id);
         foreach ($school as $row) {
@@ -507,7 +518,7 @@ class Mobile extends MY_Controller {
             $USERCOIN = $row['uc_num'];
         }
         unset($row);
-        if ($SUM > 0 && $USERCOIN > 0) {
+        if ($SUM >= 0 && $USERCOIN >= 0) {
             $spare_money = $USERCOIN - $SUM;
             if ($spare_money >= 0) {
                 //去扣除积分
@@ -573,7 +584,7 @@ class Mobile extends MY_Controller {
 
     public function get_study_record() {
         $UID = $this->session->userdata('UID');
-        $result = $this->teachbook_model->select_study_record($UID);
+        $result = $this->teachbook_model->select_study_record($UID,$this->getDate());
         $page = $this->load->view('mobile/vip_views/study_step/step_zero', '', true);
         $flag = 0;
         $flag2 = 0;
@@ -596,7 +607,7 @@ class Mobile extends MY_Controller {
             $page .= $page_step2;
             $page.=$this->load->view('mobile/vip_views/study_step/step_three', '', true);
             $page .= $page_step3;
-        } else {
+        } else if ($page_step2 != '') {
             $page .= $page_step2;
             $page .= $this->load->view('mobile/vip_views/study_step/stepend', '', true);
         }
@@ -613,6 +624,98 @@ class Mobile extends MY_Controller {
             }
         }
         echo $page;
+    }
+    
+    public function card_check_id(){
+        $card_id = $this->input->post('card_id', TRUE);
+        $result = $this->rechargecard_model->select_by_card_id($card_id);
+        foreach($result as $row){
+            if($row['rc_state']!=0){
+                echo  7;             //此卡已用过或不可用
+                return false;
+            }else if(time()>=strtotime($row['rc_dead_time'])){
+                 echo 5;       //此卡已过期
+                 return false;
+             }else{
+                 echo 1;
+                 return false;
+             }
+        }
+        echo 3;    //此卡不存在，请重新输入
+        return false;
+    }
+    public function card_check(){
+        $card_id = $this->input->post('card_id', TRUE);
+        $card_psw = $this->input->post('card_psw', TRUE);
+        $result = $this->rechargecard_model->select_by_card_id($card_id);
+        foreach($result as $row){
+            if($row['rc_state']!=0){
+                echo  7;             //此卡已用过或不可用
+                return false;
+            }else if(time()>=strtotime($row['rc_dead_time'])){
+                 echo 5;       //此卡已过期
+                 return false;
+             }else if($card_psw!=$row['rc_psw']){
+                 echo 9;//密码错误，
+                 return false;
+             }else{
+                 echo 1;//正确的卡
+                 return false;
+             }
+             
+        }
+        echo 3;    //此卡不存在，请重新输入
+        return false;
+    }
+    
+    public function recharge_by_card(){
+        $UID = $this->session->userdata('UID');
+        $card_id = $this->input->post('card_id', TRUE);
+        $card_psw = $this->input->post('card_psw', TRUE);
+        if($UID==FALSE){
+            echo 11;     //购买异常
+           return false;
+        }
+        $result = $this->rechargecard_model->select_by_card_id($card_id);
+        foreach($result as $row){
+            if($row['rc_state']!=0){
+                echo  7;             //此卡已用过或不可用
+                return false;
+            }else if(time()>=strtotime($row['rc_dead_time'])){
+                 echo 5;       //此卡已过期
+                 return false;
+             }else if($card_psw!=$row['rc_psw']){
+                 echo 3;//密码错误！
+                 return false;
+             }
+             $RecordArray[0]=array(
+                'csm_id' => 'csm' . $row['rc_id'],
+                'csm_rec_id' => $row['rc_id'],
+                'csm_stu_id' => $UID,
+                'csm_in_out' => '2',
+                'csm_type' => '充值',
+                'csm_coin' => $row['rc_money'],
+                'csm_date' => $this->getTime()
+            );
+             $RechargeArray=array(
+                 'rc_purchaser'=>$UID,
+                 'rc_purchase_time'=>$this->getTime(),
+                 'rc_card_id'=>$card_id,
+                 'rc_card_psw'=>$card_psw
+             );
+             
+            $result= $this->cash_model->purchase_by_card($UID, $row['rc_money'], $RecordArray, $RechargeArray);
+            if($result==1){
+                redirect('mobile/recharge_success');
+                return false;
+            }else{
+                echo $result;
+            }
+            return false;
+        }
+        echo 13;    //此卡不存在，请重新输入
+        return false;
+        
     }
 
     /**
@@ -631,8 +734,38 @@ class Mobile extends MY_Controller {
         return $menu;
     }
 
+    public function generate_card() {
+        $holder = '1429587515'; //持有人
+        $money = '100'; //充值卡面额
+        $howlong = '1440000000'; //有效截止日期时间戳
+        $data = array(
+            'rc_id' => time(),
+            'rc_holder' => $holder,
+            'rc_card_id' => $this->_get_card_id(),
+            'rc_born_time' => $this->getTime(),
+            'rc_money' => $money,
+            'rc_dead_time' => $this->getTime($howlong),
+            'rc_state' => '0',
+            'rc_psw' => $this->_get_card_psw()
+        );
+        $result = $this->cash_model->insert_recharge_card($data);
+        if($result==1){
+            echo 'success';
+        }
+    }
+
     public function testIp() {
-        echo $this->getip();
+        echo $this->getTime('1440000000');
+     }
+
+    private function _get_card_id() {
+        $elements = array('1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'z', 'x', 'c', 'v', 'b', 'n', 'm');
+        return $elements[rand(0, 35)] . $elements[rand(0, 35)] . $elements[rand(0, 35)] . $elements[rand(0, 35)] . $elements[rand(0, 35)] . $elements[rand(0, 35)];
+    }
+
+    private function _get_card_psw() {
+        $elements = array('1', '2', '3', '4', '5', '6', '7', '8', '9', '0');
+        return $elements[rand(0, 9)] . $elements[rand(0, 9)] . $elements[rand(0, 9)] . $elements[rand(0, 9)] . $elements[rand(0, 9)] . $elements[rand(0, 9)];
     }
 
     function getCityByIp() {

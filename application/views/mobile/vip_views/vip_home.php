@@ -57,14 +57,14 @@
             <a href="#title-link" class="ml-color-white">个人主页</a>
         </h1>
     </header>
-    <div onclick="change()"  style='max-height: 120px;overflow: hidden'>
+    <div onclick="javascript:window.location.href = '<?= base_url() ?>index.php/mobile/self_info_edit'"  style='max-height: 120px;overflow: hidden'>
         <div style="top:0;height:120px;width:100%;position: relative;z-index: -10;overflow: hidden;" >
             <img  id="element_id" src="http://image.52drivecar.com/bg_img/vip_home_bg.png@!topnews" width="100%" style="">
         </div>
         <div style="position:relative;top:-120px; width:100%;height:120px;overflow:hidden;">
             <div class="am-padding-top-sm">
                 <div class="am-margin-left-sm" style="position:relative;">
-                    <img onclick="test()" id="elemend" class="am-img am-circle" src="<?= $face ?>@!nail250" style="height:100px;width:100px;" />
+                    <img id="elemend" class="am-img am-circle" src="<?= $face == '' ? 'http://img3.douban.com/lpic/o626254.jpg' : $face . '@!nail250'; ?>" style="height:100px;width:100px;" />
                 </div>
                 <div style="color:#fff;top:-88px;;heght:45px;position:relative;padding-left: 120px;">
                     <div class="clearfix">
@@ -73,7 +73,6 @@
 
                     <span class="ml-color-gray" style="font-size: 1em;">余额：<span class="ml-color-currency"><?= $coin ?></span>&nbsp;C币</span>
                 </div>
-
             </div>
 
         </div>
@@ -116,7 +115,7 @@
                 </div>
 
             </div>
-            <div onclick="javascript:window.location.href='<?=  base_url()?>index.php/mobile/management' "  class="am-g ml-ontouch" style="margin: 0;">
+            <div onclick="javascript:window.location.href = '<?= base_url() ?>index.php/mobile/management'"  class="am-g ml-ontouch" style="margin: 0;">
                 <div class="am-u-sm-10" style="height:50px;font-size: 1em;margin: 0;">
                     <span class="" style="line-height:50px;font-size: 1.1em;color:#888;">学习管理</span>
                 </div>
@@ -183,25 +182,43 @@
     <div id="demo-list">
         <div id="demo-scroller" style="transition: 0ms cubic-bezier(0.1, 0.57, 0.1, 1); -webkit-transition: 0ms cubic-bezier(0.1, 0.57, 0.1, 1); transform: translate(0px, 0px) translateZ(0px);">
             <!--这中间是不同功能的显示的div-->
+
+            <div class="all-page recharge" style='display:none;'><!--充值-->
+                <div class="am-tabs am-margin-top" id="doc-my-tabs">
+                    <ul class="am-tabs-nav am-nav am-nav-tabs am-nav-justify">
+                        <li class="am-active"><a href="">充值卡充值</a></li>
+                        <li><a href="">其他方式充值</a></li>
+                    </ul>
+                    <div class="am-tabs-bd">
+                        <div class="am-tab-panel am-active">
+                            <div class="login-alert am-alert am-alert-danger"  style="margin:0;">
+                                <p class="name_alert" onchange="toAlert()">dddd</p>
+                            </div>
+                            <form class="am-form"  id="form-recharge" method="post" onsubmit="return checkForm(this)" action="<?= base_url() ?>index.php/mobile/recharge_by_card">
+                                <div class="am-input am-margin">
+                                    <input id="card_id" name="card_id"  type="text" class="am-form-field" autocomplete="off" value="" onfocus="check_onfocus()" onblur="check_onbulr(this.value)" placeholder="请输入卡号">
+                                </div>
+                                <div class="am-input  am-margin">
+                                    <input class="am-form-field" id="card_psw" type="password" name="card_psw" placeholder="请输入密码" autocomplete="off"  value="">
+                                </div>
+                                <div class="am-margin">
+                                    <button type="submit"   class="am-btn confirm ml-btn-normal am-btn-block am-radius">确&nbsp;&nbsp;认</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="am-tab-panel">...</div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
             <div class="all-page comsumpation" style='display:none;'><!--消费记录-->
                 <ul class="am-list csm-list-container">
                 </ul>
             </div>
 
-            <style>
-                .clock{
-                    background: url('<?= base_url() ?>application/images/mobile/time1.png') 0 0px no-repeat;
-                }
-                .clock-step-1{
-                    background: url('<?= base_url() ?>application/images/mobile/time1.png') 0 -70px no-repeat;
-                }
-                .clock-step-2{
-                    background: url('<?= base_url() ?>application/images/mobile/time1.png') 0 -140px no-repeat;
-                }
-                .clock-end{
-                    background: url('<?= base_url() ?>application/images/mobile/time1.png') 0 -210px no-repeat;
-                }
-            </style>
             <div class="all-page Record" style='display:none;font-size: 1em;'><!--学习记录-->
 
                 <div class="record_container">
@@ -215,13 +232,7 @@
 
 
             </div>
-            <div class="all-page coach_comment" style='display:none;font-size: 1em'><!--教练评价-->
-                <ul class="am-comments-list am-comments-list-flip am-padding coach_comment_container">
 
-                </ul>
-
-
-            </div>
             <!--这中间是不同功能的显示的div-->
         </div>
     </div>
@@ -249,21 +260,27 @@
         }
     });
     $(function () {
-        var geolocation = new $.AMUI.Geolocation();
-        var $demoArea = $('#doc-geo-demo');
+        $('#doc-my-tabs').tabs();
 
-        geolocation.get({timeout: 7000}).then(function (position) {
-            // console.log(position.coords);
-            var contentString = '你的位置：\n\t纬度 ' + position.coords.latitude +
-                    '，\n\t经度 ' + position.coords.longitude + '，\n\t精确度 ' +
-                    position.coords.accuracy;
-  alert(contentString);
-    });
+//        var geolocation = new $.AMUI.Geolocation();
+//        var $demoArea = $('#doc-geo-demo');
+//         
+//
+//        geolocation.get({timeout: 7000}).then(function (position) {
+//            // console.log(position.coords);
+//            var contentString = '你的位置：\n\t纬度 ' + position.coords.latitude +
+//                    '，\n\t经度 ' + position.coords.longitude + '，\n\t精确度 ' +
+//                    position.coords.accuracy;
+//            alert(contentString);
+//        });
     });
     function  change(id) {
         window.scroll(0, 0);
         switch (id) {
             case 1:
+                $('.recharge').css('display', 'block');
+                $('.my_title').html('充   值');
+                recharge();
                 break;
             case 2:
                 $('.Record').css('display', 'block');
@@ -286,7 +303,10 @@
         setTimeout(function () {
             $('body').addClass('demo-list-active');
         }, 1);
-        setTimeout(openModel, 300);
+//        setTimeout(openModel, 300);
+    }
+    function recharge() {
+        closeModel();
     }
     function Consumpation() {
         $.ajax({
@@ -362,6 +382,88 @@
     function closeModel() {
         $('.loading').modal('close');
     }
+    
+    $('.login-alert').css('display', 'none');
+    function toAlert() {
+        $('.login-alert').css('display', 'block');
+    }
+    
+    
+    function check_onbulr(str) {
+        if(str==''){
+            return false;
+        }
+    data = 'card_id=' + str;
+    $.ajax({
+        dataType: "text",
+        type: "POST",
+        async: true,
+//        url: base_url + "/first/login_check?r=" + Math.random(),
+        url: localhostPath + "/index.php/mobile/card_check_id",
+        data: data,
+        success: function (data) {
+            if (data ==7) {
+                $(".name_alert").text('此卡已用过或不可用');
+                    toAlert();
+            }else if(data ==5){
+                $(".name_alert").text('此卡已过期');
+                    toAlert();
+            }else if(data ==3){
+                $(".name_alert").text('没这张卡');
+                    toAlert();
+            }
+        }
+    });
+}
+function check_onfocus() {
+    $(".name_alert").text('');
+    $('.login-alert').css('display', 'none');
+}
+    
+    function checkForm(thisform) {
+    var bol = false;
+    with (thisform)
+    {
+        if (card_id.value === "")
+        {
+            card_id.focus();
+                toAlert();
+                $(".name_alert").text("用户名不能为空");
+            return false;
+        } else if (card_psw.value === "") {
+            card_psw.focus();
+                toAlert();
+                $(".name_alert").text("密码不能为空");
+            return false;
+        } else {
+            $.ajax({
+                type: "POST",
+                async: false,
+                cache: false,
+                dataType: "text",
+                url: localhostPath + "/index.php/mobile/card_check",
+                data: {card_id: card_id.value, card_psw: card_psw.value},
+                success: function (data) {
+                    if (data == 1) {
+                        bol = true;
+                    } else if (data == 7) {
+                        bol = false;
+                            toAlert();
+                            $(".name_alert").text("此卡已用过或不可用");
+                    } else if (data == 9) {
+                        bol = false;
+                            toAlert();
+                            $(".name_alert").text("密码错误");
+                    }else {
+                        bol = false;
+                            toAlert();
+                            $(".name_alert").text("用户压根儿不存在");
+                    }
+                }});
+            return bol;
+        }
+    }
+}
 
 </script>
 

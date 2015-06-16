@@ -8,7 +8,7 @@
                 <li class=""style="background:#333;border-bottom: 1px dotted #999;">
                     <div class="am-g am-margin-sm">
                         <div class="am-u-sm-4 am-u-md-4">
-                            <img class="am-circle" src="<?= $this->session->userdata('face'); ?>@!nail250" height="80px" height="80px"/>
+                            <img class="am-circle" src="<?= $this->session->userdata('face')==''?'http://img3.douban.com/lpic/o626254.jpg':$this->session->userdata('face').'@!nail250';?>" height="80px" height="80px"/>
                         </div>
                         <div class="am-u-sm-7 am-u-md-7" style="color:#fff">
                             <span class=" am-text-lg am-fl"  style="color:#fff"><?= $this->session->userdata('name'); ?></span>
