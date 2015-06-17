@@ -43,6 +43,7 @@
 
 </style>
 <script src="<?php echo base_url() . 'application/js/jquery.Jcrop.js' ?>" type="text/javascript"></script>
+<script src="<?php echo base_url() . 'application/js/headpic/ajaxfileupload.js' ?>" type="text/javascript"></script>
 <link rel="stylesheet" href="<?php echo base_url() . 'application/css/jquery.Jcrop.css' ?>">
 
 <div class="am-page" id="mobile-index"> 
@@ -61,7 +62,7 @@
         <section class="am-panel am-panel-default" style='border-color:#ddd;'>
             <div onclick="change(1)"  class="am-g ml-ontouch" style="margin: 0;">
                 <div class="am-u-sm-10" style="font-size: 1em;margin: 0;padding:5px;">
-                   <img  id="elemend" class="am-img am-circle" src="http://img3.douban.com/lpic/o626254.jpg" style="height:80px;width:80px;" />
+                    <img  id="elemend" class="am-img am-circle" src="http://img3.douban.com/lpic/o626254.jpg" style="height:80px;width:80px;" />
                 </div>
                 <div class="am-u-sm-2 am-text-center" style="height:50px;font-size: 1em;padding: 0;margin: 0;">
                     <span class="am-icon-angle-right" style="line-height:80px;font-size: 1.5em;color:#ccc;">&nbsp;</span>
@@ -143,7 +144,20 @@
             <!--这中间是不同功能的显示的div-->
 
             <div class="all-page changeHead" style='display:none;'><!--修改头像-->
-                <img id="element_id" src="http://img3.douban.com/lpic/o626254.jpg">
+                <div style="width:300px;height:300px; overflow: none;" >
+                    <input type="file" name="imageUpload" onchange="showPreview(this)"/>
+                    <img  id="element_id" src="" style="max-width:300px;max-height: 260px;">
+                    <img  id="element_id_shadow" src="" style="display:none;">
+                </div>
+                <div>
+                    <input onclick="UploadPic()" type="button" class="am-btn am-btn-danger" value="summit"/>
+                </div>
+                <div>
+                    <canvas id="myCanvas" height="200" width="200"></canvas>
+                </div>
+
+
+
             </div>
 
             <div class="all-page Record" style='display:none;font-size: 1em;'><!--学习记录-->
@@ -175,18 +189,41 @@
     var pathName = window.document.location.pathname;
     var pos = curWwwPath.indexOf(pathName);
     var localhostPath = curWwwPath.substring(0, pos);
+    var radio = '';
 
     $(function () {
         $('#doc-my-tabs').tabs();
     });
-    
+
+    function showPreview(source) {
+        var file = source.files[0];
+        if (window.FileReader) {
+            var fr = new FileReader();
+            fr.onloadend = function (e) {
+                $("#element_id").attr("src", e.target.result);
+                $("#element_id_shadow").attr("src", e.target.result);
+//                setTimeout(getRaio(),1000);
+changeHead();
+            };
+            fr.readAsDataURL(file);
+        }
+
+    }
+    function getRaio(){
+        var real_w = $("#element_id_shadow").width();
+        var w = $("#element_id").width();
+        radio = real_w / w;
+        alert(real_w);
+        
+    }
+
     function  change(id) {
         window.scroll(0, 0);
         switch (id) {
             case 1:
                 $('.changeHead').css('display', 'block');
                 $('.my_title').html('修改头像');
-                changeHead();
+//                changeHead();
                 break;
             case 2:
                 $('.Record').css('display', 'block');
@@ -211,16 +248,51 @@
         }, 1);
 //        setTimeout(openModel, 300);
     }
-    function changeHead(){
+
+    function changeHead() {
         $('#element_id').Jcrop({
-            aspectRatio:1,
-            onSelect: updateCoords
+            aspectRatio: 1,
+            onSelect: updateCoords,
+            boxWidth: '300'
         }
-                );
+        );
     }
-function updateCoords(c){
-    alert(c.x+" ,,"+c.w);
-}
+    function updateCoords(c) {
+        var x = c.x;
+        var y = c.y;
+        var w = c.w;
+        var h = c.h;
+         var real_width = $("#element_id_shadow").width();
+        var width = $("#element_id").width();
+        radio = real_width / width;
+        alert(radio);
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+        var img = document.getElementById("element_id");
+        ctx.drawImage(img, x * radio, y * radio, w * radio, h * radio, 0, 0, 200, 200);
+
+
+
+    }
+    function UploadPic() {
+        alert('toLoad');
+        // Generate the image data
+        var Pic = document.getElementById("myCanvas").toDataURL("image/png");
+        Pic = Pic.replace(/^data:image\/(png|jpg);base64,/, "");
+        // Sending the image data to Server
+        $.ajax({
+            type: 'POST',
+            url: '<?= base_url() ?>index.php/mobile/upload_image',
+            data: {img: Pic},
+            dataType: 'text', //返回值类型 一般设置为json
+            success: function (msg) {
+                if (msg == 1) {
+                    window.location.href = '<?= base_url() ?>index.php/mobile/vip_home';
+                }
+                alert(msg);
+            }
+        });
+    }
     function back() {      //次页面返回
         window.scroll(0, 0);
         $('body').removeClass('demo-list-active');

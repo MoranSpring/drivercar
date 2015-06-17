@@ -86,7 +86,8 @@ class Mobile extends MY_Controller {
         $title = " 注册 - 我爱开车网（手机版）";
         $this->view($title, $page);
     }
-        public function recharge_success() {
+
+    public function recharge_success() {
         $page = $this->load->view('mobile/vip_views/recharge_success', '', true);
         $title = " 注册 - 我爱开车网（手机版）";
         $this->view($title, $page);
@@ -104,7 +105,7 @@ class Mobile extends MY_Controller {
     }
 
     public function management() {
-        if ($this->session->userdata('TYPE') == 2||$this->session->userdata('TYPE') == 3) {
+        if ($this->session->userdata('TYPE') == 2 || $this->session->userdata('TYPE') == 3) {
             
         } else {
             redirect();
@@ -211,9 +212,20 @@ class Mobile extends MY_Controller {
 //        foreach ($coach as $row) {
 //            $body = $row;
 //        }
-        $body['name'] = $this->session->userdata('name');
-        $body['face'] = $this->session->userdata('face');
-        $body['tel'] = $this->session->userdata('TEL');
+        $user_data = $this->accesscontrol_model->selectById($UID);
+        foreach ($user_data as $row) {
+            if ($row['stu_true_name'] != null) {
+                $this->session->set_userdata('true_name', $row['stu_true_name']);
+                $row['name']= $row['stu_true_name'];
+            } elseif ($row['stu_nick_name'] != null) {
+                $this->session->set_userdata('name', $row['stu_nick_name']);
+                $row['name']= $row['stu_nick_name'];
+            } else {
+                $this->session->set_userdata('name', $row['stu_name']);
+                $row['name']= $row['stu_name'];
+            }
+            $body = $row;
+        }
         $body['menu'] = $this->getMenu();
         $coach = $this->usercoin_model->selectbyId($UID);
         foreach ($coach as $row) {
@@ -223,11 +235,13 @@ class Mobile extends MY_Controller {
         $title = "个人主页 - 我爱开车网（手机版）";
         $this->view($title, $page);
     }
+
     public function self_info_edit() {
         $page = $this->load->view('mobile/vip_views/self_info_edit', '', true);
         $title = "信息编辑 - 我爱开车网（手机版）";
         $this->view($title, $page);
     }
+
     public function school_home($id) {
         $school = $this->school_model->get_from_id($id);
         foreach ($school as $row) {
@@ -584,7 +598,7 @@ class Mobile extends MY_Controller {
 
     public function get_study_record() {
         $UID = $this->session->userdata('UID');
-        $result = $this->teachbook_model->select_study_record($UID,$this->getDate());
+        $result = $this->teachbook_model->select_study_record($UID, $this->getDate());
         $page = $this->load->view('mobile/vip_views/study_step/step_zero', '', true);
         $flag = 0;
         $flag2 = 0;
@@ -625,70 +639,70 @@ class Mobile extends MY_Controller {
         }
         echo $page;
     }
-    
-    public function card_check_id(){
+
+    public function card_check_id() {
         $card_id = $this->input->post('card_id', TRUE);
         $result = $this->rechargecard_model->select_by_card_id($card_id);
-        foreach($result as $row){
-            if($row['rc_state']!=0){
-                echo  7;             //此卡已用过或不可用
+        foreach ($result as $row) {
+            if ($row['rc_state'] != 0) {
+                echo 7;             //此卡已用过或不可用
                 return false;
-            }else if(time()>=strtotime($row['rc_dead_time'])){
-                 echo 5;       //此卡已过期
-                 return false;
-             }else{
-                 echo 1;
-                 return false;
-             }
+            } else if (time() >= strtotime($row['rc_dead_time'])) {
+                echo 5;       //此卡已过期
+                return false;
+            } else {
+                echo 1;
+                return false;
+            }
         }
         echo 3;    //此卡不存在，请重新输入
         return false;
     }
-    public function card_check(){
+
+    public function card_check() {
         $card_id = $this->input->post('card_id', TRUE);
         $card_psw = $this->input->post('card_psw', TRUE);
         $result = $this->rechargecard_model->select_by_card_id($card_id);
-        foreach($result as $row){
-            if($row['rc_state']!=0){
-                echo  7;             //此卡已用过或不可用
+        foreach ($result as $row) {
+            if ($row['rc_state'] != 0) {
+                echo 7;             //此卡已用过或不可用
                 return false;
-            }else if(time()>=strtotime($row['rc_dead_time'])){
-                 echo 5;       //此卡已过期
-                 return false;
-             }else if($card_psw!=$row['rc_psw']){
-                 echo 9;//密码错误，
-                 return false;
-             }else{
-                 echo 1;//正确的卡
-                 return false;
-             }
-             
+            } else if (time() >= strtotime($row['rc_dead_time'])) {
+                echo 5;       //此卡已过期
+                return false;
+            } else if ($card_psw != $row['rc_psw']) {
+                echo 9; //密码错误，
+                return false;
+            } else {
+                echo 1; //正确的卡
+                return false;
+            }
         }
         echo 3;    //此卡不存在，请重新输入
         return false;
     }
-    
-    public function recharge_by_card(){
+
+    public function recharge_by_card() {
         $UID = $this->session->userdata('UID');
         $card_id = $this->input->post('card_id', TRUE);
         $card_psw = $this->input->post('card_psw', TRUE);
-        if($UID==FALSE){
+        if ($UID == FALSE) {
             echo 11;     //购买异常
-           return false;
+            return false;
         }
         $result = $this->rechargecard_model->select_by_card_id($card_id);
-        foreach($result as $row){
-            if($row['rc_state']!=0){
-                echo  7;             //此卡已用过或不可用
+        foreach ($result as $row) {
+            if ($row['rc_state'] != 0) {
+                echo 7;             //此卡已用过或不可用
                 return false;
-            }else if(time()>=strtotime($row['rc_dead_time'])){
-                 echo 5;       //此卡已过期
-                 return false;
-             }else if($card_psw!=$row['rc_psw']){
-                 echo 3;//密码错误！
-                 return false;
-             }
-             $RecordArray[0]=array(
+            } else if (time() >= strtotime($row['rc_dead_time'])) {
+                echo 5;       //此卡已过期
+                return false;
+            } else if ($card_psw != $row['rc_psw']) {
+                echo 3; //密码错误！
+                return false;
+            }
+            $RecordArray[0] = array(
                 'csm_id' => 'csm' . $row['rc_id'],
                 'csm_rec_id' => $row['rc_id'],
                 'csm_stu_id' => $UID,
@@ -697,25 +711,65 @@ class Mobile extends MY_Controller {
                 'csm_coin' => $row['rc_money'],
                 'csm_date' => $this->getTime()
             );
-             $RechargeArray=array(
-                 'rc_purchaser'=>$UID,
-                 'rc_purchase_time'=>$this->getTime(),
-                 'rc_card_id'=>$card_id,
-                 'rc_card_psw'=>$card_psw
-             );
-             
-            $result= $this->cash_model->purchase_by_card($UID, $row['rc_money'], $RecordArray, $RechargeArray);
-            if($result==1){
+            $RechargeArray = array(
+                'rc_purchaser' => $UID,
+                'rc_purchase_time' => $this->getTime(),
+                'rc_card_id' => $card_id,
+                'rc_card_psw' => $card_psw
+            );
+
+            $result = $this->cash_model->purchase_by_card($UID, $row['rc_money'], $RecordArray, $RechargeArray);
+            if ($result == 1) {
                 redirect('mobile/recharge_success');
                 return false;
-            }else{
+            } else {
                 echo $result;
             }
             return false;
         }
         echo 13;    //此卡不存在，请重新输入
         return false;
-        
+    }
+
+    public function upload_image() {
+        $UID = $this->session->userdata('UID');
+        if ($UID == FALSE)
+            return false;
+        $img = $this->input->post('img', TRUE);
+        $img = str_replace('data:image/png;base64,', '', $img);
+        $img = str_replace(' ', '+', $img);
+        $data = base64_decode($img);
+        $file_name = md5('userhead' . rand(0, 1000));
+        $folder_name = 'mobile/headpic/' . $this->getFolderName();
+        $file = 'application/images/' . $file_name . '.jpg';
+        $success = file_put_contents($file, $data);
+        if ($success) {
+            if ($this->_upload_by_content($folder_name . $file_name, $file) == 200) {
+                $data = array(
+                    'stu_face' => 'http://image.52drivecar.com/' . $folder_name . $file_name . '.jpg'
+                );
+                $result = $this->accesscontrol_model->update_attr($UID, $data);
+                echo $result;
+            } else {
+                echo '3'; //上传失败
+            }
+            unlink($file);
+            return false;
+        }
+        echo 'Unable to save the file.';
+    }
+
+    function _upload_by_content($name, $file) {
+        $bucket = 'driver-un';
+        $object = $name . '.jpg';
+        $filepath = $file;  //英文
+        $options = array(
+            ALIOSS::OSS_FILE_UPLOAD => $filepath,
+            'partSize' => 5242880,
+        );
+        $response = $this->alioss->create_mpu_object($bucket, $object, $options);
+
+        return $response->status;
     }
 
     /**
@@ -749,14 +803,14 @@ class Mobile extends MY_Controller {
             'rc_psw' => $this->_get_card_psw()
         );
         $result = $this->cash_model->insert_recharge_card($data);
-        if($result==1){
+        if ($result == 1) {
             echo 'success';
         }
     }
 
     public function testIp() {
-       
-     }
+        
+    }
 
     private function _get_card_id() {
         $elements = array('1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'z', 'x', 'c', 'v', 'b', 'n', 'm');

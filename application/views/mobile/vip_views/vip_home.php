@@ -64,7 +64,7 @@
         <div style="position:relative;top:-120px; width:100%;height:120px;overflow:hidden;">
             <div class="am-padding-top-sm">
                 <div class="am-margin-left-sm" style="position:relative;">
-                    <img id="elemend" class="am-img am-circle" src="<?= $face == '' ? 'http://img3.douban.com/lpic/o626254.jpg' : $face . '@!nail250'; ?>" style="height:100px;width:100px;" />
+                    <img id="elemend" class="am-img am-circle" src="<?= $stu_face == '' ? 'http://img3.douban.com/lpic/o626254.jpg' : $stu_face . '@!nail250'; ?>" style="height:100px;width:100px;" />
                 </div>
                 <div style="color:#fff;top:-88px;;heght:45px;position:relative;padding-left: 120px;">
                     <div class="clearfix">
@@ -137,7 +137,7 @@
             </div>
             <div onclick="change()" class="am-g ml-ontouch" style="margin: 0;border-bottom: 1px solid #ddd;">
                 <div class="am-u-sm-10" style="height:50px;font-size: 1em;margin: 0;">
-                    <span class="" style="line-height:50px;font-size: 1.1em;color:#888;">联系方式：<?= $tel ?></span>
+                    <span class="" style="line-height:50px;font-size: 1.1em;color:#888;">联系方式：<?= $stu_tel ?></span>
                 </div>
                 <div class="am-u-sm-2 am-text-center" style="height:50px;font-size: 1em;padding: 0;margin: 0;">
                     <span class="am-icon-angle-right" style="line-height:50px;font-size: 1.5em;color:#ccc;">&nbsp;</span>

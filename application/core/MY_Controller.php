@@ -16,6 +16,11 @@ class MY_Controller extends CI_Controller {
         $CurrentTime = $timeArray["year"] . "-" . $timeArray["mon"] . "-" . $timeArray["mday"] . " " . $timeArray["hours"] . ":" . $timeArray["minutes"] . ":" . $timeArray["seconds"];
         return $CurrentTime;
     }
+    public function getFolderName(){
+        $timeArray = getdate();
+        $Name = $timeArray["year"] . "/" . $timeArray["mon"] . "/" . $timeArray["mday"] . "/" ;
+        return $Name;
+    }
 
     public function getDate() {
         $timeArray = getdate();

@@ -71,7 +71,6 @@ class Accesscontrol_model extends CI_Model{
         $this->db->where('UID',$data['UID']);
         $result=$this->db->update('AccessControl', $data);
         return $result;
-        
     }
     public function  update_attr($id,$data){
         $this->db->where('stu_id',$id);
@@ -96,5 +95,5 @@ class Accesscontrol_model extends CI_Model{
         $query = $this->db->get('AccessControl');
         return $query->num_rows();
     }
-    
+
 }
