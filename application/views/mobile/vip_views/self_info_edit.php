@@ -127,7 +127,7 @@
 
 
 <div class="am-page" id="demo-list-page" style="display: none;">
-    <header data-am-widget="header" class="am-header am-header-default ml-color-bg-main">
+    <header data-am-widget="header" class="am-header am-header-default ml-color-bg-main" data-am-sticky>
         <div class="am-header-left am-header-nav">
             <a onclick="back();">
                 <img class="am-header-icon-custom" src="data:image/svg+xml;charset=utf-8,&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 12 20&quot;&gt;&lt;path d=&quot;M10,0l2,2l-8,8l8,8l-2,2L0,10L10,0z&quot; fill=&quot;%23fff&quot;/&gt;&lt;/svg&gt;"
@@ -144,21 +144,21 @@
             <!--这中间是不同功能的显示的div-->
 
             <div class="all-page changeHead" style='display:none;'><!--修改头像-->
-                <div style="width:300px;height:300px; overflow: none;" >
-                    <input type="file" name="imageUpload" onchange="showPreview(this)"/>
-                    <img  id="element_id" src="" style="max-width:300px;max-height: 260px;">
+                <div class="am-center" style=" overflow: none;" >
+                    <div class="am-form-file am-margin-top">
+                        <button type="button" class="am-btn am-btn-danger am-btn-sm">
+                            <i class="am-icon-cloud-upload"></i> 选择要上传的图片</button>
+                        <input id="doc-form-file" type="file" name="imageUpload" onchange="showPreview(this)" multiple>
+                    </div>
+                    <div id="file-list" style="position: relative;top:-50px;"></div>
+
+
+<!--<input type="file" name="imageUpload" onchange="showPreview(this)"/>-->
+                    <img  id="element_id" src="" >
                     <img  id="element_id_shadow" src="" style="display:none;">
                 </div>
-                <div>
-                    <input onclick="UploadPic()" type="button" class="am-btn am-btn-danger" value="summit"/>
-                </div>
-                <div>
-                    <canvas id="myCanvas" height="200" width="200"></canvas>
-                </div>
-
-
-
             </div>
+
 
             <div class="all-page Record" style='display:none;font-size: 1em;'><!--学习记录-->
                 <div class="record_container">
@@ -175,6 +175,9 @@
         </div>
     </div>
 </div>
+<div class="preview-btn" style="position:fixed;bottom:0px;width:100%;z-index:1100; display: none;">
+    <button class="am-btn am-btn-lg am-btn-primary" style="width: 100%;" onclick="showCanvas()">预&nbsp;&nbsp;&nbsp;览</button>
+</div>
 <!----------------------加载提示框。。。。。--------------------------------->
 <div class="loading am-modal am-modal-loading am-modal-no-btn" tabindex="-1" id="my-modal-loading">
     <div class="am-modal-dialog">
@@ -184,18 +187,53 @@
         </div>
     </div>
 </div>
+
+<div class="am-modal am-modal-confirm" tabindex="-1" id="my-confirm">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">您的头像</div>
+        <div class="am-modal-bd">
+            <canvas id="myCanvas" height="200" width="200"></canvas>
+        </div>
+        <div class="am-modal-footer">
+            <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+            <span class="am-modal-btn" data-am-modal-confirm>上传</span>
+        </div>
+    </div>
+</div>
 <script>
     var curWwwPath = window.document.location.href;
     var pathName = window.document.location.pathname;
     var pos = curWwwPath.indexOf(pathName);
     var localhostPath = curWwwPath.substring(0, pos);
     var radio = '';
+    var jcrop_api;
+    var realWidth;
+    var realHeight;
 
     $(function () {
         $('#doc-my-tabs').tabs();
+        realWidth = document.body.clientWidth;
+        realHeight = document.body.clientHeight;
+//        $('#element_id').css('max-height', realHeight - 20);
+        $('#element_id').css('max-width', realWidth);
+
+        $('#doc-form-file').on('change', function () {
+            var fileNames = '';
+            $.each(this.files, function () {
+                fileNames += "<span class='am-badge'  style='width:100%;line-height:12px;font-size:0.7em;background:url(/application/images/alpha50.png)'>"+ this.name + '</span> ';
+            });
+            $('#file-list').html(fileNames);
+        });
     });
 
     function showPreview(source) {
+        openModel();
+        $('.preview-btn').css('display','none');
+        if (typeof (jcrop_api) != 'undefined') {
+            jcrop_api.destroy();
+            $('#element_id').css('height', '');
+            $('#element_id').css('widhth', '');
+        }
         var file = source.files[0];
         if (window.FileReader) {
             var fr = new FileReader();
@@ -203,18 +241,19 @@
                 $("#element_id").attr("src", e.target.result);
                 $("#element_id_shadow").attr("src", e.target.result);
 //                setTimeout(getRaio(),1000);
-changeHead();
+                closeModel();
+                changeHead();
             };
             fr.readAsDataURL(file);
         }
 
     }
-    function getRaio(){
+    function getRaio() {
         var real_w = $("#element_id_shadow").width();
         var w = $("#element_id").width();
         radio = real_w / w;
         alert(real_w);
-        
+
     }
 
     function  change(id) {
@@ -250,10 +289,17 @@ changeHead();
     }
 
     function changeHead() {
+        $('.preview-btn').css('display','block');
         $('#element_id').Jcrop({
             aspectRatio: 1,
+            allowSelect: false,
             onSelect: updateCoords,
-            boxWidth: '300'
+//            boxWidth: realWidth,
+            handleSize: 12
+        }
+        , function () {
+            jcrop_api = this;
+            jcrop_api.animateTo([20, 20, 120, 120]);
         }
         );
     }
@@ -262,20 +308,22 @@ changeHead();
         var y = c.y;
         var w = c.w;
         var h = c.h;
-         var real_width = $("#element_id_shadow").width();
+        var real_width = $("#element_id_shadow").width();
         var width = $("#element_id").width();
         radio = real_width / width;
-        alert(radio);
+        var thiswindow = $(window);
+        thiswindow.smoothScroll({position: y - 30, speed: 1000});
         var canvas = document.getElementById("myCanvas");
         var ctx = canvas.getContext("2d");
         var img = document.getElementById("element_id");
         ctx.drawImage(img, x * radio, y * radio, w * radio, h * radio, 0, 0, 200, 200);
+//        showCanvas();
 
 
 
     }
     function UploadPic() {
-        alert('toLoad');
+        openModel();
         // Generate the image data
         var Pic = document.getElementById("myCanvas").toDataURL("image/png");
         Pic = Pic.replace(/^data:image\/(png|jpg);base64,/, "");
@@ -289,7 +337,7 @@ changeHead();
                 if (msg == 1) {
                     window.location.href = '<?= base_url() ?>index.php/mobile/vip_home';
                 }
-                alert(msg);
+                closeModel();
             }
         });
     }
@@ -321,6 +369,18 @@ changeHead();
     }
     function closeModel() {
         $('.loading').modal('close');
+    }
+
+    function showCanvas() {
+        $('#my-confirm').modal({
+            relatedTarget: this,
+            onConfirm: function (options) {
+                UploadPic();
+            },
+            // closeOnConfirm: false,
+            onCancel: function () {
+            }
+        });
     }
 
 

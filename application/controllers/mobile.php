@@ -151,10 +151,10 @@ class Mobile extends MY_Controller {
     }
 
     public function book_detail() {
-        if ($this->session->userdata('TYPE') == 2) {
+        if ($this->session->userdata('TYPE') == 2 || $this->session->userdata('TYPE') == 3) {
             
         } else {
-            $this->view("you aren't vip!");
+            redirect();
             return false;
         }
         $id = $this->input->get('id');
@@ -749,6 +749,7 @@ class Mobile extends MY_Controller {
                     'stu_face' => 'http://image.52drivecar.com/' . $folder_name . $file_name . '.jpg'
                 );
                 $result = $this->accesscontrol_model->update_attr($UID, $data);
+                $this->session->set_userdata('face', 'http://image.52drivecar.com/' . $folder_name . $file_name . '.jpg');
                 echo $result;
             } else {
                 echo '3'; //上传失败
