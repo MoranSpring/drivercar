@@ -35,6 +35,7 @@ class Mobile extends MY_Controller {
         $this->load->model('usercoin_model');
         $this->load->model('consumption_model');
         $this->load->model('cash_model');
+        $this->load->model('news_model');
         $this->load->model('rechargecard_model');
     }
 
@@ -216,13 +217,13 @@ class Mobile extends MY_Controller {
         foreach ($user_data as $row) {
             if ($row['stu_true_name'] != null) {
                 $this->session->set_userdata('true_name', $row['stu_true_name']);
-                $row['name']= $row['stu_true_name'];
+                $row['name'] = $row['stu_true_name'];
             } elseif ($row['stu_nick_name'] != null) {
                 $this->session->set_userdata('name', $row['stu_nick_name']);
-                $row['name']= $row['stu_nick_name'];
+                $row['name'] = $row['stu_nick_name'];
             } else {
                 $this->session->set_userdata('name', $row['stu_name']);
-                $row['name']= $row['stu_name'];
+                $row['name'] = $row['stu_name'];
             }
             $body = $row;
         }
@@ -257,6 +258,19 @@ class Mobile extends MY_Controller {
         $body['menu'] = $this->getMenu();
         $page = $this->load->view('mobile/public_views/map_sch_pos', $body, true);
         $title = "驾培点地址 - 我爱开车网（手机版）";
+        $this->view($title, $page);
+    }
+
+    public function article($id='1429669168') {
+        $news = $this->news_model->select_detail($id);
+        $title = '';
+        $page='';
+        foreach ($news as $row) {
+            $row['news_content'] = preg_replace('/\n/', '<p/><p>', $row['news_content']);
+            $page = $this->load->view('mobile/public_views/article', $row, true);
+             $title = $row['news_title'] . " - 我爱开车网（手机版）";
+        }
+       
         $this->view($title, $page);
     }
 

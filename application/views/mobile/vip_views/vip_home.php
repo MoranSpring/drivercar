@@ -135,23 +135,15 @@
                 </div>
 
             </div>
-            <div onclick="change()" class="am-g ml-ontouch" style="margin: 0;border-bottom: 1px solid #ddd;">
+            <div onclick="javascript:window.location.href = '<?= base_url() ?>index.php/mobile/self_info_edit'" class="am-g ml-ontouch" style="margin: 0;border-bottom: 1px solid #ddd;">
                 <div class="am-u-sm-10" style="height:50px;font-size: 1em;margin: 0;">
-                    <span class="" style="line-height:50px;font-size: 1.1em;color:#888;">联系方式：<?= $stu_tel ?></span>
-                </div>
-                <div class="am-u-sm-2 am-text-center" style="height:50px;font-size: 1em;padding: 0;margin: 0;">
-                    <span class="am-icon-angle-right" style="line-height:50px;font-size: 1.5em;color:#ccc;">&nbsp;</span>
-                </div>
-
-            </div>
-            <div onclick="change()" class="am-g  ml-ontouch" style="margin: 0;">
-                <div class="am-u-sm-10" style="height:50px;font-size: 1em;margin: 0;">
-                    <span class="" style="line-height:50px;font-size: 1.1em;color:#888;">修改密码</span>
+                    <span class="" style="line-height:50px;font-size: 1.1em;color:#888;">个人设置</span>
                 </div>
                 <div class="am-u-sm-2 am-text-center" style="height:50px;font-size: 1em;padding: 0;margin: 0;">
                     <span class="am-icon-angle-right" style="line-height:50px;font-size: 1.5em;color:#ccc;">&nbsp;</span>
                 </div>
             </div>
+            
         </section>
 
 
@@ -297,6 +289,9 @@
                 $('.comsumpation').css('display', 'block');
                 $('.my_title').html('消费记录');
                 Consumpation();
+                break;
+            case 6:
+                
                 break;
         }
         $('#demo-list-page').css('display', 'block');

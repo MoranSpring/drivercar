@@ -62,7 +62,7 @@
         <section class="am-panel am-panel-default" style='border-color:#ddd;'>
             <div onclick="change(1)"  class="am-g ml-ontouch" style="margin: 0;">
                 <div class="am-u-sm-10" style="font-size: 1em;margin: 0;padding:5px;">
-                    <img  id="elemend" class="am-img am-circle" src="http://img3.douban.com/lpic/o626254.jpg" style="height:80px;width:80px;" />
+                    <img  id="elemend" class="am-img am-circle" src="<?= $this->session->userdata('face') == FALSE ? 'http://img3.douban.com/lpic/o626254.jpg' : $this->session->userdata('face') . '@!nail250'; ?>" style="height:80px;width:80px;" />
                 </div>
                 <div class="am-u-sm-2 am-text-center" style="height:50px;font-size: 1em;padding: 0;margin: 0;">
                     <span class="am-icon-angle-right" style="line-height:80px;font-size: 1.5em;color:#ccc;">&nbsp;</span>
@@ -72,7 +72,8 @@
         <section class="am-panel am-panel-default" style='border-color:#ddd;'>
             <div onclick="change(2)" class="am-g ml-ontouch" style="margin: 0;border-bottom: 1px solid #ddd;">
                 <div class="am-u-sm-10 " style="height:50px;font-size: 1em;margin: 0;">
-                    <span class="" style="line-height:50px;font-size: 1.1em;color:#888;">用户昵称</span>
+                    <span class="am-fl" style="line-height:50px;font-size: 1.1em;color:#888;">用户昵称</span>
+                    <span class="am-fr" style="line-height:50px;font-size: 0.9em;color:#bbb;"><?= $this->session->userdata('stu_nick_name') == FALSE ? '未填写' : $this->session->userdata('stu_nick_name'); ?></span>
                 </div>
                 <div class="am-u-sm-2 am-text-center" style="height:50px;font-size: 1em;padding: 0;margin: 0;">
                     <span class="am-icon-angle-right" style="line-height:50px;font-size: 1.5em;color:#ccc;">&nbsp;</span>
@@ -81,7 +82,8 @@
             </div>
             <div onclick="change(3)" class="am-g ml-ontouch" style="margin: 0;border-bottom: 1px solid #ddd;">
                 <div class="am-u-sm-10" style="height:50px;font-size: 1em;margin: 0;">
-                    <span class="" style="line-height:50px;font-size: 1.1em;color:#888;">用户真实姓名</span>
+                    <span class="am-fl" style="line-height:50px;font-size: 1.1em;color:#888;">真实姓名</span>
+                    <span class="am-fr" style="line-height:50px;font-size: 0.9em;color:#bbb;"><?= $this->session->userdata('true_name') == FALSE ? '未填写' : $this->session->userdata('true_name'); ?></span>
                 </div>
                 <div class="am-u-sm-2 am-text-center" style="height:50px;font-size: 1em;padding: 0;margin: 0;">
                     <span class="am-icon-angle-right" style="line-height:50px;font-size: 1.5em;color:#ccc;">&nbsp;</span>
@@ -92,7 +94,8 @@
         <section class="am-panel am-panel-default" style='border-color:#ddd;'>
             <div onclick="change(4)" class="am-g ml-ontouch" style="margin: 0;border-bottom: 1px solid #ddd;">
                 <div class="am-u-sm-10" style="height:50px;font-size: 1em;margin: 0;">
-                    <span class="" style="line-height:50px;font-size: 1.1em;color:#888;">联系电话</span>
+                    <span class="am-fl" style="line-height:50px;font-size: 1.1em;color:#888;">联系电话</span>
+                    <span class="am-fr" style="line-height:50px;font-size: 0.9em;color:#bbb;"><?= $this->session->userdata('TEL') == FALSE ? '未填写' : $this->session->userdata('TEL'); ?></span>
                 </div>
                 <div class="am-u-sm-2 am-text-center" style="height:50px;font-size: 1em;padding: 0;margin: 0;">
                     <span class="am-icon-angle-right" style="line-height:50px;font-size: 1.5em;color:#ccc;">&nbsp;</span>
@@ -110,7 +113,7 @@
             </div>
             <div onclick="change(6)" class="am-g  ml-ontouch" style="margin: 0;">
                 <div class="am-u-sm-10" style="height:50px;font-size: 1em;margin: 0;">
-                    <span class="" style="line-height:50px;font-size: 1.1em;color:#888;">更多</span>
+                    <span class="" style="line-height:50px;font-size: 1.1em;color:#888;">更&nbsp;&nbsp;多</span>
                 </div>
                 <div class="am-u-sm-2 am-text-center" style="height:50px;font-size: 1em;padding: 0;margin: 0;">
                     <span class="am-icon-angle-right" style="line-height:50px;font-size: 1.5em;color:#ccc;">&nbsp;</span>
@@ -151,20 +154,52 @@
                         <input id="doc-form-file" type="file" name="imageUpload" onchange="showPreview(this)" multiple>
                     </div>
                     <div id="file-list" style="position: relative;top:-50px;"></div>
-
-
-<!--<input type="file" name="imageUpload" onchange="showPreview(this)"/>-->
                     <img  id="element_id" src="" >
                     <img  id="element_id_shadow" src="" style="display:none;">
                 </div>
             </div>
 
-
-            <div class="all-page Record" style='display:none;font-size: 1em;'><!--学习记录-->
-                <div class="record_container">
+            <div class="all-page edit-nick-name" style='display:none;font-size: 1em;'><!--修改昵称-->
+                <div class="login-alert am-alert am-alert-danger"  style="margin:0;">
+                    <p class="name_alert" onchange="toAlert()"></p>
+                </div>
+                <div class="nick_name_container am-margin">
+                    <form class="am-form" method="post" onsubmit="return checkNickNameForm(this)">
+                        <input class="am-form-field" id="nick_name_input" value="" name="nick_name_input" onfocus="check_onfocus()" maxlength=10 type="text" placeholder="<?= $this->session->userdata('stu_nick_name') == FALSE ? '给自己起个美美的昵称吧' : $this->session->userdata('stu_nick_name'); ?>" style="border-top: 0;border-left: 0;border-right: 0;"><br/>
+                        <button type="submit" class="am-btn am-btn-primary am-btn-block">确&nbsp;&nbsp;&nbsp;定</button>
+                    </form>
 
                 </div>
             </div>
+
+            <div class="all-page edit-true-name" style='display:none;font-size: 1em;'><!--修改真实姓名-->
+                <div class="login-alert am-alert am-alert-danger"  style="margin:0;">
+                    <p class="name_alert" onchange="toAlert()"></p>
+                </div>
+                <div class="true_name_container am-margin">
+                    <form class="am-form" method="post" onsubmit="return checkTrueNameForm(this)">
+                        <input class="am-form-field" id="true_name_input" value="" name="true_name_input" onfocus="check_onfocus()" maxlength=4 type="text" placeholder="<?= $this->session->userdata('true_name') == FALSE ? '请输入真实姓名' : $this->session->userdata('true_name'); ?>" style="border-top: 0;border-left: 0;border-right: 0;"><br/>
+                        <button type="submit" class="am-btn am-btn-primary am-btn-block">确&nbsp;&nbsp;&nbsp;定</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="all-page edit-psw" style='display:none;font-size: 1em;'><!--修改密码-->
+                <div class="login-alert am-alert am-alert-danger"  style="margin:0;">
+                    <p class="name_alert" onchange="toAlert()"></p>
+                </div>
+                <div class="true_name_container am-margin">
+                    <form class="am-form" method="post" onsubmit="return checkPswForm(this)">
+                        <input class="am-form-field" id="old_psw" value="" name="old_psw" onfocus="check_onfocus()"  type="password" placeholder="请输入旧密码" style="border-top: 0;border-left: 0;border-right: 0;">
+                        <input class="am-form-field" id="new_psw" value="" name="new_psw" onfocus="check_onfocus()"  type="password" placeholder="请输入新密码" style="border-top: 0;border-left: 0;border-right: 0;">
+                        <input class="am-form-field" id="re_new_psw" value="" name="re_new_psw" onfocus="check_onfocus()" type="password" placeholder="再输一遍新密码" style="border-top: 0;border-left: 0;border-right: 0;"><br/>
+
+                        <button type="submit" class="am-btn am-btn-primary am-btn-block">确&nbsp;&nbsp;&nbsp;定</button>
+                    </form>
+                </div>
+            </div>
+
+
             <div class="all-page coach_comment" style='display:none;font-size: 1em'><!--教练评价-->
                 <ul class="am-comments-list am-comments-list-flip am-padding coach_comment_container">
 
@@ -209,9 +244,13 @@
     var jcrop_api;
     var realWidth;
     var realHeight;
+    function toAlert() {
+        $('.login-alert').css('display', 'block');
+    }
 
     $(function () {
         $('#doc-my-tabs').tabs();
+        $('.login-alert').css('display', 'none');
         realWidth = document.body.clientWidth;
         realHeight = document.body.clientHeight;
 //        $('#element_id').css('max-height', realHeight - 20);
@@ -220,7 +259,7 @@
         $('#doc-form-file').on('change', function () {
             var fileNames = '';
             $.each(this.files, function () {
-                fileNames += "<span class='am-badge'  style='width:100%;line-height:12px;font-size:0.7em;background:url(/application/images/alpha50.png)'>"+ this.name + '</span> ';
+                fileNames += "<span class='am-badge'  style='width:100%;line-height:12px;font-size:0.7em;background:url(/application/images/alpha50.png)'>" + this.name + '</span> ';
             });
             $('#file-list').html(fileNames);
         });
@@ -228,7 +267,7 @@
 
     function showPreview(source) {
         openModel();
-        $('.preview-btn').css('display','none');
+        $('.preview-btn').css('display', 'none');
         if (typeof (jcrop_api) != 'undefined') {
             jcrop_api.destroy();
             $('#element_id').css('height', '');
@@ -262,23 +301,19 @@
             case 1:
                 $('.changeHead').css('display', 'block');
                 $('.my_title').html('修改头像');
-//                changeHead();
                 break;
             case 2:
-                $('.Record').css('display', 'block');
-                $('.my_title').html('学习记录');
-                study_record();
+                $('.edit-nick-name').css('display', 'block');
+                $('.my_title').html('修改昵称');
+//                study_record();
                 break;
             case 3:
-                $('.coach_comment').css('display', 'block');
-                $('.my_title').html('教练建议');
-                coach_comment();
-
+                $('.edit-true-name').css('display', 'block');
+                $('.my_title').html('修改真实姓名');
                 break;
             case 5:
-                $('.comsumpation').css('display', 'block');
-                $('.my_title').html('消费记录');
-                Consumpation();
+                $('.edit-psw').css('display', 'block');
+                $('.my_title').html('修改密码');
                 break;
         }
         $('#demo-list-page').css('display', 'block');
@@ -289,7 +324,7 @@
     }
 
     function changeHead() {
-        $('.preview-btn').css('display','block');
+        $('.preview-btn').css('display', 'block');
         $('#element_id').Jcrop({
             aspectRatio: 1,
             allowSelect: false,
@@ -335,7 +370,7 @@
             dataType: 'text', //返回值类型 一般设置为json
             success: function (msg) {
                 if (msg == 1) {
-                    window.location.href = '<?= base_url() ?>index.php/mobile/vip_home';
+                    self.location = document.referrer;
                 }
                 closeModel();
             }
@@ -383,6 +418,153 @@
         });
     }
 
+    function checkNickNameForm(thisform) {
+        with (thisform)
+        {
+            if (nick_name_input.value === "") {
+                nick_name_input.focus();
+                toAlert();
+                $(".name_alert").text("输入不能为空");
+                return false;
+            } else if (checkSpecialCharacter(nick_name_input.value)) {
+                toAlert();
+                $(".name_alert").text("不能有特殊字符");
+            } else if (nick_name_input.value.length < 3) {
+                toAlert();
+                $(".name_alert").text("太短啦");
+            }
+            else {
+                $.ajax({
+                    type: "POST",
+                    dataType: "text",
+                    url: localhostPath + "/index.php/info_change/nickName",
+                    async: true,
+                    data: {nickName: nick_name_input.value},
+                    success: function (data) {
+                        self.location = document.referrer;
+
+
+                    }});
+            }
+
+        }
+        return false;
+    }
+
+    function checkTrueNameForm(thisform) {
+        with (thisform)
+        {
+            if (true_name_input.value === "") {
+                true_name_input.focus();
+                toAlert();
+                $(".name_alert").text("输入不能为空");
+                return false;
+            } else if (!isChn(true_name_input.value)) {
+                toAlert();
+                $(".name_alert").text("必须是中文，谢谢");
+            } else if (true_name_input.value.length < 2) {
+                toAlert();
+                $(".name_alert").text("太短啦");
+            }
+            else {
+                $.ajax({
+                    type: "POST",
+                    dataType: "text",
+                    url: localhostPath + "/index.php/info_change/realName",
+                    async: true,
+                    data: {realName: true_name_input.value},
+                    success: function (data) {
+                        self.location = document.referrer;
+
+
+                    }});
+            }
+
+        }
+        return false;
+    }
+    function checkPswForm(thisform) {
+        with (thisform)
+        {
+            if (old_psw.value === "" || new_psw.value === "" || re_new_psw.value === "") {
+                old_psw.focus();
+                toAlert();
+                $(".name_alert").text("输入不能为空");
+                return false;
+            } else if (new_psw.value !== re_new_psw.value) {
+                new_psw.focus();
+                toAlert();
+                $(".name_alert").text("新密码输入不一致");
+                return false;
+            } else if (new_psw.value.length < 8) {
+                new_psw.focus();
+                toAlert();
+                $(".name_alert").text("密码必须大于8个字符");
+                return false;
+            }
+            else {
+                $.ajax({
+                    type: "POST",
+                    dataType: "text",
+                    url: localhostPath + "/index.php/info_change/pwdChange",
+                    async: true,
+                    data: {pwd_active: old_psw.value, new_pwd_one: new_psw.value},
+                    success: function (data) {
+                        switch (data) {
+                            case '1':
+                                self.location = document.referrer;
+                                break;
+                            case '3':
+                                new_psw.focus();
+                                toAlert();
+                                $(".name_alert").text("旧密码错误");
+                                break;
+                            case '7':
+                                new_psw.focus();
+                                toAlert();
+                                $(".name_alert").text("修改异常");
+                                break;
+                            case '9':
+                                new_psw.focus();
+                                toAlert();
+                                $(".name_alert").text("修改出错");
+                                break;
+                        }
+
+
+
+                    }});
+            }
+
+        }
+        return false;
+    }
+    function check_onfocus() {
+        $(".name_alert").text('');
+        $('.login-alert').css('display', 'none');
+    }
+    /**
+     * 昵称限制特殊字符验证
+     */
+
+    function checkSpecialCharacter(str) {
+        var specialKey = "~\!@()&#$%\^*\'\"\+！@#￥%…&*（）——+-=？“：；‘，。《》、{}【】";//Specific Key list
+        for (var i = 0; i < str.length; i++) {
+            flag = specialKey.indexOf(str.substr(i, 1));
+            if (flag >= 0)
+                return true;
+        }
+        return false;
+    }
+    //真实姓名
+    //只能输入中文
+    function isChn(str) {
+        var reg = /^[\u4E00-\u9FA5]+$/;
+        if (!reg.test(str)) {
+            return false;
+        }
+        return true;
+    }
 
 </script>
 

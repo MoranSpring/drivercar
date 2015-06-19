@@ -117,7 +117,7 @@
             </a>
         </li>
         <li class="box box-bottom box-reight ml-ontouch">
-            <a href="" style="height: 100%">
+            <a href="<?= base_url() ?>index.php/mobile/article" style="height: 100%">
                 <img class="home-img" src="<?= base_url() ?>application/images/mobile/coach_book.png" style="width:100%;"/>
             </a>
         </li>

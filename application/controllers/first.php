@@ -405,6 +405,7 @@ class First extends MY_Controller {
                 }
                 if ($row['stu_nick_name'] != null) {
                     $this->session->set_userdata('name', $row['stu_nick_name']);
+                    $this->session->set_userdata('stu_nick_name', $row['stu_nick_name']);
                 }else {
                     $this->session->set_userdata('name', $name);
                 }

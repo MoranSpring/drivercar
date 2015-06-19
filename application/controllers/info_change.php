@@ -48,7 +48,8 @@ class Info_change extends MY_Controller {
         );
         $result = $this->accesscontrol_model->update_attr($id,$data);
         if ($result == 1) {
-            echo 'success!!';
+            echo 'success';
+            $this->session->set_userdata('stu_nick_name',$nickName);
         } else {
             echo 'insert error!';
         }
@@ -77,6 +78,7 @@ class Info_change extends MY_Controller {
         $result = $this->accesscontrol_model->update_attr($id,$data);
         if ($result == 1) {
             echo 'success!!';
+            $this->session->set_userdata('stu_true_name',$realName);
         } else {
             echo 'insert error!';
         }
@@ -324,31 +326,30 @@ class Info_change extends MY_Controller {
      public function pwdChange(){
         $id =$this->session->userdata('UID');
         //从页面获取到的密码验证码和新密码
-        $pwd_active= $this->input->post('pwd_active');
-        $new_pwd_one= $this->input->post('new_pwd_one');
-        $pwd_hasmd5= $this->input->post('pwd_hasmd5');
+        $pwd_active= $this->input->post('pwd_active',TRUE);
+        $new_pwd= $this->input->post('new_pwd_one',TRUE);
+//        $pwd_hasmd5= $this->input->post('pwd_hasmd5');
         trim($pwd_active);
-        trim($new_pwd_one);
-        trim($pwd_hasmd5);
-        $pwd_active_md5=md5($pwd_active);
-        $new_pwd_md5=md5($new_pwd_one);
-
-        $flag=$this->isStrSame($pwd_hasmd5,$pwd_active_md5);
-
-            if($flag){
-                     $data=array(
-                        'stu_pwd'=>$new_pwd_md5
+        trim($new_pwd);
+        $data=array(
+                        'stu_pwd'=>md5($new_pwd)
                     );
-                    $result = $this->accesscontrol_model->update_attr($id,$data);
-                    if ($result == 1) {
-                        echo '密码修改成功!!';
-                    } else {
-                        echo 'insert error!';
-                    }
+        $result=$this->accesscontrol_model->selectById($id);
+        foreach ($result as $row) {
+            if($row['stu_pwd']!=  md5($pwd_active)){
+               echo 3;//旧密码错误
+               return false;
             }else{
-                echo '密码错误!';
+                $result = $this->accesscontrol_model->update_attr($id,$data);
+                    if ($result == 1) {
+                        echo 1; //修改成功；
+                    } else {
+                        echo 9;//修改出错；
+                    }
             }
-
+            return false;
+        }
+        echo 7;//修改异常
     }
         //学员序列号验证
     public function ValiVipSerNum() {
