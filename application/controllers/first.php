@@ -43,22 +43,6 @@ class First extends MY_Controller {
         }
     }
 
-    public function mobile() {
-        $this->load->view('mobile/login_views/template');
-    }
-
-    public function mobile_login() {
-        $this->load->view('mobile/login_views/login');
-    }
-
-    public function mobile_news() {
-        $this->load->view('mobile/login_views/template');
-    }
-
-    public function mobile_book() {
-        $this->load->view('mobile/vip_views/study_book');
-    }
-
     public function view($title = '', $page = '') {
         $name = $this->session->userdata('name');
         if ($name == null) {
@@ -187,7 +171,11 @@ class First extends MY_Controller {
         $title = "驾培点信息 - 我爱开车网";
         $this->view($title, $page);
     }
-
+    public function index_page() {
+        $page = $this->load->view('a_views/index', '', true);
+        $title = "首页 - 我爱开车网";
+        $this->view($title, $page);
+    }
     public function school_info($id = '') {
         if ($id == '')
             exit(0);
@@ -270,10 +258,10 @@ class First extends MY_Controller {
         if ($stu_type == 3) {
             //将数据插入用户表,普通注册用户
             $result = $this->accesscontrol_model->insert($datas);
-            $coin_data=array(
-                'uc_id'=>'coin'.$Uid,
-                'uc_stu_id'=>$Uid,
-                'uc_num'=>0
+            $coin_data = array(
+                'uc_id' => 'coin' . $Uid,
+                'uc_stu_id' => $Uid,
+                'uc_num' => 0
             );
             if ($result == 1) {
                 $result = $this->usercoin_model->insert($coin_data);
@@ -299,17 +287,17 @@ class First extends MY_Controller {
         } else if ($stu_type == 1) {
             $serial_num = $train_serial_num;
         } else {
-            echo  '用户类型异常';
+            echo '用户类型异常';
             exit(0);
         }
-        
+
         $ser_num_vali = $this->serialnumber_model->SerValidChange($serial_num);
         if ($ser_num_vali) {
             $result = $this->accesscontrol_model->insert($datas);
-            $coin_data=array(
-                'uc_id'=>'coin'.$Uid,
-                'uc_stu_id'=>$Uid,
-                'uc_num'=>3000
+            $coin_data = array(
+                'uc_id' => 'coin' . $Uid,
+                'uc_stu_id' => $Uid,
+                'uc_num' => 3000
             );
             if ($result == 1) {
                 $result = $this->usercoin_model->insert($coin_data);
@@ -320,13 +308,13 @@ class First extends MY_Controller {
                 $this->session->set_userdata('name', $username);
                 if ($stu_type == 2) {
                     redirect();
-                } else if($stu_type == 1){
-                    $coach_id=  time();
-                    $attr=array('coach_id'=>$coach_id,'coach_user_id'=>$Uid);
-                    $result1=$this->coach_model->insert($attr);
+                } else if ($stu_type == 1) {
+                    $coach_id = time();
+                    $attr = array('coach_id' => $coach_id, 'coach_user_id' => $Uid);
+                    $result1 = $this->coach_model->insert($attr);
                     $this->session->set_userdata('coach_id', $coach_id);
                     redirect('coach');
-                }else{
+                } else {
                     exit();
                 }
             } else {
@@ -337,10 +325,6 @@ class First extends MY_Controller {
             echo '无效序列号！';
         }
     }
-    
-
-   
-    
 
     public function login_check() {
         $name = $this->input->get('name');
@@ -406,7 +390,7 @@ class First extends MY_Controller {
                 if ($row['stu_nick_name'] != null) {
                     $this->session->set_userdata('name', $row['stu_nick_name']);
                     $this->session->set_userdata('stu_nick_name', $row['stu_nick_name']);
-                }else {
+                } else {
                     $this->session->set_userdata('name', $name);
                 }
                 if ($row['stu_tel'] != null) {
@@ -414,7 +398,7 @@ class First extends MY_Controller {
                 }
                 if ($row['stu_face'] != null) {
                     $this->session->set_userdata('face', $row['stu_face']);
-                } 
+                }
                 if ($row['stu_type'] == 3) {
                     redirect();
                 } else if ($row['stu_type'] == 1) {
@@ -422,7 +406,7 @@ class First extends MY_Controller {
                 } else if ($row['stu_type'] == 0) {
                     redirect('admin');
                 } else {
-                  redirect();
+                    redirect();
                 }
                 return true;
             }
@@ -544,7 +528,8 @@ class First extends MY_Controller {
         $data = array('reg_email_str' => $reg_email_str, 'send_time' => $send_time, 'result' => $result);
         echo json_encode($data);
     }
-        function get_school_info() {
+
+    function get_school_info() {
         $city = $this->input->post("city", TRUE);
         $result = $this->school_model->get_from_city($city);
         $list = '';
@@ -557,6 +542,17 @@ class First extends MY_Controller {
         );
         echo json_encode($data);
     }
-    
+
+    function send_message() {
+        
+        $options['accountsid'] = '4b624a4e3b505fd45db7e28605dfa1ac';
+        $options['token'] = '464c98f7b103aee53a75344d5a549868';
+        $this->load->library('ucpaas',$options);
+        $appId = "e5e7b60c4cfb4f10a43b11afa0f885e4";
+        $to = "13812635123";
+        $templateId = "8276";
+        $param = "等你等的黄花菜都凉了！,1256";
+        echo $this->ucpaas->templateSMS($appId, $to, $templateId, $param);
+    }
 
 }

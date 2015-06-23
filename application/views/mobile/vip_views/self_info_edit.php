@@ -370,7 +370,7 @@
             dataType: 'text', //返回值类型 一般设置为json
             success: function (msg) {
                 if (msg == 1) {
-                    self.location = document.referrer;
+                    location.replace(localhostPath + "/index.php/mobile/vip_home");
                 }
                 closeModel();
             }
@@ -441,7 +441,7 @@
                     async: true,
                     data: {nickName: nick_name_input.value},
                     success: function (data) {
-                        self.location = document.referrer;
+                        location.replace(localhostPath + "/index.php/mobile/vip_home");
 
 
                     }});
@@ -474,7 +474,10 @@
                     async: true,
                     data: {realName: true_name_input.value},
                     success: function (data) {
-                        self.location = document.referrer;
+//                        window.location.replace( localhostPath + "/index.php/mobile/vip_home");
+//                        history.go(-1);
+                       location.replace(localhostPath + "/index.php/mobile/vip_home");
+
 
 
                     }});
@@ -512,7 +515,7 @@
                     success: function (data) {
                         switch (data) {
                             case '1':
-                                self.location = document.referrer;
+                                location.replace(localhostPath + "/index.php/mobile/vip_home");
                                 break;
                             case '3':
                                 new_psw.focus();

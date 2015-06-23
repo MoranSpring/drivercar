@@ -57,7 +57,7 @@
             <a href="#title-link" class="ml-color-white">个人主页</a>
         </h1>
     </header>
-    <div onclick="javascript:window.location.href = '<?= base_url() ?>index.php/mobile/self_info_edit'"  style='max-height: 120px;overflow: hidden'>
+    <div onclick="javascript:window.location.assign( '<?= base_url() ?>index.php/mobile/self_info_edit')"  style='max-height: 120px;overflow: hidden'>
         <div style="top:0;height:120px;width:100%;position: relative;z-index: -10;overflow: hidden;" >
             <img  id="element_id" src="http://image.52drivecar.com/bg_img/vip_home_bg.png@!topnews" width="100%" style="">
         </div>

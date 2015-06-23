@@ -177,6 +177,11 @@ class Mobile extends MY_Controller {
         $title = "新闻 - 我爱开车网（手机版）";
         $this->view($title, $page);
     }
+        public function hook() {
+        $page = $this->load->view('mobile/public_views/hook', '', true);
+        $title = "测试 - 我爱开车网（手机版）";
+        $this->view($title, $page);
+    }
 
     public function coach_home($id) {
         $coach = $this->coach_model->select_detail($id);

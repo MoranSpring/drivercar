@@ -130,7 +130,7 @@
                             $("#mail_span").html("<font color=green>恭喜,邮箱可以注册 !</font>");
 
                             var reg_email = $('#mail').val();
-                            var reg_email_str = randomAlphanumeric('text', 8, '0123456789abcdefghijkmnpqrstuvwxyz');
+                            var reg_email_str = randomAlphanumeric('text', 4, '0123456789abcdefghijkmnpqrstuvwxyz');
                             $.ajax({
                                 type: "POST",
                                 dataType: "text",
@@ -167,7 +167,7 @@
             //alert(first_time+":"+second_time);
             var count = first_time - second_time;
             //为方便测试  设置为60，实际应为600
-            if (count > 0 && count < 200) {
+            if (count > -600 && count < 600) {
                 return true;
             } else {
                 return false;
