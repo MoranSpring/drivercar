@@ -61,7 +61,10 @@
         float:left;
         width:207px;
         height:130px;
-        border:1px solid #000;
+        margin-right: -1px;
+        margin-bottom: -1px;
+        overflow: hidden;
+        border:1px solid #ccc;
     }
 </style>
 <link rel="stylesheet" href="<?= base_url() ?>application/css/slide.css">
@@ -137,33 +140,121 @@
                 <p style="padding-left: 5px;color:#aaa;font-size: 12px;">提前预约 拒绝等待</p>
                 <div class="" style="position: relative;bottom:15px;right:0px;left: 120px;width:70px;">
                     <img src="<?= base_url() ?>application/images/calendar.jpg" height="70" width="71"/>
+
                 </div>
             </li>
         </ul>
     </div>
 </div>
 <div class="index-coach" style="height: 260px;">
-    <div style="width:172px;height:260px;float:left;border:1px solid #000;margin: -1px;">
-        aaa
+    <div style="width:172px;height:260px;float:left;">
+        <img src="<?= base_url() ?>application/images/school.png" style="height:259px;"/>
+        <div style="color:#fff;position: relative;top:-259px;background: url('<?= base_url() ?>application/images/alpha50.png');width:100px;line-height:40px;text-align: center;">
+            官方推荐
+        </div>
+        <div style="color:#fff;position: relative;top:-80px;background: url('<?= base_url() ?>application/images/alpha50.png');width:169px;line-height:40px;text-align: center;">
+            金牌驾培 全心为您
+        </div>
     </div>
     <div style="width:828px;height:260px;float:left;margin-top: -1px;margin-bottom: -1px;">
         <ul class="index-con-ul">
-            <li>aa</li>
-            <li>aa</li>
-            <li>aa</li>
-            <li>aa</li>
-            <li>aa</li>
-            <li>aa</li>
-            <li>aa</li>
-            <li>aa</li>
+            <li class='index-list'>
+                <img src="<?= base_url() ?>application/images/test-list.png" style="height:128px;width:205px;"/>
+                <div class="index-defult" style="color:#fff;position: relative;top:-30px;background: url('<?= base_url() ?>application/images/alpha50.png');width:130px;line-height:30px;text-align: center;">
+                    南湖驾校
+                </div>
+                <div class="index-hover"  style="color:#fff;display:none;position: relative;top:0px;background: url('<?= base_url() ?>application/images/alpha50.png');line-height:29px;height:60px;">
+                    <div>南湖驾校</div>
+                    <div style='color:#F00;font-weight: bold;'>￥3500<span class='am-fr'><a style='color:#1fed62;'>详情查看>></a></span></div>
+                </div>
+            </li>
+            <li class='index-list'>
+                <img src="<?= base_url() ?>application/images/test-list.png" style="height:128px;width:205px;"/>
+                <div class="index-defult" style="color:#fff;position: relative;top:-30px;background: url('<?= base_url() ?>application/images/alpha50.png');width:130px;line-height:30px;text-align: center;">
+                    南湖驾校
+                </div>
+                <div class="index-hover"  style="color:#fff;display:none;position: relative;top:0px;background: url('<?= base_url() ?>application/images/alpha50.png');line-height:29px;height:60px;">
+                    <div>南湖驾校</div>
+                    <div style='color:#F00;font-weight: bold;'>￥3500<span class='am-fr'><a style='color:#1fed62;'>详情查看>></a></span></div>
+                </div>
+            </li>
+            <li class='index-list'>
+                <img src="<?= base_url() ?>application/images/test-list.png" style="height:128px;width:205px;"/>
+                <div class="index-defult" style="color:#fff;position: relative;top:-30px;background: url('<?= base_url() ?>application/images/alpha50.png');width:130px;line-height:30px;text-align: center;">
+                    南湖驾校
+                </div>
+                <div class="index-hover"  style="color:#fff;display:none;position: relative;top:0px;background: url('<?= base_url() ?>application/images/alpha50.png');line-height:29px;height:60px;">
+                    <div>南湖驾校</div>
+                    <div style='color:#F00;font-weight: bold;'>￥3500<span class='am-fr'><a style='color:#1fed62;'>详情查看>></a></span></div>
+                </div>
+            </li>
+            <li class='index-list'>
+                <img src="<?= base_url() ?>application/images/test-list.png" style="height:128px;width:205px;"/>
+                <div class="index-defult" style="color:#fff;position: relative;top:-30px;background: url('<?= base_url() ?>application/images/alpha50.png');width:130px;line-height:30px;text-align: center;">
+                    南湖驾校
+                </div>
+                <div class="index-hover"  style="color:#fff;display:none;position: relative;top:0px;background: url('<?= base_url() ?>application/images/alpha50.png');line-height:29px;height:60px;">
+                    <div>南湖驾校</div>
+                    <div style='color:#F00;font-weight: bold;'>￥3500<span class='am-fr'><a style='color:#1fed62;'>详情查看>></a></span></div>
+                </div>
+            </li>
+            <li class='index-list'>
+                <img src="<?= base_url() ?>application/images/test-list.png" style="height:128px;width:205px;"/>
+                <div class="index-defult" style="color:#fff;position: relative;top:-30px;background: url('<?= base_url() ?>application/images/alpha50.png');width:130px;line-height:30px;text-align: center;">
+                    南湖驾校
+                </div>
+                <div class="index-hover"  style="color:#fff;display:none;position: relative;top:0px;background: url('<?= base_url() ?>application/images/alpha50.png');line-height:29px;height:60px;">
+                    <div>南湖驾校</div>
+                    <div style='color:#F00;font-weight: bold;'>￥3500<span class='am-fr'><a style='color:#1fed62;'>详情查看>></a></span></div>
+                </div>
+            </li>
+            <li class='index-list'>
+                <img src="<?= base_url() ?>application/images/test-list.png" style="height:128px;width:205px;"/>
+                <div class="index-defult" style="color:#fff;position: relative;top:-30px;background: url('<?= base_url() ?>application/images/alpha50.png');width:130px;line-height:30px;text-align: center;">
+                    南湖驾校
+                </div>
+                <div class="index-hover"  style="color:#fff;display:none;position: relative;top:0px;background: url('<?= base_url() ?>application/images/alpha50.png');line-height:29px;height:60px;">
+                    <div>南湖驾校</div>
+                    <div style='color:#F00;font-weight: bold;'>￥3500<span class='am-fr'><a style='color:#1fed62;'>详情查看>></a></span></div>
+                </div>
+            </li>
+            <li class='index-list'>
+                <img src="<?= base_url() ?>application/images/test-list.png" style="height:128px;width:205px;"/>
+                <div class="index-defult" style="color:#fff;position: relative;top:-30px;background: url('<?= base_url() ?>application/images/alpha50.png');width:130px;line-height:30px;text-align: center;">
+                    南湖驾校
+                </div>
+                <div class="index-hover"  style="color:#fff;display:none;position: relative;top:0px;background: url('<?= base_url() ?>application/images/alpha50.png');line-height:29px;height:60px;">
+                    <div>南湖驾校</div>
+                    <div style='color:#F00;font-weight: bold;'>￥3500<span class='am-fr'><a style='color:#1fed62;'>详情查看>></a></span></div>
+                </div>
+            </li>
+            <li class='index-list'>
+                <img src="<?= base_url() ?>application/images/test-list.png" style="height:128px;width:205px;"/>
+                <div class="index-defult" style="color:#fff;position: relative;top:-30px;background: url('<?= base_url() ?>application/images/alpha50.png');width:130px;line-height:30px;text-align: center;">
+                    南湖驾校
+                </div>
+                <div class="index-hover"  style="color:#fff;display:none;position: relative;top:0px;background: url('<?= base_url() ?>application/images/alpha50.png');line-height:29px;height:60px;">
+                    <div>南湖驾校</div>
+                    <div style='color:#F00;font-weight: bold;'>￥3500<span class='am-fr'><a style='color:#1fed62;'>详情查看>></a></span></div>
+                </div>
+            </li>
+
 
 
         </ul>
     </div>
 </div>
 <div class="index-coach" style="height: 260px;">
-    <div style="width:172px;height:260px;float:left;border:1px solid #000;margin: -1px;">
-        aaa
+    <div style="width:172px;height:260px;float:left;margin: -1px;">
+        <div style="width:172px;height:260px;float:left;margin: -1px;">
+            <img src="<?= base_url() ?>application/images/coach.png" style="height:258px;"/>
+            <div style="color:#fff;position: relative;top:-258px;background: url('<?= base_url() ?>application/images/alpha50.png');width:100px;line-height:40px;text-align: center;">
+                官方推荐
+            </div>
+            <div style="color:#fff;position: relative;top:-80px;background: url('<?= base_url() ?>application/images/alpha50.png');width:260px;line-height:40px;text-align: center;">
+                金牌驾培 全心为您
+            </div>
+        </div>
     </div>
     <div style="width:828px;height:260px;float:left;margin-top: -1px;margin-bottom: -1px;">
         <ul class="index-con-ul">
@@ -182,7 +273,26 @@
 </div>
 
 <script>
+    var i = 0;
     $('.ck-slide').ckSlide({
         dir: 'x'
+    });
+    $('.index-list').live('mouseover', function () {
+
+        $(this).children('.index-defult').css('display', 'none');
+        $(this).children('.index-hover').css('display', 'block');
+        $(this).children('.index-hover').animate({top: '-60px'},200);
+
+    });
+    $('.index-list').live('mouseleave', function () {
+        var this_list=$(this);
+        this_list.children('.index-hover').animate({top: '0px'},1,function(){
+            this_list.children('.index-hover').css('display', 'none');
+             this_list.children('.index-defult').css('display', 'block');
+        });
+        
+        
+//        $(this).children('.index-hover').css('display', 'none');
+
     });
 </script>
