@@ -243,7 +243,8 @@ class First extends MY_Controller {
     public function register_insert() {
         $username = $this->input->post('username');
         $password = $this->input->post('userpass');
-        $email = $this->input->post('useremail');
+        $email = $this->input->post('useremail')=='' ?'': $this->input->post('useremail');
+        $phone= $this->input->post('phone')==''?'': $this->input->post('phone');
         $stu_type = $this->input->post('user_type');
         $reg_time = $this->getTime();
         $Uid = time();
@@ -251,6 +252,7 @@ class First extends MY_Controller {
             'stu_id' => $Uid,
             'stu_name' => $username,
             'stu_email' => $email,
+            'stu_tel' => $phone,
             'stu_pwd' => md5($password),
             'stu_type' => $stu_type,
             'stu_reg_time' => $reg_time
@@ -414,6 +416,34 @@ class First extends MY_Controller {
         }
         echo false;
     }
+    public function login_phoneexist(){
+        $phone = $this->input->post('phone',TRUE);
+        $Result = $this->accesscontrol_model->select_phone($phone);
+        foreach($Result as $row){
+            echo '3';//该手机已被注册
+            return false;
+        }
+        $phone_code=  rand(1000, 9999);
+        $this->session->set_userdata('phone_verify_code', $phone_code);
+        $return = $this->_send_message($phone,$phone_code);
+        if($return=='000000'){
+            echo '1';//验证码发送成功。
+        }else{
+            echo '7';//验证码发送失败。
+        }
+    }
+    public function is_phone_verify_code(){
+        $phone = $this->input->post('code',TRUE);
+        $real_code = $this->session->userdata('phone_verify_code');
+        if($real_code==$phone){
+            echo '1';
+            return false;
+        }else{
+            echo '3';
+            return false;
+        }
+        
+    }
 
     public function login_exit() {
         $this->session->sess_destroy();
@@ -543,16 +573,21 @@ class First extends MY_Controller {
         echo json_encode($data);
     }
 
-    function send_message() {
-        
+    private function _send_message($phone,$code) {
+        $deadline_time='5';
         $options['accountsid'] = '4b624a4e3b505fd45db7e28605dfa1ac';
         $options['token'] = '464c98f7b103aee53a75344d5a549868';
         $this->load->library('ucpaas',$options);
         $appId = "e5e7b60c4cfb4f10a43b11afa0f885e4";
-        $to = "13812635123";
+        $to = $phone;
         $templateId = "8276";
-        $param = "等你等的黄花菜都凉了！,1256";
-        echo $this->ucpaas->templateSMS($appId, $to, $templateId, $param);
+        $param =$code.",".$deadline_time;
+        $return =$this->ucpaas->templateSMS($appId, $to, $templateId, $param);
+        return $this->_decode_message_json($return);
+    }
+    private function _decode_message_json($return){
+       $data = json_decode($return, true);
+       return $data['resp']['respCode'];
     }
 
 }

@@ -93,7 +93,7 @@
          * @param {type} countdown 单位为秒
          * @returns {undefined}                 */
         function setTime(countdown) {
-            var btn_reg_emailkey = $('#send_reg_emailkey');
+            var btn_reg_emailkey = $('#send_reg_message');
             if (countdown == 0) {
                 btn_reg_emailkey.val("发送邮件");
                 btn_reg_emailkey.attr("disabled", false);
@@ -109,56 +109,39 @@
             }, 1000);
         }
         //
-        $('#send_reg_emailkey').click(function () {
-            $("#send_reg_emailkey").attr("disabled", true);
+        $('#send_reg_message').click(function () {
+            $("#send_reg_message").attr("disabled", true);
             var countdown = 10;
-            var email = $('#mail').val();
-            email = $.trim(email);
-            if (isEmailForm(email) && (email != null || email != "")) {
+            var phone = $('#phone').val();
+            phone = $.trim(phone);
+            send_time = Math.round(new Date().getTime() / 1000);
+            if (isphone(phone) && (phone != null || phone != "")) {
                 $.ajax({
                     type: "POST",
-                    url: "<?= base_url() ?>index.php/first/login_mailexist?r=" + Math.random(),
+                    url: "<?= base_url() ?>index.php/first/login_phoneexist?r=" + Math.random(),
                     async: true,
-                    data: {email: email},
+                    data: {phone: phone},
                     success: function (data) {
-                        if (data == "1" || data == true) {
-                            $("#mail_span").html('<img src="<?= base_url() ?>application/images/text_error.png"><font color=red>该邮箱已被注册，请更换~</font>');
-                            $("#btn_sub").attr("disabled", true);
-                            $("#send_reg_emailkey").attr("disabled", false);
-                        } else {
+                        if (data == '1') {
+                            email_flag = true;
                             setTime(countdown);
-                            $("#mail_span").html("<font color=green>恭喜,邮箱可以注册 !</font>");
-
-                            var reg_email = $('#mail').val();
-                            var reg_email_str = randomAlphanumeric('text', 4, '0123456789abcdefghijkmnpqrstuvwxyz');
-                            $.ajax({
-                                type: "POST",
-                                dataType: "text",
-                                url: "<?= base_url() ?>index.php/first/RegmailVali",
-                                async: true,
-                                data: {reg_email: reg_email, reg_email_str: reg_email_str},
-                                success: function (data) {
-                                    alert(data);
-                                    var email_statua = eval("(" + data + ")");//转换为json对象 
-                                    result = email_statua.result;
-                                    reg_email_str2 = email_statua.reg_email_str;
-                                    send_time = email_statua.send_time;
-                                    if (result) {
-                                        email_flag = true;
-                                        $("#mail_span").html("<font color=green>邮件已正确发送,请注意查收！</font>");
-                                    } else {
-                                        email_flag = false;
-                                        $("#mail_span").html("<font color=red>邮件发送错误,请检查邮箱地址！</font>");
-                                    }
-                                }
-                            });
+                            $("#mail_span").html("<font color=green>邮件已正确发送,请注意查收！</font>");
+                        } else if (data == '3') {
+                            $("#mail_span").html('<img src="<?= base_url() ?>application/images/text_error.png"><font color=red>该手机已被注册~</font>');
+                            $("#btn_sub").attr("disabled", true);
+                            $("#send_reg_message").attr("disabled", false);
+                        } else {
+                            $("#send_reg_message").attr("disabled", false);
+                            $("#btn_sub").attr("disabled", true);
+                            $("#mail_span").html("<font color=red>手机号输入有误 !</font>");
                         }
-                    }
+                        
+                        }
                 });
             } else {
-                $("#send_reg_emailkey").attr("disabled", false);
+                $("#send_reg_message").attr("disabled", false);
                 $("#btn_sub").attr("disabled", true);
-                $("#mail_span").html("<font color=red>邮箱格式错误 !</font>");
+                $("#mail_span").html("<font color=red>手机号输入有误 !</font>");
 
             }
         });
@@ -182,17 +165,28 @@
             var cur_time = Math.round(new Date().getTime() / 1000);
             if (regpage_mail_key != null || regpage_mail_key != "") {
                 if (isValiKeyTimeout(cur_time, send_time)) {
-
-                    //alert(regpage_mail_key+"::"+reg_email_str2);
-                    if (isStrSame(regpage_mail_key, reg_email_str2)) {
-                        emailkey_flag = true;
+                    $.ajax({
+                    type: "POST",
+                    url: "<?= base_url() ?>index.php/first/is_phone_verify_code?r=" + Math.random(),
+                    async: true,
+                    data: {code: regpage_mail_key},
+                    success: function (data) {
+                        if (data == '1') {
+                           emailkey_flag = true;
                         $('#mailkey_span').html("<font color=green>验证码正确</font>");
                         $('#btn_sub').attr("disabled", false);
-                    } else {//y64ik2x4
-                        emailkey_flag = false;
+                        } else if (data == '3') {
+                            emailkey_flag = false;
                         $("#btn_sub").attr("disabled", true);
                         $('#mailkey_span').html('<img src="<?= base_url() ?>application/images/text_error.png"><font color=red>验证码错误</font>');
-                    }
+                        } else {
+                            $("#send_reg_message").attr("disabled", false);
+                            $("#btn_sub").attr("disabled", true);
+                            $("#mail_span").html("<font color=red>手机号输入有误 !</font>");
+                        }
+                        }
+                });
+                    //alert(regpage_mail_key+"::"+reg_email_str2);
                 } else {
                     emailkey_flag = false;
                     $('#mailkey_span').html("<font color=red>验证码超时</font>");
@@ -237,8 +231,8 @@
         //*******************************************************************       
         //有默认选中的情况
         //获取选中项的值，一般采用遍历的方法，判断哪一项选中，获取其value属性的值
-    $('.user_type').click(function () {
-            var check_val=$(this).children('.radio').val();
+        $('.user_type').click(function () {
+            var check_val = $(this).children('.radio').val();
             setSerialShowHide(check_val);
         });
         function getRadioValue(radioName) {
@@ -365,7 +359,6 @@
         });
 
         $("#btn_sub").click(function () {
-            var agreenMent = $("#agreement").attr("data");
             if (!name_flag) {
                 alert("用户名错误");
             } else if (!email_flag) {
@@ -374,11 +367,6 @@
                 alert("邮件验证码错误");
             } else if (!pwd_flag) {
                 alert("密码异常");
-            } else if (!code_flag) {
-                alert("页面验证码错误");
-            } else if (agreenMent != '1') {
-                $("#aggreement_span").html('<img src="<?= base_url() ?>application/images/text_error.png"><font color=red>请先同意用户条款!</font>');
-                return false;
             } else {
                 $("#btn_sub").val('注册').attr("disabled", false);
                 document.getElementById('registerForm').submit();
@@ -390,6 +378,14 @@
     });
     function changeCode() {
         $("#verify_code").attr("src", "<?= base_url() ?>index.php/first/verify_image?r=" + Math.random());
+    }
+    function isphone(num) {
+        var partten = /^1[3,5,7,8]\d{9}$/;
+        if (partten.test(num)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 //            function isRegEmailKeyVali(reg_email_key){
@@ -410,7 +406,7 @@
     #login_form h2{background:url(<?= base_url() ?>application/images/iphone.png) left -452px no-repeat; padding-left:46px; color:#009fe3; font-size:16px; font-weight:bold; height:20px; line-height:20px; margin-bottom:24px;}
 
     .input_div5 .user_type{ margin: 16px 10px;}
-    .send_reg_emailkey{padding:8px;margin: 0px 10px;}
+    .send_reg_message{padding:8px;margin: 0px 10px;}
     .btn_sub{  background: #0697d5;  width: 320px; 
                font-size:20px;
                height: 60px;
@@ -451,10 +447,10 @@
 
 
             <div class="am-input-group am-margin-top">
-                <span class="am-input-group-label ">@</span>
-                <input  id="mail" name="useremail" type="text" class="am-form-field"  placeholder="请填写正确的邮箱，以便接收账号激活邮件" maxlength="64">
+                <span class="am-input-group-label am-icon-phone"></span>
+                <input  id="phone" name="phone" type="text" class="am-form-field"  placeholder="请填写手机号" maxlength="14">
                 <span class="am-input-group-btn">
-                    <button class="send_reg_emailkey am-btn am-btn-lg am-btn-default" id="send_reg_emailkey" value="邮件" type="button">发送邮件</button>
+                    <button class="send_reg_message am-btn am-btn-xl am-btn-default" id="send_reg_message" value="手机号" type="button">发送验证码</button>
                 </span>
             </div> 
             <span id="mail_span"></span>
@@ -482,7 +478,7 @@
                     <input class="radio"  type="radio" name="user_type" id="common_user" value="3" checked="checked"> 普通用户
                 </label>
                 <label class="user_type am-btn am-btn-primary am-btn">
-                <input  class="radio"  type="radio" name="user_type" id="vip_user" value="2"> &nbsp;&nbsp;学员&nbsp;&nbsp;
+                    <input  class="radio"  type="radio" name="user_type" id="vip_user" value="2"> &nbsp;&nbsp;学员&nbsp;&nbsp;
                 </label>
                 <label class="user_type am-btn am-btn-primary am-btn">
                     <input class="radio"  type="radio" name="user_type" id="trainer" value="1"> &nbsp;&nbsp;教练&nbsp;&nbsp;
@@ -504,17 +500,8 @@
                 </div>
             </div>
 
-            <div class="am-input-group am-margin-top">
-                <span class="am-input-group-label ">验</span>
-                <input id="varcode" name="vercode" type="text"  value="" placeholder="请输入验证码">
-            </div>
-            <img src="<?= base_url() ?>index.php/first/verify_image" alt="验证码" id="verify_code" class="yz_img" />
-            <a class="changeone" href="javascript:void(0);" onclick="changeCode()" >点击换一张</a>
-            <span id="changeCode_span"></span>
 
-            <div class="am-input-group am-margin-top">
-                <div class="input_div9 check2" data="0" id="agreement">&nbsp;&nbsp;&nbsp;&nbsp;我已阅读并接受《我爱开车网用户服务协议》</div>
-            </div>
+
 
             <div class="am-margin ">
                 <button id="btn_sub" type="button" style="width:100%;"class="am-btn am-radius am-btn-primary am-btn-block">注册</button>

@@ -95,5 +95,11 @@ class Accesscontrol_model extends CI_Model{
         $query = $this->db->get('AccessControl');
         return $query->num_rows();
     }
+    public function select_phone($phone){
+        $this->db->select();
+        $this->db->where('stu_tel',$phone);
+        $query = $this->db->get('AccessControl');
+        return $query->result_array();
+    }
 
 }
