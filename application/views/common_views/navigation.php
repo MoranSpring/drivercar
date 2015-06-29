@@ -6,7 +6,7 @@
         <div>
             <ul class='menu-ul'>
                 <li>
-                    <a><span>
+                    <a href="<?= base_url() . 'index.php' ?>"><span>
                             首  页 
                         </span></a>
                 </li>

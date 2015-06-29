@@ -53,13 +53,13 @@ class First extends MY_Controller {
         }
         $body['navigation'] = $this->load->view('common_views/navigation', '', true);
         if ($page == '') {
-            $this->sch_info();
+            $this->index_page();
             return false;
         } else {
             $body['content'] = $page;
         }
         if ($title == '') {
-            $body['title'] = "我爱开车网-首页";
+            $body['title'] = "首页-我爱开车网";
         } else {
             $body['title'] = $title;
         }
@@ -171,11 +171,13 @@ class First extends MY_Controller {
         $title = "驾培点信息 - 我爱开车网";
         $this->view($title, $page);
     }
+
     public function index_page() {
         $page = $this->load->view('a_views/index', '', true);
         $title = "首页 - 我爱开车网";
         $this->view($title, $page);
     }
+
     public function school_info($id = '') {
         if ($id == '')
             exit(0);
@@ -243,9 +245,10 @@ class First extends MY_Controller {
     public function register_insert() {
         $username = $this->input->post('username');
         $password = $this->input->post('userpass');
-        $email = $this->input->post('useremail')=='' ?'': $this->input->post('useremail');
-        $phone= $this->input->post('phone')==''?'': $this->input->post('phone');
+        $email = $this->input->post('useremail') == null ? null : $this->input->post('useremail');
+        $phone = $this->input->post('phone') == '' ? '' : $this->input->post('phone');
         $stu_type = $this->input->post('user_type');
+        $phone_code = $this->input->post('reg_mail_key');
         $reg_time = $this->getTime();
         $Uid = time();
         $datas = array(
@@ -257,6 +260,11 @@ class First extends MY_Controller {
             'stu_type' => $stu_type,
             'stu_reg_time' => $reg_time
         );
+        //检查手机号码是不是对的
+        if ($phone_code != $this->session->userdata('phone_verify_code')) {
+            echo '手机验证码异常错误';
+            return false;
+        }
         if ($stu_type == 3) {
             //将数据插入用户表,普通注册用户
             $result = $this->accesscontrol_model->insert($datas);
@@ -273,6 +281,7 @@ class First extends MY_Controller {
                 $this->session->set_userdata('UID', $Uid);
                 $this->session->set_userdata('TYPE', $stu_type);
                 $this->session->set_userdata('name', $username);
+                $this->session->set_userdata('TEL', $phone);
                 redirect();
                 echo '"regist success !"';
                 return;
@@ -281,7 +290,6 @@ class First extends MY_Controller {
                 return;
             }
         }
-
         $vip_serial_num = $this->input->post('vip_serial_num');
         $train_serial_num = $this->input->post('train_serial_num');
         if ($stu_type == 2) {
@@ -330,7 +338,16 @@ class First extends MY_Controller {
 
     public function login_check() {
         $name = $this->input->get('name');
-        $Result = $this->accesscontrol_model->loginSelect($name);
+        $name_array=array();
+        //判断是邮箱，手机号，还是用户名；
+        if (preg_match("/1[3458]{1}\d{9}$/", $name)) {
+            $name_array=array('stu_tel'=>$name);
+        } else if (preg_match('/^[0-9a-zA-Z]+@(([0-9a-zA-Z]+)[.])+[a-z]{2,4}$/i', $name)) {
+            $name_array=array('stu_email'=>$name);
+        }else{
+            $name_array=array('stu_name'=>$name);
+        }
+        $Result = $this->accesscontrol_model->loginSelect($name_array);
         if ($Result == null) {
             echo "用户不存在";
 //            echo 'This user is not exist.';
@@ -360,7 +377,16 @@ class First extends MY_Controller {
     public function psw_isRight() {
         $name = $this->input->post('name');
         $psw = $this->input->post('password');
-        $Result = $this->accesscontrol_model->loginSelect($name);
+        $name_array=array();
+        //判断是邮箱，手机号，还是用户名；
+        if (preg_match("/1[3458]{1}\d{9}$/", $name)) {
+            $name_array=array('stu_tel'=>$name);
+        } else if (preg_match("/^[0-9a-zA-Z]+@(([0-9a-zA-Z]+)[.])+[a-z]{2,4}$/i", $name)) {
+            $name_array=array('stu_email'=>$name);
+        }else{
+            $name_array=array('stu_name'=>$name);
+        }
+        $Result = $this->accesscontrol_model->loginSelect($name_array);
         foreach ($Result as $row) {
             if ($row['stu_pwd'] != md5($psw)) {
                 echo '1';
@@ -375,7 +401,14 @@ class First extends MY_Controller {
     public function login_psw_check() {
         $name = $this->input->post('name');
         $psw = $this->input->post('password');
-        $Result = $this->accesscontrol_model->loginSelect($name);
+        if (preg_match("/1[3458]{1}\d{9}$/", $name)) {
+            $name_array=array('stu_tel'=>$name);
+        } else if (preg_match("/^[0-9a-zA-Z]+@(([0-9a-zA-Z]+)[.])+[a-z]{2,4}$/i", $name)) {
+            $name_array=array('stu_email'=>$name);
+        }else{
+            $name_array=array('stu_name'=>$name);
+        }
+        $Result = $this->accesscontrol_model->loginSelect($name_array);
         foreach ($Result as $row) {
             if ($row['stu_pwd'] != md5($psw)) {
                 $data = array(
@@ -416,33 +449,37 @@ class First extends MY_Controller {
         }
         echo false;
     }
-    public function login_phoneexist(){
-        $phone = $this->input->post('phone',TRUE);
+
+    public function send_message() {
+        $phone = $this->input->post('phone', TRUE);
         $Result = $this->accesscontrol_model->select_phone($phone);
-        foreach($Result as $row){
-            echo '3';//该手机已被注册
+        foreach ($Result as $row) {
+            echo '3'; //该手机已被注册
             return false;
         }
-        $phone_code=  rand(1000, 9999);
-        $this->session->set_userdata('phone_verify_code', $phone_code);
-        $return = $this->_send_message($phone,$phone_code);
-        if($return=='000000'){
-            echo '1';//验证码发送成功。
-        }else{
-            echo '7';//验证码发送失败。
-        }
+        $phone_code = rand(1000, 9999);
+//        $this->session->set_userdata('phone_verify_code', $phone_code);
+//        $return = $this->_send_message($phone,$phone_code);
+//        if($return=='000000'){
+//            echo '1';//验证码发送成功。
+//        }else{
+//            echo '7';//验证码发送失败。
+//        }
+        //测试专用，测完打开以上代码
+        $this->session->set_userdata('phone_verify_code', '1111');
+        echo '1';
     }
-    public function is_phone_verify_code(){
-        $phone = $this->input->post('code',TRUE);
+
+    public function is_phone_verify_code() {
+        $phone = $this->input->post('code', TRUE);
         $real_code = $this->session->userdata('phone_verify_code');
-        if($real_code==$phone){
+        if ($real_code == $phone) {
             echo '1';
             return false;
-        }else{
+        } else {
             echo '3';
             return false;
         }
-        
     }
 
     public function login_exit() {
@@ -573,21 +610,22 @@ class First extends MY_Controller {
         echo json_encode($data);
     }
 
-    private function _send_message($phone,$code) {
-        $deadline_time='5';
+    private function _send_message($phone, $code) {
+        $deadline_time = '5';
         $options['accountsid'] = '4b624a4e3b505fd45db7e28605dfa1ac';
         $options['token'] = '464c98f7b103aee53a75344d5a549868';
-        $this->load->library('ucpaas',$options);
+        $this->load->library('ucpaas', $options);
         $appId = "e5e7b60c4cfb4f10a43b11afa0f885e4";
         $to = $phone;
         $templateId = "8276";
-        $param =$code.",".$deadline_time;
-        $return =$this->ucpaas->templateSMS($appId, $to, $templateId, $param);
+        $param = $code . "," . $deadline_time;
+        $return = $this->ucpaas->templateSMS($appId, $to, $templateId, $param);
         return $this->_decode_message_json($return);
     }
-    private function _decode_message_json($return){
-       $data = json_decode($return, true);
-       return $data['resp']['respCode'];
+
+    private function _decode_message_json($return) {
+        $data = json_decode($return, true);
+        return $data['resp']['respCode'];
     }
 
 }

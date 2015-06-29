@@ -18,6 +18,8 @@
         var emailkey_flag = false;
         var pwd_flag = false;
         var code_flag = false;
+        var userkind_flag = false;
+        var selected_kind=3;
 
         //验证用户名格式是否正确
         function isUserNameForm(str) {
@@ -118,7 +120,7 @@
             if (isphone(phone) && (phone != null || phone != "")) {
                 $.ajax({
                     type: "POST",
-                    url: "<?= base_url() ?>index.php/first/login_phoneexist?r=" + Math.random(),
+                    url: "<?= base_url() ?>index.php/first/send_message?r=" + Math.random(),
                     async: true,
                     data: {phone: phone},
                     success: function (data) {
@@ -233,6 +235,7 @@
         //获取选中项的值，一般采用遍历的方法，判断哪一项选中，获取其value属性的值
         $('.user_type').click(function () {
             var check_val = $(this).children('.radio').val();
+            selected_kind=check_val;
             setSerialShowHide(check_val);
         });
         function getRadioValue(radioName) {
@@ -283,6 +286,7 @@
                     success: function (data) {
                         //alert(data);
                         if (data == 1 || data == "1") {
+                            userkind_flag=true;
                             vip_wrong_icon.style.display = "none";
                             vip_right_icon.style.display = "";
                             $("#btn_sub").attr("disabled", false);
@@ -311,6 +315,7 @@
                     data: {train_page_num: train_page_num, ser_type: trainerstr},
                     success: function (data) {
                         if (data == 1 || data == "1") {
+                            userkind_flag=true;
                             train_wrong_icon.style.display = "none";
                             train_right_icon.style.display = "";
                             $("#btn_sub").attr("disabled", false);
@@ -359,6 +364,7 @@
         });
 
         $("#btn_sub").click(function () {
+            getRadioValue('user_type');
             if (!name_flag) {
                 alert("用户名错误");
             } else if (!email_flag) {
@@ -367,6 +373,8 @@
                 alert("邮件验证码错误");
             } else if (!pwd_flag) {
                 alert("密码异常");
+            } else if (!userkind_flag&&selected_kind!=3) {
+                alert("验证码有误");
             } else {
                 $("#btn_sub").val('注册').attr("disabled", false);
                 document.getElementById('registerForm').submit();
@@ -457,7 +465,7 @@
 
             <div class="am-input-group am-margin-top">
                 <span class="am-input-group-label"><i class="am-icon-chain"></i></span>
-                <input class="serial_input am-form-field" id="reg_mail_key" name="reg_mail_key"  type="text" placeholder="请输入邮件验证码" maxlength="64">
+                <input class="serial_input am-form-field" id="reg_mail_key" name="reg_mail_key"  type="text" placeholder="请输入验证码" maxlength="4">
             </div>
             <span id="mailkey_span"><img id="mailkey_right_icon am-input-group-label" src="<?= base_url() ?>application/images/reg/right_icon.png" style="display:none;"><img id="mailkey_wrong_icon" src="<?= base_url() ?>application/images/reg/wrong_icon.png" style="display:none;"></span></span>
 

@@ -43,9 +43,9 @@ class Accesscontrol_model extends CI_Model{
         return $query->result_array();
     }
     
-    public function loginSelect($name){//返回该用户名对应的密码
+    public function loginSelect($name_array){//返回该用户名对应的密码
          $this->db->select();
-         $this->db->where('stu_name',$name);
+         $this->db->where($name_array);
         $query = $this->db->get('AccessControl');
         return $query->result_array();
     }
