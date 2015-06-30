@@ -437,6 +437,10 @@ class First extends MY_Controller {
                 if ($row['stu_type'] == 3) {
                     redirect();
                 } else if ($row['stu_type'] == 1) {
+                    $coaid = $this->coach_model->selectCoaIdByStuId($row['stu_id']);
+                    foreach ($coaid as $temp) {
+                        $this->session->set_userdata('COACH_ID', $temp['coach_id']);
+                    }
                     redirect('coach');
                 } else if ($row['stu_type'] == 0) {
                     redirect('admin');

@@ -55,10 +55,10 @@ class VipCenter extends MY_Controller {
     }
 
     public function study_progress() {
-        if ($this->session->userdata('TYPE') == 2) {
+        if ($this->session->userdata('TYPE') == 2||$this->session->userdata('TYPE') ==3) {
             
         } else {
-            $this->view("you aren't vip!");
+            redirect('first/login');
             return false;
         }
         $UID = $this->session->userdata('UID');
@@ -86,7 +86,7 @@ class VipCenter extends MY_Controller {
     }
 
     public function management() {
-        if ($this->session->userdata('TYPE') == 2) {
+        if ($this->session->userdata('TYPE') == 2||$this->session->userdata('TYPE') == 3) {
             
         } else {
             $this->view("you aren't vip!");
@@ -176,8 +176,14 @@ class VipCenter extends MY_Controller {
     }
 
     public function get_cls() {
-        $coabk_time = $this->input->post('coabk_time');
-        $coabk_coach_id = $this->input->post('coabk_coach_id');
+        $coabk_time = $this->input->post('coabk_time',true);
+        $coabk_coach_id = $this->input->post('coabk_coach_id',true);
+        if($coabk_coach_id==''){
+            $coabk_coach_id=$this->session->userdata('UID');
+        }
+        if($coabk_coach_id==''){
+          return false;
+        }
         $time = $this->getDate();
         $cls = $this->getCurrentCls();
 

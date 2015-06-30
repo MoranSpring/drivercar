@@ -61,9 +61,12 @@ class Coach_model extends CI_Model {
     }
 
     public function selectAllinfoById($id) {//返回该用户名所有信息
-        $this->db->select();
+        $this->db->select('Coach.*');
+        $this->db->select('School.jp_name');
         $this->db->where('coach_user_id', $id);
-        $query = $this->db->get('Coach');
+        $query = $this->db->from('Coach');
+        $this->db->join('School', 'School.jp_id=Coach.coach_sch_id');
+        $query = $this->db->get();
         return $query->result_array();
     }
 
@@ -95,6 +98,13 @@ class Coach_model extends CI_Model {
     public function selectCostById($id) {//返回教练所要的课时费
         $this->db->select('coach_cls_cost');
         $this->db->where('coach_id', $id);
+        $query = $this->db->get('Coach');
+        return $query->result_array();
+    }
+    
+    public function selectCoaIdByStuId($id) {//返回教练所要的课时费
+        $this->db->select('coach_id');
+        $this->db->where('coach_user_id', $id);
         $query = $this->db->get('Coach');
         return $query->result_array();
     }

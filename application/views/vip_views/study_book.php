@@ -239,7 +239,7 @@
 
                             </tbody>
                         </table>
-                        <h3 class="am-text-right">您选了 <span class="sum-cls-num">8</span> 节课  共计：<span id="sum" class="am-icon-rmb" style="color:#990000;font-size: 18px;">3000</span>  积分</h3>
+                        <h3 class="am-text-right">您选了 <span class="sum-cls-num">8</span> 节课  共计：<span id="sum" style="color:#990000;font-size: 18px;"></span>  C币</h3>
 
 
                     </div>

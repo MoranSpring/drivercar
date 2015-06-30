@@ -61,13 +61,13 @@
         <div>
             <ul class="co-self clearfix">
                 <li style="width:25%">
-                   <img src="<?= $coa_face ?>" class="am-img-thumbnail" height="250" width="250"/>
+                   <img src="<?= $coach_face?>" class="am-img-thumbnail" height="250" width="250"/>
                 </li>
                 <li style="width:75%">
                     <ul class="co-self-info clearfix">
                         <li class="co-name">
-                            <p><?= $coa_name ?></p>
-                            <div>个人介绍：<?= $coa_self_intro ?><a class="<?php if ($isCoach == true)
+                            <p><?= $coach_name ?></p>
+                            <div>个人介绍：<?= $coach_intro ?><a class="<?php if ($isCoach == true)
     echo 'co-self-edit-on';
 else
     echo 'co-self-edit-off';
@@ -79,7 +79,7 @@ else
                                     等级：
                                 </li>
                                 <li>
-                                    <?=$coa_grade?>
+                                    <?=$coach_grade?>
                                 </li>
                             </ul>
                             <ul class="co-self-third clearfix">
@@ -87,7 +87,7 @@ else
                                     所属驾培点：
                                 </li>
                                 <li>
-                                   <?= $coa_sch_name ?> <span class="am-icon-map-marker ml-red"></span>
+                                   <?= $jp_name ?> <span class="am-icon-map-marker ml-red"></span>
                                 </li>
                             </ul>
                             <ul class="co-self-third clearfix">
@@ -95,7 +95,7 @@ else
                                     培训人数：
                                 </li>
                                 <li>
-                                    <?=$coa_stu_sum ?>
+                                    <?=$coach_stu_num?>
                                 </li>
                             </ul>
                             <ul class="co-self-third clearfix">
@@ -103,7 +103,7 @@ else
                                     手机号码：
                                 </li>
                                 <li>
-                                        <?=$coa_tel_number ?>
+                                        <?=$coach_telnum?>
                                 </li>
                             </ul>
                             <ul class="co-self-third clearfix">
@@ -131,7 +131,7 @@ else
                                     提供服务类型：
                                 </li>
                                 <li>
-                                    <?=$coa_serv_type ?>
+                                    <?=$coach_serv_type?>
                                 </li>
                             </ul>
                             <ul class="co-self-third clearfix">

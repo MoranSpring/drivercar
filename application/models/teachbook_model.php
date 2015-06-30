@@ -39,19 +39,21 @@ class Teachbook_model extends CI_Model {
         $query = $this->db->get('TeachBook');
         return $query->result_array();
     }
-        public function select_study_record($id,$time) {//学习进度查询并按照课程排序
+
+    public function select_study_record($id, $time) {//学习进度查询并按照课程排序
         $this->db->select('TeachBook.*');
         $this->db->select('Course.cls_name');
         $STATE = array('1', '7');
         $this->db->where_in('book_state', $STATE);
         $this->db->where('book_stu_id', $id);
         $this->db->where('book_date <', $time);
-         $this->db->order_by("book_date", "asc");
-         $this->db->from('TeachBook');
-         $this->db->join('Course', 'Course.cls_id=TeachBook.book_cls_id');
+        $this->db->order_by("book_date", "asc");
+        $this->db->from('TeachBook');
+        $this->db->join('Course', 'Course.cls_id=TeachBook.book_cls_id');
         $query = $this->db->get();
         return $query->result_array();
     }
+
     public function select_coach_comment($id) {//学习进度查询并按照课程排序
         $this->db->select('TeachBook.*');
         $this->db->select('Course.cls_name');
@@ -60,10 +62,10 @@ class Teachbook_model extends CI_Model {
         $STATE = array('1', '7');
         $this->db->where_in('book_state', $STATE);
         $this->db->where('book_stu_id', $id);
-         $this->db->order_by("book_date", "asc");
-         $this->db->from('TeachBook');
+        $this->db->order_by("book_date", "asc");
+        $this->db->from('TeachBook');
         $this->db->join('Coach', 'Coach.coach_id=TeachBook.book_coa_id');
-         $this->db->join('Course', 'Course.cls_id=TeachBook.book_cls_id');
+        $this->db->join('Course', 'Course.cls_id=TeachBook.book_cls_id');
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -190,42 +192,89 @@ class Teachbook_model extends CI_Model {
         return $query;
     }
 
-    public function select_further_detail_coa($id, $time, $cls) {//返回该用户名所有信息
-        $this->db->select();
+    public function select_further_detail_coa($id, $time, $cls) {//
+        $this->db->select('TeachBook.*');
+        $this->db->select('AccessControl.stu_name');
+        $this->db->select('AccessControl.stu_true_name');
+        $this->db->select('AccessControl.stu_nick_name');
+        $this->db->select('Coach.coach_cls_cost');
+        $this->db->select('Course.cls_name');
+        $this->db->select('School.jp_name');
         $this->db->where('book_coa_id', $id);
         $this->db->where('book_date >', $time);
+        $STATE = array('1', '7');
+        $this->db->where_in('book_state', $STATE);
+        $this->db->from('TeachBook');
+        $this->db->join('Coach', 'Coach.coach_id=TeachBook.book_coa_id');
+        $this->db->join('AccessControl', 'AccessControl.stu_id=TeachBook.book_stu_id');
+        $this->db->join('Course', 'Course.cls_id=TeachBook.book_cls_id');
+        $this->db->join('School', 'School.jp_id=TeachBook.book_sch_id');
         $this->db->order_by("book_date", "asc");
         $this->db->order_by("book_cls_num", "asc");
-        $query1 = $this->db->get('TeachBook');
-
-        $this->db->select();
+        $query1 = $this->db->get();
+       
+        $this->db->select('TeachBook.*');
+        $this->db->select('AccessControl.stu_name');
+        $this->db->select('AccessControl.stu_true_name');
+        $this->db->select('AccessControl.stu_nick_name');
+        $this->db->select('Coach.coach_cls_cost');
+        $this->db->select('Course.cls_name');
+        $this->db->select('School.jp_name');
         $this->db->where('book_coa_id', $id);
         $this->db->where('book_date', $time);
         $this->db->where('book_cls_num >', $cls);
+        $this->db->where_in('book_state', $STATE);
+        $this->db->from('TeachBook');
+        $this->db->join('Coach', 'Coach.coach_id=TeachBook.book_coa_id');
+        $this->db->join('AccessControl', 'AccessControl.stu_id=TeachBook.book_stu_id');
+        $this->db->join('Course', 'Course.cls_id=TeachBook.book_cls_id');
+        $this->db->join('School', 'School.jp_id=TeachBook.book_sch_id');
         $this->db->order_by("book_date", "asc");
         $this->db->order_by("book_cls_num", "asc");
-        $query2 = $this->db->get('TeachBook');
+        $query2 = $this->db->get();
         $query = array_merge($query2->result_array(), $query1->result_array());
         return $query;
     }
 
     public function select_further_unbook_coa($id, $time, $cls) {//返回退订的所有订单
-        $this->db->select();
+        $this->db->select('TeachBook.*');
+        $this->db->select('AccessControl.stu_name');
+        $this->db->select('AccessControl.stu_true_name');
+        $this->db->select('AccessControl.stu_nick_name');
+        $this->db->select('Coach.coach_cls_cost');
+        $this->db->select('Course.cls_name');
+        $this->db->select('School.jp_name');
         $this->db->where('book_coa_id', $id);
         $this->db->where('book_date >', $time);
-        $this->db->where('book_state', '7');
+        $this->db->where_in('book_state', '7');
+        $this->db->from('TeachBook');
+        $this->db->join('Coach', 'Coach.coach_id=TeachBook.book_coa_id');
+        $this->db->join('AccessControl', 'AccessControl.stu_id=TeachBook.book_stu_id');
+        $this->db->join('Course', 'Course.cls_id=TeachBook.book_cls_id');
+        $this->db->join('School', 'School.jp_id=TeachBook.book_sch_id');
         $this->db->order_by("book_date", "asc");
         $this->db->order_by("book_cls_num", "asc");
-        $query1 = $this->db->get('TeachBook');
-
-        $this->db->select();
+        $query1 = $this->db->get();
+       
+        $this->db->select('TeachBook.*');
+        $this->db->select('AccessControl.stu_name');
+        $this->db->select('AccessControl.stu_true_name');
+        $this->db->select('AccessControl.stu_nick_name');
+        $this->db->select('Coach.coach_cls_cost');
+        $this->db->select('Course.cls_name');
+        $this->db->select('School.jp_name');
         $this->db->where('book_coa_id', $id);
         $this->db->where('book_date', $time);
         $this->db->where('book_cls_num >', $cls);
-        $this->db->where('book_state', '7');
+        $this->db->where_in('book_state', '7');
+        $this->db->from('TeachBook');
+        $this->db->join('Coach', 'Coach.coach_id=TeachBook.book_coa_id');
+        $this->db->join('AccessControl', 'AccessControl.stu_id=TeachBook.book_stu_id');
+        $this->db->join('Course', 'Course.cls_id=TeachBook.book_cls_id');
+        $this->db->join('School', 'School.jp_id=TeachBook.book_sch_id');
         $this->db->order_by("book_date", "asc");
         $this->db->order_by("book_cls_num", "asc");
-        $query2 = $this->db->get('TeachBook');
+        $query2 = $this->db->get();
         $query = array_merge($query2->result_array(), $query1->result_array());
         return $query;
     }
@@ -286,7 +335,7 @@ class Teachbook_model extends CI_Model {
     }
 
     public function select_detail_from_time($coachID, $time1, $time2) {//教练查询教学情况，通过
-       $this->db->select('TeachBook.*');
+        $this->db->select('TeachBook.*');
         $this->db->select('Course.cls_name');
         $this->db->select('School.jp_name');
         $this->db->select('AccessControl.stu_true_name');
@@ -375,15 +424,16 @@ class Teachbook_model extends CI_Model {
         $query = $this->db->get('TeachBook');
         return $query->result_array();
     }
-    public function check_is_exist($data,$book_coa_id){
+
+    public function check_is_exist($data, $book_coa_id) {
         $this->db->select();
-        $where='';
-        foreach($data as  $row){
-            $one="(book_date='".$row['date']. "' AND book_cls_num='".$row['cls']."' AND book_coa_id='".$book_coa_id."' AND book_state!='6')";
-            if($where!=''){
-                $where=$where." OR ".$one;
-            }else{
-                $where=$one;
+        $where = '';
+        foreach ($data as $row) {
+            $one = "(book_date='" . $row['date'] . "' AND book_cls_num='" . $row['cls'] . "' AND book_coa_id='" . $book_coa_id . "' AND book_state!='6')";
+            if ($where != '') {
+                $where = $where . " OR " . $one;
+            } else {
+                $where = $one;
             }
         }
         $this->db->where($where);

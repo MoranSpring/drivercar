@@ -188,6 +188,7 @@ function init() {
     $('.item').removeClass('ml-cls-active-defult');
     $('.item').removeClass('ml-cls-active-selected');
     $('.item').removeClass('ml-has-selecked');
+        $('.item').removeClass('ml-cls-active');
     $('.item').attr('value', '');
     $('.item').css('background', '');
     refresh();

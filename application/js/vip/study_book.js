@@ -183,6 +183,7 @@ function init() {
     $('.item').removeClass('ml-cls-active-defult');
     $('.item').removeClass('ml-cls-active-selected');
     $('.item').removeClass('ml-has-selecked');
+    $('.item').removeClass('ml-cls-active');
     $('.item').attr('value', '');
     $('.item').css('background', '');
     refresh();
@@ -266,32 +267,45 @@ function submit() {
         $('#book-table-info').append("<tr><td>" + selArray[i].date + ", 第" + selArray[i].cls + "节课" + "</td><td><a  target='_blank' href='" + localhostPath + "/index.php/first/school_info/" + school_id + "'>" + school_name + "</a></td> <td><a  target='_blank' href='" + localhostPath + "/index.php/first/coach_self_info/" + coach_id + "'>" + coach_name + "</a></td><td>" + projectName + "</td></tr>");
     }
     $('.sum-cls-num').html(selArray.length);
+    var cost = $('.select-coa-cost').text();
+    var sum = selArray.length * cost;
+    $('#sum').html(sum);
 }
 function toOnload() {
     var school_id = $('.select_sch').val();
     var coach_id = $('.select_coach').val();
     var project = $('.cls_project').val();
+     if(school_id==''||coach_id==''||project==''){
+        alert('信息有误！');
+        return false;
+    }
     var selArray = refresh();
     var json = JSON.stringify(selArray);
     $.ajax({
         type: "POST",
         dataType: "text",
-        url: localhostPath + "/index.php/vipcenter/teach_book",
+        url: localhostPath + "/index.php/mobile/teach_book",
         async: true,
         data: {book_coa_id: coach_id, book_sch_id: school_id, book_cls_id: project, json: json},
         success: function (data) {
-            if (data == 1) {
-                alert("预约成功！!!");
+              if (data == 1) {
+                alert("预约成功！");
                 step1();
                 $('.step_1').css('display', 'block');
                 $('.step_2').css('display', 'none');
                 $('.step_3').css('display', 'none');
-                if (typeof (iAmMobile) === 'function') {
-                window.location.href = document.referrer;
-            }else{
-               window.location.href = localhostPath + "/index.php/vipcenter/vip_center";
+                    window.location.href = localhostPath + "/index.php/vipcenter/vip_center";
+            }else if(data == 3){
+               alert('余额不足'); 
             }
-                
+            else if(data == 11){
+               alert('插入时出现异常'); 
+            }
+            else if(data == 9){
+               alert('返回异常'); 
+            }
+            else if(data == 7){
+               alert('该课程已被别人选走了'); 
             }
             else {
                 alert("预约失败！");

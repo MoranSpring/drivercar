@@ -1,5 +1,5 @@
 <tr>
- <td><?=$book_date?></td>
+ <td class="this-date"><?=$book_date?></td>
     <td>第<?=$book_cls_num?>节</td>
     <td><a   target='_blank' href="<?=  base_url()?>index.php/first/school_info/<?=$book_sch_id?>"><?=$jp_name?></a></td>
     <td><a   target='_blank' href="<?=  base_url()?>index.php/first/coach_self_info/<?=$book_coa_id?>"><?=$coach_name?></a></td>

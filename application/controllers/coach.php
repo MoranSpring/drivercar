@@ -75,49 +75,19 @@ class Coach extends MY_Controller {
     }
     public function self_info(){
         $UID = $this->session->userdata('UID');
-        //$UID='1427162541';
-        //教练名
-        $body['coa_name']='';
-        //教练级别
-        $body['coa_grade']='';
-        //教练个人介绍
-        $body['coa_self_intro']='';
-        //教练所在驾校
-        $body['coa_sch_name']='';
-        //培训人数
-        $body['coa_stu_sum']='';
-        //教练手机号码
-        $body['coa_tel_number']='';
-        //教练服务类型
-        $body['coa_serv_type']='';
-        //教练服务类型
-        $body['coach_history_score']='';
-        //教练头像
-        $body['coa_face']='';
-        //是否为教练
-        $body['isCoach']='';
-        $default_head='http://driver-un.oss-cn-shenzhen.aliyuncs.com/headpic/default.jpg';
-       $body['isCoach']= $this->session->userdata('TYPE')==1?  true : false;
+       $default_head='http://driver-un.oss-cn-shenzhen.aliyuncs.com/headpic/default.jpg';
        $result=  $this->coach_model->selectAllinfoById($UID);
        
         foreach ($result as $row) {
-            $body['coa_name']=$row['coach_name'];
-            $body['coa_grade']=  $this->getCoachGrade($row['coach_grade']);
-            $body['coa_self_intro']=$row['coach_intro'];
-            $body['coa_face']=$row['coach_face'];
-            $coa_sch_name=$this->school_model->getJPNameById($row['coach_sch_id']);
-            foreach ($coa_sch_name as $row2) {
-                $body['coa_sch_name']=$row2['jp_name'];
-            }
-            $body['coa_stu_sum']=$row['coach_stu_num'];
-            $body['coa_tel_number']=$row['coach_telnum'];
-            $body['coach_history_score']=$row['coach_history_score'];
-            $body['coa_serv_type']=$this->getCoachServType($row['coach_serv_type']);
+            $row['coa_grade']=  $this->getCoachGrade($row['coach_grade']);
+            $row['coach_serv_type']=$this->getCoachServType($row['coach_serv_type']);
         }
-        if($body['coa_face']==null){
-            $body['coa_face']=$default_head;
+        if($row['coach_face']==null){
+            $row['coach_face']=$default_head;
         }
-        $page = $this->load->view('coach_views/self_info',$body, true);
+       $row['isCoach']= $this->session->userdata('TYPE')==1?  true : false;
+       
+        $page = $this->load->view('coach_views/self_info',$row, true);
         $this->view($page);
     }
     public function teach_info(){
@@ -168,51 +138,22 @@ class Coach extends MY_Controller {
             echo $return;
     }
     public function book(){
-        $coachID="1427162541";
+        $coa_id=$this->session->userdata('COACH_ID');
         $time = $this->getDate();
         $cls = $this->getCurrentCls();
-        $result_fur = $this->teachbook_model->select_further_detail_coa($coachID, $time, $cls);
+        $result_fur = $this->teachbook_model->select_further_detail_coa($coa_id, $time, $cls);
         $comment_list = array();
         $j = 0;
         foreach ($result_fur as $row) {
-            $list['book_id'] = $row['book_id'];
-            $list['book_date'] = $row['book_date'];
-            $list['book_cls_num'] = $row['book_cls_num'];
-            $list['book_cls_name'] ="";
-            $courseName1 = $this->course_model->select($row['book_cls_id']);
-            foreach ($courseName1 as $row1) {
-                $list['book_cls_name'] = $row1['cls_name'];
-            }
-            
-            $coachName = $this->accesscontrol_model->selectUserName($row['book_stu_id']);
-            foreach ($coachName as $row3) {
-                $list['stu_name'] = $row3['stu_true_name'];
-            }
-            
-            $schName = $this->school_model->select_name($row['book_sch_id']);
-            $list['sch_name'] = $schName[0]['jp_name'];
-            $comment_list['book_list'][$j] = $this->load->view('coach_views/book_list', $list, true);
+            $comment_list['book_list'][$j] = $this->load->view('coach_views/book_list', $row, true);
             $j++;
         }
         
-        $result_un = $this->teachbook_model->select_further_unbook_coa($coachID, $time, $cls);
+        $result_un = $this->teachbook_model->select_further_unbook_coa($coa_id, $time, $cls);
          $i = 0;
         foreach ($result_un as $row) {
-            $list['book_id'] = $row['book_id'];
-            $list['book_date'] = $row['book_date'];
-            $list['book_cls_num'] = $row['book_cls_num'];
-            $list['book_cls_name'] ="";
-            $courseName1 = $this->course_model->select($row['book_cls_id']);
-            foreach ($courseName1 as $row2) {
-                $list['book_cls_name'] = $row2['cls_name'];
-            }
-            
-            $coachName = $this->accesscontrol_model->selectUserName($row['book_stu_id']);
-            $list['stu_name'] = $coachName[0]['stu_true_name'];
-            
-            $schName = $this->school_model->select_name($row['book_sch_id']);
-            $list['sch_name'] = $schName[0]['jp_name'];
-            $comment_list['unbook_list'][$i] = $this->load->view('coach_views/unbook_list', $list, true);
+  
+            $comment_list['unbook_list'][$i] = $this->load->view('coach_views/unbook_list', $row, true);
             $i++;
         }
         

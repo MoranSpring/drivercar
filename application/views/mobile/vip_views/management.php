@@ -79,14 +79,14 @@
         $('#my-confirm').modal({
             relatedTarget: this,
             onConfirm: function (options) {
-             confirm($(this.relatedTarget),gap,nowHour);
+             confirms($(this.relatedTarget),gap,nowHour);
             },
             onCancel: function () {
             }
         });
 
     });
-    function confirm(mthis,gap,nowHour) {
+    function confirms(mthis,gap,nowHour) {
         var book_id = mthis.attr('book_id');
         var thisData = mthis;
         $.ajax({
