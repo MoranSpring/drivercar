@@ -20,7 +20,7 @@
 
 </figure>
     </div>
-        <div class="am-article-bd">
+        <div class="am-article-bd" style="font-size:1.8rem;">
             <p class="am-article-lead"><?=$news_mainidea?></p>
             <?=$news_content?>
         </div>

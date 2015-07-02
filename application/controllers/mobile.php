@@ -71,6 +71,36 @@ class Mobile extends MY_Controller {
             $body['un_study'] = $this->teachbook_model->un_study_cla_sum($uid, $time, $cls);
             $body['un_comment'] = $this->teachbook_model->un_comment_cla_sum($uid, $time);
         }
+
+        $news = $this->news_model->select_simple();
+        $topNews = $this->news_model->select_TopNews();
+        $topNewsId = "";
+        $sub1NewsId = "";
+        $sub2NewsId = "";
+        foreach ($topNews as $value) {
+            if ($value['news_postion'] == 1) {
+                $topNewsId = $value['news_id'];
+            } else if ($value['news_postion'] == 2) {
+                $sub1NewsId = $value['news_id'];
+            } else if ($value['news_postion'] == 3) {
+                $sub2NewsId = $value['news_id'];
+            }
+        }
+        foreach ($news as $row) {
+            if ($row['news_id'] == $topNewsId) {
+                $body['topNewsTitle'] = $row['news_title'];
+                $body['topNewsUrl'] = $row['news_imge'];
+                $body['topNewsId'] = $row['news_id'];
+            } else if ($row['news_id'] == $sub1NewsId) {
+                $body['sub1NewsTitle'] = $row['news_title'];
+                $body['sub1NewsId'] = $row['news_id'];
+                $body['sub1NewsUrl'] = $row['news_imge'];
+            } else if ($row['news_id'] == $sub2NewsId) {
+                $body['sub2NewsTitle'] = $row['news_title'];
+                $body['sub2NewsId'] = $row['news_id'];
+                $body['sub2NewsUrl'] = $row['news_imge'];
+            }
+        }
         $page = $this->load->view('mobile/public_views/home', $body, true);
         $title = "我爱开车网（手机版）- 首页";
         $this->view($title, $page);
@@ -172,12 +202,75 @@ class Mobile extends MY_Controller {
     }
 
     public function news() {
-        $body['menu'] = $this->getMenu();
-        $page = $this->load->view('mobile/public_views/news', $body, true);
+
+        $oneNews = array();
+        $oneNews['menu'] = $this->getMenu();
+        $news = $this->news_model->select_simple();
+        $topNews = $this->news_model->select_TopNews();
+        $topNewsId = "";
+        $sub1NewsId = "";
+        $sub2NewsId = "";
+        foreach ($topNews as $value) {
+            if ($value['news_postion'] == 1) {
+                $topNewsId = $value['news_id'];
+            } else if ($value['news_postion'] == 2) {
+                $sub1NewsId = $value['news_id'];
+            } else if ($value['news_postion'] == 3) {
+                $sub2NewsId = $value['news_id'];
+            }
+        }
+        $a = $b = $c = $d = $e = $f = $g = 0;
+        foreach ($news as $row) {
+            if ($row['news_id'] == $topNewsId) {
+                $oneNews['topNewsTitle'] = $row['news_title'];
+                $oneNews['topNewsUrl'] = $row['news_imge'];
+                $oneNews['topNewsMainidea'] = $row['news_mainidea'];
+                $oneNews['topNewsId'] = $row['news_id'];
+                $oneNews['topNewsAuthor'] = $row['news_author'];
+                $oneNews['topNewsTime'] = $row['news_date'];
+            } else if ($row['news_id'] == $sub1NewsId) {
+                $oneNews['sub1NewsTitle'] = $row['news_title'];
+                $oneNews['sub1NewsId'] = $row['news_id'];
+                $oneNews['sub1NewsUrl'] = $row['news_imge'];
+            } else if ($row['news_id'] == $sub2NewsId) {
+                $oneNews['sub2NewsTitle'] = $row['news_title'];
+                $oneNews['sub2NewsId'] = $row['news_id'];
+                $oneNews['sub2NewsUrl'] = $row['news_imge'];
+            }
+
+            switch ($row['news_type']) {
+                case 1:
+                    $oneNews['news1'][$a] = $this->load->view('mobile/public_views/news_list', $row, true);
+                    $a++;
+                    break;
+                case 2:
+                    $oneNews['news2'][$b] = $this->load->view('mobile/public_views/news_list', $row, true);
+                    $b++;
+                    break;
+                case 3:
+                    $oneNews['news3'][$c] = $this->load->view('mobile/public_views/news_list', $row, true);
+                    $c++;
+                    break;
+                case 4:
+                    $oneNews['news4'][$d] = $this->load->view('mobile/public_views/news_list', $row, true);
+                    $d++;
+                    break;
+                case 5:
+                    $oneNews['news5'][$e] = $this->load->view('mobile/public_views/news_list', $row, true);
+                    $e++;
+                    break;
+                case 6:
+                    $oneNews['news6'][$f] = $this->load->view('mobile/public_views/news_list', $row, true);
+                    $f++;
+                    break;
+            }
+        }
+        $page = $this->load->view('mobile/public_views/news', $oneNews, true);
         $title = "新闻 - 我爱开车网（手机版）";
         $this->view($title, $page);
     }
-        public function hook() {
+
+    public function hook() {
         $page = $this->load->view('mobile/public_views/hook', '', true);
         $title = "测试 - 我爱开车网（手机版）";
         $this->view($title, $page);
@@ -197,7 +290,7 @@ class Mobile extends MY_Controller {
     public function vip_home($id = '') {
         $isSelf = FALSE;
         $UID = '';
-        //访问用户类型判断，是否是该用户本人
+//访问用户类型判断，是否是该用户本人
         if ($id == '') {
             if ($this->session->userdata('UID') == FALSE) {
                 redirect('mobile/login');
@@ -266,16 +359,16 @@ class Mobile extends MY_Controller {
         $this->view($title, $page);
     }
 
-    public function article($id='1429669168') {
+    public function article($id = '1429669168') {
         $news = $this->news_model->select_detail($id);
         $title = '';
-        $page='';
+        $page = '';
         foreach ($news as $row) {
             $row['news_content'] = preg_replace('/\n/', '<p/><p>', $row['news_content']);
             $page = $this->load->view('mobile/public_views/article', $row, true);
-             $title = $row['news_title'] . " - 我爱开车网（手机版）";
+            $title = $row['news_title'] . " - 我爱开车网（手机版）";
         }
-       
+
         $this->view($title, $page);
     }
 
@@ -427,14 +520,14 @@ class Mobile extends MY_Controller {
             'csm_coin' => $need_back,
             'csm_date' => $this->getTime()
         );
-        //资金操作！---------------------------------------消费记录---修改退定状态--订单id--写入用户余额--用户id
+//资金操作！---------------------------------------消费记录---修改退定状态--订单id--写入用户余额--用户id
         $return = $this->cash_model->back_money($csm_record, $data, $id, $back_money, $UID);
         if ($return === TRUE)
             echo 1;
         else {
             echo false;
         }
-        //去扣除积分
+//去扣除积分
 //        $COIN = array('uc_num' => $back_money);
 //        $result_coin = $this->usercoin_model->update($UID, $COIN);
 //        if($result_coin==1){
@@ -517,7 +610,7 @@ class Mobile extends MY_Controller {
         $json = $this->input->post('json', TRUE);
         $bookArray = json_decode($json, true);
         $clsnum = count($bookArray); //看客户总共选了多少节课
-        //判断传过来的json是否用重复时间
+//判断传过来的json是否用重复时间
         for ($i = 0; $i < $clsnum; $i++) {
             $temp_day = $bookArray[$i]['date'];
             $temp_cls = $bookArray[$i]['cls'];
@@ -529,14 +622,14 @@ class Mobile extends MY_Controller {
                 }
             }
         }
-        //判断传来的课程时间跟数据库中的时间是否冲突，防止选课前刚刚被被人选走课程
+//判断传来的课程时间跟数据库中的时间是否冲突，防止选课前刚刚被被人选走课程
         $is_exist_array = $this->teachbook_model->check_is_exist($bookArray, $book_coa_id); //读出该教练的单节课的积分
         foreach ($is_exist_array as $row) {
-            //有节课被别人已经选走
+//有节课被别人已经选走
             echo 7;
             return false;
         }
-        //判断用户余额是否充足！
+//判断用户余额是否充足！
         $SUM = 0; //最终的费用
         $USERCOIN = 0; //用户剩余的积分数
         $COAHCOIN = 0; //教练单节课积分
@@ -554,15 +647,15 @@ class Mobile extends MY_Controller {
         if ($SUM >= 0 && $USERCOIN >= 0) {
             $spare_money = $USERCOIN - $SUM;
             if ($spare_money >= 0) {
-                //去扣除积分
+//去扣除积分
                 $data = array('uc_num' => $spare_money); //消费后用户余额
             } else {
-                //余额不足
+//余额不足
                 echo 3;
                 return false;
             }
         } else {
-            //返回异常
+//返回异常
             echo 9;
             return false;
         }
@@ -850,9 +943,9 @@ class Mobile extends MY_Controller {
             $ip = $_SERVER['REMOTE_ADDR'];
         }
 
-        //处理多层代理的情况
-        //或者使用正则方式：$ip = preg_match("/[\d\.]{7,15}/", $ip, $matches) ? $matches[0] : $unknown;
-        // * --/
+//处理多层代理的情况
+//或者使用正则方式：$ip = preg_match("/[\d\.]{7,15}/", $ip, $matches) ? $matches[0] : $unknown;
+// * --/
         if (false !== strpos($ip, ',')) {
             $ip = reset(explode(',', $ip));
         }

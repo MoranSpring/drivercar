@@ -51,30 +51,24 @@
 <?= $menu ?>
 <div class="am-margin-sm">
     <div data-am-widget="slider" class="am-slider  am-slider-c3 " style="min-height: 177px;" data-am-slider='{&quot;controlNav&quot;:false}'>
-        <ul class="am-slides">
+        <ul class="am-slides" onclick="javascript:window.location.href = '<?= base_url() ?>index.php/mobile/news'">
             <li>
-                <img src="http://image.52drivecar.com/news_imges/1429669168.jpg@!topnews">
+                <img src="<?=$topNewsUrl?>@!topnews">
                 <div class="am-slider-desc am-text-xs">
                     <div class="am-slider-counter ml-color-bg-main">
-                        <span class="am-active">1</span>/4</div>远方 有一个地方 那里种有我们的梦想</div>
+                        <span class="am-active">1</span>/3</div><?=$topNewsTitle?></div>
             </li>
             <li>
-                <img src="http://image.52drivecar.com/news_imges/1429461478.jpg@!topnews">
+                <img src="<?=$sub1NewsUrl?>@!topnews">
                 <div class="am-slider-desc am-text-xs">
                     <div class="am-slider-counter ml-color-bg-main">
-                        <span class="am-active">2</span>/4</div>某天 也许会相遇 相遇在这个好地方</div>
+                        <span class="am-active">2</span>/3</div><?=$sub1NewsTitle?></div>
             </li>
             <li>
-                <img src="http://image.52drivecar.com/1426697515.jpg@!topnews">
+                <img src="<?=$sub2NewsUrl?>@!topnews">
                 <div class="am-slider-desc am-text-xs">
                     <div class="am-slider-counter ml-color-bg-main">
-                        <span class="am-active">3</span>/4</div>不要太担心 只因为我相信 终会走过这条遥远的道路</div>
-            </li>
-            <li>
-                <img src="http://image.52drivecar.com/news_imges/1429461553.jpg@!topnews">
-                <div class="am-slider-desc am-text-xs">
-                    <div class="am-slider-counter ml-color-bg-main">
-                        <span class="am-active">4</span>/4</div>OH PARA PARADISE 是否那么重要 你是否那么地遥远</div>
+                        <span class="am-active">3</span>/3</div><?=$sub2NewsTitle?></div>
             </li>
         </ul>
     </div>

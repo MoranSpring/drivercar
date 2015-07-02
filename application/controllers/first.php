@@ -462,16 +462,16 @@ class First extends MY_Controller {
             return false;
         }
         $phone_code = rand(1000, 9999);
-//        $this->session->set_userdata('phone_verify_code', $phone_code);
-//        $return = $this->_send_message($phone,$phone_code);
-//        if($return=='000000'){
-//            echo '1';//验证码发送成功。
-//        }else{
-//            echo '7';//验证码发送失败。
-//        }
+        $this->session->set_userdata('phone_verify_code', $phone_code);
+        $return = $this->_send_message($phone,$phone_code);
+        if($return=='000000'){
+            echo '1';//验证码发送成功。
+        }else{
+            echo '7';//验证码发送失败。
+        }
         //测试专用，测完打开以上代码
-        $this->session->set_userdata('phone_verify_code', '1111');
-        echo '1';
+//        $this->session->set_userdata('phone_verify_code', '1111');
+//        echo '1';
     }
 
     public function is_phone_verify_code() {

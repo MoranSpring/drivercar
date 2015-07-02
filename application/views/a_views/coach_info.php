@@ -36,60 +36,7 @@
                 </ul>
                 <div class="sch_content clearfix">
                     <ul class="coach_list" id="coach_list">
-                        <li>
-                            <a href="#">
-                                <img class="coachimg am-img-bdrs" src="http://cn.bing.com/az/hprichv/LondonTrainStation_GettyRR_139321755_ZH-CN742316019.jpg">
-                                <div class="clearfix"><div class="coa_name">李建国</div><div class="coa_sch">南湖驾校</div></div>
-                                <div class="coa_price">100￥/h</div>
-                                <div class="">已有3218人评价</div>
-                                <div class="coa_comment">当前评分 <img class="comm_" src="<?= base_url() . 'application/images/star5.png' ?>" ><span>4.7</span>分</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img class="coachimg am-img-bdrs" src="http://cn.bing.com/az/hprichv/LondonTrainStation_GettyRR_139321755_ZH-CN742316019.jpg">
-                                <div class="clearfix"><div class="coa_name">李建国</div><div class="coa_sch">南湖驾校</div></div>
-                                <div class="coa_price">100￥/h</div>
-                                <div class="">已有3218人评价</div>
-                                <div class="coa_comment">当前评分 <img class="comm_" src="<?= base_url() . 'application/images/star5.png' ?>" ><span>4.7</span>分</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img class="coachimg am-img-bdrs" src="http://cn.bing.com/az/hprichv/LondonTrainStation_GettyRR_139321755_ZH-CN742316019.jpg">
-                                <div class="clearfix"><div class="coa_name">李建国</div><div class="coa_sch">南湖驾校</div></div>
-                                <div class="coa_price">100￥/h</div>
-                                <div class="">已有3218人评价</div>
-                                <div class="coa_comment">当前评分 <img class="comm_" src="<?= base_url() . 'application/images/star5.png' ?>" ><span>4.7</span>分</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img class="coachimg am-img-bdrs" src="http://cn.bing.com/az/hprichv/LondonTrainStation_GettyRR_139321755_ZH-CN742316019.jpg">
-                                <div class="clearfix"><div class="coa_name">李建国</div><div class="coa_sch">南湖驾校</div></div>
-                                <div class="coa_price">100￥/h</div>
-                                <div class="">已有3218人评价</div>
-                                <div class="coa_comment">当前评分 <img class="comm_" src="<?= base_url() . 'application/images/star5.png' ?>" ><span>4.7</span>分</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img class="coachimg am-img-bdrs" src="http://cn.bing.com/az/hprichv/LondonTrainStation_GettyRR_139321755_ZH-CN742316019.jpg">
-                                <div class="clearfix"><div class="coa_name">李建国</div><div class="coa_sch">南湖驾校</div></div>
-                                <div class="coa_price">100￥/h</div>
-                                <div class="">已有3218人评价</div>
-                                <div class="coa_comment">当前评分 <img class="comm_" src="<?= base_url() . 'application/images/star5.png' ?>" ><span>4.7</span>分</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img class="coachimg am-img-bdrs" src="http://cn.bing.com/az/hprichv/LondonTrainStation_GettyRR_139321755_ZH-CN742316019.jpg">
-                                <div class="clearfix"><div class="coa_name">李建国</div><div class="coa_sch">南湖驾校</div></div>
-                                <div class="coa_price">100￥/h</div>
-                                <div class="">已有3218人评价</div>
-                                <div class="coa_comment">当前评分 <img class="comm_" src="<?= base_url() . 'application/images/star5.png' ?>" ><span>4.7</span>分</div>
-                            </a>
-                        </li>
+                       
                     </ul>
                 </div>
             </div>

@@ -75,7 +75,7 @@ class VipCenter extends MY_Controller {
     }
 
     public function study_book() {
-        if ($this->session->userdata('TYPE') == 2) {
+        if ($this->session->userdata('TYPE') == 2||$this->session->userdata('TYPE') == 3) {
             
         } else {
             $this->view("you aren't vip!");

@@ -8,7 +8,7 @@ $(function () {
     $('#bt1').click(function () {
         if (check() === 100 || check() === 200) {
             step2();
-            isStaticCoach();
+//            isStaticCoach();
             get_project_name();
             $('.step_1').css('display', 'none');
             $('.step_2').css('display', 'block');
@@ -45,11 +45,62 @@ $(function () {
 //                     sumit();
         toOnload();
     });
-    getSchoolsInfo();
+    getCoachInfos();
     get3Date();
-    $(".select_coach").attr("disabled", true);
+    $(".select_coa").attr("disabled", true);
 });
+function getCoachInfos() {
+    $.ajax({
+        type: "GET",
+        url: localhostPath + "/index.php/mobile/get_coach_info?r=" + Math.random(),
+        async: true,
+        success: function (data) {
+            var json = eval("(" + data + ")");
+            if (json.exist == '1') {
+                $('.coa_img').attr('src', json.coach_face);
+                $('.select_school').text(json.jp_name);
+                $('.select-coa-cost').text(json.coach_cls_cost);
+                $('.select_school').attr('id', json.sc_sch);
+                $('.select_coach').text(json.coach_name);
+                $('.select_coach').attr('id', json.sc_coa);
+            } else {
+                $('.coa_exist').css('display', 'none');
+                $('.coa_unexist').css('display', 'block');
+            }
+        }
+    });
+}
+function toSelectCoach() {
+    $('.selected-coa').css('display', 'none');
+    $('.to-select-coa').css('display', 'block');
+    getSchoolsInfo();
+}
+function summitCoach() {
+    var school_id = $('.select_sch').val();
+    var coach_id = $('.select_coa').val();
+    if (school_id == '' || coach_id == '')
+        return false;
+    $.ajax({
+        type: "GET",
+        url: localhostPath + "/index.php/mobile/to_change_coach",
+        async: true,
+        data: {coach_id: coach_id, school_id: school_id},
+        success: function (data) {
+            if (data == 1) {
+                getCoachInfos();
+                $('.select_coa').empty();
+                $('.select_sch').empty();
+                $('.coa_exist').css('display', 'block');
+                $('.coa_unexist').css('display', 'none');
+                $('.selected-coa').css('display', 'block');
+                $('.to-select-coa').css('display', 'none');
+            } else {
+                alert('选择出错！');
+            }
+        }
+    });
 
+}
 function getSchoolsInfo() {
     $.ajax({
         type: "GET",
@@ -65,14 +116,10 @@ function getSchoolsInfo() {
         }
     });
 }
-
-
-
-
 function selectCoach(sch_id) {
     init();
-    $('.select_coach').empty();
-    $(".select_coach").attr("disabled", "true");
+    $('.select_coa').empty();
+    $(".select_coa").attr("disabled", "true");
     $.ajax({
         type: "GET",
         url: localhostPath + "/index.php/admin/get_coach_via_sch/" + sch_id + "?r=" + Math.random(),
@@ -80,12 +127,12 @@ function selectCoach(sch_id) {
         success: function (data) {
             var json = eval("(" + data + ")");
             for (var i = 0; i < json.length; i++) {
-                $('.select_coach').append("<option value='" + json[i].coach_id + "'>" + json[i].coach_name + "</option>");
+                $('.select_coa').append("<option value='" + json[i].coach_id + "'>" + json[i].coach_name + "</option>");
             }
-            $('.select_coach').trigger('chosen:updated');
+            $('.select_coa').trigger('chosen:updated');
         }
     });
-    $(".select_coach").removeAttr("disabled");
+    $(".select_coa").removeAttr("disabled");
     return true;
 }
 //--------------选择类-----------------
@@ -179,7 +226,7 @@ function hs() {
 }
 
 function init() {
-    $('#cls_table').css('display', 'none');
+    $('.selected_cls_container').css('display', 'none');
     $('.item').removeClass('ml-cls-active-defult');
     $('.item').removeClass('ml-cls-active-selected');
     $('.item').removeClass('ml-has-selecked');
@@ -212,7 +259,7 @@ function get3Date() {
             select_date(day3, 3);
 //            alert(day1);
             //--------------afterInit--------------
-            $('#cls_table').css('display', 'table');
+            $('.selected_cls_container').css('display', 'block');
         }
     }
     );
@@ -221,7 +268,7 @@ function get3Date() {
 }
 function select_date(day, n) {
     var thisDay = "coabk_time=" + day;
-    var coach = $('.select_coach').val();
+    var coach = $('.select_coach').attr('id');
     var thisCoach = "coabk_coach_id=" + coach;
     $.ajax({
         type: "POST",
@@ -253,11 +300,11 @@ function submit() {
     var kind = $('.cls_kind').val();
     var project = $('.cls_project').val();
     var projectName = $('.cls_project').attr("projectName");
-    var school_id = $('.select_sch').val();
-    var coach_id = $('.select_coach').val();
+    var school_id = $('.select_school').attr('id');
+    var coach_id = $('.select_coach').attr('id');
     //-----------jquery1.7 UNUSED------------
-    var school_name = $('.select_sch option:selected').text();
-    var coach_name = $('.select_coach  option:selected').text();
+    var school_name = $('.select_school').text();
+    var coach_name = $('.select_coach').text();
 
 
 //    alert(kind + '    ' + projectName + '    ' + school_name + '    ' + coach_name);
@@ -272,10 +319,10 @@ function submit() {
     $('#sum').html(sum);
 }
 function toOnload() {
-    var school_id = $('.select_sch').val();
-    var coach_id = $('.select_coach').val();
+    var school_id = $('.select_school').attr('id');
+    var coach_id = $('.select_coach').attr('id');
     var project = $('.cls_project').val();
-     if(school_id==''||coach_id==''||project==''){
+    if (school_id == '' || coach_id == '' || project == '') {
         alert('信息有误！');
         return false;
     }
@@ -288,24 +335,24 @@ function toOnload() {
         async: true,
         data: {book_coa_id: coach_id, book_sch_id: school_id, book_cls_id: project, json: json},
         success: function (data) {
-              if (data == 1) {
+            if (data == 1) {
                 alert("预约成功！");
                 step1();
                 $('.step_1').css('display', 'block');
                 $('.step_2').css('display', 'none');
                 $('.step_3').css('display', 'none');
-                    window.location.href = localhostPath + "/index.php/vipcenter/vip_center";
-            }else if(data == 3){
-               alert('余额不足'); 
+                window.location.href = localhostPath + "/index.php/vipcenter/vip_center";
+            } else if (data == 3) {
+                alert('余额不足');
             }
-            else if(data == 11){
-               alert('插入时出现异常'); 
+            else if (data == 11) {
+                alert('插入时出现异常');
             }
-            else if(data == 9){
-               alert('返回异常'); 
+            else if (data == 9) {
+                alert('返回异常');
             }
-            else if(data == 7){
-               alert('该课程已被别人选走了'); 
+            else if (data == 7) {
+                alert('该课程已被别人选走了');
             }
             else {
                 alert("预约失败！");

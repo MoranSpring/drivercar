@@ -87,8 +87,7 @@
     $('.unbook').live("click", function () {
 
         var today = new Date();
-//        var nowHour = today.getHours();
-        var nowHour = 21;
+        var nowHour = today.getHours();
         var date = $(this).closest('tr').find('.this-date').html();
         var mthis = $(this);
         var info = '';

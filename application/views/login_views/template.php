@@ -24,7 +24,7 @@
                             <tr>
                                 <th>账户</th>
                                 <td width="245">
-                                    <input id="name" type="text" name="name" placeholder="电子邮箱/手机号" autocomplete="off"  value="" onfocus="check_onfocus()" onblur="check_onbulr(this.value)">
+                                    <input id="name" type="text" name="name" placeholder="账户名/电子邮箱/手机号" autocomplete="off"  value="" onfocus="check_onfocus()" onblur="check_onbulr(this.value)">
                                 </td>
                                 <td  class="name_alert">
                                 </td>

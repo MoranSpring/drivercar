@@ -57,32 +57,73 @@
                     </div>
                 </div>
                 <div class="step_2" style="display:none">
-                    <div class="am-g am-margin-top">
-                        <div class="am-u-sm-4 am-u-md-2 am-text-right">所属驾校</div>
-                        <div class="am-u-sm-8 am-u-md-10">
-                            <select class="select_sch" onchange="selectCoach(this.value)" data-placeholder="请选择" style="font-size: 1em;width:250px;text-align: center;">
-                            </select>
+                    <div class="selected-coa clearfix" style="margin:25px;width:450px;height:140px;border:1px solid #ddd;">
+                        <div style="border-bottom: 1px solid #ddd;line-height:39px;padding-left: 30px;background:#f0f0f0;">
+                            教练信息
+                        </div>
+                        <div class="clearfix" style="width:70%;float: left;">
+                            <div class='coa_exist'>
+                                <div style="width:30%;float: left;margin:10px;">
+                                    <img class='coa_img' src="" style="width:78px;height: 78px;"/>
+                                </div>
+                                <div style="width:60%;float: left;padding:10px;">
+                                    <div class='select_coach' style="font-size: 20px;color:#aaa;line-height:30px;">
+                                        
+                                    </div>
+                                    <div class='select_school'  style="font-size: 15px;color:#ccc;line-height:25px;">
+                                        
+                                    </div>
+                                    <div>
+                                        <span class="select-coa-cost ml-color-currency"></span> C币/学时
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="coa_unexist" style="display: none;">
+                                <span class="am-text-sm" style="color:#888">您还没有选择教练，请点击右侧选择教练</span>
+                            </div>
+                        </div>
+                        <div style="width:28%;float: left;border-left: 1px solid #ddd;line-height: 98px;height: 98px;text-align: center;"><a onclick='toSelectCoach()' title='更换教练'><span class="am-icon-exchange" style="font-size: 30px;color:#aaa;"></span></a></div>
+                    </div>
+                    <div class="am-margin to-select-coa clearfix" style='width:490px;display:none;border: 1px solid #ddd;'>
+                        <div style='width:100%;border-bottom: 1px solid #ddd;line-height:39px;padding-left: 30px;background: #f0f0f0;font-weight: bold;'>
+                            添加教练
+                        </div><div style='padding: 20px;'>
+                        <div class='clearfix am-margin-top-sm' style='width:450px;'>
+                            <div style='width:20%;float: left;text-align: right;line-height: 43px;'>
+                                选择驾校
+                            </div>
+                            <div style='width:75%;float: right;'>
+                                <select class="select_sch" onchange="selectCoach(this.value)" data-placeholder="请选择" style="font-size: 1em;width:100%;text-align: center;">
+                                </select>
+                            </div>
+                        </div>
+                        <div class='clearfix am-margin-top-sm' style='width:450px;'>
+                            <div style='width:20%;float: left;text-align: right;line-height: 43px;'>
+                                选择教练
+                            </div>
+                            <div class="" style='width:75%;float: right;'>
+                                <select class="select_coa" data-placeholder="请选择" style="font-size: 1em;width:100%;text-align: center;">
+                                </select>
+                            </div>
+                        </div>
+                        <div  class="am-margin-top-sm" style='padding-left:178px;'>
+                            <button onclick='summitCoach()' type='button' onsubmit="false" class='am-btn am-btn-primary am-btn-block' style='width: 60%'> 确定</button>
+                        </div></div>
+                    </div>
+                    <div class='clearfix am-margin-top-sm' style='width:450px;'>
+                        <div class='clearfix' style='width:20%;float: left;text-align: right;line-height: 43px;'>
+                            选择日期
+                        </div>
+                        <div class="" style='width:75%;float: right;'>
+                            <input type="text" id="datepicker"style="width:100%"/>
                         </div>
                     </div>
-                    <div class="am-g am-margin-top">
-                        <div class="am-u-sm-4 am-u-md-2 am-text-right">选择教练</div>
-                        <div class="am-u-sm-8 am-u-md-10">
-                            <select class="select_coach" data-placeholder="请选择" style="font-size: 1em;width:250px;text-align: center;">
-                            </select>
-                        </div>
-                    </div>
-                    <div class="am-g am-margin-top">
-                        <div class="am-u-sm-4 am-u-md-2 am-text-right">选择日期</div>
-                        <div class="am-u-sm-8 am-u-md-10 ">
-                            <!--<input type="text" class="am-form-field" id="select_date" name="news_date" style="width: 200px" placeholder="点击选择日期" data-am-datepicker="{format: 'yyyy-mm-dd'}" readonly/>-->
-                            <input type="text" id="datepicker"style="width: 200px"/>
-                        </div>
-                    </div>
-                    <div class="am-g am-margin-top">
+
+                    <div class="selected_cls_container am-g am-margin-top" style='display: none;'>
                         <div class="am-u-sm-6 am-u-md-6 am-text-center">
                             <div class="">选择时间</div>
                             <div onselectstart="return false">
-                                <table id="cls_table"class="am-table am-table-bordered ml-table-hover"   style="font-size: 0.8em;display: none;cursor:pointer;user-select:none;">
+                                <table id="cls_table"class="am-table am-table-bordered ml-table-hover"   style="font-size: 0.8em;cursor:pointer;user-select:none;">
                                     <thead>
                                         <tr>          
                                             <th width="25%">时间 \ 日期</th>
@@ -168,7 +209,7 @@
                         <div class="am-u-sm-6 am-u-md-6">
                             <div class="am-g am-margin-top">
                                 <div>你选了<span id="cls_num_box"></span>节课</div>
-                                <div>供需<span>1000</span>元积分</div>
+<!--                                <div>供需<span>1000</span>元积分</div>-->
                                 <div id="cls_date_box"></div>
 
                             </div>
@@ -264,8 +305,8 @@
             nodata: 'none'
         });
         function setInfo() {
-            $('.user-name').html('<?= $this->session->userdata('name');?>');
-            $('.user-tel').html('<?= $this->session->userdata('TEL');?>');
+            $('.user-name').html('<?= $this->session->userdata('name'); ?>');
+            $('.user-tel').html('<?= $this->session->userdata('TEL'); ?>');
         }
     </script>
 

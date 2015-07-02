@@ -63,7 +63,7 @@
         margin-right: -1px;
         margin-bottom: -1px;
         overflow: hidden;
-        border:2px solid #f0f0f0;
+        border:1px solid #f0f0f0;
     }
     .alpha50 {  
         filter:alpha(opacity=50);  
