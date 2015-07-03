@@ -6,7 +6,7 @@
         <meta name="description" content="我爱开车网是国内首个驾驶培训预约学习平台，为用户提供客观的、第三方的驾培机构评价信息，同时也为用户提供汽车相关咨询服务。">
         <link rel="stylesheet" type="text/css" href='<?= base_url() ?>application/css/index.css'>
         <link rel="shortcut icon" href="<?php echo base_url() . 'application/images/iconfont-suo.png' ?>" type="image/x-icon">
-         <script src="<?php echo base_url() . 'application/js/jquery-1.7.1.min.js' ?>" type="text/javascript"></script>
+         <script src="http://libs.baidu.com/jquery/1.7.1/jquery.min.js"></script>
         <script src="<?php echo base_url() . 'application/js/jquery.cxselect.min.js' ?>" type="text/javascript"></script>
         <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=RbYDrD0LPcQqzZTo21PFZ6kR"></script>
         <link rel="stylesheet" href="<?= base_url() ?>application/css/admin/amazeui.min.css"/>

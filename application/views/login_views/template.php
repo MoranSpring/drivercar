@@ -3,11 +3,10 @@
     <head>
         <title>登陆 - 我爱开车网</title>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-        <link rel="shortcut icon" type="image/x-icon" href="res/homepage/favicon.ico?v=3.9" />
         <link href="<?= base_url() ?>application/css/login/screen.css" media="screen, projection" rel="stylesheet" type="text/css" >
         <link rel="stylesheet" type="text/css" href="<?= base_url() ?>application/css/login/base.css">
         <link rel="stylesheet" type="text/css" href="<?= base_url() ?>application/css/login/login.css">
-        <script src="<?php echo base_url() . 'application/js/jquery-1.7.1.min.js' ?>" type="text/javascript"></script>
+        <script src="http://libs.baidu.com/jquery/1.7.1/jquery.min.js"></script>
         <script  language="javascript" src="<?=base_url()?>application/js/login.js"></script>  
     </head>
     <body background="<?= base_url() ?>application/images/login-al.png">
