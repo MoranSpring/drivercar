@@ -57,7 +57,7 @@
                     </div>
                 </div>
                 <div class="step_2" style="display:none">
-                    <div class="selected-coa clearfix" style="margin:25px;width:450px;height:140px;border:1px solid #ddd;">
+                    <div class="selected-coa clearfix" style="margin-top:25px;margin-left: auto;margin-right:auto;width:450px;height:140px;border:1px solid #ddd;">
                         <div style="border-bottom: 1px solid #ddd;line-height:39px;padding-left: 30px;background:#f0f0f0;">
                             教练信息
                         </div>
@@ -84,7 +84,7 @@
                         </div>
                         <div style="width:28%;float: left;border-left: 1px solid #ddd;line-height: 98px;height: 98px;text-align: center;"><a onclick='toSelectCoach()' title='更换教练'><span class="am-icon-exchange" style="font-size: 30px;color:#aaa;"></span></a></div>
                     </div>
-                    <div class="am-margin to-select-coa clearfix" style='width:490px;display:none;border: 1px solid #ddd;'>
+                    <div class="am-margin to-select-coa clearfix" style='width:490px;margin-top:25px;margin-left: auto;margin-right:auto;display:none;border: 1px solid #ddd;'>
                         <div style='width:100%;border-bottom: 1px solid #ddd;line-height:39px;padding-left: 30px;background: #f0f0f0;font-weight: bold;'>
                             添加教练
                         </div><div style='padding: 20px;'>
@@ -110,7 +110,7 @@
                             <button onclick='summitCoach()' type='button' onsubmit="false" class='am-btn am-btn-primary am-btn-block' style='width: 60%'> 确定</button>
                         </div></div>
                     </div>
-                    <div class='clearfix am-margin-top-sm' style='width:450px;'>
+                    <div class='clearfix am-margin-top-sm' style='width:450px;margin-top:25px;margin-left: auto;margin-right:auto;'>
                         <div class='clearfix' style='width:20%;float: left;text-align: right;line-height: 43px;'>
                             选择日期
                         </div>
