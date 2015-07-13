@@ -338,14 +338,14 @@ class First extends MY_Controller {
 
     public function login_check() {
         $name = $this->input->get('name');
-        $name_array=array();
+        $name_array = array();
         //判断是邮箱，手机号，还是用户名；
         if (preg_match("/1[3458]{1}\d{9}$/", $name)) {
-            $name_array=array('stu_tel'=>$name);
+            $name_array = array('stu_tel' => $name);
         } else if (preg_match('/^[0-9a-zA-Z]+@(([0-9a-zA-Z]+)[.])+[a-z]{2,4}$/i', $name)) {
-            $name_array=array('stu_email'=>$name);
-        }else{
-            $name_array=array('stu_name'=>$name);
+            $name_array = array('stu_email' => $name);
+        } else {
+            $name_array = array('stu_name' => $name);
         }
         $Result = $this->accesscontrol_model->loginSelect($name_array);
         if ($Result == null) {
@@ -377,14 +377,14 @@ class First extends MY_Controller {
     public function psw_isRight() {
         $name = $this->input->post('name');
         $psw = $this->input->post('password');
-        $name_array=array();
+        $name_array = array();
         //判断是邮箱，手机号，还是用户名；
         if (preg_match("/1[3458]{1}\d{9}$/", $name)) {
-            $name_array=array('stu_tel'=>$name);
+            $name_array = array('stu_tel' => $name);
         } else if (preg_match("/^[0-9a-zA-Z]+@(([0-9a-zA-Z]+)[.])+[a-z]{2,4}$/i", $name)) {
-            $name_array=array('stu_email'=>$name);
-        }else{
-            $name_array=array('stu_name'=>$name);
+            $name_array = array('stu_email' => $name);
+        } else {
+            $name_array = array('stu_name' => $name);
         }
         $Result = $this->accesscontrol_model->loginSelect($name_array);
         foreach ($Result as $row) {
@@ -402,11 +402,11 @@ class First extends MY_Controller {
         $name = $this->input->post('name');
         $psw = $this->input->post('password');
         if (preg_match("/1[3458]{1}\d{9}$/", $name)) {
-            $name_array=array('stu_tel'=>$name);
+            $name_array = array('stu_tel' => $name);
         } else if (preg_match("/^[0-9a-zA-Z]+@(([0-9a-zA-Z]+)[.])+[a-z]{2,4}$/i", $name)) {
-            $name_array=array('stu_email'=>$name);
-        }else{
-            $name_array=array('stu_name'=>$name);
+            $name_array = array('stu_email' => $name);
+        } else {
+            $name_array = array('stu_name' => $name);
         }
         $Result = $this->accesscontrol_model->loginSelect($name_array);
         foreach ($Result as $row) {
@@ -463,11 +463,11 @@ class First extends MY_Controller {
         }
         $phone_code = rand(1000, 9999);
         $this->session->set_userdata('phone_verify_code', $phone_code);
-        $return = $this->_send_message($phone,$phone_code);
-        if($return=='000000'){
-            echo '1';//验证码发送成功。
-        }else{
-            echo '7';//验证码发送失败。
+        $return = $this->_send_message($phone, $phone_code);
+        if ($return == '000000') {
+            echo '1'; //验证码发送成功。
+        } else {
+            echo '7'; //验证码发送失败。
         }
         //测试专用，测完打开以上代码
 //        $this->session->set_userdata('phone_verify_code', '1111');
@@ -630,6 +630,33 @@ class First extends MY_Controller {
     private function _decode_message_json($return) {
         $data = json_decode($return, true);
         return $data['resp']['respCode'];
+    }
+
+    public function test_shmop() {
+        $key = 12345; // 共享内存的key
+        $memsize = 100; // 共享内存的大小，单位byte
+        $perm = 0666; // 共享内存访问权限，参考linux的权限
+        $offset = 0; // 共享内存偏移地址，0表示共享内存的起始地址
+        $shm_id = shmop_open($key, "c", $perm, $memsize); // 创建一个共享内存，第二个参数c表示创建
+        $shm_bytes_written = shmop_write($shm_id, "abjjjjjjtqwertyuiopzxcvbnm,.", 0); // 把"abc"写入共享内存
+        echo $shm_bytes_written; // 打印出写入共享内存的数据长度，这里将显示3
+//        shmop_delete($shm_id);
+        shmop_close($shm_id); // 关闭共享内存
+        
+    }
+
+    public function test_shmop2() {
+        $shm_id = shmop_open(12345, "w", 0, 0); // 打开key为12345的共享内存，第二个参数w表示以读写方式打开，打开已存在的共享内存，第三个和第四个参数必须是0
+        echo '#'.shmop_delete($shm_id).'#'; // 删除共享内存
+        $shm_data = shmop_read($shm_id, 0, 7); // 从共享内存里面读取3字节的数据，第二个参数是偏移地址，0表示共享内存的起始地址
+        echo $shm_data; // 打印出上个函数返回的共享内存数据
+//        shmop_close($shm_id); // 关闭共享内存
+    }
+    public function  todo(){
+        $a = sem_get(99999);
+        sem_acquire($a);
+        //todo
+        sem_release($a);
     }
 
 }
