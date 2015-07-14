@@ -19,11 +19,11 @@
 <div class="ml_step_ul am-margin-top-sm">
     <ul class="clear" style="padding-left:0;">
         <li id="ml-step1"class=" ml_li">1.选择课程</li>
-        <li class=" ml_li"><img id="ml-step_img1"  src="<?= base_url() ?>application/images/cover.png" style="height: 40px; vertical-align:top"  height="40px" width="26" /></li>
+        <li class=" ml_li"><img id="ml-step_img1"  src="http://image.52drivecar.com/images/cover.png" style="height: 40px; vertical-align:top"  height="40px" width="26" /></li>
         <li id="ml-step2" class=" ml_li">2.选择课程</li>
-        <li class=" ml_li"><img id="ml-step_img2"  src="<?= base_url() ?>application/images/cover.png"  style="height: 40px; vertical-align:top" height="40px" width="26" /></li>
+        <li class=" ml_li"><img id="ml-step_img2"  src="http://image.52drivecar.com/images/cover.png"  style="height: 40px; vertical-align:top" height="40px" width="26" /></li>
         <li id="ml-step3" class=" ml_li">3.完成选课</li>
-        <li class=" ml_li"><img id="ml-step_img3"  src="<?= base_url() ?>application/images/cover.png"  style="height: 40px; vertical-align:top" height="40px" width="20" /></li>
+        <li class=" ml_li"><img id="ml-step_img3"  src="http://image.52drivecar.com/images/cover.png"  style="height: 40px; vertical-align:top" height="40px" width="20" /></li>
     </ul>
 </div>
 

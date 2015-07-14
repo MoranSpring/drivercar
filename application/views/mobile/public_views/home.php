@@ -77,42 +77,42 @@
     <ul class="am-avg-sm-4 boxes">
         <li class="box box-top ml-ontouch">
             <a href="<?= base_url() ?>index.php/mobile/study_book" style="height: 100%">
-                <img class="home-img" src="<?= base_url() ?>application/images/mobile/coach_book.png" style="width:100%;"/>
+                <img class="home-img" src="http://image.52drivecar.com/images/mobile/coach_book.png" style="width:100%;"/>
             </a>
         </li>
         <li class="box box-top ml-ontouch">
             <a href="<?= base_url() ?>index.php/mobile/main_school_list" style="height: 100%">
-                <img class="home-img" src="<?= base_url() ?>application/images/mobile/school.png" style="width:100%;"/>
+                <img class="home-img" src="http://image.52drivecar.com/images/mobile/school.png" style="width:100%;"/>
             </a>
         </li>
         <li class="box box-top ml-ontouch">
             <a href="<?= base_url() ?>index.php/mobile/main_coach_list" style="height: 100%">
-                <img class="home-img" src="<?= base_url() ?>application/images/mobile/coach.png" style="width:100%;"/>
+                <img class="home-img" src="http://image.52drivecar.com/images/mobile/coach.png" style="width:100%;"/>
             </a>
         </li>
         <li class="box box-top box-reight ml-ontouch">
             <a href="<?= base_url() ?>index.php/mobile/news" style="height: 100%">
-                <img class="home-img" src="<?= base_url() ?>application/images/mobile/news.png" style="width:100%;"/>
+                <img class="home-img" src="http://image.52drivecar.com/images/mobile/news.png" style="width:100%;"/>
             </a>
         </li>
         <li class="box box-bottom ml-ontouch">
             <a href="<?= base_url() ?>index.php/mobile/map_main" style="height: 100%">
-                <img class="home-img" src="<?= base_url() ?>application/images/mobile/coach_book.png" style="width:100%;"/>
+                <img class="home-img" src="http://image.52drivecar.com/images/mobile/coach_book.png" style="width:100%;"/>
             </a>
         </li>
         <li class="box box-bottom ml-ontouch">
             <a href="<?= base_url() ?>index.php/mobile/register" style="height: 100%">
-                <img class="home-img" src="<?= base_url() ?>application/images/mobile/coach_book.png" style="width:100%;"/>
+                <img class="home-img" src="http://image.52drivecar.com/images/mobile/coach_book.png" style="width:100%;"/>
             </a>
         </li>
         <li class="box box-bottom ml-ontouch">
             <a href="" style="height: 100%">
-                <img class="home-img" src="<?= base_url() ?>application/images/mobile/coach_book.png" style="width:100%;"/>
+                <img class="home-img" src="http://image.52drivecar.com/images/mobile/coach_book.png" style="width:100%;"/>
             </a>
         </li>
         <li class="box box-bottom box-reight ml-ontouch">
             <a href="<?= base_url() ?>index.php/mobile/article" style="height: 100%">
-                <img class="home-img" src="<?= base_url() ?>application/images/mobile/coach_book.png" style="width:100%;"/>
+                <img class="home-img" src="http://image.52drivecar.com/images/mobile/coach_book.png" style="width:100%;"/>
             </a>
         </li>
 

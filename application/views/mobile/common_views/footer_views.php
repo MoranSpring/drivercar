@@ -1,4 +1,4 @@
-<footer data-am-widget="footer" class="am-footer am-footer-default am-margin-lg" data-am-footer="{  }" style="background:url('<?=  base_url()?>application/images/mobile/bg_EEE.png');">
+<footer data-am-widget="footer" class="am-footer am-footer-default am-margin-lg" data-am-footer="{  }" style="background:url('http://image.52drivecar.com/images/mobile/bg_EEE.png');">
     <div class="am-footer-switch">
         <span class="am-footer-ysp" data-rel="mobile" data-am-modal="{target: '#am-switch-mode'}">手机版</span>
         <span class="am-footer-divider">|</span>
@@ -7,7 +7,7 @@
     </div>
     <div class="am-footer-miscs ">
         <p>由
-            <a href="http://www.52drivecar.com/" title="Kyle" target="_blank" class="">Kyle</a>提供技术支持</p>
+            <a href="http://weibo.com/kyleml" title="Kyle" target="_blank" class="">Kyle</a>提供技术支持</p>
         <span>CopyRight©2015 52drivecar.com Inc.</span><br/>
         <span>鄂ICP备15005490号</span>
     </div>

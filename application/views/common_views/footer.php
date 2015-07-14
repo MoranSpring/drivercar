@@ -8,7 +8,7 @@
     </div>
     <div class="am-footer-miscs ">
         <span>由
-            <a href="http://www.baidu.com/" title="kyle" target="_blank" class="">Kyle</a>提供技术支持</span>
+            <a href="http://weibo.com/kyleml" title="kyle" target="_blank" class="">Kyle</a>提供技术支持</span>
         <span>CopyRight©2015 52drivercar.com Inc.</span>
         <span>鄂ICP备15005490号</span>
     </div>

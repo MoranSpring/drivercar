@@ -174,7 +174,7 @@ class First extends MY_Controller {
 
     public function index_page() {
         $page = $this->load->view('a_views/index', '', true);
-        $title = "首页 - 我爱开车网";
+        $title = "我爱开车网 - 首页";
         $this->view($title, $page);
     }
 
