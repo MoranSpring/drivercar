@@ -18,7 +18,7 @@ select{
     border-radius: 3px;
     display: inline-block;
     background:#FFF;
-    background-image: url('../../images/arrow_down.png');
+    background-image: url('http://image.52drivecar.com/images/arrow_down.png');
     background-repeat: no-repeat;
     background-position: 95%,45%;
     -webkit-appearance: none;

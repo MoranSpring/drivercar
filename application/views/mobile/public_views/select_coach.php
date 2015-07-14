@@ -139,7 +139,7 @@
         setTimeout(function () {
             $('body').addClass('demo-list-active');
         }, 1);
-        setTimeout(openModel, 300);
+        openModel();
         getCoach(id);
     }
     function histroyReload(id) {

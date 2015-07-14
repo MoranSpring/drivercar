@@ -244,7 +244,6 @@
             for (var i = 0; i < chkRadio.length; i++) {
                 if (chkRadio[i].checked) {
                     radio_val = chkRadio[i].value;
-                    alert(radio_val);
                     break;
                 }
             }
