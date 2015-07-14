@@ -99,7 +99,7 @@
         text-align: right;
         padding-right: 10px;
         height: 100%;
-      border: 1px solid #ccc;
+      border: 1px solid #ddd;
 
     }
     .index-main-item{
@@ -108,7 +108,7 @@
         padding-left: 10px;
         width:50%;
         height: 50%;
-        border:1px solid #ccc;
+        border:1px solid #ddd;
     }
 </style>
 <link rel="stylesheet" href="http://image.52drivecar.com/css/slide.css">
