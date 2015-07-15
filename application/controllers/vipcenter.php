@@ -30,8 +30,8 @@ class VipCenter extends MY_Controller {
         $name = $this->session->userdata('name');
 
         if ($name == null) {
-            $body['header'] = $this->load->view('common_views/header', '', true);
-            $body['content'] = $this->load->view('common_views/unlogin', '', true);
+            redirect('first/login');
+            return false;
         } else {
             $data = array('username' => $name);
             $body['header'] = $this->load->view('common_views/header_logined', $data, true);
@@ -78,7 +78,7 @@ class VipCenter extends MY_Controller {
         if ($this->session->userdata('TYPE') == 2||$this->session->userdata('TYPE') == 3) {
             
         } else {
-            $this->view("you aren't vip!");
+            redirect('first/login');
             return false;
         }
         $page = $this->load->view('vip_views/study_book', '', true);
@@ -89,7 +89,7 @@ class VipCenter extends MY_Controller {
         if ($this->session->userdata('TYPE') == 2||$this->session->userdata('TYPE') == 3) {
             
         } else {
-            $this->view("you aren't vip!");
+            redirect('first/login');
             return false;
         }
         $UID = $this->session->userdata('UID');
@@ -142,10 +142,10 @@ class VipCenter extends MY_Controller {
     }
 
     public function feedback() {
-        if ($this->session->userdata('TYPE') == 2) {
+        if ($this->session->userdata('TYPE') == 2||$this->session->userdata('TYPE') == 3) {
             
         } else {
-            $this->view("you aren't vip!");
+            redirect('first/login');
             return false;
         }
         $comment_list = array();
